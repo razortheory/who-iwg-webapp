@@ -1,0 +1,10 @@
+Django>=1.9,<1.10
+django-environ
+
+psycopg2
+
+celery
+
+ipython
+
+django-mailing
