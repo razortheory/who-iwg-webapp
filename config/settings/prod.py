@@ -88,7 +88,7 @@ if USE_COMPRESSOR:
     COMPRESS_CSS_HASHING_METHOD = 'content'
 
     COMPRESS_CSS_FILTERS = (
-        'iwg_blog.settings.abs_compress.CustomCssAbsoluteFilter',
+        'config.settings.abs_compress.CustomCssAbsoluteFilter',
         'compressor.filters.cssmin.CSSMinFilter'
     )
 

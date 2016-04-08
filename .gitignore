@@ -61,6 +61,10 @@ coverage.xml
 # Django stuff:
 *.log
 
+static/
+media/
+!media/.gitkeep
+
 # Sphinx documentation
 docs/_build/
 
