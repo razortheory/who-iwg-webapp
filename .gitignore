@@ -16,7 +16,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-config/settings/env/
+env/
 build/
 develop-eggs/
 dist/
@@ -28,6 +28,8 @@ lib64/
 parts/
 sdist/
 var/
+log/
+conf/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -76,3 +78,4 @@ celerybeat-schedule
 
 # Env config file
 env.config
+.env
