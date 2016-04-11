@@ -21,7 +21,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=255)),
-                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, populate_from=b'title', unique=True)),
+                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `title` field', populate_from=b'title', unique=True)),
+                ('short_description', django_markdown.models.MarkdownField()),
                 ('content', django_markdown.models.MarkdownField()),
                 ('is_published', models.BooleanField(default=False)),
                 ('is_featured', models.BooleanField(default=False)),
@@ -38,7 +39,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
-                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, populate_from=b'name', unique=True)),
+                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True)),
             ],
             options={
                 'verbose_name_plural': 'Categories',
@@ -49,7 +50,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
-                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, populate_from=b'name', unique=True)),
+                ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True)),
             ],
         ),
         migrations.AddField(

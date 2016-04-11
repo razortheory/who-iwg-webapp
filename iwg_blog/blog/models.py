@@ -8,7 +8,10 @@ from .managers import CaseInsensitiveUniqueModelManager
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='name', editable=True, unique=True, blank=True)
+    slug = AutoSlugField(
+        populate_from='name', editable=True, unique=True, blank=True,
+        help_text='optional; will be automatically populated from `name` field'
+    )
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -19,7 +22,10 @@ class Category(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    slug = AutoSlugField(populate_from='name', editable=True, unique=True, blank=True)
+    slug = AutoSlugField(
+        populate_from='name', editable=True, unique=True, blank=True,
+        help_text='optional; will be automatically populated from `name` field'
+    )
 
     objects = CaseInsensitiveUniqueModelManager(insensitive_unique_fields=['name', ])
 
@@ -32,12 +38,14 @@ class Article(models.Model):
     slug = AutoSlugField(
         populate_from='title',
         unique=True, db_index=True,
-        editable=True, blank=True
+        editable=True, blank=True,
+        help_text='optional; will be automatically populated from `title` field'
     )
 
     category = models.ForeignKey(Category, related_name='articles')
     tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
 
+    short_description = MarkdownField()
     content = MarkdownField()
 
     is_published = models.BooleanField(default=False)
