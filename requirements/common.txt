@@ -11,6 +11,6 @@ django-mailing
 
 pillow
 django-autoslug
-django_markdown
+git+https://github.com/th13f/django_markdown.git
 django-select2
 django-grappelli>=2.8,<2.9
