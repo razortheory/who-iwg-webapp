@@ -161,3 +161,9 @@ MEDIA_ROOT = root('media')
 # --------------------------------------------------------------------------
 
 MAILING_USE_CELERY = True
+
+
+# Grappelli configuration
+# --------------------------------------------------------------------------
+
+GRAPPELLI_ADMIN_TITLE = 'IWG Blog'
