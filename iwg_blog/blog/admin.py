@@ -10,7 +10,6 @@ class ArticleAdmin(admin.ModelAdmin):
     form = ArticleAdminForm
     list_display = ('title', )
     search_fields = ('title', )
-    exclude = ('documents', )
     inlines = (DocumentAdminInline, )
 
 

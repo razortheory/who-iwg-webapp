@@ -6,6 +6,7 @@ from .models import Document, UploadedImage
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('name', )
+    search_fields = ('name', )
 
 
 class DocumentAdminInline(admin.StackedInline):
