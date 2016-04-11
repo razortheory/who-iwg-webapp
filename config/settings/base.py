@@ -20,6 +20,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Application definition
 # --------------------------------------------------------------------------
 
+CUSTOMIZE_APPS = [
+    'grappelli',
+]
+
 DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,13 +37,17 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'mailing',
+    'django_markdown',
+    'django_select2',
 ]
 
 LOCAL_APPS = [
-    'iwg_blog.testapp',  # Example app. Remove it.
+    'iwg_blog.blog',
+    'iwg_blog.grantee',
+    'iwg_blog.attachments',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = CUSTOMIZE_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 
 # Middleware configurations

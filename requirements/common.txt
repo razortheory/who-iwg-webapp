@@ -8,3 +8,9 @@ celery
 ipython
 
 django-mailing
+
+pillow
+django-autoslug
+django_markdown
+django-select2
+django-grappelli>=2.8,<2.9

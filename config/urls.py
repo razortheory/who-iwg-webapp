@@ -27,7 +27,11 @@ sitemaps = {
 
 
 urlpatterns = [
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^markdown/', include('django_markdown.urls')),
+    url(r'^select2/', include('django_select2.urls')),
+
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
 ]

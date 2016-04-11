@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% load i18n grp_tags %}
+
+{% block title %}{{ title }} | {% get_site_title %}{% endblock %}
+
+{% block branding %}
+    {# Use the div#grp-branding for branding elements, e.g. a logo #}
+    {# <div id="grp-branding"></div> #}
+{% endblock %}
+
+{% block extrastyle %}
+    <style>
+        .select2-container {
+            width: 400px!important;
+        }
+        .form-row.tags .select2-container, .form-row.tags .grp-related-widget-tools {
+            float: left;
+        }
+        .form-row.tags .grp-related-widget-tools {
+            padding-left: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    {{ block.super }}
+{% endblock %}
+
+
+{% block nav-global %}{% endblock %}
