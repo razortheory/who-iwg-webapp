@@ -39,6 +39,7 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 USE_COMPRESSOR = env.bool('USE_COMPRESSOR')
 USE_CLOUDFRONT = env.bool('USE_CLOUDFRONT')
+USE_HTTPS = env.bool('USE_HTTPS')
 
 
 # Storage configurations
@@ -51,7 +52,7 @@ AWS_AUTO_CREATE_BUCKET = True
 
 
 AWS_QUERYSTRING_AUTH = False
-AWS_S3_SECURE_URLS = True
+AWS_S3_SECURE_URLS = USE_HTTPS
 
 
 if USE_CLOUDFRONT:
