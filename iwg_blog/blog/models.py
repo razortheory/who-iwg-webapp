@@ -13,6 +13,8 @@ class Category(models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
+    image = models.ImageField(upload_to='images')
+
     class Meta:
         verbose_name_plural = 'Categories'
 

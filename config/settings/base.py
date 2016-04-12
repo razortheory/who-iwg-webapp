@@ -166,4 +166,4 @@ MAILING_USE_CELERY = True
 # Grappelli configuration
 # --------------------------------------------------------------------------
 
-GRAPPELLI_ADMIN_TITLE = 'IWG Blog'
+GRAPPELLI_ADMIN_TITLE = 'IWG Portal'

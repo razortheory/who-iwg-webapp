@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
                 ('slug', autoslug.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True)),
+                ('image', models.ImageField(upload_to=b'images')),
             ],
             options={
                 'verbose_name_plural': 'Categories',
