@@ -39,6 +39,8 @@ THIRD_PARTY_APPS = [
     'mailing',
     'django_markdown',
     'django_select2',
+    'compressor',
+    'meta',
 ]
 
 LOCAL_APPS = [
@@ -167,3 +169,9 @@ MAILING_USE_CELERY = True
 # --------------------------------------------------------------------------
 
 GRAPPELLI_ADMIN_TITLE = 'IWG Portal'
+
+
+#Django meta configuration
+
+META_USE_OG_PROPERTIES = True
+META_USE_SITES = True

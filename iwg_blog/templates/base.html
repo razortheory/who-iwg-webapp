@@ -1,18 +1,12 @@
+{% load meta %}
 {% load compress %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IWG Blog</title>
-
-  {% compress css %}
-    <style>
-      body {
-        background: #66ff66;
-      }
-    </style>
-  {% endcompress %}
+<head {% meta_namespaces %}>
+    <meta charset="UTF-8">
+    <title>IWG Blog</title>
+    {% include "meta/meta.html" %}
 </head>
 <body>
 

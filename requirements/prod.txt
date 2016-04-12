@@ -4,5 +4,4 @@ wsgiref==0.1.2
 gunicorn
 
 django-storages
-django-compressor
 boto

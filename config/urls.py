@@ -34,6 +34,8 @@ urlpatterns = [
 
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'', include('iwg_blog.blog.urls')),
 ]
 
 if settings.DEBUG:
