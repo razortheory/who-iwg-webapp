@@ -37,6 +37,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'mailing',
+    'django_jinja',
     'django_markdown',
     'django_select2',
 ]
@@ -69,7 +70,29 @@ MIDDLEWARE_CLASSES = [
 # Template configurations
 # --------------------------------------------------------------------------
 
+from django_jinja.builtins import DEFAULT_EXTENSIONS
+
 TEMPLATES = [
+    {
+        'BACKEND': 'django_jinja.backend.Jinja2',
+        'DIRS': [
+            root('iwg_blog', 'templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'match_extension': '.jinja',
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+                'iwg_blog.context_processors.google_analytics',
+            ],
+            "extensions": DEFAULT_EXTENSIONS + [
+                "compressor.contrib.jinja2ext.CompressorExtension",
+            ]
+        },
+    },
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
