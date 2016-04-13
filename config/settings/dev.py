@@ -54,4 +54,5 @@ CELERY_ALWAYS_EAGER = True
 # New Relic configurations
 # --------------------------------------------------------------------------
 
+NEWRELIC_DJANGO_ACTIVE = False
 NEWRELIC_AVAILABILITY_TEST_ACTIVE = False
