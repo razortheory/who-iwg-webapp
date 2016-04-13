@@ -1,0 +1,29 @@
+.markItUp {
+    width: 100%!important;
+}
+
+.markItUp .markItUpHeader {
+    width: 100%;
+    float: left;
+}
+
+.markItUp .markItUpFooter {
+    display: none;
+}
+
+.markItUp textarea {
+    width: 49%;
+    margin-right: 1%;
+    float: left;
+    min-height: 500px;
+}
+
+.markItUp .markItUpPreviewFrame {
+    min-height: 500px;
+    margin: 0;
+    width: 49%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}

@@ -167,3 +167,13 @@ MAILING_USE_CELERY = True
 # --------------------------------------------------------------------------
 
 GRAPPELLI_ADMIN_TITLE = 'IWG Portal'
+
+
+# Markdown configuration
+# --------------------------------------------------------------------------
+
+MARKDOWN_SET_PATH = 'vendor/django_markdown/sets'
+MARKDOWN_SET_NAME = 'custom_markdown'
+MARKDOWN_EXTENSIONS = [
+    'iwg_blog.markdown_extensions.images_gallery',
+]

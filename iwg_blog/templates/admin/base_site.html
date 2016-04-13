@@ -1,5 +1,6 @@
 {% extends "admin/base.html" %}
 {% load i18n grp_tags %}
+{% load static %}
 
 {% block title %}{{ title }} | {% get_site_title %}{% endblock %}
 
@@ -20,10 +21,11 @@
             padding-left: 0;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'css/admin-markitup.css' %}">
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
     {{ block.super }}
 {% endblock %}
 
