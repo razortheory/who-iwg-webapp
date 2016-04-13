@@ -9,6 +9,12 @@
     {% include "meta/meta.html" %}
 </head>
 <body>
+    {% block content %}{% endblock %}
 
+    <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="WHO IWG">
+        <meta itemprop="logo" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
+        <meta itemprop="url" content="http://www.who.int">
+    </div>
 </body>
 </html>

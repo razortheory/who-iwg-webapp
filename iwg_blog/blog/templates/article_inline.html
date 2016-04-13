@@ -1,0 +1,33 @@
+{% load django_markdown %}
+
+<div>
+    <div itemscope itemtype="http://schema.org/BlogPosting">
+        <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage"
+              itemid="{{ request.scheme }}://{{ request.site }}{% url 'article_detail_view' article.id %}"/>
+        <h2 itemprop="headline">{{ article.title }}</h2>
+
+        <span itemprop="description">{{ article.short_description | markdown }}</span>
+
+        <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            <meta itemprop="url" content="{{ request.scheme }}://{{ request.site }}{{ article.cover_image.url }}">
+            <meta itemprop="width" content="{{ article.cover_image.width }}">
+            <meta itemprop="height" content="{{ article.cover_image.height }}">
+        </div>
+        <meta itemprop="datePublished" content="{{ article.created_at }}"/>
+        <meta itemprop="dateModified" content="{{ article.updated_at }}"/>
+
+        <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
+                <meta itemprop="width" content="176">
+                <meta itemprop="height" content="55">
+            </div>
+            <meta itemprop="name" content="WHO IWG">
+        </div>
+
+        <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <meta itemprop="name" content="WHO IWG">
+        </div>
+
+    </div>
+</div>
