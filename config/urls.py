@@ -36,5 +36,10 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
 ]
 
+
+if settings.NEWRELIC_AVAILABILITY_TEST_ACTIVE:
+    urlpatterns.append(url('availability-test/', include('availability_monitor.urls')))
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -50,3 +50,8 @@ BROKER_URL = env('BROKER_URL', default='amqp://guest@localhost//')
 
 CELERY_ALWAYS_EAGER = True
 
+
+# New Relic configurations
+# --------------------------------------------------------------------------
+
+NEWRELIC_AVAILABILITY_TEST_ACTIVE = False

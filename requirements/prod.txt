@@ -6,3 +6,5 @@ gunicorn
 django-storages
 django-compressor
 boto
+
+newrelic
