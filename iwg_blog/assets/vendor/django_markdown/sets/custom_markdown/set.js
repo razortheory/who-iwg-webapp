@@ -57,7 +57,7 @@ miu = {
 		return '\n'+heading;
 	}
 };
-var target;
+
 $(document).ready(function () {
 	function addEventHandler(obj, evt, handler) {
 		if (obj.addEventListener) {
@@ -69,37 +69,45 @@ $(document).ready(function () {
 		}
 	}
 
+	window.ondragenter = function(event){
+		event.preventDefault();
+	};
+
+	window.ondragover = function(event){
+		event.preventDefault();
+	};
+
 	var markItUps = document.getElementsByTagName('textarea');
 	for (var i=0; i<markItUps.length; i++){
-		addEventHandler(markItUps[i], "drop",
-			function (event) {
-				if ( event.target.className == "markItUpEditor" ) {
-					event = event || window.event;
-					if (event.preventDefault) {
-						event.preventDefault();
-					}
-
-					var files = event.dataTransfer.files;
-
-					var data = new FormData();
-					data.append('image_file', files[0]);
-
-					$.ajax({
-						url: event.target.getAttribute('data-upload-image-url'),
-						type: 'POST',
-						data: data,
-						cache: false,
-						processData: false,
-						contentType: false,
-						success: function (data, textStatus, jqXHR) {
-							$.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
-						},
-						error: function (data, textStatus, errorThrown) {
-							console.log('ERRORS: ' + data.statusText);
-						}
-					});
+		addEventHandler(markItUps[i], "drop", function (event) {
+			if ( event.target.className == "markItUpEditor" ) {
+				event = event || window.event;
+				if (event.preventDefault) {
+					event.preventDefault();
 				}
+
+				event.target.focus();
+
+				var files = event.dataTransfer.files;
+
+				var data = new FormData();
+				data.append('image_file', files[0]);
+
+				$.ajax({
+					url: event.target.getAttribute('data-upload-image-url'),
+					type: 'POST',
+					data: data,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function (data, textStatus, jqXHR) {
+						$.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
+					},
+					error: function (data, textStatus, errorThrown) {
+						console.log('ERRORS: ' + data.statusText);
+					}
+				});
 			}
-		);
+		});
 	}
 });
