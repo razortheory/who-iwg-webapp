@@ -175,5 +175,6 @@ GRAPPELLI_ADMIN_TITLE = 'IWG Portal'
 MARKDOWN_SET_PATH = 'vendor/django_markdown/sets'
 MARKDOWN_SET_NAME = 'custom_markdown'
 MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.tables',
     'iwg_blog.markdown_extensions.images_gallery',
 ]

@@ -36,9 +36,54 @@ mySettings = {
 			openWith: '----images-gallery----\n',
 			closeWith: '----------------------\n'
 		},
+		{
+			name:'Embed Video',
+			key:'E',
+			replaceWith:function(h) {
+				var video_width = prompt('Widget width', '500');
+				var video_height = prompt('Widget height', '375');
+				var video_link = prompt('Video link', 'http://');
+				var result = '<iframe ';
+				if (video_width) {
+					result += 'width="' + video_width + '" ';
+				}
+				if (video_height) {
+					result += 'height="' + video_height + '" ';
+				}
+				result += 'src="' + video_link + '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+				return result;
+			}
+		},
 		{name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
 		{separator:'---------------'},
 		{name:'Quotes', openWith:'> '},
+		{name:'Table',
+			header:" header ",
+			seperator:" ------ ",
+			placeholder:" data   ",
+			replaceWith:function(h) {
+				cols = prompt("How many cols?");
+				rows = prompt("How many rows?");
+				out = "";
+				// header row
+				for (c = 0; c < cols; c++) {
+						out += "|"+(h.header||"");
+				}
+				out += "|\n";
+				// seperator
+				for (c = 0; c < cols; c++) {
+						out += "|"+(h.seperator||"");
+				}
+				out += "|\n";
+				for (r = 0; r < rows; r++) {
+					for (c = 0; c < cols; c++) {
+						out += "|"+(h.placeholder||"");
+					}
+					out += "|\n";
+				}
+				return out;
+			}
+		},
 		{separator:'---------------'},
 		{name:'Preview', call:'preview', className:"preview"}
 	]
