@@ -6,13 +6,13 @@
     <div>
         <div itemscope itemtype="http://schema.org/BlogPosting">
             <meta itemscope itemprop="mainEntityOfPage" itemType="https://schema.org/WebPage"
-                  itemid="{{ request.scheme }}://{{ request.site }}{% url 'article_detail_view' article.id %}"/>
+                  itemid="{{ scheme }}://{{ site }}{% url 'article_detail_view' article.id %}"/>
             <h2 itemprop="headline">{{ article.title }}</h2>
 
             <span itemprop="description">{{ article.content | markdown }}</span>
 
             <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
-                <meta itemprop="url" content="{{ request.scheme }}://{{ request.site }}{{ article.cover_image.url }}">
+                <meta itemprop="url" content="{{ scheme }}://{{ site }}{{ article.cover_image.url }}">
                 <meta itemprop="width" content="{{ article.cover_image.width }}">
                 <meta itemprop="height" content="{{ article.cover_image.height }}">
             </div>

@@ -3,18 +3,32 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head {% meta_namespaces %}>
+<head {% meta_namespaces %} itemscope itemtype="http://schema.org/WebSite">
     <meta charset="UTF-8">
-    <title>IWG Blog</title>
+    <title itemprop='name'>IWG Blog</title>
     {% include "meta/meta.html" %}
 </head>
 <body>
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
     <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
         <meta itemprop="name" content="WHO IWG">
         <meta itemprop="logo" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
         <meta itemprop="url" content="http://www.who.int">
     </div>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "{{ scheme }}://{{ site }}/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ scheme }}://{{ site }}/search?q={search_term_string}{# {% url 'search_view' %}?q={search_term_string} #}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 </body>
 </html>
