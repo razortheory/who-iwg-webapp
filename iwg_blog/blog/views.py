@@ -42,3 +42,20 @@ class ArticleListView(BaseViewMixin, ListView):
                     description='List of articles.',
                     url=reverse('articles_view')
                     )
+
+
+class SearchView(BaseViewMixin, ListView):
+    model = Article
+
+    template_name = 'article_list.html'
+
+    def get_queryset(self):
+        search_string = self.request.GET.get('q', '')
+        return self.model.objects.filter(title__icontains=search_string)
+
+    def get_meta_context(self):
+        url = reverse('search_view') + '?' + self.request.GET.urlencode()
+        return Meta(title='Search result',
+                    description='Search result.',
+                    url=url
+                    )
