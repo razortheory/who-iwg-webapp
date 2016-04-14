@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 
 from .models import Article
 
@@ -59,3 +59,14 @@ class SearchView(BaseViewMixin, ListView):
                     description='Search result.',
                     url=url
                     )
+
+
+class LandingView(BaseViewMixin, TemplateView):
+    template_name = 'landing.html'
+
+    def get_meta_context(self):
+        return Meta(title='IWG Portal',
+                    description='IWG Portal',
+                    url=reverse('landing_view'),
+                    )
+
