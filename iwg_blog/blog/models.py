@@ -75,7 +75,7 @@ class Article(ModelMeta, models.Model):
         return self.tags.values_list('slug', flat=True)
 
     def get_absolute_url(self):
-        return reverse('article_view', args=(self.id, ))
+        return reverse('article_detail_view', args=(self.id, ))
 
     def short_description_html(self):
         return markdown(self.short_description)

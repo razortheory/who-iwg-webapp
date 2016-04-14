@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from meta.views import Meta
 
 from django.views.generic import DetailView, ListView
@@ -25,6 +26,7 @@ class ArticleListView(ListView):
     def get_meta_data_for_seo(self):
         return Meta(title='Article list',
                     description='List of articles.',
+                    url=reverse('articles_view')
                     )
 
     def get_context_data(self, **kwargs):
