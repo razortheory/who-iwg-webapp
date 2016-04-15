@@ -30,3 +30,33 @@
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
+
+#markItUpFullscreen {
+    width: 100vw!important;
+    position: fixed;
+    background-color: #ffffff;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0 0 1rem;
+}
+
+#markItUpFullscreen .markItUpContainer {
+    height: 98.5%;
+}
+
+#markItUpFullscreen .markItUpHeader {
+    width: 98%;
+    margin: auto;
+}
+
+#markItUpFullscreen .fullScreenClose {
+    position: absolute;
+    right: 20px;
+    top: 4px;
+}
+
+#markItUpFullscreen .markItUpEditor, #markItUpFullscreen .markItUpPreviewFrame {
+    height: 100%;
+}

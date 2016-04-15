@@ -12,7 +12,10 @@ def set_attrs_for_field(field, attrs):
 class ArticleAdminForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
-        markdown_attrs = {'data-upload-image-url': reverse('upload_image_ajax')}
+        markdown_attrs = {
+            'data-upload-image-url': reverse('upload_image_ajax'),
+            'data-preview-parser-url': reverse('django_markdown_preview'),
+        }
         set_attrs_for_field(self.fields['content'], markdown_attrs)
         set_attrs_for_field(self.fields['short_description'], markdown_attrs)
 

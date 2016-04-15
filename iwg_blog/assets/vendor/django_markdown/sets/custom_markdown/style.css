@@ -58,3 +58,10 @@
 .markItUp .preview a {
 	background-image:url(images/preview.png);
 }
+
+.markItUp .markItUpFullScreen a {
+	background-image:url(images/fullscreen.png);
+}
+.markItUp .markItUpFullScreen-alt a {
+	background-image:url(images/fullscreen-alt.png);
+}

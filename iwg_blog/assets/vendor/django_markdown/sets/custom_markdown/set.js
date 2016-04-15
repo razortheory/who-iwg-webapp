@@ -11,6 +11,39 @@
 // Feel free to add more tags
 // -------------------------------------------------------------------
 
+function getCaretPosition(ctrl) {
+	var CaretPos = 0;
+	// IE Support
+	if (document.selection) {
+		ctrl.focus();
+		var Sel = document.selection.createRange();
+		Sel.moveStart('character', -ctrl.value.length);
+		CaretPos = Sel.text.length;
+	}
+	// Firefox support
+	else if (ctrl.selectionStart || ctrl.selectionStart == '0')
+		CaretPos = ctrl.selectionStart;
+
+	return (CaretPos);
+}
+
+
+function setCaretPosition(ctrl, pos) {
+	if (ctrl.setSelectionRange) {
+		ctrl.focus();
+		setTimeout(function(){
+			ctrl.setSelectionRange(pos, pos);
+		}, 0)
+	}
+	else if (ctrl.createTextRange) {
+		var range = ctrl.createTextRange();
+		range.collapse(true);
+		range.moveEnd('character', pos);
+		range.moveStart('character', pos);
+		range.select();
+	}
+}
+
 mySettings = {
 	onShiftEnter: {keepDefault:false, openWith:'\n\n'},
 	markupSet: [
@@ -92,7 +125,61 @@ mySettings = {
 			}
 		},
 		{separator:'---------------'},
-		{name:'Preview', call:'preview', className:"preview"}
+		{name:'Preview', call:'preview', className:"preview"},
+        {
+            name: 'Fullscreen',
+            className: 'markItUpFullScreen',
+            call: function () {
+				var minimize = function () {
+					var textarea = $('#fullscreen');
+					var caretPosition = getCaretPosition(textarea[0]);
+					$($.markItUp.fullscreenSource).val(textarea.val());
+					setCaretPosition($.markItUp.fullscreenSource, caretPosition);
+					textarea.unbind();
+                    setTimeout(function(){
+						$.markItUp({target: $($.markItUp.fullscreenSource)})
+					}, 1);
+
+                    var container = textarea.parents('.markItUp').jqmHide();
+                    container.parent().remove();
+
+                    $.markItUp.fullscreen = false;
+                };
+
+                if (!$.markItUp.fullscreen) {
+					$.markItUp.fullscreenSource = $.markItUp.focused;
+					var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
+					console.log(caretPosition);
+					var origTextarea = $($.markItUp.fullscreenSource);
+
+                    $('body').append('<textarea id="fullscreen" data-upload-image-url="' + origTextarea.data('upload-image-url') + '"></textarea>');
+
+                    var textarea = $('#fullscreen');
+                    textarea.val(origTextarea.val()).show().markItUp(
+						mySettings, {"previewParserPath": origTextarea.data('preview-parser-url')}
+					);
+
+					var container = textarea.parents('.markItUp');
+					setTimeout(function(){
+						container.jqm({toTop: true}).jqmShow();
+					}, 0);
+					setCaretPosition(textarea[0], caretPosition);
+
+                    var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
+                    $('.markItUpHeader', container).append(closeBtn);
+
+                    $('.fullScreenClose, .jqmOverlay', container).click(function () {
+                        minimize();
+                        return false;
+                    });
+
+                    $.markItUp.fullscreen = true;
+                } else {
+                    minimize();
+                    return false;
+                }
+            }
+        }
 	],
 	onTab: {
 		keepDefault: false,
@@ -106,7 +193,7 @@ mySettings = {
 miu = {
 	markdownTitle: function(markItUp, achar) {
 		heading = '';
-		n = jQuery.trim(markItUp.selection||markItUp.placeHolder).length;
+		n = $.trim(markItUp.selection||markItUp.placeHolder).length;
 		// work around bug in python-markdown where header underlines must be at least 3 chars
 		if (n < 3) { n = 3; }
 		for(i = 0; i < n; i++) {
@@ -117,6 +204,8 @@ miu = {
 };
 
 $(document).ready(function () {
+    $.markItUp.fullscreen = false;
+
 	function addEventHandler(obj, evt, handler) {
 		if (obj.addEventListener) {
 			obj.addEventListener(evt, handler, false);
@@ -127,45 +216,42 @@ $(document).ready(function () {
 		}
 	}
 
-	window.ondragenter = function(event){
-		event.preventDefault();
-	};
+    addEventHandler(window, 'dragenter', function (event) {
+        event.preventDefault();
+    });
 
-	window.ondragover = function(event){
-		event.preventDefault();
-	};
+    addEventHandler(window, 'dragover', function (event) {
+        event.preventDefault();
+    });
 
-	var markItUps = document.getElementsByTagName('textarea');
-	for (var i=0; i<markItUps.length; i++){
-		addEventHandler(markItUps[i], "drop", function (event) {
-			if ( event.target.className == "markItUpEditor" ) {
-				event = event || window.event;
-				if (event.preventDefault) {
-					event.preventDefault();
-				}
+    addEventHandler(window, "drop", function (event) {
+        if (event.target.className == "markItUpEditor") {
+            event = event || window.event;
+            if (event.preventDefault) {
+                event.preventDefault();
+            }
 
-				event.target.focus();
+            event.target.focus();
 
-				var files = event.dataTransfer.files;
+            var files = event.dataTransfer.files;
 
-				var data = new FormData();
-				data.append('image_file', files[0]);
+            var data = new FormData();
+            data.append('image_file', files[0]);
 
-				$.ajax({
-					url: event.target.getAttribute('data-upload-image-url'),
-					type: 'POST',
-					data: data,
-					cache: false,
-					processData: false,
-					contentType: false,
-					success: function (data, textStatus, jqXHR) {
-						$.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
-					},
-					error: function (data, textStatus, errorThrown) {
-						console.log('ERRORS: ' + data.statusText);
-					}
-				});
-			}
-		});
-	}
+            $.ajax({
+                url: event.target.getAttribute('data-upload-image-url'),
+                type: 'POST',
+                data: data,
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (data, textStatus, jqXHR) {
+                    $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
+                },
+                error: function (data, textStatus, errorThrown) {
+                    console.log('ERRORS: ' + data.statusText);
+                }
+            });
+        }
+    });
 });
