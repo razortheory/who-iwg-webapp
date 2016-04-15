@@ -1,3 +1,20 @@
+"""
+Images gallery Extension for Python-Markdown
+=============================================
+Input:
+    ----images-gallery----
+    ![alt_text](/media/images/andrew_galves_paORKUs.png "title")
+    ![alt_text](/media/images/ellie_JrzWbFV.png "title")
+    ![alt_text](/media/images/thomas_jbLH2AI.png "title")
+    ----------------------
+Outputs:
+    <div class="images-gallery">
+        <div class="images-gallery-item"><img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title"></div>
+        <div class="images-gallery-item"><img alt="alt_text" src="/media/images/ellie_JrzWbFV.png" title="title"></div>
+        <div class="images-gallery-item"><img alt="alt_text" src="/media/images/thomas_jbLH2AI.png" title="title"></div>
+    </div>
+"""
+
 import re
 
 from markdown.blockprocessors import ParagraphProcessor

@@ -1,3 +1,13 @@
+"""
+Urlize Extension for Python-Markdown
+=============================================
+Automatically text links parsing to html links
+Examples:
+    http://google.com
+    www.google.co
+    google.com (.com, .net, .org domains supported)
+"""
+
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 from markdown.util import AtomicString, etree

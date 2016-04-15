@@ -1,3 +1,13 @@
+"""
+Embedding Extension for Python-Markdown
+=============================================
+Added youtube, vimeo, etc video embedding to Python-Markdown.
+A simple example:
+    ![embed?width=500&height=375](https://www.youtube.com/embed/02ZL5y2TY_o)
+Outputs:
+    <iframe allowfullscreen="" frameborder="0" height="375" mozallowfullscreen="" src="https://www.youtube.com/embed/02ZL5y2TY_o" webkitallowfullscreen="" width="500"></iframe>
+"""
+
 from markdown.extensions import Extension
 from markdown.inlinepatterns import Pattern
 from markdown.util import etree
