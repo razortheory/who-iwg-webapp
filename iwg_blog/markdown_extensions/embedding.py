@@ -1,43 +1,36 @@
-from __future__ import absolute_import, unicode_literals
-
-import re
-
-from markdown.blockprocessors import ParagraphProcessor
 from markdown.extensions import Extension
+from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 
+from .utils import markdown_ordered_dict_prepend
 
-class EmbeddingProcessor(ParagraphProcessor):
-    """ Process Media Embedding. """
-    RE = re.compile(r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)')
 
-    def test(self, parent, block):
-        return bool(self.RE.match(block))
+class EmbeddingPattern(Pattern):
+    RE = r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)'
 
-    def run(self, parent, blocks):
-        for block in blocks:
-            match = self.RE.match(block)
-            if match:
-                blocks.remove(block)
-                embedded = etree.SubElement(parent, 'iframe')
-                embedded.set('webkitallowfullscreen', '')
-                embedded.set('mozallowfullscreen', '')
-                embedded.set('allowfullscreen', '')
-                embedded.set('frameborder', '0')
-                embedded.set('src', match.groupdict()['url'])
-                params = match.groupdict()['params'] or ''
-                for param in params.split('&'):
-                    param = param.split('=')
-                    if len(param) == 2:
-                        embedded.set(*param)
+    def __init__(self, md):
+        super(EmbeddingPattern, self).__init__(self.RE, md)
+
+    def handleMatch(self, m):
+        el = etree.Element('iframe')
+        el.set('webkitallowfullscreen', '')
+        el.set('mozallowfullscreen', '')
+        el.set('allowfullscreen', '')
+        el.set('frameborder', '0')
+        el.set('src', m.groupdict()['url'])
+        params = m.groupdict()['params'] or ''
+        for param in params.split('&'):
+            param = param.split('=')
+            if len(param) == 2:
+                el.set(*param)
+
+        return el
 
 
 class EmbeddingExtension(Extension):
-    """ Add images gallery to Markdown. """
-
     def extendMarkdown(self, md, md_globals):
-        """ Add an instance of ImagesGalleryExtension to BlockParser. """
-        md.parser.blockprocessors.add('embed', EmbeddingProcessor(md.parser), '<paragraph')
+        # Inserting to the top of inline patterns to avoid conflicts with images pattern
+        markdown_ordered_dict_prepend(md.inlinePatterns, 'embed', EmbeddingPattern(md))
 
 
 def makeExtension(*args, **kwargs):

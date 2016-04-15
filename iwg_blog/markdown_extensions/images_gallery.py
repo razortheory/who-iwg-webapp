@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 import re
 
 from markdown.blockprocessors import ParagraphProcessor
@@ -8,7 +6,6 @@ from markdown.util import etree
 
 
 class ImagesGalleryProcessor(ParagraphProcessor):
-    """ Process Images Gallery. """
     RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<images>(.*\n)+)[-]{10,}', re.MULTILINE)
     IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_url>[^ ]+) "(?P<title>[^"]+)"\)')
 
@@ -36,10 +33,7 @@ class ImagesGalleryProcessor(ParagraphProcessor):
 
 
 class ImagesGalleryExtension(Extension):
-    """ Add images gallery to Markdown. """
-
     def extendMarkdown(self, md, md_globals):
-        """ Add an instance of ImagesGalleryExtension to BlockParser. """
         md.parser.blockprocessors.add('images-gallery', ImagesGalleryProcessor(md.parser), '<paragraph')
 
 

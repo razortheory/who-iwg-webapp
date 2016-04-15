@@ -179,6 +179,7 @@ MARKDOWN_EXTENSIONS = [
     'markdown.extensions.tables',
     'iwg_blog.markdown_extensions.images_gallery',
     'iwg_blog.markdown_extensions.embedding',
+    'iwg_blog.markdown_extensions.urlize',
 ]
 
 MARKDOWN_EXTENSION_CONFIGS = {
