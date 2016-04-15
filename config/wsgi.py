@@ -20,5 +20,5 @@ from django.conf import settings
 if settings.NEWRELIC_DJANGO_ACTIVE:
     import newrelic.agent
 
-    newrelic.agent.initialize(settings.NEWRELIC_INI, environment=settings.NEW_RELIC_ENV)
+    newrelic.agent.initialize(settings.NEWRELIC_INI, environment=settings.NEWRELIC_ENV)
     application = newrelic.agent.WSGIApplicationWrapper(application)
