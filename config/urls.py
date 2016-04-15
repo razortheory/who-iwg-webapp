@@ -38,7 +38,7 @@ urlpatterns = [
 
 
 if settings.NEWRELIC_AVAILABILITY_TEST_ACTIVE:
-    urlpatterns.append(url('availability-test/', include('availability_monitor.urls')))
+    urlpatterns.append(url('availability-test/', include('iwg_blog.availability_monitor.urls')))
 
 
 if settings.DEBUG:
