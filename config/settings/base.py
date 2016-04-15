@@ -175,7 +175,14 @@ GRAPPELLI_ADMIN_TITLE = 'IWG Portal'
 MARKDOWN_SET_PATH = 'vendor/django_markdown/sets'
 MARKDOWN_SET_NAME = 'custom_markdown'
 MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.smarty',
     'markdown.extensions.tables',
     'iwg_blog.markdown_extensions.images_gallery',
     'iwg_blog.markdown_extensions.embedding',
 ]
+
+MARKDOWN_EXTENSION_CONFIGS = {
+    'markdown.extensions.smarty': {
+        'smart_angled_quotes': True
+    }
+}
