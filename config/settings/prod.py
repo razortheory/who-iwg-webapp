@@ -137,15 +137,15 @@ CELERY_QUEUES = (
 # --------------------------------------------------------------------------
 
 # Enable/disable run newrelic python agent with django application.
-NEWRELIC_DJANGO_ACTIVE = environ.bool('NEWRELIC_DJANGO_ACTIVE')
+NEWRELIC_DJANGO_ACTIVE = env.bool('NEWRELIC_DJANGO_ACTIVE')
 
 if NEWRELIC_DJANGO_ACTIVE:
-    NEWRELIC_INI = environ('NEWRELIC_INI')
-    NEWRELIC_ENV = environ('NEWRELIC_ENV')
+    NEWRELIC_INI = env('NEWRELIC_INI')
+    NEWRELIC_ENV = env('NEWRELIC_ENV')
 
 # If you're going to disable availability test task, make sure you disable availability monitor test
 # in synthetics tab of new relic account.
-NEWRELIC_AVAILABILITY_TEST_ACTIVE = environ.bool('NEWRELIC_AVAILABILITY_TEST_ACTIVE')
+NEWRELIC_AVAILABILITY_TEST_ACTIVE = env.bool('NEWRELIC_AVAILABILITY_TEST_ACTIVE')
 
 if NEWRELIC_AVAILABILITY_TEST_ACTIVE:
     INSTALLED_APPS += [
