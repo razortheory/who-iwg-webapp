@@ -93,7 +93,13 @@ mySettings = {
 		},
 		{separator:'---------------'},
 		{name:'Preview', call:'preview', className:"preview"}
-	]
+	],
+	onTab: {
+		keepDefault: false,
+		replaceWith: function(h){
+			return "\t";
+		}
+	}
 };
 
 // mIu nameSpace to avoid conflict.
