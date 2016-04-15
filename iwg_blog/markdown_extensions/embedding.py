@@ -9,7 +9,7 @@ from markdown.util import etree
 
 class EmbeddingProcessor(ParagraphProcessor):
     """ Process Media Embedding. """
-    RE = re.compile(r'\[!embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)')
+    RE = re.compile(r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)')
 
     def test(self, parent, block):
         return bool(self.RE.match(block))

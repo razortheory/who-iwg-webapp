@@ -43,7 +43,7 @@ mySettings = {
 				var video_width = prompt('Widget width (empty for auto)');
 				var video_height = prompt('Widget height (empty for auto)');
 				var video_link = prompt('Video link', 'http://');
-				var result = '[!embed';
+				var result = '![embed';
 				var params = '';
 				if (video_width) {
 					params += 'width=' + video_width;
