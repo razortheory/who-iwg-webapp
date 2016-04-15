@@ -16,7 +16,7 @@ class ImagesGalleryProcessor(ParagraphProcessor):
         return bool(self.RE.match(block))
 
     def run(self, parent, blocks):
-        for index, block in enumerate(blocks):
+        for block in blocks:
             images_match = self.RE.match(block)
             if images_match:
                 blocks.remove(block)

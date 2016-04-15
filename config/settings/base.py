@@ -177,4 +177,5 @@ MARKDOWN_SET_NAME = 'custom_markdown'
 MARKDOWN_EXTENSIONS = [
     'markdown.extensions.tables',
     'iwg_blog.markdown_extensions.images_gallery',
+    'iwg_blog.markdown_extensions.embedding',
 ]

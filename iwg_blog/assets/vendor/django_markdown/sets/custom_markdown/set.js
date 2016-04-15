@@ -40,17 +40,24 @@ mySettings = {
 			name:'Embed Video',
 			key:'E',
 			replaceWith:function(h) {
-				var video_width = prompt('Widget width', '500');
-				var video_height = prompt('Widget height', '375');
+				var video_width = prompt('Widget width (empty for auto)');
+				var video_height = prompt('Widget height (empty for auto)');
 				var video_link = prompt('Video link', 'http://');
-				var result = '<iframe ';
+				var result = '[!embed';
+				var params = '';
 				if (video_width) {
-					result += 'width="' + video_width + '" ';
+					params += 'width=' + video_width;
 				}
 				if (video_height) {
-					result += 'height="' + video_height + '" ';
+					if (params){
+						params += '&';
+					}
+					params += 'height=' + video_height;
 				}
-				result += 'src="' + video_link + '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+				if (params){
+					result += '?' + params;
+				}
+				result += '](' + video_link + ')';
 				return result;
 			}
 		},
