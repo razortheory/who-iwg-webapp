@@ -31,6 +31,16 @@ class ArticleView(BaseViewMixin, DetailView):
         return self.get_object().as_meta(self.request)
 
 
+class ArticlePreviewView(ArticleView):
+    def post(self, request, *args, **kwargs):
+        return self.get(request, *args, **kwargs)
+
+    def get_object(self, queryset=None):
+        obj = super(ArticlePreviewView, self).get_object()
+        obj.content = self.request.POST.get('data', 'No content posted')
+        return obj
+
+
 class ArticleListView(BaseViewMixin, ListView):
     model = Article
     queryset = Article.objects.all()
