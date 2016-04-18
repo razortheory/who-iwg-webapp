@@ -176,3 +176,24 @@ GRAPPELLI_ADMIN_TITLE = 'IWG Portal'
 META_USE_OG_PROPERTIES = True
 META_USE_SITES = True
 META_SITE_NAME = 'IWG Portal'
+
+
+# Markdown configuration
+# --------------------------------------------------------------------------
+
+MARKDOWN_SET_PATH = 'vendor/django_markdown/sets'
+MARKDOWN_SET_NAME = 'custom_markdown'
+MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.smarty',
+    'markdown.extensions.tables',
+    'iwg_blog.markdown_extensions.images_gallery',
+    'iwg_blog.markdown_extensions.embedding',
+    'iwg_blog.markdown_extensions.urlize',
+    'iwg_blog.markdown_extensions.images_caption',
+]
+
+MARKDOWN_EXTENSION_CONFIGS = {
+    'markdown.extensions.smarty': {
+        'smart_angled_quotes': True
+    }
+}

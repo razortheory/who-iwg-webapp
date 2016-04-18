@@ -1,5 +1,6 @@
 {% extends "admin/base.html" %}
 {% load i18n grp_tags %}
+{% load static %}
 
 {% block title %}{{ title }} | {% get_site_title %}{% endblock %}
 
@@ -20,12 +21,37 @@
             padding-left: 0;
         }
     </style>
+    <link rel="stylesheet" href="{% static 'css/admin-markitup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin-modal-loading.css' %}">
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
+    <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
     {{ block.super }}
 {% endblock %}
 
 
 {% block nav-global %}{% endblock %}
+
+{% block footer %}
+    {{ block.super }}
+    <div id="loadingDiv" class="loading-modal">
+        <div class="loading-modal-center">
+            <div class="cssload-thecube">
+                <div class="cssload-cube cssload-c1"></div>
+                <div class="cssload-cube cssload-c2"></div>
+                <div class="cssload-cube cssload-c4"></div>
+                <div class="cssload-cube cssload-c3"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var $loading = $('.loading-modal');
+        $(document).ajaxStart(function () {
+            $loading.fadeIn();
+        }).ajaxStop(function () {
+            $loading.fadeOut();
+        });
+    </script>
+{% endblock %}
