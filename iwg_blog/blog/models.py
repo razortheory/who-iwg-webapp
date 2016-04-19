@@ -90,3 +90,12 @@ class Article(ModelMeta, models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+
+    send_email = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.email
