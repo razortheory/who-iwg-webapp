@@ -78,7 +78,6 @@ if USE_CLOUDFRONT or USE_COMPRESSOR:
     AWS_HEADERS = {'Cache-Control': str('public, max-age=604800')}
 
 if USE_COMPRESSOR:
-    INSTALLED_APPS += ('compressor',)
     STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 
     # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
@@ -131,6 +130,12 @@ CELERY_DEFAULT_ROUTING_KEY = 'iwg_blog-queue'
 CELERY_QUEUES = (
     Queue('iwg_blog-queue', Exchange('iwg_blog-queue'), routing_key='iwg_blog-queue'),
 )
+
+
+# Django meta settings
+# --------------------------------------------------------------------------
+
+META_SITE_PROTOCOL = 'https'
 
 
 # New Relic configurations

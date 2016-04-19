@@ -13,4 +13,6 @@ pillow
 django-autoslug
 git+https://github.com/razortheory/django_markdown.git
 django-select2
+django-compressor
 django-grappelli>=2.8,<2.9
+django-meta==1.2

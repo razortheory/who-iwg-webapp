@@ -1,20 +1,34 @@
+{% load meta %}
 {% load compress %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>IWG Blog</title>
-
-  {% compress css %}
-    <style>
-      body {
-        background: #66ff66;
-      }
-    </style>
-  {% endcompress %}
+<head {% meta_namespaces %} itemscope itemtype="http://schema.org/WebSite">
+    <meta charset="UTF-8">
+    <title itemprop='name'>IWG Blog</title>
+    {% include "meta/meta.html" %}
 </head>
 <body>
+{% block content %}{% endblock %}
 
+    <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="WHO IWG">
+        <meta itemprop="logo" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
+        <meta itemprop="url" content="http://www.who.int">
+    </div>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "{{ scheme }}://{{ site }}/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ scheme }}://{{ site }}{% url 'search_view' %}?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 </body>
 </html>

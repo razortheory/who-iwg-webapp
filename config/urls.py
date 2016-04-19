@@ -32,8 +32,12 @@ urlpatterns = [
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^select2/', include('django_select2.urls')),
 
+    url(r'^attachments/', include('iwg_blog.attachments.urls')),
+
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'', include('iwg_blog.blog.urls')),
 ]
 
 

@@ -23,4 +23,5 @@ class UploadedImageAdmin(admin.ModelAdmin):
     image_preview.short_description = 'Image'
 
     def image_url(self, obj):
-        return obj.image_file.url
+        return '<a href="{0}">{0}</a>'.format(obj.image_file.url)
+    image_url.allow_tags = True

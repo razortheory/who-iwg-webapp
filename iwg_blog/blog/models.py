@@ -1,6 +1,10 @@
-from django.db import models
-
 from autoslug import AutoSlugField
+from markdown import markdown
+
+from meta.models import ModelMeta
+
+from django.core.urlresolvers import reverse
+from django.db import models
 from django_markdown.models import MarkdownField
 
 from .managers import CaseInsensitiveUniqueModelManager
@@ -35,7 +39,7 @@ class Tag(models.Model):
         return self.name
 
 
-class Article(models.Model):
+class Article(ModelMeta, models.Model):
     title = models.CharField(max_length=255)
     slug = AutoSlugField(
         populate_from='title',
@@ -57,6 +61,32 @@ class Article(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def cover_image_url(self):
+        return self.cover_image.url
+
+    @property
+    def absolute_url(self):
+        return self.get_absolute_url()
+
+    @property
+    def keywords(self):
+        return self.tags.values_list('slug', flat=True)
+
+    def get_absolute_url(self):
+        return reverse('article_detail_view', args=(self.id, ))
+
+    def short_description_html(self):
+        return markdown(self.short_description)
+
+    _metadata = {
+        'title': 'title',
+        'description': 'short_description_html',
+        'image': 'cover_image_url',
+        'url': 'absolute_url',
+        'keywords': 'keywords'
+    }
 
     class Meta:
         ordering = ['-created_at']

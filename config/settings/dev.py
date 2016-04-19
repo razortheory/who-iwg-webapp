@@ -51,6 +51,12 @@ BROKER_URL = env('BROKER_URL', default='amqp://guest@localhost//')
 CELERY_ALWAYS_EAGER = True
 
 
+# Django meta configuration
+# --------------------------------------------------------------------------
+
+META_SITE_PROTOCOL = 'http'
+
+
 # New Relic configurations
 # --------------------------------------------------------------------------
 
