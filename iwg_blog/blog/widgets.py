@@ -1,3 +1,4 @@
+from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 
@@ -21,3 +22,12 @@ class ArticleContentMarkdownWidget(MarkdownWidget):
             "#%s" % attrs['id'], previewParserPath=preview_path
         )
         return mark_safe(html)
+
+
+class AdminImageWidget(AdminFileWidget):
+    def render(self, name, value, attrs=None):
+        output = u''
+        if value and getattr(value, "url", None):
+            output += u'<a href="%s" target="_blank"><img height="150" src="%s" alt="%s" /></a>' % (value.url, value.url, value)
+        output += super(AdminFileWidget, self).render(name, value, attrs)
+        return mark_safe(output)

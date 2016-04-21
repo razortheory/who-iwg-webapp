@@ -19,3 +19,13 @@ class CaseInsensitiveUniqueModelManager(models.Manager):
                 kwargs['%s__iexact' % field_name] = kwargs[field_name]
                 del kwargs[field_name]
         return super(CaseInsensitiveUniqueModelManager, self).get(**kwargs)
+
+
+class ArticleManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super(ArticleManager, self).get_queryset(*args, **kwargs).filter(is_sample=False)
+
+
+class SampleArticleManager(models.Manager):
+    def get_queryset(self, *args, **kwargs):
+        return super(SampleArticleManager, self).get_queryset(*args, **kwargs).filter(is_sample=True)
