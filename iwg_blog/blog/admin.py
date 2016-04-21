@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 
 from .forms import ArticleAdminForm
-from .models import Article, Category, SampleArticle, Tag
+from .models import Article, Category, SampleArticle, Tag, Subscriber
 from .utils import update_url_params
 from .widgets import AdminImageWidget
 from ..attachments.admin import DocumentAdminInline
@@ -76,3 +76,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', )
+
+
+@admin.register(Subscriber)
+class SubscriberAdmin(admin.ModelAdmin):
+    list_display = ('email', 'send_email')

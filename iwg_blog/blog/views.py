@@ -2,11 +2,12 @@ from meta.views import Meta
 
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView, CreateView, UpdateView
 
-from .models import Article
+from .forms import SubscribeForm, UnsubscribeForm
+from .models import Article, Subscriber
 
 
 class BaseViewMixin(object):
@@ -80,3 +81,22 @@ class LandingView(BaseViewMixin, TemplateView):
                     url=reverse('landing_view'),
                     )
 
+
+class SubscribeForUpdates(CreateView):
+    model = Subscriber
+    form_class = SubscribeForm
+    template_name = 'subscribe_form.html'
+    success_url = reverse_lazy('landing_view')
+
+
+class UnsubscribeFromUpdates(UpdateView):
+    model = Subscriber
+    form_class = UnsubscribeForm
+    template_name = 'subscribe_form.html'
+    success_url = reverse_lazy('landing_view')
+
+    def get_object(self, queryset=None):
+        if self.request.method in ('POST', 'PUT'):
+            email = self.request.POST.get('email')
+            return Subscriber.objects.filter(email=email).first()
+        return None

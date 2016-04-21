@@ -145,3 +145,12 @@ class SampleArticle(Article):
     def save(self, **kwargs):
         self.is_sample = True
         super(SampleArticle, self).save(**kwargs)
+
+
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+
+    send_email = models.BooleanField(default=True)
+
+    def __unicode__(self):
+        return self.email
