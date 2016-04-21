@@ -12,3 +12,13 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
+
+
+from django.conf import settings
+
+
+if settings.NEWRELIC_DJANGO_ACTIVE:
+    import newrelic.agent
+
+    newrelic.agent.initialize(settings.NEWRELIC_INI, environment=settings.NEWRELIC_ENV)
+    application = newrelic.agent.WSGIApplicationWrapper(application)

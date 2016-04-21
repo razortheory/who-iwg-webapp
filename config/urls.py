@@ -40,5 +40,10 @@ urlpatterns = [
     url(r'', include('iwg_blog.blog.urls')),
 ]
 
+
+if settings.NEWRELIC_AVAILABILITY_TEST_ACTIVE:
+    urlpatterns.append(url('availability-test/', include('iwg_blog.availability_monitor.urls')))
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

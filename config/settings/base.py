@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'iwg_blog.taskapp',
     'iwg_blog.blog',
     'iwg_blog.grantee',
     'iwg_blog.attachments',
