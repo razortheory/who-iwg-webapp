@@ -10,7 +10,7 @@ class DocumentAdmin(admin.ModelAdmin):
     list_per_page = 20
 
     def document_preview(self, obj):
-        return "<img height=\"200\" src=\"%s\">" % obj.get_preview_url()
+        return "<img class=\"document-preview\" src=\"%s\">" % obj.get_preview_url()
     document_preview.allow_tags = True
     document_preview.short_description = 'Preview'
 
