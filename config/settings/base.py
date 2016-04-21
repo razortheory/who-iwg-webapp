@@ -187,6 +187,7 @@ MARKDOWN_SET_NAME = 'custom_markdown'
 MARKDOWN_EXTENSIONS = [
     'markdown.extensions.smarty',
     'markdown.extensions.tables',
+    'markdown.extensions.attr_list',
     'iwg_blog.markdown_extensions.images_gallery',
     'iwg_blog.markdown_extensions.embedding',
     'iwg_blog.markdown_extensions.urlize',

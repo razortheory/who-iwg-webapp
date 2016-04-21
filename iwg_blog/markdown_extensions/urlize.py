@@ -40,6 +40,7 @@ class UrlizePattern(Pattern):
 
         el = etree.Element("a")
         el.set('href', url)
+        el.set('target', '_blank')
         el.text = AtomicString(text)
         return el
 
