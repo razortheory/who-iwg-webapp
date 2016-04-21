@@ -16,3 +16,4 @@ django-select2
 django-compressor
 django-grappelli>=2.8,<2.9
 django-meta==1.2
+py-thumbnailer
