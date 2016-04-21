@@ -7,6 +7,8 @@ from .models import Document, UploadedImage
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('name', 'document_preview')
     search_fields = ('name', )
+    readonly_fields = ('document_preview', )
+    exclude = ('file_preview', )
     list_per_page = 20
 
     def document_preview(self, obj):
