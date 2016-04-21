@@ -1,11 +1,14 @@
 from autoslug import AutoSlugField
+from django_markdown.models import MarkdownField
+
 from markdown import markdown
 
 from meta.models import ModelMeta
 
 from django.core.urlresolvers import reverse
 from django.db import models
-from django_markdown.models import MarkdownField
+from django.utils import timezone
+
 
 from .managers import CaseInsensitiveUniqueModelManager
 
@@ -61,6 +64,7 @@ class Article(ModelMeta, models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    published_at = models.DateTimeField(default=None, null=True, blank=True)
 
     @property
     def cover_image_url(self):
@@ -90,6 +94,14 @@ class Article(ModelMeta, models.Model):
 
     class Meta:
         ordering = ['-created_at']
+
+    def save(self, *args, **kwargs):
+        if self.is_published:
+            already_exist_and_not_published = self.pk and not Article.objects.get(pk=self.pk).is_published
+            if already_exist_and_not_published or not self.pk:
+                self.published_at = timezone.now()
+
+        super(Article, self).save(*args, **kwargs)
 
 
 class Subscriber(models.Model):

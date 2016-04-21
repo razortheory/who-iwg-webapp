@@ -1,0 +1,9 @@
+{% extends 'mailing/base.html' %}
+
+{% block email_body %}
+    {% for article in articles %}
+        <tr>
+            <td><a href="{{ scheme }}://{{ domain }}{% url 'article_detail_view' article.id%}">{{ article.title }}</a></td>
+        </tr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'mailing/base.txt' %}
+
+{% block email_body %}
+{% for article in articles %}
+    {{ scheme }}://{{ domain }}{% url 'article_detail_view' article.id%}" - {{ article.title }}
+{% endblock %}
