@@ -14,8 +14,8 @@ class JsonSerializer(object):
                 data[field] = getattr(obj, field)
         return data
 
-    def serialize(self, obj):
-        if isinstance(obj, (list, set, tuple)):
+    def serialize(self, obj, many=False):
+        if many:
             data = [self.serialize_obj(single_obj) for single_obj in obj]
         else:
             data = self.serialize_obj(obj)

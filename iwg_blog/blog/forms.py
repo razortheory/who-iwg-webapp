@@ -1,24 +1,14 @@
 from django import forms
 from django.core.urlresolvers import reverse
 
-from django_markdown.widgets import MarkdownWidget
-from django_select2.forms import Select2MultipleWidget
-
+from .fields import MarkdownFormField
 from .models import Subscriber
-from .widgets import ArticleContentMarkdownWidget
+from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget
 
 
 def set_attrs_for_field(field, attrs):
     field.widget.attrs = field.widget.attrs or {}
     field.widget.attrs.update(attrs)
-
-
-class MarkdownFormField(forms.CharField):
-    widget = MarkdownWidget
-
-    def __init__(self, *args, **kwargs):
-        # Using default form initialization to prevent dirty widget overriding
-        super(MarkdownFormField, self).__init__(*args, **kwargs)
 
 
 class ArticleAdminForm(forms.ModelForm):
@@ -42,7 +32,7 @@ class ArticleAdminForm(forms.ModelForm):
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
-            'tags': Select2MultipleWidget,
+            'tags': TagsSelect2AdminWidget,
             'content': ArticleContentMarkdownWidget,
         }
         field_classes = {
@@ -94,4 +84,3 @@ class UnsubscribeForm(forms.ModelForm):
     def save(self, commit=True):
         self.instance.send_email = False
         return super(UnsubscribeForm, self).save(commit)
-

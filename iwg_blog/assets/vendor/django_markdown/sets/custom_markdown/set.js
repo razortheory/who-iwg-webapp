@@ -238,6 +238,7 @@ $(document).ready(function () {
             var data = new FormData();
             data.append('image_file', files[0]);
 
+            loading_spinner_enabled = true;
             $.ajax({
                 url: event.target.getAttribute('data-upload-image-url'),
                 type: 'POST',

@@ -11,8 +11,8 @@
 
 {% block extrastyle %}
     <style>
-        .select2-container {
-            width: 400px!important;
+        .django-select2 {
+            width: 100%!important;
         }
         .form-row.tags .select2-container, .form-row.tags .grp-related-widget-tools {
             float: left;
@@ -48,10 +48,16 @@
     </div>
     <script>
         var $loading = $('.loading-modal');
+        var loading_spinner_enabled = false;
         $(document).ajaxStart(function () {
-            $loading.fadeIn();
+            if (loading_spinner_enabled){
+                $loading.fadeIn();
+            }
         }).ajaxStop(function () {
-            $loading.fadeOut();
+            if (loading_spinner_enabled){
+                loading_spinner_enabled = false;
+                $loading.fadeOut();
+            }
         });
     </script>
 {% endblock %}
