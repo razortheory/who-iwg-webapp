@@ -5,8 +5,16 @@ from .models import Document, UploadedImage
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('name', )
+    list_display = ('name', 'document_preview')
     search_fields = ('name', )
+    readonly_fields = ('document_preview', )
+    exclude = ('file_preview', )
+    list_per_page = 20
+
+    def document_preview(self, obj):
+        return "<img class=\"document-preview\" src=\"%s\">" % obj.get_preview_url()
+    document_preview.allow_tags = True
+    document_preview.short_description = 'Preview'
 
 
 class DocumentAdminInline(admin.StackedInline):

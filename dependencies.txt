@@ -1,3 +1,6 @@
 libpq-dev
 postgresql-9.3
 libjpeg-dev
+ffmpeg
+poppler-utils
+unoconv
