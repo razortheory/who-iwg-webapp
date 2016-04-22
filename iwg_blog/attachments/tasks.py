@@ -9,7 +9,7 @@ from py_thumbnailer.thumbnail import create_thumbnail
 
 @task
 def generate_document_preview(document):
-    path, filename = os.path.split(document.document_file.path)
+    path, filename = os.path.split(document.document_file.name)
     head, ext = os.path.splitext(filename)
 
     try:
