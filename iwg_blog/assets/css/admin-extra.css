@@ -1,0 +1,22 @@
+.django-select2 {
+    width: 100% !important;
+}
+
+.form-row.tags .select2-container, .form-row.tags .grp-related-widget-tools {
+    float: left;
+}
+
+.form-row.tags .grp-related-widget-tools {
+    padding-left: 0;
+}
+
+.field-document_preview .document-preview {
+    max-height: 200px;
+    border: 1px dashed black;
+    display: block;
+    margin: 0 auto;
+}
+
+.jquery-dialog {
+    display: none;
+}
