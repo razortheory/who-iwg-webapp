@@ -41,6 +41,7 @@ THIRD_PARTY_APPS = [
     'django_select2',
     'compressor',
     'meta',
+    'watson',
 ]
 
 LOCAL_APPS = [

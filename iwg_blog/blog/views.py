@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 
 from django.views.generic import DetailView, ListView, TemplateView, CreateView, UpdateView
 
+from watson import search as watson
+
 from .forms import SubscribeForm, UnsubscribeForm
 from .models import Article, Subscriber
 
@@ -62,7 +64,12 @@ class SearchView(BaseViewMixin, ListView):
 
     def get_queryset(self):
         search_string = self.request.GET.get('q', '')
-        return self.model.objects.filter(title__icontains=search_string)
+        queryset = super(SearchView, self).get_queryset()
+
+        if not search_string:
+            return queryset
+
+        return watson.filter(self.model.objects, search_string, ranking=True)
 
     def get_meta_context(self):
         url = reverse('search_view') + '?' + self.request.GET.urlencode()

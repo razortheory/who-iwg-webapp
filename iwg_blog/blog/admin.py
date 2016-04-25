@@ -1,10 +1,13 @@
 from django.contrib import admin
 from django.db import models
 
+from watson.search import default_search_engine
+
 from .forms import ArticleAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
 from .utils import update_url_params
 from .widgets import AdminImageWidget
+from .adapters import ArticleAdapter
 from ..attachments.admin import DocumentAdminInline
 
 
@@ -28,16 +31,20 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
+    formfield_overrides = {
+        models.ImageField: {'widget': AdminImageWidget}
+    }
+
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
         'published_at', 'status', 'hits', 'words_count'
     ]
-    search_fields = ['title', ]
     list_filter = ['status', 'category', 'published_at']
     inlines = (DocumentAdminInline, )
-    formfield_overrides = {
-        models.ImageField: {'widget': AdminImageWidget}
-    }
+
+    search_adapter_cls = ArticleAdapter
+    search_engine = default_search_engine
+    search_fields = [None]
 
     def list_display_hits(self, request):
         return request.user.has_perm('blog.view_article_hits')
@@ -61,6 +68,12 @@ class ArticleAdmin(ConfigurableModelAdmin):
         ])
     tags_list.short_description = 'Tags'
     tags_list.allow_tags = True
+
+    def get_search_results(self, request, queryset, search_term):
+        if not search_term:
+            return queryset, False
+
+        return self.search_engine.filter(queryset, search_term, ranking=False), False
 
 
 @admin.register(SampleArticle)
