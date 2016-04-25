@@ -23,7 +23,7 @@ def send_emails_for_subscribers():
     published_from = (today - timedelta(days=7)).replace(hour=0, minute=0, second=0)
     published_to = (today - timedelta(days=1)).replace(hour=23, minute=59, second=59)
 
-    articles = Article.objects.filter(is_published=True,
+    articles = Article.objects.filter(status=Article.STATUS_PUBLISHED,
                                       published_at__gte=published_from,
                                       published_at__lte=published_to)[:10]
 
