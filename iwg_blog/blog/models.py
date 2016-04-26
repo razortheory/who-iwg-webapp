@@ -1,3 +1,5 @@
+import re
+
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
@@ -92,7 +94,7 @@ class Article(ModelMeta, models.Model):
             if old_obj.status != self.status and self.status == self.STATUS_PUBLISHED:
                 self.published_at = timezone.now()
 
-        self.words_count = len(self.content_text.split())
+        self.words_count = len(re.findall(r"\S+", self.content_text))
         super(Article, self).save(**kwargs)
 
     @property
