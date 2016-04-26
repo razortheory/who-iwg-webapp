@@ -2,11 +2,11 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
-from autoslug import AutoSlugField
 from django_markdown.models import MarkdownField
 from markdown import markdown
 from meta.models import ModelMeta
 
+from .fields import AutoSlugField
 from .managers import ArticleManager, CaseInsensitiveUniqueModelManager, SampleArticleManager
 from .utils import markdown_to_text
 
