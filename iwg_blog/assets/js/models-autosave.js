@@ -29,7 +29,7 @@ function hasAutoSavedData(){
     return $('[data-autosave]').map(function(){
         var autosave_data = localStorage.getItem($(this).data('autosave'));
         return Boolean(autosave_data) && autosave_data != $(this).val()
-    }).get().includes(true)
+    }).get().indexOf(true) != -1
 }
 
 $(document).ready(function(){
