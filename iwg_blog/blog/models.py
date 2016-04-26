@@ -84,6 +84,14 @@ class Article(ModelMeta, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, editable=False)
 
+    def __init__(self, *args, **kwargs):
+        sample = kwargs.pop('sample', None)
+        if sample:
+            for field in ['title', 'category', 'cover_image', 'short_description', 'content']:
+                kwargs[field] = getattr(sample, field)
+
+        super(Article, self).__init__(*args, **kwargs)
+
     def __unicode__(self):
         return self.title
 
@@ -148,16 +156,6 @@ class SampleArticle(Article):
     def save(self, **kwargs):
         self.is_sample = True
         super(SampleArticle, self).save(**kwargs)
-
-    def start_from_sample(self):
-        article = Article(
-            title=self.title, category=self.category, cover_image=self.cover_image,
-            short_description=self.short_description, content=self.content,
-            status=self.STATUS_DRAFT
-        )
-        article.save()
-        article.tags.add(*self.tags.all())
-        return article
 
 
 class Subscriber(models.Model):

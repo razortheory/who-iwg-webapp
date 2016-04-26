@@ -92,11 +92,14 @@ class SampleArticleAdmin(ArticleAdmin):
 
     def response_change(self, request, obj):
         if "_create_article" in request.POST:
-            article = obj.start_from_sample()
+            article = Article(sample=obj)
+            article.save()
+            article.tags.add(*obj.tags.all())
+
             msg = 'New article was created from "%(obj)s" successfully.' % {'obj': force_text(obj)}
             self.message_user(request, msg, messages.SUCCESS)
             redirect_url = reverse('admin:%s_%s_change' % (self.model._meta.app_label, 'article'),
-                                   current_app=self.admin_site.name, args=[article.id])
+                                   current_app=self.admin_site.name, args=[article.pk])
             return HttpResponseRedirect(redirect_url)
 
         else:
