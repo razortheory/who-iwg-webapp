@@ -18,3 +18,5 @@ django-grappelli>=2.8,<2.9
 django-meta==1.2
 beautifulsoup4
 py-thumbnailer
+
+django-watson
