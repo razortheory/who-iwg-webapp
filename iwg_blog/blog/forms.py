@@ -35,7 +35,7 @@ class AutoSaveModelFormMixin(object):
     @property
     def media(self):
         media = super(AutoSaveModelFormMixin, self).media
-        media.add_js(['js/models-autosave.js'])
+        media.add_js(['admin/js/admin-models-autosave.js'])
         return media
 
 

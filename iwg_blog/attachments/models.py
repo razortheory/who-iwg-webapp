@@ -31,7 +31,7 @@ class Document(models.Model):
     def get_preview_url(self):
         if self.file_preview:
             return self.file_preview.url
-        return static('images/other.png')
+        return static('attachments/images/other.png')
 
 
 class UploadedImage(models.Model):
