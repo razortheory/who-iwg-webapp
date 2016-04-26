@@ -1,5 +1,8 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.http import HttpResponseRedirect
+from django.utils.encoding import force_text
 
 from .forms import ArticleAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
@@ -65,7 +68,26 @@ class ArticleAdmin(ConfigurableModelAdmin):
 
 @admin.register(SampleArticle)
 class SampleArticleAdmin(ArticleAdmin):
-    pass
+    def render_change_form(self, request, context, **kwargs):
+        context = context or {}
+        context.update({
+            'additional_actions': [
+                {'text': 'Create new article from sample', 'name': '_create_article'}
+            ]
+        })
+        return super(SampleArticleAdmin, self).render_change_form(request, context, **kwargs)
+
+    def response_change(self, request, obj):
+        if "_create_article" in request.POST:
+            article = obj.start_from_sample()
+            msg = 'New article was created from "%(obj)s" successfully.' % {'obj': force_text(obj)}
+            self.message_user(request, msg, messages.SUCCESS)
+            redirect_url = reverse('admin:%s_%s_change' % (self.model._meta.app_label, 'article'),
+                                   current_app=self.admin_site.name, args=[article.id])
+            return HttpResponseRedirect(redirect_url)
+
+        else:
+            return super(SampleArticleAdmin, self).response_change(request, obj)
 
 
 @admin.register(Category)

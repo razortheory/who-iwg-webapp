@@ -20,3 +20,7 @@
 .jquery-dialog {
     display: none;
 }
+
+.table tbody tr td, table tbody tr th {
+    max-width: 1000px;
+}

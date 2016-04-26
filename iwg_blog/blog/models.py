@@ -59,7 +59,8 @@ class Article(ModelMeta, models.Model):
         populate_from='title',
         unique=True, db_index=True,
         editable=True, blank=True,
-        help_text='optional; will be automatically populated from `title` field'
+        help_text='optional; will be automatically populated from `title` field',
+        manager=all_objects,
     )
 
     category = models.ForeignKey(Category, related_name='articles')
@@ -145,6 +146,16 @@ class SampleArticle(Article):
     def save(self, **kwargs):
         self.is_sample = True
         super(SampleArticle, self).save(**kwargs)
+
+    def start_from_sample(self):
+        article = Article(
+            title=self.title, category=self.category, cover_image=self.cover_image,
+            short_description=self.short_description, content=self.content,
+            status=self.STATUS_DRAFT
+        )
+        article.save()
+        article.tags.add(*self.tags.all())
+        return article
 
 
 class Subscriber(models.Model):
