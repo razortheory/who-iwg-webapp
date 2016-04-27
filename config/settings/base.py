@@ -189,6 +189,7 @@ MARKDOWN_EXTENSIONS = [
     'markdown.extensions.smarty',
     'markdown.extensions.tables',
     'markdown.extensions.attr_list',
+    'iwg_blog.markdown_extensions.article_content_preview',
     'iwg_blog.markdown_extensions.images_gallery',
     'iwg_blog.markdown_extensions.embedding',
     'iwg_blog.markdown_extensions.urlize',
