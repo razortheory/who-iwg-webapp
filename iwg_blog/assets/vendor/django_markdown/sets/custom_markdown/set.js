@@ -95,6 +95,12 @@ mySettings = {
             }
         },
         {name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
+        {
+            name:'Article content preview',
+            openWith:'----article-content-preview----\nimage: ',
+            closeWith: '\ntext: \ndescription: \nurl: \n-------------------------------\n',
+            placeHolder:'Insert image url or tag here...'
+        },
         {separator:'---------------'},
         {name:'Quotes', openWith:'> '},
         {name:'Table',

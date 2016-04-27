@@ -3,7 +3,7 @@ Article content preview Extension for Python-Markdown
 =============================================
 Input:
     ----article-content-preview----
-    image: /media/images/tango_icon.png
+    image: /media/images/tango_icon.png or ![alt_text](/media/images/country-flags_abXgWVp.jpg "title")
     text: What are some of the myths - and facts - about vaccination?
     description: The diseases we can vaccinate against will return if we stop vaccination programmes.
     url: http://google.com
@@ -25,6 +25,7 @@ import re
 
 from markdown.blockprocessors import ParagraphProcessor
 from markdown.extensions import Extension
+from markdown.inlinepatterns import IMAGE_LINK_RE
 from markdown.util import etree, AtomicString
 
 
@@ -49,6 +50,10 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
                     data[data_dict['key'].strip()] = data_dict['value'].strip()
 
                 if 'image' in data:
+                    image_tag_match = re.match(IMAGE_LINK_RE, data['image'])
+                    if image_tag_match:
+                        data['image'] = image_tag_match.group(9).split()[0]
+
                     image_item = etree.SubElement(article_content_preview, 'div')
                     image_item.set('style', 'background-image:url(%s)' % data['image'])
 

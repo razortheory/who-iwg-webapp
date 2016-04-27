@@ -47,11 +47,14 @@
 .markItUp .markItUpButton14 a {
 	background-image:url(images/link.png);
 }
+.markItUp .markItUpButton15 a {
+	background-image:url(images/earth-link.png);
+}
 
-.markItUp .markItUpButton15 a	{
+.markItUp .markItUpButton16 a	{
 	background-image:url(images/quotes.png);
 }
-.markItUp .markItUpButton16 a	{
+.markItUp .markItUpButton17 a	{
 	background-image:url(images/grid.png);
 }
 
