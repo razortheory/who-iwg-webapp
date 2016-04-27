@@ -10,11 +10,11 @@ Input:
     -------------------------------
 Outputs:
     <div class="article-content-preview">
-        <div style="background-image:url(/media/images/tango_icon.png)"></div>
+        <div class="article-content-preview__thumbnail" style="background-image:url(/media/images/country-flags_abXgWVp.jpg)"></div>
         <div class="article-content-preview__body">
             <h4 class="article-content-preview__title">What are some of the myths - and facts - about vaccination?</h4>
             <h4 class="article-content-preview__text">The diseases we can vaccinate against will return if we stop vaccination programmes.</h4>
-            <h4 class="article-content-preview__link" href="http://google.com"><a href="http://google.com" target="_blank">google.com</a></h4>
+            <a class="article-content-preview__link" href="http://google.com" target="_blank">google.com</a>
         </div>
     </div>
 """
@@ -56,6 +56,7 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
 
                     image_item = etree.SubElement(article_content_preview, 'div')
                     image_item.set('style', 'background-image:url(%s)' % data['image'])
+                    image_item.set('class', 'article-content-preview__thumbnail')
 
                 body_item = etree.SubElement(article_content_preview, 'div')
                 body_item.set('class', 'article-content-preview__body')
