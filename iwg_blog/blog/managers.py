@@ -26,6 +26,12 @@ class ArticleManager(models.Manager):
         return super(ArticleManager, self).get_queryset(*args, **kwargs).filter(is_sample=False)
 
 
+class PublishedArticleManager(ArticleManager):
+    def get_queryset(self, *args, **kwargs):
+        return super(PublishedArticleManager, self).get_queryset(*args, **kwargs)\
+            .filter(status=self.model.STATUS_PUBLISHED)
+
+
 class SampleArticleManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
         return super(SampleArticleManager, self).get_queryset(*args, **kwargs).filter(is_sample=True)

@@ -1,0 +1,41 @@
+{% load django_markdown %}
+
+
+<div class="posts-list">
+  <h2 class="posts-list__title title-main"><span class="first"><span>L</span></span><span>ATEST ARTICLE</span>
+  </h2>
+  <ul class="posts-list__list">
+    {% for article in articles %}
+      <li class="post posts-list__item">
+        <div style="background-image:url({{ article.cover_image.url }})" class="post__image">
+        </div>
+        <h3 class="post__title">
+          {{ article.title }}
+        </h3>
+        <div class="post__body">
+          <a href="{{ article.get_absolute_url }}" class="button desktop-only post__button">CONTINUE READING</a>
+          <div class="post__text">
+            {{ article.short_description |markdown }}
+          </div>
+        </div>
+        <div class="post__footer">
+          <ul class="post__footer-tags">
+            {% for tag in article.tags.all %}
+              <li class="post__footer-tag">
+                <a href="{{ tag.get_absolute_url }}" class="post__footer-link">#{{ tag.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="post__footer-date">
+            {{ article.published_at |date:"j<\s\u\b>S</\s\u\b> F, Y" |safe }}
+          </div>
+          <div class="post__footer-devider">
+          </div>
+          <div class="mobile-only post__footer-button-wrap">
+            <a href="{{ article.get_absolute_url }}" class="button post__footer-button">CONTINUE READING</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

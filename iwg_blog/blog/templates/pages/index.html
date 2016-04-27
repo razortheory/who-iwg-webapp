@@ -1,0 +1,13 @@
+{% extends "layouts/default.html" %}
+{% load static %}
+
+
+{% block content %}
+  {% include "partials/home/home.html" %}
+{% endblock %}
+
+
+{% block extraScripts %}
+  <script src="{% static 'blog/scripts/vendor/jquery.carouFredSel.js' %}"></script>
+  <script src="{% static 'blog/scripts/vendor/jquery.touchSwipe.min.js' %}"></script>
+{% endblock %}

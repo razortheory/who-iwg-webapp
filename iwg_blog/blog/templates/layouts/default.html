@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include "partials/head/head.html" %}
+    {% block head %}{% endblock %}
+
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+
+  {% block scripts %}
+    <script src="{% static 'blog/scripts/vendor/modernizr-2.6.1.min.js' %}"></script>
+    <script src="{% static 'blog/scripts/vendor/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'blog/scripts/vendor/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'blog/scripts/vendor/retina.min.js' %}"></script>
+    <script src="{% static 'blog/scripts/tools.js' %}"></script>
+  {% endblock %}
+
+  {% block extraScripts %}{% endblock %}
+
+</html>

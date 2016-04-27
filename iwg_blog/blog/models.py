@@ -9,7 +9,7 @@ from markdown import markdown
 from meta.models import ModelMeta
 
 from .fields import AutoSlugField
-from .managers import ArticleManager, CaseInsensitiveUniqueModelManager, SampleArticleManager
+from .managers import ArticleManager, CaseInsensitiveUniqueModelManager, SampleArticleManager, PublishedArticleManager
 from .utils import markdown_to_text
 
 
@@ -20,13 +20,14 @@ class Category(models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
-    image = models.ImageField(upload_to='images')
-
     class Meta:
         verbose_name_plural = 'Categories'
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('blog:category_detail_view', args=(self.slug, ))
 
 
 class Tag(models.Model):
@@ -41,6 +42,9 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('blog:tag_detail_view', args=(self.slug,))
+
 
 class Article(ModelMeta, models.Model):
     STATUS_DRAFT = 'draft'
@@ -54,6 +58,7 @@ class Article(ModelMeta, models.Model):
     )
 
     objects = ArticleManager()
+    published = PublishedArticleManager()
     all_objects = models.Manager()
 
     title = models.CharField(max_length=255)
@@ -126,7 +131,7 @@ class Article(ModelMeta, models.Model):
         return self.tags.values_list('slug', flat=True)
 
     def get_absolute_url(self):
-        return reverse('article_detail_view', args=(self.id, ))
+        return reverse('blog:article_detail_view', args=(self.slug, ))
 
     def short_description_html(self):
         return markdown(self.short_description)
@@ -140,7 +145,7 @@ class Article(ModelMeta, models.Model):
     }
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-published_at']
         permissions = (
             ('view_article_hits', 'Can view article hits'),
             ('change_article_slug', 'Can change article slug'),

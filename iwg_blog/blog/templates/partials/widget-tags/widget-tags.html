@@ -1,0 +1,9 @@
+<div class="widget-tags">
+  <ul class="widget-tags__list">
+    {% for tag in tags %}
+      <li class="widget-tags__item">
+        <a href="{{ tag.get_absolute_url }}" class="widget-tags__link">{{ tag.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

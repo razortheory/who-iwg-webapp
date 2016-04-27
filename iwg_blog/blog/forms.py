@@ -48,7 +48,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
 
         instance = kwargs.get('instance')
         if instance:
-            preview_path = reverse('article_preview_view', args=[instance.id])
+            preview_path = reverse('blog:article_preview_view', args=[instance.slug])
         else:
             preview_path = reverse('django_markdown_preview')
 

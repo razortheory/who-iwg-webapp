@@ -1,0 +1,23 @@
+<div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
+  {% include "partials/svg-images/svg-images.html" %}
+</div>
+<div class="page">
+  <div class="header-wrap">
+    {% include "partials/header/header.html" %}
+  </div>
+  <div class="main-wrap">
+    <!--main-->
+    <main role="main" class="main">
+      <div class="inner inner_content">
+        <div class="search-page">
+          {% include "partials/search/search.html" with obj_list=article_list %}
+          {% include "partials/blog-posts/blog-posts.html" with articles=article_list %}
+        </div>
+      </div>
+    </main>
+  </div>
+  <!--main END-->
+  <div class="footer-wrap">
+    {% include "partials/footer/footer.html" %}
+  </div>
+</div>

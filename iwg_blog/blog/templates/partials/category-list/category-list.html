@@ -1,0 +1,41 @@
+{% load django_markdown %}
+
+
+<div class="category-list">
+  <ul class="category-list__list">
+    {% for article in articles %}
+      <li class="category-list__item">
+        <div class="category-post">
+          <div style="background-image:url({{ article.cover_image.url }})" class="category-post__image">
+          </div>
+          <h3 class="category-post__title">{{ article.title }}
+          </h3>
+          <div class="category-post__footer">
+            <ul class="category-post__footer-tags">
+              {% for tag in article.tags.all %}
+                <li class="category-post__footer-tag">
+                  <a href="{{ tag.get_absolute_url }}" class="category-post__footer-link">#{{ tag.name }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            <div class="category-post__footer-date">
+              {{ article.published_at |date:"j<\s\u\b>S</\s\u\b> F, Y" |safe }}
+            </div>
+            <div class="category-post__footer-devider">
+            </div>
+          </div>
+          <div class="category-post__body">
+            <div class="category-post__text">
+              {{ article.short_description |markdown }}
+            </div>
+            <a href="{{ article.get_absolute_url }}" title="Read more" class="category-post__button">
+              <svg class="icon icon_arrow-right-simple">
+                <use xlink:href="#icon_arrow-right-simple"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

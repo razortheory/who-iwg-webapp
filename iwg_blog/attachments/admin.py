@@ -5,8 +5,9 @@ from .models import Document, UploadedImage
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'document_preview')
-    search_fields = ('name', )
+    list_display = ('name', 'article', 'is_featured', 'document_preview')
+    list_filter = ('is_featured', )
+    search_fields = ('name', 'article')
     readonly_fields = ('document_preview', )
     exclude = ('file_preview', )
     list_per_page = 20

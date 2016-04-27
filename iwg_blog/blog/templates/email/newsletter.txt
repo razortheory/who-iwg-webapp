@@ -2,5 +2,5 @@
 
 {% block email_body %}
 {% for article in articles %}
-    {{ scheme }}://{{ domain }}{% url 'article_detail_view' article.id%}" - {{ article.title }}
+    {{ scheme }}://{{ domain }}{% url 'article_detail_view' article.slug %}" - {{ article.title }}
 {% endblock %}

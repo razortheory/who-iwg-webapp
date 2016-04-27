@@ -1,0 +1,28 @@
+<div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
+  {% include "partials/svg-images/svg-images.html" %}
+</div>
+<div class="page">
+  <div class="header-wrap">
+    {% include "partials/header/header.html" %}
+  </div>
+  <div class="main-wrap">
+    <!--main-->
+    <main role="main" class="main">
+      <div class="inner inner_category">
+        <div class="category-page">
+          <h2 class="category-page__title title-main title-main_n">
+            <span class="first"><span>{{ category.name |first }}</span></span><span>{{ category.name |slice:"1:" }}</span>
+          </h2>
+          {% include "partials/category-list/category-list.html" with articles=article_list %}
+          <div class="category-page__nav">
+            {% include "partials/posts-nav/posts-nav.html" %}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!--main END-->
+  <div class="footer-wrap">
+    {% include "partials/footer/footer.html" %}
+  </div>
+</div>
