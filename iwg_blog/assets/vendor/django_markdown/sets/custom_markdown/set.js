@@ -155,7 +155,7 @@ mySettings = {
 
                     var textarea = $('#fullscreen');
                     $(origTextarea[0].attributes).each(function() {
-						if (this.nodeName.startsWith('data-')){
+						if (this.nodeName.indexOf('data-') == 0){
 							textarea.attr(this.nodeName, this.nodeValue);
 						}
                     });
