@@ -16,4 +16,8 @@ class Migration(migrations.Migration):
             name='article',
             options={'ordering': ['-published_at'], 'permissions': (('view_article_hits', 'Can view article hits'), ('change_article_slug', 'Can change article slug'))},
         ),
+        migrations.RemoveField(
+            model_name='category',
+            name='image',
+        ),
     ]
