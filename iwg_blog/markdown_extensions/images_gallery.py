@@ -23,8 +23,9 @@ from markdown.util import etree
 
 
 class ImagesGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<images>(.*\n)+)[-]{10,}', re.MULTILINE)
+    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n)+)[-]{10,}', re.MULTILINE)
     IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_url>[^ ]+) "(?P<title>[^"]+)"\)')
+    COLUMNS_RE = re.compile(r'columns:[ ]?(?P<columns_num>\d+)\n')
 
     def test(self, parent, block):
         return bool(self.RE.match(block))
@@ -37,11 +38,14 @@ class ImagesGalleryProcessor(ParagraphProcessor):
                 images_gallery = etree.SubElement(parent, 'div')
                 images_gallery.set('class', 'images-gallery')
 
-                for image_match in self.IMAGE_RE.finditer(images_match.group('images')):
+                columns_match = self.COLUMNS_RE.match(images_match.group('data'))
+                columns_num = int(columns_match.group('columns_num')) if columns_match else 2
+
+                for image_match in self.IMAGE_RE.finditer(images_match.group('data')):
                     image_dict = image_match.groupdict()
 
                     gallery_item = etree.SubElement(images_gallery, 'div')
-                    gallery_item.set('class', 'images-gallery-item')
+                    gallery_item.set('class', 'images-gallery-item col-xs-%s' % (12/columns_num, ))
 
                     image = etree.SubElement(gallery_item, 'img')
                     image.set('src', image_dict['image_url'])

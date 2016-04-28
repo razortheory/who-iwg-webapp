@@ -40,9 +40,9 @@ class ArticleAdmin(ConfigurableModelAdmin):
 
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
-        'published_at', 'status', 'hits', 'words_count'
+        'published_at', 'is_featured', 'status', 'hits', 'words_count'
     ]
-    list_filter = ['status', 'category', 'published_at']
+    list_filter = ['is_featured', 'status', 'category', 'published_at']
     inlines = (DocumentAdminInline, )
 
     search_adapter_cls = ArticleAdapter

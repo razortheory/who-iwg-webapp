@@ -50,7 +50,7 @@
 {% block scripts %}
   {% compress js %}
     {{ block.super }}
-    <script src="{% static 'scripts/vendor/jquery.carouFredSel.js' %}"></script>
-    <script src="{% static 'scripts/vendor/jquery.touchSwipe.min.js' %}"></script>
+    <script src="{% static 'vendor/jquery.carouFredSel.js' %}"></script>
+    <script src="{% static 'vendor/jquery.touchSwipe.min.js' %}"></script>
   {% endcompress %}
 {% endblock %}

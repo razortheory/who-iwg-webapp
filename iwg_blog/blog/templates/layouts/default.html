@@ -38,15 +38,17 @@
 
 
 {% block styles %}
-  <link href="{% static 'stylesheets/style.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
 {% endblock %}
 
 
 {% block scripts %}
   {{ block.super }}
-  <script src="{% static 'scripts/vendor/modernizr-2.6.1.min.js' %}"></script>
-  <script src="{% static 'scripts/vendor/jquery-2.1.4.min.js' %}"></script>
-  <script src="{% static 'scripts/vendor/jquery-migrate-1.2.1.min.js' %}"></script>
-  <script src="{% static 'scripts/vendor/retina.min.js' %}"></script>
-  <script src="{% static 'scripts/tools.js' %}"></script>
+  <script src="{% static 'vendor/modernizr-2.6.1.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-2.1.4.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-migrate-1.2.1.min.js' %}"></script>
+  <script src="{% static 'vendor/retina.min.js' %}"></script>
+  <script src="{% static 'vendor/masonry.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'js/tools.js' %}"></script>
 {% endblock %}

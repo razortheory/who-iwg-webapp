@@ -22,6 +22,7 @@ $(document).ready(function() {
         }
     });
 });
+
 function carouFredSelInit (Slider, visible, responsive, width, height, autoplay, circular, align, swipe) {
 
     if (typeof $().carouFredSel == 'function') {
@@ -63,10 +64,21 @@ function carouFredSelInit (Slider, visible, responsive, width, height, autoplay,
                     swipe: {
                         onTouch: swipe,
                         onMouse: swipe
-                    },
+                    }
                 };
 
             iSlider.carouFredSel(options);
         });
     }
 }
+
+$(document).ready(function () {
+    var $gallery = $('.images-gallery');
+    $gallery.masonry({
+        itemSelector: '.images-gallery-item',
+        percentPosition: true
+    });
+    $gallery.imagesLoaded().progress( function() {
+      $gallery.masonry('layout');
+    });
+});

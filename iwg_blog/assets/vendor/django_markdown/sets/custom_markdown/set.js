@@ -66,7 +66,7 @@ mySettings = {
         {
             name:'Pictures gallery',
             key:'G',
-            openWith: '----images-gallery----\n',
+            openWith: '----images-gallery----\ncolumns: 2\n',
             closeWith: '----------------------\n'
         },
         {
