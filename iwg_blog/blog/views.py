@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.db import models
+from django.shortcuts import redirect
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 from django.conf import settings
@@ -211,6 +212,18 @@ class SubscribeForUpdates(CreateView):
     form_class = SubscribeForm
     template_name = 'subscribe_form.html'
     success_url = reverse_lazy('blog:landing_view')
+
+    def form_valid(self, form):
+        messages.success(self.request, 'You\'re successfully subscribed.')
+        return super(SubscribeForUpdates, self).form_valid(form)
+
+    def form_invalid(self, form):
+        for errorlist in form.errors.values():
+            for error in errorlist:
+                messages.error(self.request, error)
+
+        next_url = self.request.META.get('HTTP_REFERER') or 'blog:landing_view'
+        return redirect(next_url)
 
 
 class UnsubscribeFromUpdates(UpdateView):

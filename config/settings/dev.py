@@ -62,20 +62,3 @@ META_SITE_PROTOCOL = 'http'
 
 NEWRELIC_DJANGO_ACTIVE = False
 NEWRELIC_AVAILABILITY_TEST_ACTIVE = False
-
-STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
-
-# See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
-COMPRESS_ENABLED = True
-
-# See: http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_HASHING_METHOD
-COMPRESS_CSS_HASHING_METHOD = 'content'
-
-COMPRESS_CSS_FILTERS = (
-    'config.settings.abs_compress.CustomCssAbsoluteFilter',
-    'compressor.filters.cssmin.CSSMinFilter'
-)
-
-COMPRESS_OFFLINE = True
-COMPRESS_OUTPUT_DIR = "cache"
-COMPRESS_CACHE_BACKEND = "locmem"

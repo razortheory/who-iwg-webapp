@@ -75,6 +75,11 @@ class SubscribeForm(forms.ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email', ]
+        error_messages = {
+            'email': {
+                'required': '',
+            }
+        }
 
     def clean(self):
         return self.cleaned_data

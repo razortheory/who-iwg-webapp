@@ -41,6 +41,7 @@
 {% block scripts %}
   {% compress js %}
     {{ block.super }}
+    <script src="{% static 'scripts/vendor/jquery.sticky-kit.min.js' %}"></script>
     <script src="{% static 'scripts/alerts.js' %}"></script>
   {% endcompress %}
 {% endblock %}
