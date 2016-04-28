@@ -20,4 +20,4 @@ def update_url_params(url, params):
 
 
 def markdown_to_text(markdown_text):
-    return BeautifulSoup(markdown(markdown_text)).get_text()
+    return BeautifulSoup(markdown(markdown_text), 'html.parser').get_text()
