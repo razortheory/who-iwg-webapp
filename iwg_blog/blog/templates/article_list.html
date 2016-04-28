@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-    {% for article in article_list %}
-        {% include 'article_inline.html' with article=article %}
-    {% endfor %}
-
-{% endblock %}

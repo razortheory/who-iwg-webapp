@@ -5,7 +5,7 @@
     {% for document in documents %}
       <li class="widget-docs__item">
         <div style="background-image:url({{ document.file_preview.url }})" class="widget-docs__thumbnail">
-          <img src="{% static 'blog/images/pdf-icon.svg' %}" class="widget-docs__file-image" alt="">
+          <img src="{% static 'images/pdf-icon.svg' %}" class="widget-docs__file-image" alt="">
         </div>
         <div class="widget-docs__item-body">
           <a href="{{ document.document_file.url }}" class="widget-docs__link">{{ document.name }}</a>

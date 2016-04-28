@@ -1,7 +1,7 @@
 {% load django_markdown %}
 
 
-<div class="category-list">
+<div class="category-list {% if related %} category-list_related {% endif %}">
   <ul class="category-list__list">
     {% for article in articles %}
       <li class="category-list__item">

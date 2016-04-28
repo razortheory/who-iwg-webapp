@@ -1,9 +1,12 @@
 {% load django_markdown %}
 
 
-<div class="posts-list">
-  <h2 class="posts-list__title title-main"><span class="first"><span>L</span></span><span>ATEST ARTICLE</span>
-  </h2>
+<div class="posts-list {% if full %} posts-list_full {% endif %}">
+  {% if title %}
+    <h2 class="posts-list__title title-main">
+      <span class="first"><span>{{ title |first }}</span></span><span>{{ title |slice:"1:" }}</span>
+    </h2>
+  {% endif %}
   <ul class="posts-list__list">
     {% for article in articles %}
       <li class="post posts-list__item">

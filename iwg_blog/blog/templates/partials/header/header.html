@@ -3,17 +3,17 @@
 <!--header-->
 <header class="header">
   <div class="header__inner">
-    <a href="{% url 'blog:landing_view' %}" style="background-image:url({% static 'blog/images/hrp-logo.png' %})" class="header__logo"></a>
+    <a href="{% url 'blog:landing_view' %}" style="background-image:url({% static 'images/hrp-logo.png' %})" class="header__logo"></a>
     <div class="header__search-social">
       <div class="header__social">
         {% include "partials/social/social.html" %}
       </div>
       <div class="header__search">
-        {% include "partials/search-top/search-top.html" %}
+        {% include "partials/search/search-top.html" %}
       </div>
     </div>
     <div class="header__nav">
-      {% include "partials/nav/nav.html" %}
+      {% include "partials/header/nav.html" %}
     </div>
   </div>
 </header>

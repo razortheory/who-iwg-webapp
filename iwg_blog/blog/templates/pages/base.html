@@ -1,0 +1,46 @@
+{% extends "layouts/default.html" %}
+{% load static compress %}
+
+
+{% block styles %}
+  {% compress css %}
+    {{ block.super }}
+    <link href="{% static 'stylesheets/alerts.css' %}" type="text/css" rel="stylesheet">
+  {% endcompress %}
+{% endblock %}
+
+
+{% block page %}
+  <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
+    {% include "partials/utils/svg-images.html" %}
+  </div>
+  <div class="page">
+    <div class="header-wrap">
+      {% include "partials/header/header.html" %}
+    </div>
+
+    <div class="messages-wrap">
+      {% include "partials/widgets/messages.html" %}
+    </div>
+
+    <div class="main-wrap">
+      <!--main-->
+      <main role="main" class="main">
+        {% block content %}
+        {% endblock %}
+      </main>
+    </div>
+    <!--main END-->
+    <div class="footer-wrap">
+      {% include "partials/footer/footer.html" %}
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  {% compress js %}
+    {{ block.super }}
+    <script src="{% static 'scripts/alerts.js' %}"></script>
+  {% endcompress %}
+{% endblock %}

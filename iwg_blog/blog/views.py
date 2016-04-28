@@ -1,15 +1,15 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.db import models
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
-from meta.views import Meta
-
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse, reverse_lazy
 
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
 
+from meta.views import Meta
 from watson import search as watson
 
 from iwg_blog.attachments.views import FeaturedDocumentsMixin
@@ -140,8 +140,6 @@ class ArticlePreviewView(AccessMixin, ArticleView):
 class ArticleListView(BaseViewMixin, ListView):
     model = Article
     queryset = Article.published.all()
-
-    template_name = 'article_list.html'
 
     def get_meta_context(self):
         return Meta(title='Article list',

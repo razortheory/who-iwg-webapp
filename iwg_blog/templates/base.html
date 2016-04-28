@@ -16,7 +16,7 @@
   </head>
   <body>
 
-    {% block content %}{% endblock %}
+    {% block page %}{% endblock %}
 
     <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="WHO IWG">
@@ -25,20 +25,20 @@
     </div>
 
 
-    {% block scripts %}
-      <script type="application/ld+json">
-        {
-          "@context": "http://schema.org",
-          "@type": "WebSite",
-          "url": "{{ scheme }}://{{ site }}/",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "{{ scheme }}://{{ site }}{% url 'blog:search_view' %}?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{ scheme }}://{{ site }}/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ scheme }}://{{ site }}{% url 'blog:search_view' %}?q={search_term_string}",
+          "query-input": "required name=search_term_string"
         }
+      }
 
-      </script>
+    </script>
+    {% block scripts %}
     {% endblock %}
 
   </body>
