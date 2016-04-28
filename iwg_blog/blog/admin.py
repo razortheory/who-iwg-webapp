@@ -57,7 +57,7 @@ class ArticleAdmin(ConfigurableModelAdmin):
         return super(ArticleAdmin, self).changelist_view(request, extra_context=extra_context)
 
     def get_queryset(self, request):
-        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category', 'tags')
+        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
 
     def short_description_preview(self, obj):
         return obj.short_description_text

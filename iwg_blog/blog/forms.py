@@ -1,7 +1,7 @@
 from django import forms
 from django.core.urlresolvers import reverse
 
-from .fields import MarkdownFormField
+from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
 from .models import Subscriber
 from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget
 
@@ -67,6 +67,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'content': ArticleContentMarkdownWidget,
         }
         field_classes = {
+            'tags': OrderedModelMultipleChoiceField,
             'content': MarkdownFormField,
         }
 

@@ -8,8 +8,8 @@ from django_markdown.models import MarkdownField
 from markdown import markdown
 from meta.models import ModelMeta
 
-from .fields import AutoSlugField
-from .managers import ArticleManager, CaseInsensitiveUniqueModelManager, SampleArticleManager
+from .fields import AutoSlugField, OrderedManyToManyField
+from .managers import ArticleManager, SampleArticleManager, ArticleTagManager
 from .utils import markdown_to_text
 
 
@@ -36,7 +36,7 @@ class Tag(models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
-    objects = CaseInsensitiveUniqueModelManager(insensitive_unique_fields=['name', ])
+    objects = ArticleTagManager()
 
     def __unicode__(self):
         return self.name
@@ -66,7 +66,7 @@ class Article(ModelMeta, models.Model):
     )
 
     category = models.ForeignKey(Category, related_name='articles')
-    tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
+    tags = OrderedManyToManyField(Tag, related_name='articles', blank=True)
 
     cover_image = models.ImageField(upload_to='images')
 
