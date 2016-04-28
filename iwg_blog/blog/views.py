@@ -105,6 +105,7 @@ class ArticleView(BaseViewMixin, DetailView):
 
 class ArticlePreviewView(AccessMixin, ArticleView):
     queryset = Article.objects.all()
+    template_name = 'pages/article-preview.html'
 
     raise_exception = True
     permission_required = ['blog.add_article', 'blog.add_samplearticle', 'blog.add_samplearticle',

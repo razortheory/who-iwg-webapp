@@ -1,0 +1,33 @@
+{% extends "layouts/default.html" %}
+{% load static compress %}
+
+
+{% block page %}
+  <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
+    {% include "partials/utils/svg-images.html" %}
+  </div>
+  <div class="inner inner_article" style="padding-bottom: 60px;">
+    <div class="post-page">
+      {% include "partials/article.html" %}
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  {% compress js %}
+    {{ block.super }}
+    <script>
+      $(function () {
+        var updateIframeHeight = function () {
+          $('iframe.embed').each(function (i, e) {
+            $(e).height($(e).width() / 16 * 9);
+          });
+        }
+
+        $(window).on('resize', updateIframeHeight);
+        updateIframeHeight();
+      });
+    </script>
+  {% endcompress %}
+{% endblock %}
