@@ -1,5 +1,6 @@
 from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse
+from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 from django_markdown.utils import editor_js_initialization
@@ -40,13 +41,23 @@ class TagsSelect2AdminWidget(ModelSelect2TagWidget):
     search_fields = [
         'name__icontains',
     ]
-    queryset = Tag.objects
 
     def get_queryset(self):
         return Tag.objects.all()
 
+    def render_options(self, choices, selected_choices):
+        output = ['<option></option>' if not self.is_required else '']
+
+        queryset = self.get_queryset().filter(pk__in=selected_choices).order_by_array(selected_choices)
+        choices = [(obj.pk, self.label_from_instance(obj))
+                   for obj in queryset]
+
+        for option_value, option_label in choices:
+            output.append(self.render_option(map(force_text, selected_choices), option_value, option_label))
+        return '\n'.join(output)
+
     def value_from_datadict(self, data, files, name):
-        values = data.getlist(name)
+        values = [value for value in data.getlist(name) if value]
         qs = self.get_queryset()
         int_values = []
         for val in values:
@@ -56,9 +67,9 @@ class TagsSelect2AdminWidget(ModelSelect2TagWidget):
                 pass
 
         existing_tags_pks = [str(pk) for pk in qs.filter(pk__in=int_values).values_list('pk', flat=True)]
-        cleaned_pks = set()
+        cleaned_pks = []
         for val in values:
             if val not in existing_tags_pks:
                 val = qs.get_or_create(name=val)[0].pk
-            cleaned_pks.add(val)
-        return list(cleaned_pks)
+            cleaned_pks.append(val)
+        return sorted(set(cleaned_pks), key=lambda x: cleaned_pks.index(x))
