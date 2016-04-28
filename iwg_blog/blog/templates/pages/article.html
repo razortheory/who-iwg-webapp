@@ -15,8 +15,8 @@
 
 
 {% block scripts %}
+  {{ block.super }}
   {% compress js %}
-    {{ block.super }}
     <script>
       $(function () {
         var updateIframeHeight = function () {
