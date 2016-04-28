@@ -42,6 +42,22 @@
   {% compress js %}
     {{ block.super }}
     <script src="{% static 'scripts/vendor/jquery.sticky-kit.min.js' %}"></script>
-    <script src="{% static 'scripts/alerts.js' %}"></script>
+    <script>
+      $(function () {
+        $('.messages-wrap').stick_in_parent();
+        $('.alert .close').click(function () {
+          $(this).parents('.alert').animate({
+            height: "0px",
+            "padding-top": "0px",
+            "padding-bottom": "0px",
+            "margin-top": "0px",
+            "margin-bottom": "0px",
+            opacity: "0"
+          }, function () {
+            $(this).hide();
+          });
+        });
+      });
+    </script>
   {% endcompress %}
 {% endblock %}

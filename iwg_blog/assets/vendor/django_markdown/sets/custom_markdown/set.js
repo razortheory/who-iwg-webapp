@@ -72,27 +72,9 @@ mySettings = {
         {
             name:'Embed Video',
             key:'E',
-            replaceWith:function(h) {
-                var video_width = prompt('Widget width (empty for auto)');
-                var video_height = prompt('Widget height (empty for auto)');
-                var video_link = prompt('Video link', 'http://');
-                var result = '![embed';
-                var params = '';
-                if (video_width) {
-                    params += 'width=' + video_width;
-                }
-                if (video_height) {
-                    if (params){
-                        params += '&';
-                    }
-                    params += 'height=' + video_height;
-                }
-                if (params){
-                    result += '?' + params;
-                }
-                result += '](' + video_link + ')';
-                return result;
-            }
+            openWith: '![embed](',
+            closeWith: ')\n',
+            placeHolder: 'http://'
         },
         {name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
         {
