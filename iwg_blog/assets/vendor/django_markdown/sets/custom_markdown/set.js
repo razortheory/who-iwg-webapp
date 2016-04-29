@@ -62,7 +62,7 @@ mySettings = {
             return markItUp.line+'. ';
         }},
         {separator:'---------------' },
-        {className: 'mui-picture', name:'Picture', key:'P', openWith: '![Alternative text](', closeWith: ' "Title")', placeHolder: 'http://'},
+        {className: 'mui-picture-modal', name:'Picture', replaceWith: function(h){window.imageModalDialog.dialog("open");}},
         {
             className: 'mui-picture-gallery',
             name:'Pictures gallery',

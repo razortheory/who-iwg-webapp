@@ -35,7 +35,8 @@
 	background-image:url(images/list-numeric.png);
 }
 
-.markItUp .mui-picture a {
+.markItUp .mui-picture a,
+.markItUp .mui-picture-modal a {
 	background-image:url(images/photo.png);
 }
 .markItUp .mui-picture-gallery a {

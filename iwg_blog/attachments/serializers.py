@@ -12,6 +12,9 @@ class JsonSerializer(object):
                 data[field] = getattr(self, 'serialize_%s' % field)(getattr(obj, field))
             else:
                 data[field] = getattr(obj, field)
+
+            if callable(data[field]):
+                data[field] = data[field]()
         return data
 
     def serialize(self, obj, many=False):
