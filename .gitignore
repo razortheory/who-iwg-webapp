@@ -61,7 +61,7 @@ coverage.xml
 # Django stuff:
 *.log
 
-static/
+/static/
 media/
 !media/.gitkeep
 

@@ -1,7 +1,7 @@
 from django import forms
 from django.core.urlresolvers import reverse
 
-from .fields import MarkdownFormField
+from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
 from .models import Subscriber
 from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget
 
@@ -48,7 +48,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
 
         instance = kwargs.get('instance')
         if instance:
-            preview_path = reverse('article_preview_view', args=[instance.id])
+            preview_path = reverse('blog:article_preview_view', args=[instance.slug])
         else:
             preview_path = reverse('django_markdown_preview')
 
@@ -67,6 +67,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'content': ArticleContentMarkdownWidget,
         }
         field_classes = {
+            'tags': OrderedModelMultipleChoiceField,
             'content': MarkdownFormField,
         }
 
@@ -75,6 +76,11 @@ class SubscribeForm(forms.ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email', ]
+        error_messages = {
+            'email': {
+                'required': '',
+            }
+        }
 
     def clean(self):
         return self.cleaned_data

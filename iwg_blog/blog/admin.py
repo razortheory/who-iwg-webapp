@@ -43,9 +43,9 @@ class ArticleAdmin(ConfigurableModelAdmin):
 
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
-        'published_at', 'status', 'hits', 'words_count'
+        'published_at', 'is_featured', 'status', 'hits', 'words_count'
     ]
-    list_filter = ['status', 'category', 'published_at']
+    list_filter = ['is_featured', 'status', 'category', 'published_at']
     inlines = (DocumentAdminInline, )
 
     search_adapter_cls = ArticleAdapter
@@ -60,7 +60,7 @@ class ArticleAdmin(ConfigurableModelAdmin):
         return super(ArticleAdmin, self).changelist_view(request, extra_context=extra_context)
 
     def get_queryset(self, request):
-        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category', 'tags')
+        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
 
     def short_description_preview(self, obj):
         return obj.short_description_text
@@ -95,11 +95,14 @@ class SampleArticleAdmin(ArticleAdmin):
 
     def response_change(self, request, obj):
         if "_create_article" in request.POST:
-            article = obj.start_from_sample()
+            article = Article(sample=obj)
+            article.save()
+            article.tags.add(*obj.tags.all())
+
             msg = 'New article was created from "%(obj)s" successfully.' % {'obj': force_text(obj)}
             self.message_user(request, msg, messages.SUCCESS)
             redirect_url = reverse('admin:%s_%s_change' % (self.model._meta.app_label, 'article'),
-                                   current_app=self.admin_site.name, args=[article.id])
+                                   current_app=self.admin_site.name, args=[article.pk])
             return HttpResponseRedirect(redirect_url)
 
         else:

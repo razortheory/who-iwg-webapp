@@ -10,7 +10,7 @@
     padding-left: 0;
 }
 
-.field-document_preview .document-preview {
+img.document-preview {
     max-height: 200px;
     border: 1px dashed black;
     display: block;

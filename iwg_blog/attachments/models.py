@@ -13,6 +13,8 @@ class Document(models.Model):
     document_file = models.FileField(upload_to='documents')
     file_preview = models.ImageField(upload_to='documents/thumbnails', blank=True, null=True)
 
+    is_featured = models.BooleanField(default=False)
+
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

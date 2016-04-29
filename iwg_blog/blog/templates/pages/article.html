@@ -1,0 +1,33 @@
+{% extends "pages/base.html" %}
+{% load static compress %}
+
+
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      {% include "partials/article.html" %}
+    </div>
+  </div>
+  <div class="inner inner_category">
+    {% include "partials/posts/small-posts-list.html" with articles=related_articles related=True %}
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  {{ block.super }}
+  {% compress js %}
+    <script>
+      $(function () {
+        var updateIframeHeight = function () {
+          $('iframe.embed').each(function (i, e) {
+            $(e).height($(e).width() / 16 * 9);
+          });
+        }
+
+        $(window).on('resize', updateIframeHeight);
+        updateIframeHeight();
+      });
+    </script>
+  {% endcompress %}
+{% endblock %}

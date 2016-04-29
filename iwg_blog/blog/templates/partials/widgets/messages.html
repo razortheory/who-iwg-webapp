@@ -1,0 +1,9 @@
+{% if messages %}
+  <div class="messages">
+    <div class="messages__inner">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }} <a href="javascript:void(0)" class="close">&times;</a></div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}

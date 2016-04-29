@@ -1,0 +1,8 @@
+.images-gallery .images-gallery-item {
+    padding: 5px;
+}
+
+.images-gallery .images-gallery-item img {
+    width: 100%;
+    height: auto;
+}

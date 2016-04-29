@@ -3,32 +3,43 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head {% meta_namespaces %} itemscope itemtype="http://schema.org/WebSite">
-    <meta charset="UTF-8">
-    <title itemprop='name'>IWG Blog</title>
-    {% include "meta/meta.html" %}
-</head>
-<body>
-{% block content %}{% endblock %}
+  <head {% meta_namespaces %} itemscope itemtype="http://schema.org/WebSite">
+    {% block head %}
+      <meta charset="UTF-8">
+      <title itemprop='name'>{{ page_title |default:"IWG Blog" }}</title>
+      {% include "meta/meta.html" %}
+
+    {% endblock %}
+
+    {% block styles %}{% endblock %}
+
+  </head>
+  <body>
+
+    {% block page %}{% endblock %}
 
     <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="WHO IWG">
-        <meta itemprop="logo" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
-        <meta itemprop="url" content="http://www.who.int">
+      <meta itemprop="name" content="WHO IWG">
+      <meta itemprop="logo" content="http://www.who.int/sysmedia/media/resources/who-logo-en.jpg">
+      <meta itemprop="url" content="http://www.who.int">
     </div>
 
 
     <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "url": "{{ scheme }}://{{ site }}/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "{{ scheme }}://{{ site }}{% url 'search_view' %}?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "{{ scheme }}://{{ site }}/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "{{ scheme }}://{{ site }}{% url 'blog:search_view' %}?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
-    }
+
     </script>
-</body>
+    {% block scripts %}
+    {% endblock %}
+
+  </body>
 </html>

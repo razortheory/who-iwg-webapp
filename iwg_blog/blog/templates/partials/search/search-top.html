@@ -1,0 +1,42 @@
+<div class="search-top">
+  <!-- for showing search results add class "search-top_active" to the block "search-top"-->
+  <form action="{% url 'blog:search_view' %}" class="search-top__form">
+    <div class="search-top__form-inner">
+      <!-- for showing search results add class "field_active" to the block "search-top__field"-->
+      <input placeholder="Search Articles" class="field search-top__field" type="text" name="q">
+      <button class="button button_full search-top__button">
+        <svg class="icon icon_search">
+          <use xlink:href="#icon_search"></use>
+        </svg>
+      </button>
+    </div>
+    <div class="search-top-results">
+      <ul class="search-top-results__list">
+        <li class="search-top-results__item">
+          <div style="background-image:url(temp/top-article-pic-1.jpg)" class="search-top-results__thumbnail">
+          </div>
+          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
+            myths – and facts – about <strong>vaccinat</strong>ion</a>
+          </div>
+        </li>
+        <li class="search-top-results__item">
+          <div style="background-image:url(temp/top-article-pic-2.jpg)" class="search-top-results__thumbnail">
+          </div>
+          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
+            myths – and facts – about <strong>vaccinat</strong>ion</a>
+          </div>
+        </li>
+        <li class="search-top-results__item">
+          <div style="background-image:url(temp/top-article-pic-3.jpg)" class="search-top-results__thumbnail">
+          </div>
+          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
+            myths – and facts – about <strong>vaccinat</strong>ion</a>
+          </div>
+        </li>
+      </ul>
+      <div class="search-top-results__footer"><a href="#" class="button button_full search-top-results__more-link">SHOW
+        ALL RESULTS</a>
+      </div>
+    </div>
+  </form>
+</div>

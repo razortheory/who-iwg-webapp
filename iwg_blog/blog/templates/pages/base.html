@@ -1,0 +1,65 @@
+{% extends "layouts/default.html" %}
+{% load static compress %}
+
+
+{% block styles %}
+  {{ block.super }}
+  {% compress css %}
+    <link href="{% static 'css/alerts.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-grid.css' %}" type="text/css" rel="stylesheet">
+  {% endcompress %}
+{% endblock %}
+
+
+{% block page %}
+  <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
+    {% include "partials/utils/svg-images.html" %}
+  </div>
+  <div class="page">
+    <div class="header-wrap">
+      {% include "partials/header/header.html" %}
+    </div>
+
+    <div class="messages-wrap">
+      {% include "partials/widgets/messages.html" %}
+    </div>
+
+    <div class="main-wrap">
+      <!--main-->
+      <main role="main" class="main">
+        {% block content %}
+        {% endblock %}
+      </main>
+    </div>
+    <!--main END-->
+    <div class="footer-wrap">
+      {% include "partials/footer/footer.html" %}
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block scripts %}
+  {{ block.super }}
+  {% compress js %}
+    <script src="{% static 'vendor/jquery.sticky-kit.min.js' %}"></script>
+    <script>
+      $(function () {
+        $('.messages-wrap').stick_in_parent();
+        $('.alert .close').click(function () {
+          $(this).parents('.alert').animate({
+            height: "0px",
+            "padding-top": "0px",
+            "padding-bottom": "0px",
+            "margin-top": "0px",
+            "margin-bottom": "0px",
+            opacity: "0"
+          }, function () {
+            $(this).hide();
+          });
+        });
+      });
+    </script>
+  {% endcompress %}
+{% endblock %}

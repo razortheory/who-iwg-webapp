@@ -1,0 +1,7 @@
+.ui-dialog {
+    position: fixed;
+}
+
+.ui-widget {
+    font-family: inherit;
+}

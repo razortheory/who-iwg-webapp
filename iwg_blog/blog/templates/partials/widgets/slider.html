@@ -1,0 +1,25 @@
+<div class="js-slider-container slider">
+  <ul class="js-slider slider-inner slider__list">
+    {% for article in articles %}
+      <li style="background-image: url({{ article.cover_image.url }})" class="slide slider__item">
+        <div class="slider__inner-wrap">
+          <div class="slider__inner">
+            <div class="slider__date">
+              {{ article.published_at |date:"jS F, Y" |safe }}
+            </div>
+            <h2 class="slider__title">
+              {{ article.title }}
+            </h2>
+            <div class="slider__category">
+              -{{ article.category.name }}-
+            </div>
+            <a href="{{ article.get_absolute_url }}" class="button button_full slider__button">CONTINUE READING</a>
+          </div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="js-slider-pager slider__pagination slider__pagination">
+  </div>
+  {% include "partials/fixed-info/fixed-info.html" %}
+</div>

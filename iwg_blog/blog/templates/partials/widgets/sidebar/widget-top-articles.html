@@ -1,0 +1,13 @@
+<div class="widget-top-articles">
+  <ul class="widget-top-articles__list">
+    {% for article in articles %}
+      <li class="widget-top-articles__item">
+        <div style="background-image:url({{ article.cover_image.url }})" class="widget-top-articles__thumbnail">
+        </div>
+        <div class="widget-top-articles__item-body">
+          <a href="{{ article.get_absolute_url }}" class="widget-top-articles__link">{{ article.title }}</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>

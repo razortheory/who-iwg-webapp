@@ -1,3 +1,5 @@
+import re
+
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
@@ -6,8 +8,8 @@ from django_markdown.models import MarkdownField
 from markdown import markdown
 from meta.models import ModelMeta
 
-from .fields import AutoSlugField
-from .managers import ArticleManager, CaseInsensitiveUniqueModelManager, SampleArticleManager
+from .fields import AutoSlugField, OrderedManyToManyField
+from .managers import ArticleManager, SampleArticleManager, ArticleTagManager, PublishedArticleManager
 from .utils import markdown_to_text
 
 
@@ -18,13 +20,14 @@ class Category(models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
-    image = models.ImageField(upload_to='images')
-
     class Meta:
         verbose_name_plural = 'Categories'
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('blog:category_detail_view', args=(self.slug, ))
 
 
 class Tag(models.Model):
@@ -34,10 +37,13 @@ class Tag(models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
-    objects = CaseInsensitiveUniqueModelManager(insensitive_unique_fields=['name', ])
+    objects = ArticleTagManager()
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('blog:tag_detail_view', args=(self.slug,))
 
 
 class Article(ModelMeta, models.Model):
@@ -52,6 +58,7 @@ class Article(ModelMeta, models.Model):
     )
 
     objects = ArticleManager()
+    published = PublishedArticleManager()
     all_objects = models.Manager()
 
     title = models.CharField(max_length=255)
@@ -64,7 +71,7 @@ class Article(ModelMeta, models.Model):
     )
 
     category = models.ForeignKey(Category, related_name='articles')
-    tags = models.ManyToManyField(Tag, related_name='articles', blank=True)
+    tags = OrderedManyToManyField(Tag, related_name='articles', blank=True)
 
     cover_image = models.ImageField(upload_to='images')
 
@@ -82,6 +89,14 @@ class Article(ModelMeta, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, editable=False)
 
+    def __init__(self, *args, **kwargs):
+        sample = kwargs.pop('sample', None)
+        if sample:
+            for field in ['title', 'category', 'cover_image', 'short_description', 'content']:
+                kwargs[field] = getattr(sample, field)
+
+        super(Article, self).__init__(*args, **kwargs)
+
     def __unicode__(self):
         return self.title
 
@@ -92,7 +107,7 @@ class Article(ModelMeta, models.Model):
             if old_obj.status != self.status and self.status == self.STATUS_PUBLISHED:
                 self.published_at = timezone.now()
 
-        self.words_count = len(self.content_text.split())
+        self.words_count = len(re.findall(r"\S+", self.content_text))
         super(Article, self).save(**kwargs)
 
     @property
@@ -116,7 +131,7 @@ class Article(ModelMeta, models.Model):
         return self.tags.values_list('slug', flat=True)
 
     def get_absolute_url(self):
-        return reverse('article_detail_view', args=(self.id, ))
+        return reverse('blog:article_detail_view', args=(self.slug, ))
 
     def short_description_html(self):
         return markdown(self.short_description)
@@ -130,7 +145,7 @@ class Article(ModelMeta, models.Model):
     }
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['-published_at']
         permissions = (
             ('view_article_hits', 'Can view article hits'),
             ('change_article_slug', 'Can change article slug'),
@@ -146,16 +161,6 @@ class SampleArticle(Article):
     def save(self, **kwargs):
         self.is_sample = True
         super(SampleArticle, self).save(**kwargs)
-
-    def start_from_sample(self):
-        article = Article(
-            title=self.title, category=self.category, cover_image=self.cover_image,
-            short_description=self.short_description, content=self.content,
-            status=self.STATUS_DRAFT
-        )
-        article.save()
-        article.tags.add(*self.tags.all())
-        return article
 
 
 class Subscriber(models.Model):

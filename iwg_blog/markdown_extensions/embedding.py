@@ -7,40 +7,48 @@ A simple example:
 Outputs:
     <iframe allowfullscreen="" frameborder="0" height="375" mozallowfullscreen="" src="https://www.youtube.com/embed/02ZL5y2TY_o" webkitallowfullscreen="" width="500"></iframe>
 """
+import re
 
+from markdown.blockprocessors import ParagraphProcessor
 from markdown.extensions import Extension
-from markdown.inlinepatterns import Pattern
 from markdown.util import etree
 
 from .utils import markdown_ordered_dict_prepend
 
 
-class EmbeddingPattern(Pattern):
-    RE = r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)'
+class EmbeddingProcessor(ParagraphProcessor):
+    RE = re.compile(r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)')
 
-    def __init__(self, md):
-        super(EmbeddingPattern, self).__init__(self.RE, md)
+    def test(self, parent, block):
+        return bool(self.RE.match(block))
 
-    def handleMatch(self, m):
-        el = etree.Element('iframe')
-        el.set('webkitallowfullscreen', '')
-        el.set('mozallowfullscreen', '')
-        el.set('allowfullscreen', '')
-        el.set('frameborder', '0')
-        el.set('src', m.groupdict()['url'])
-        params = m.groupdict()['params'] or ''
-        for param in params.split('&'):
-            param = param.split('=')
-            if len(param) == 2:
-                el.set(*param)
+    def run(self, parent, blocks):
+        for block in blocks:
+            m = self.RE.match(block)
+            if not m:
+                continue
 
-        return el
+            el = etree.SubElement(parent, 'iframe')
+            el.set('class', 'embed')
+            el.set('webkitallowfullscreen', '')
+            el.set('mozallowfullscreen', '')
+            el.set('allowfullscreen', '')
+            el.set('frameborder', '0')
+            el.set('width', '100%')
+            el.set('src', m.groupdict()['url'])
+            params = m.groupdict()['params'] or ''
+            for param in params.split('&'):
+                param = param.split('=')
+                if len(param) == 2:
+                    el.set(*param)
+
+            blocks.remove(block)
 
 
 class EmbeddingExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         # Inserting to the top of inline patterns to avoid conflicts with images pattern
-        markdown_ordered_dict_prepend(md.inlinePatterns, 'embed', EmbeddingPattern(md))
+        markdown_ordered_dict_prepend(md.parser.blockprocessors, 'embed', EmbeddingProcessor(md.parser))
 
 
 def makeExtension(*args, **kwargs):

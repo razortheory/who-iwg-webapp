@@ -47,57 +47,51 @@ function setCaretPosition(ctrl, pos) {
 mySettings = {
     onShiftEnter: {keepDefault:false, openWith:'\n\n'},
     markupSet: [
-        {name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },
-        {name:'Second Level Heading', key:'2', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '-') } },
-        {name:'Heading 3', key:'3', openWith:'### ', placeHolder:'Your title here...' },
-        {name:'Heading 4', key:'4', openWith:'#### ', placeHolder:'Your title here...' },
-        {name:'Heading 5', key:'5', openWith:'##### ', placeHolder:'Your title here...' },
-        {name:'Heading 6', key:'6', openWith:'###### ', placeHolder:'Your title here...' },
+        {className: 'mui-h1', name:'First Level Heading', key:'1', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '=') } },
+        {className: 'mui-h2', name:'Second Level Heading', key:'2', placeHolder:'Your title here...', closeWith:function(markItUp) { return miu.markdownTitle(markItUp, '-') } },
+        {className: 'mui-h3', name:'Heading 3', key:'3', openWith:'### ', placeHolder:'Your title here...' },
+        {className: 'mui-h4', name:'Heading 4', key:'4', openWith:'#### ', placeHolder:'Your title here...' },
+        {className: 'mui-h5', name:'Heading 5', key:'5', openWith:'##### ', placeHolder:'Your title here...' },
+        {className: 'mui-h6', name:'Heading 6', key:'6', openWith:'###### ', placeHolder:'Your title here...' },
         {separator:'---------------' },
-        {name:'Bold', key:'B', openWith:'**', closeWith:'**'},
-        {name:'Italic', key:'I', openWith:'_', closeWith:'_'},
+        {className: 'mui-bold', name:'Bold', key:'B', openWith:'**', closeWith:'**'},
+        {className: 'mui-italic', name:'Italic', key:'I', openWith:'_', closeWith:'_'},
         {separator:'---------------' },
-        {name:'Bulleted List', openWith:'- ' },
-        {name:'Numeric List', openWith:function(markItUp) {
+        {className: 'mui-list-bulleted', name:'Bulleted List', openWith:'- ' },
+        {className: 'mui-list-numeric', name:'Numeric List', openWith:function(markItUp) {
             return markItUp.line+'. ';
         }},
         {separator:'---------------' },
-        {name:'Picture', key:'P', replaceWith:'![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'},
+        {className: 'mui-picture', name:'Picture', key:'P', openWith: '![Alternative text](', closeWith: ' "Title")', placeHolder: 'http://'},
         {
+            className: 'mui-picture-gallery',
             name:'Pictures gallery',
             key:'G',
-            openWith: '----images-gallery----\n',
-            closeWith: '----------------------\n'
+            openWith: '----images-gallery----\ncolumns: 2\n',
+            closeWith: '----------------------\n',
+            placeHolder: 'Insert your images here'
         },
         {
+            className: 'mui-embed',
             name:'Embed Video',
             key:'E',
-            replaceWith:function(h) {
-                var video_width = prompt('Widget width (empty for auto)');
-                var video_height = prompt('Widget height (empty for auto)');
-                var video_link = prompt('Video link', 'http://');
-                var result = '![embed';
-                var params = '';
-                if (video_width) {
-                    params += 'width=' + video_width;
-                }
-                if (video_height) {
-                    if (params){
-                        params += '&';
-                    }
-                    params += 'height=' + video_height;
-                }
-                if (params){
-                    result += '?' + params;
-                }
-                result += '](' + video_link + ')';
-                return result;
-            }
+            openWith: '![embed](',
+            closeWith: ')\n',
+            placeHolder: 'http://'
         },
-        {name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
+        {className: 'mui-link', name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
+        {
+            className: 'mui-article-content-preview',
+            name:'Article content preview',
+            openWith:'----article-content-preview----\nimage: ',
+            closeWith: '\ntext: \ndescription: \nurl: \n-------------------------------\n',
+            placeHolder:'Insert image url or tag here...'
+        },
         {separator:'---------------'},
-        {name:'Quotes', openWith:'> '},
-        {name:'Table',
+        {className: 'mui-quotes', name:'Quotes', openWith:'> '},
+        {
+            className: 'mui-table',
+            name:'Table',
             header:" header ",
             seperator:" ------ ",
             placeholder:" data   ",
@@ -155,7 +149,7 @@ mySettings = {
 
                     var textarea = $('#fullscreen');
                     $(origTextarea[0].attributes).each(function() {
-						if (this.nodeName.startsWith('data-')){
+						if (this.nodeName.indexOf('data-') == 0){
 							textarea.attr(this.nodeName, this.nodeValue);
 						}
                     });
