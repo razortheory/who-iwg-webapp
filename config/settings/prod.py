@@ -3,9 +3,6 @@ from __future__ import absolute_import
 from .base import *
 
 
-environ.Env.read_env()
-
-
 DEBUG = False
 
 ADMINS = env.json('ADMINS')

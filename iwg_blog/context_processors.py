@@ -26,8 +26,7 @@ def google_analytics(request):
 def twitter_config(request):
     return {
         'twitter': {
-            'limit': settings.TWEET_LIMIT,
-            'link': settings.TWEET_LINK,
-            'widget_id': settings.TWEET_WIDGET_ID
+            'limit': settings.TWITTER_LIMIT,
+            'link': settings.TWITTER_LINK
         }
     }

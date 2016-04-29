@@ -9,6 +9,8 @@ apps_root = root.path('iwg_blog')
 
 BASE_DIR = root()
 
+environ.Env.read_env()
+
 
 # Base configurations
 # --------------------------------------------------------------------------
@@ -204,6 +206,5 @@ MARKDOWN_EXTENSION_CONFIGS = {
     }
 }
 
-TWEET_LIMIT = env.int('TWEET_LIMIT', 3)
-TWEET_LINK = env('TWEET_LINK', default='')
-TWEET_WIDGET_ID = env('TWEET_WIDGET_ID', default='')
+TWITTER_LIMIT = env.int('TWITTER_LIMIT', 3)
+TWITTER_LINK = env('TWITTER_LINK', default='')
