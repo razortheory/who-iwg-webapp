@@ -32,6 +32,12 @@ function hasAutoSavedData(){
     }).get().indexOf(true) != -1
 }
 
+function enableAutoSaving(){
+    setInterval(function(){
+        autoSaveData();
+    }, 3000);
+}
+
 $(document).ready(function(){
     if (hasAutoSavedData()){
         $("#dialog-autosave-confirm").dialog({
@@ -42,19 +48,19 @@ $(document).ready(function(){
                 "Yes": function () {
                     restoreAutoSavedData();
                     clearAutoSavedData();
+                    enableAutoSaving();
                     $(this).dialog("close");
                 },
                 "No": function () {
                     clearAutoSavedData();
+                    enableAutoSaving();
                     $(this).dialog("close");
                 }
             }
         });
+    } else {
+        enableAutoSaving();
     }
 
     $('form').submit(clearAutoSavedData);
-
-    setInterval(function(){
-        autoSaveData();
-    }, 3000);
 });
