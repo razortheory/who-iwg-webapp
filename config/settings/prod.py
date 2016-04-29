@@ -53,7 +53,6 @@ AWS_AUTO_CREATE_BUCKET = True
 
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_SECURE_URLS = USE_HTTPS
-AWS_S3_FILE_OVERWRITE = False
 
 
 if USE_CLOUDFRONT:
@@ -78,7 +77,6 @@ if USE_CLOUDFRONT or USE_COMPRESSOR:
     AWS_HEADERS = {'Cache-Control': str('public, max-age=604800')}
 
 if USE_COMPRESSOR:
-    INSTALLED_APPS += ('compressor',)
     STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
 
     # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED

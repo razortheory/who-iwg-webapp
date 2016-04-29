@@ -39,6 +39,7 @@ THIRD_PARTY_APPS = [
     'mailing',
     'django_markdown',
     'django_select2',
+    'compressor',
     'meta',
     'watson',
 ]
