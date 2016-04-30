@@ -45,12 +45,3 @@
     </div>
   </div>
 {% endblock %}
-
-
-{% block scripts %}
-  {{ block.super }}
-  {% compress js %}
-    <script src="{% static 'vendor/jquery.carouFredSel.js' %}"></script>
-    <script src="{% static 'vendor/jquery.touchSwipe.min.js' %}"></script>
-  {% endcompress %}
-{% endblock %}
