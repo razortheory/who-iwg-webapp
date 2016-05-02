@@ -3,4 +3,5 @@
 {% block email_body %}
 {% for article in articles %}
     {{ scheme }}://{{ domain }}{% url 'article_detail_view' article.slug %}" - {{ article.title }}
+{% endfor %}
 {% endblock %}
