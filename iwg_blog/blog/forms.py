@@ -48,7 +48,6 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
 
-        self.instance = kwargs.get('instance')
         preview_path = reverse('blog:article_preview_view')
 
         markdown_attrs = {
