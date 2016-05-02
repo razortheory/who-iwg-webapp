@@ -83,7 +83,7 @@ mySettings = {
             className: 'mui-article-content-preview',
             name:'Article content preview',
             openWith:'----article-content-preview----\nimage: ',
-            closeWith: '\ntext: \ndescription: \nurl: \n-------------------------------\n',
+            closeWith: '\ntext: \ndescription: \nurl: \n',
             placeHolder:'Insert image url or tag here...'
         },
         {separator:'---------------'},

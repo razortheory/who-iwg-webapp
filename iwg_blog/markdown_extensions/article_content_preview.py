@@ -30,7 +30,7 @@ from markdown.util import etree, AtomicString
 
 
 class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}article-content-preview[-]{3,}\n(?P<data>(.*\n)+)[-]{10,}', re.MULTILINE)
+    RE = re.compile(r'^[-]{3,}article-content-preview[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
     DATA_RE = re.compile(r'(?P<key>[^:]+):(?P<value>[^\n]+)')
 
     def test(self, parent, block):
