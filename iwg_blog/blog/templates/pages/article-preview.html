@@ -1,5 +1,6 @@
 {% extends "pages/article.html" %}
 {% load static compress %}
+{% load django_markdown %}
 
 
 {% block page %}
@@ -8,7 +9,11 @@
   </div>
   <div class="inner inner_article" style="padding-bottom: 60px;">
     <div class="post-page">
-      {% include "partials/article.html" %}
+      <article class="article">
+        <div class="article__body content-text">
+          {{ content |markdown }}
+        </div>
+      </article>
     </div>
   </div>
 {% endblock %}
