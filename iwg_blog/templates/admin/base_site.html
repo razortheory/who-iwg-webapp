@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/admin-markitup.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/admin-modal-loading.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/admin-models-autosave.css' %}">
 {% endblock %}
 
 {% block javascripts %}
     <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
     <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
     <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
+    <script src="{% static "admin/js/admin-markitup-image-insert-modal.js" %}"></script>
     {{ block.super }}
 {% endblock %}
 
@@ -30,6 +30,7 @@
 {% block footer %}
     {{ block.super }}
     {% include "admin/models-autosave.html" %}
+    {% include "admin/image-insert-modal.html" %}
     <div id="loadingDiv" class="loading-modal">
         <div class="loading-modal-center">
             <div class="cssload-thecube">

@@ -35,7 +35,9 @@ class ImagesGalleryProcessor(ParagraphProcessor):
             images_match = self.RE.match(block)
             if images_match:
                 blocks.remove(block)
-                images_gallery = etree.SubElement(parent, 'div')
+                images_gallery_wrap = etree.SubElement(parent, 'div')
+                images_gallery_wrap.set('class', 'images-gallery-wrapper')
+                images_gallery = etree.SubElement(images_gallery_wrap, 'div')
                 images_gallery.set('class', 'images-gallery')
 
                 columns_match = self.COLUMNS_RE.match(images_match.group('data'))
@@ -45,12 +47,18 @@ class ImagesGalleryProcessor(ParagraphProcessor):
                     image_dict = image_match.groupdict()
 
                     gallery_item = etree.SubElement(images_gallery, 'div')
-                    gallery_item.set('class', 'images-gallery-item col-xs-%s' % (12/columns_num, ))
+                    gallery_item.set('class', 'images-gallery-item col-sm-%s' % (12/columns_num, ))
 
-                    image = etree.SubElement(gallery_item, 'img')
+                    gallery_item_link = etree.SubElement(gallery_item, 'a')
+                    gallery_item_link.set('href', image_dict['image_url'])
+
+                    image = etree.SubElement(gallery_item_link, 'img')
                     image.set('src', image_dict['image_url'])
                     image.set('alt', image_dict['alt_text'])
                     image.set('title', image_dict['title'])
+
+                images_paginator = etree.SubElement(images_gallery_wrap, 'div')
+                images_paginator.set('class', 'images-gallery-paginator')
 
 
 class ImagesGalleryExtension(Extension):

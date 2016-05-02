@@ -24,3 +24,11 @@ img.document-preview {
 .table tbody tr td, table tbody tr th {
     max-width: 1000px;
 }
+
+.ui-dialog {
+    position: fixed;
+}
+
+.ui-widget {
+    font-family: inherit;
+}

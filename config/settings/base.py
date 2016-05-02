@@ -9,6 +9,8 @@ apps_root = root.path('iwg_blog')
 
 BASE_DIR = root()
 
+environ.Env.read_env()
+
 
 # Base configurations
 # --------------------------------------------------------------------------
@@ -86,6 +88,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'iwg_blog.context_processors.google_analytics',
+                'iwg_blog.context_processors.twitter_config',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -202,3 +205,6 @@ MARKDOWN_EXTENSION_CONFIGS = {
         'smart_angled_quotes': True
     }
 }
+
+TWITTER_LIMIT = env.int('TWITTER_LIMIT', 3)
+TWITTER_LINK = env('TWITTER_LINK', default='')

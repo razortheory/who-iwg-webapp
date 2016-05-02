@@ -3,6 +3,7 @@ from django.db import models
 
 from .tasks import generate_document_preview
 from ..blog.models import Article
+from ..utils.file_types import get_file_type
 
 
 class Document(models.Model):
@@ -34,6 +35,10 @@ class Document(models.Model):
         if self.file_preview:
             return self.file_preview.url
         return static('attachments/images/other.png')
+
+    def file_type_icon_url(self):
+        file_type = get_file_type(self.document_file.name)
+        return static('attachments/images/%s-icon.png' % file_type) if file_type else ''
 
 
 class UploadedImage(models.Model):

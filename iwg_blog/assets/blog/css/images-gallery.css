@@ -1,0 +1,103 @@
+.images-gallery-wrapper {
+    position: relative;
+}
+
+.images-gallery .images-gallery-item {
+    padding: 5px;
+}
+
+.images-gallery .images-gallery-item img {
+    width: 100%;
+    height: auto;
+}
+
+.images-gallery-paginator {
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.images-gallery-paginator a {
+    position: relative;
+    margin: 0 0 0 10px;
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    vertical-align: top;
+    border: 2px solid #fff;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.images-gallery-paginator a:first-child {
+    margin-left: 0;
+}
+
+.images-gallery-paginator a:before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -5px;
+    margin-left: -5px;
+    display: block;
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #4a90e2;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -o-border-radius: 100%;
+    border-radius: 100%;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    opacity: 0;
+}
+
+.images-gallery-paginator a.selected:before {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    -moz-opacity: 1;
+    -khtml-opacity: 1;
+    opacity: 1;
+}
+
+.images-gallery-paginator span {
+    display: none;
+}
+
+.images-gallery-paginator a:hover {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@media (min-width: 767px) {
+    .images-gallery-paginator {
+        display: none;
+    }
+}

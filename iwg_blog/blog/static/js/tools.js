@@ -84,14 +84,3 @@ function carouFredSelInit (Slider, visible, responsive, width, height, autoplay,
         });
     }
 }
-
-$(document).ready(function () {
-    var $gallery = $('.images-gallery');
-    $gallery.masonry({
-        itemSelector: '.images-gallery-item',
-        percentPosition: true
-    });
-    $gallery.imagesLoaded().progress( function() {
-      $gallery.masonry('layout');
-    });
-});
