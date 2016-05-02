@@ -206,5 +206,5 @@ MARKDOWN_EXTENSION_CONFIGS = {
     }
 }
 
-TWITTER_LIMIT = env.int('TWITTER_LIMIT', 3)
-TWITTER_LINK = env('TWITTER_LINK', default='')
+TWITTER_LIMIT = 3
+TWITTER_LINK = 'https://twitter.com/who'

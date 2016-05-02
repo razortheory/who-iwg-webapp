@@ -4,6 +4,7 @@
 
 .images-gallery .images-gallery-item {
     padding: 5px;
+    float: left;
 }
 
 .images-gallery .images-gallery-item img {

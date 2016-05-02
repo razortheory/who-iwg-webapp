@@ -6,7 +6,6 @@ Input:
     ![alt_text](/media/images/andrew_galves_paORKUs.png "title")
     ![alt_text](/media/images/ellie_JrzWbFV.png "title")
     ![alt_text](/media/images/thomas_jbLH2AI.png "title")
-    ----------------------
 Outputs:
     <div class="images-gallery">
         <div class="images-gallery-item"><img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title"></div>
@@ -23,7 +22,7 @@ from markdown.util import etree
 
 
 class ImagesGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n)+)[-]{10,}', re.MULTILINE)
+    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
     IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_url>[^ ]+) "(?P<title>[^"]+)"\)')
     COLUMNS_RE = re.compile(r'columns:[ ]?(?P<columns_num>\d+)\n')
 
@@ -51,6 +50,7 @@ class ImagesGalleryProcessor(ParagraphProcessor):
 
                     gallery_item_link = etree.SubElement(gallery_item, 'a')
                     gallery_item_link.set('href', image_dict['image_url'])
+                    gallery_item_link.set('target', '_blank')
 
                     image = etree.SubElement(gallery_item_link, 'img')
                     image.set('src', image_dict['image_url'])

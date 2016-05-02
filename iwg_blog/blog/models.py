@@ -1,4 +1,5 @@
 import re
+from autoslug.utils import slugify
 
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -135,6 +136,41 @@ class Article(ModelMeta, models.Model):
 
     def short_description_html(self):
         return markdown(self.short_description)
+
+    @classmethod
+    def generate_slug(cls, title, instance_pk=None):
+        original_slug = slugify(title)
+        field = cls._meta.get_field_by_name('slug')[0]
+        if field.max_length < len(original_slug):
+            original_slug = original_slug[:field.max_length]
+
+        slug = original_slug
+        index = 0
+        # keep changing the slug until it is unique
+        while True:
+            # find instances with same slug
+            rivals = cls.all_objects.filter(slug=slug)
+            if instance_pk:
+                rivals = rivals.exclude(pk=instance_pk)
+
+            if not rivals:
+                # the slug is unique, no model uses it
+                return slug
+
+            # the slug is not unique; change once more
+            index += 1
+
+            # ensure the resulting string is not too long
+            tail_length = len(field.index_sep) + len(str(index))
+            combined_length = len(original_slug) + tail_length
+            if field.max_length < combined_length:
+                original_slug = original_slug[:field.max_length - tail_length]
+
+            # re-generate the slug
+            data = dict(slug=original_slug, sep=field.index_sep, index=index)
+            slug = '%(slug)s%(sep)s%(index)d' % data
+
+            # ...next iteration...
 
     _metadata = {
         'title': 'title',

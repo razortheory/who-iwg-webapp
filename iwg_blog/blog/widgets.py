@@ -32,7 +32,7 @@ class AdminImageWidget(AdminFileWidget):
     def render(self, name, value, attrs=None):
         output = u''
         if value and getattr(value, "url", None):
-            output += u'<a href="%s" target="_blank"><img height="150" src="%s" alt="%s" /></a>' % (value.url, value.url, value)
+            output += u'<a href="%s" target="_blank"><img height="200" src="%s" alt="%s" /></a>' % (value.url, value.url, value)
         output += super(AdminFileWidget, self).render(name, value, attrs)
         return mark_safe(output)
 
