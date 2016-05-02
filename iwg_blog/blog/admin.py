@@ -1,6 +1,5 @@
 from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
 
@@ -9,7 +8,6 @@ from watson.search import default_search_engine
 from .forms import ArticleAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
 from .utils import update_url_params
-from .widgets import AdminImageWidget
 from .adapters import ArticleAdapter
 from ..attachments.admin import DocumentAdminInline
 
@@ -34,9 +32,6 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
-    formfield_overrides = {
-        models.ImageField: {'widget': AdminImageWidget}
-    }
 
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
@@ -44,6 +39,7 @@ class ArticleAdmin(ConfigurableModelAdmin):
     ]
     list_filter = ['is_featured', 'status', 'category', 'published_at']
     inlines = (DocumentAdminInline, )
+    readonly_fields = []
 
     search_adapter_cls = ArticleAdapter
     search_engine = default_search_engine
@@ -58,6 +54,12 @@ class ArticleAdmin(ConfigurableModelAdmin):
 
     def get_queryset(self, request):
         return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
+
+    def get_fields(self, request, obj=None):
+        fields = super(ArticleAdmin, self).get_fields(request, obj=obj)[:]
+        if obj:
+            fields.remove('slug')
+        return fields
 
     def short_description_preview(self, obj):
         return obj.short_description_text
@@ -82,12 +84,13 @@ class ArticleAdmin(ConfigurableModelAdmin):
 @admin.register(SampleArticle)
 class SampleArticleAdmin(ArticleAdmin):
     def render_change_form(self, request, context, **kwargs):
-        context = context or {}
-        context.update({
-            'additional_actions': [
-                {'text': 'Create new article from sample', 'name': '_create_article'}
-            ]
-        })
+        if kwargs.get('obj'):
+            context = context or {}
+            context.update({
+                'additional_actions': [
+                    {'text': 'Create new article from sample', 'name': '_create_article'}
+                ]
+            })
         return super(SampleArticleAdmin, self).render_change_form(request, context, **kwargs)
 
     def response_change(self, request, obj):

@@ -1,9 +1,11 @@
 from django import forms
 from django.core.urlresolvers import reverse
 
+import embedded_media
+
 from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
 from .models import Subscriber
-from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget
+from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget, AdminImageWidget
 
 
 def set_attrs_for_field(field, attrs):
@@ -46,9 +48,9 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
 
-        instance = kwargs.get('instance')
-        if instance:
-            preview_path = reverse('blog:article_preview_view', args=[instance.slug])
+        self.instance = kwargs.get('instance')
+        if self.instance:
+            preview_path = reverse('blog:article_preview_view', args=[self.instance.slug])
         else:
             preview_path = reverse('django_markdown_preview')
 
@@ -65,11 +67,28 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
         widgets = {
             'tags': TagsSelect2AdminWidget,
             'content': ArticleContentMarkdownWidget,
+            'cover_image': AdminImageWidget,
         }
         field_classes = {
             'tags': OrderedModelMultipleChoiceField,
             'content': MarkdownFormField,
         }
+        help_texts = {
+            'slug': ' '
+        }
+
+    @property
+    def media(self):
+        media = super(ArticleAdminForm, self).media
+        media.add_js([
+            embedded_media.JS('var populate_slug_opts={template_url: "%s", ajax_url: "%s", instance_pk: %s};' % (
+                reverse('blog:article_detail_view', args=['dummy_slug']),
+                reverse('blog:article_generate_slug_ajax'),
+                self.instance.pk if self.instance else 'undefined'
+            )),
+            'admin/js/admin-article-slug-control.js'
+        ])
+        return media
 
 
 class SubscribeForm(forms.ModelForm):

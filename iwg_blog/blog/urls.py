@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^articles/?$', views.ArticleListView.as_view(), name='articles_view'),
     url(r'^articles/(?P<slug>[-a-zA-Z0-9_]+)/?$', views.ArticleView.as_view(), name='article_detail_view'),
     url(r'^articles/(?P<slug>[-a-zA-Z0-9_]+)/preview/?$', views.ArticlePreviewView.as_view(), name='article_preview_view'),
+    url(r'^articles/generate_slug/ajax/?$', views.GetArticleSlugAjax.as_view(), name='article_generate_slug_ajax'),
 ]
