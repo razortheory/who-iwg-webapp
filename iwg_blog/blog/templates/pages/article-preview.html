@@ -1,4 +1,4 @@
-{% extends "layouts/default.html" %}
+{% extends "pages/article.html" %}
 {% load static compress %}
 
 
@@ -11,23 +11,4 @@
       {% include "partials/article.html" %}
     </div>
   </div>
-{% endblock %}
-
-
-{% block scripts %}
-  {{ block.super }}
-  {% compress js %}
-    <script>
-      $(function () {
-        var updateIframeHeight = function () {
-          $('iframe.embed').each(function (i, e) {
-            $(e).height($(e).width() / 16 * 9);
-          });
-        }
-
-        $(window).on('resize', updateIframeHeight);
-        updateIframeHeight();
-      });
-    </script>
-  {% endcompress %}
 {% endblock %}

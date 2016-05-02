@@ -16,7 +16,7 @@
   <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
     {% include "partials/utils/svg-images.html" %}
   </div>
-  <div class="page">
+  <div class="page" id="sb-site">
     <div class="header-wrap">
       {% include "partials/header/header.html" %}
     </div>
@@ -37,6 +37,9 @@
       {% include "partials/footer/footer.html" %}
     </div>
   </div>
+
+  {% include "partials/menu/menu-aside.html" %}
+
 {% endblock %}
 
 

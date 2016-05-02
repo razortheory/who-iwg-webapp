@@ -38,7 +38,12 @@
 
 
 {% block styles %}
-  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"><!-- [if gte IE 9]
+    <style>
+      .gradient {
+      	filter: none;
+      }
+    </style>![endif]-->
 {% endblock %}
 
 
@@ -50,5 +55,6 @@
   <script src="{% static 'vendor/retina.min.js' %}"></script>
   <script src="{% static 'vendor/masonry.pkgd.min.js' %}"></script>
   <script src="{% static 'vendor/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'vendor/slidebars.js' %}"></script>
   <script src="{% static 'js/tools.js' %}"></script>
 {% endblock %}

@@ -4,6 +4,13 @@
 <header class="header">
   <div class="header__inner">
     <a href="{% url 'blog:landing_view' %}" style="background-image:url({% static 'images/hrp-logo.png' %})" class="header__logo"></a>
+    <div class="header__search-mobile">
+      {% include "partials/search/search-mobile.html" %}
+    </div>
+    <div class="header-nav-shifted-handle menu-right push-body sb-toggle-right">
+      <svg class="icon icon_burger"><use xlink:href="#icon_burger"></use>
+      </svg>
+    </div>
     <div class="header__search-social">
       <div class="header__social">
         {% include "partials/social/social.html" %}

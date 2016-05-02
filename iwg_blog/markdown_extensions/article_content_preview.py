@@ -65,7 +65,7 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
                 body_title.text = data.get('text', '')
 
                 if 'description' in data:
-                    body_description = etree.SubElement(body_item, 'h4')
+                    body_description = etree.SubElement(body_item, 'div')
                     body_description.set('class', 'article-content-preview__text')
                     body_description.text = data.get('description', '')
 
