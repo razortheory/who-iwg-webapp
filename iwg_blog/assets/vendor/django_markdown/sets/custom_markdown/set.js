@@ -68,7 +68,6 @@ mySettings = {
             name:'Pictures gallery',
             key:'G',
             openWith: '----images-gallery----\ncolumns: 2\n',
-            closeWith: '----------------------\n',
             placeHolder: 'Insert your images here'
         },
         {

@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var $galleryWrapper = $('.images-gallery-wrapper');
     var $gallery = $('.images-gallery', $galleryWrapper);
-    if (screen.width >= 768){
+    if (window.innerWidth >= 768){
         $gallery.find('.images-gallery-item a').fancybox({
             helpers: {
                 overlay: {
