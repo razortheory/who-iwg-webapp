@@ -49,10 +49,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
         super(ArticleAdminForm, self).__init__(*args, **kwargs)
 
         self.instance = kwargs.get('instance')
-        if self.instance:
-            preview_path = reverse('blog:article_preview_view', args=[self.instance.slug])
-        else:
-            preview_path = reverse('django_markdown_preview')
+        preview_path = reverse('blog:article_preview_view')
 
         markdown_attrs = {
             'data-upload-image-url': reverse('upload_image_ajax'),

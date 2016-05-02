@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import AccessMixin
 from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.views.generic.base import View
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 from django.conf import settings
@@ -105,40 +105,22 @@ class ArticleView(BaseViewMixin, DetailView):
         return super(ArticleView, self).get_context_data(**context)
 
 
-class ArticlePreviewView(AccessMixin, ArticleView):
-    queryset = Article.objects.all()
+class ArticlePreviewView(AccessMixin, TemplateView):
     template_name = 'pages/article-preview.html'
-
     raise_exception = True
-    permission_required = ['blog.add_article', 'blog.add_samplearticle', 'blog.add_samplearticle',
-                           'blog.change_article_slug', 'blog.change_samplearticle']
 
     def has_permission(self):
-        if not self.request.user.is_staff:
-            return False
+        return self.request.user.is_staff
 
-        for permission in self.permission_required:
-            if self.request.user.has_perm(permission, self.object):
-                return True
-
-        return False
+    def get_context_data(self, **kwargs):
+        return {'content': self.request.POST.get('data', 'No content posted')}
 
     def post(self, request, *args, **kwargs):
-        return self.get(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-
         if not self.has_permission():
             return self.handle_no_permission()
 
-        context = self.get_context_data(object=self.object)
+        context = self.get_context_data()
         return self.render_to_response(context)
-
-    def get_object(self, queryset=None):
-        obj = super(ArticlePreviewView, self).get_object()
-        obj.content = self.request.POST.get('data', 'No content posted')
-        return obj
 
 
 class ArticleListView(BaseViewMixin, ListView):
