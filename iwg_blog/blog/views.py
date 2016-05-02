@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.db import models
+from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.views.generic.base import View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 from django.conf import settings
@@ -238,3 +240,14 @@ class UnsubscribeFromUpdates(UpdateView):
             email = self.request.POST.get('email')
             return Subscriber.objects.filter(email=email).first()
         return None
+
+
+class GetArticleSlugAjax(View):
+    def post(self, *args, **kwargs):
+        return JsonResponse({
+            'status': 'ok',
+            'slug': Article.generate_slug(
+                self.request.POST.get('title', ''),
+                instance_pk=self.request.POST.get('instance_pk')
+            )
+        })
