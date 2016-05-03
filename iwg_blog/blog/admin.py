@@ -36,6 +36,7 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
+    change_form_template = 'admin/custom_change_form.html'
 
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
@@ -130,6 +131,7 @@ class SubscriberAdmin(admin.ModelAdmin):
 admin.site.unregister(FlatPage)
 @admin.register(FlatPage)
 class FlatPageAdmin(admin.ModelAdmin):
+    change_form_template = 'admin/custom_change_form.html'
     formfield_overrides = {
         models.TextField: {'widget': MarkdownWidget}
     }
