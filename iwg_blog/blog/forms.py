@@ -80,7 +80,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             embedded_media.JS('var populate_slug_opts={template_url: "%s", ajax_url: "%s", instance_pk: %s};' % (
                 reverse('blog:article_detail_view', args=['dummy_slug']),
                 reverse('blog:article_generate_slug_ajax'),
-                self.instance.pk if self.instance else 'undefined'
+                self.instance.pk or 'undefined'
             )),
             'admin/js/admin-article-slug-control.js'
         ])
