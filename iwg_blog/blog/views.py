@@ -127,6 +127,8 @@ class ArticleListView(BaseViewMixin, ListView):
     model = Article
     queryset = Article.published.all()
 
+    template_name = 'pages/article-list.html'
+
     def get_meta_context(self):
         return Meta(title='Article list',
                     description='List of articles.',
