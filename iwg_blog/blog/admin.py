@@ -2,6 +2,7 @@ from django_markdown.widgets import MarkdownWidget
 
 from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
 from django.contrib.flatpages.models import FlatPage
