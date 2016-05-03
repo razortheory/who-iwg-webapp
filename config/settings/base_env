@@ -1,35 +1,48 @@
 SECRET_KEY=
 
+# Example: ADMINS=[["Admin name", "admin@gmail.com"],...]
 ADMINS=
 
+# Example: ALLOWED_HOSTS=test.com,example.com
 ALLOWED_HOSTS=
 
+# Example: postgress://username:password@host:port/database_name
 DATABASE_URL=
 
+# true/false
 USE_HTTPS=
 
+# true/false
 USE_COMPRESSOR=
 
+# true/false
 USE_CLOUDFRONT=
+# if cloudfront enabled
 AWS_S3_CUSTOM_DOMAIN=
 
 AWS_STORAGE_BUCKET_NAME=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 
+# Example: EMAIL_URL=smtp://username:password@host:port/
 EMAIL_URL=
 SERVER_EMAIL=
 
 GA_PROPERTY_ID=
 
+# Celery broker url
+# Example: BROKER_URL=amqp://guest@localhost//
 BROKER_URL=
 
 NEWRELIC_LICENSE_KEY=
 
+# true/false
 NEWRELIC_DJANGO_ACTIVE=
 NEWRELIC_INI=
 NEWRELIC_ENV=
 
+# true/false
 NEWRELIC_CELERY_ACTIVE=
 
+# true/false
 NEWRELIC_AVAILABILITY_TEST_ACTIVE=
