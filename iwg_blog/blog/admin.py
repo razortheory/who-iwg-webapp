@@ -1,7 +1,11 @@
+from django_markdown.widgets import MarkdownWidget
+
 from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
+from django.contrib.flatpages.models import FlatPage
 
 from watson.search import default_search_engine
 
@@ -32,6 +36,7 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
+    change_form_template = 'admin/custom_change_form.html'
 
     list_display = [
         'title', 'category', 'tags_list', 'short_description_preview',
@@ -122,3 +127,12 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'send_email')
+
+admin.site.unregister(FlatPage)
+@admin.register(FlatPage)
+class FlatPageAdmin(admin.ModelAdmin):
+    change_form_template = 'admin/custom_change_form.html'
+    formfield_overrides = {
+        models.TextField: {'widget': MarkdownWidget}
+    }
+

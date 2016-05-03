@@ -1,0 +1,19 @@
+{% extends 'admin/change_form.html' %}
+{% load i18n grp_tags flatpages %}
+
+{% block object-tools %}
+    {% get_flatpages '/markdown-cheatsheet/' as markdown_page %}
+    <ul class="grp-object-tools">
+        {% block object-tools-items %}
+            {% if change %}
+                {{ block.super }}
+            {% endif %}
+            {% if markdown_page %}
+                <li>
+                    <a href="{{ markdown_page.0.url }}" class="grp-state-focus" target="_blank">{% trans "Markdown cheatsheet" %}</a>
+                </li>
+            {% endif %}
+
+        {% endblock %}
+    </ul>
+{% endblock %}
