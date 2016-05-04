@@ -2,8 +2,12 @@
   <form class="search__form">
     <div class="search__form-inner">
       <input placeholder="Search Articles" class="field field_full search__field" type="text" name="q" value="{{ search_string }}">
-      <button class="button button_full search__button">Search
-      </button>
+        <button class="button button_full search__button search__button_desktop">Search
+        </button>
+        <button class="button button_full search__button search__button_mobile">
+          <svg class="icon icon_search"><use xlink:href="#icon_search"></use>
+          </svg>
+        </button>
     </div>
     <div class="search__result">You searched for '{{ search_string }}' - {{ obj_list.count }} result{{ obj_list.count |pluralize }} found
     </div>

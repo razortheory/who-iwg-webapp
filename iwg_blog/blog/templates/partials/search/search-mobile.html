@@ -1,0 +1,15 @@
+<div class="search-mobile">
+  <form action="{% url 'blog:search_view' %}" class="search-mobile__form">
+    <div class="search-mobile__form-inner">
+      <div class="search-mobile__field-wrap-hider">
+        <div class="search-mobile__field-wrap">
+          <input placeholder="Search Articles" class="field search-mobile__field" type="text" name="q">
+        </div>
+      </div>
+      <button class="button button_full search-mobile__button">
+        <svg class="icon icon_search"><use xlink:href="#icon_search"></use>
+        </svg>
+      </button>
+    </div>
+  </form>
+</div>

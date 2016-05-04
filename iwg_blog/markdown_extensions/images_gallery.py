@@ -6,7 +6,6 @@ Input:
     ![alt_text](/media/images/andrew_galves_paORKUs.png "title")
     ![alt_text](/media/images/ellie_JrzWbFV.png "title")
     ![alt_text](/media/images/thomas_jbLH2AI.png "title")
-    ----------------------
 Outputs:
     <div class="images-gallery">
         <div class="images-gallery-item"><img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title"></div>
@@ -23,7 +22,7 @@ from markdown.util import etree
 
 
 class ImagesGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n)+)[-]{10,}', re.MULTILINE)
+    RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
     IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_url>[^ ]+) "(?P<title>[^"]+)"\)')
     COLUMNS_RE = re.compile(r'columns:[ ]?(?P<columns_num>\d+)\n')
 
@@ -35,7 +34,9 @@ class ImagesGalleryProcessor(ParagraphProcessor):
             images_match = self.RE.match(block)
             if images_match:
                 blocks.remove(block)
-                images_gallery = etree.SubElement(parent, 'div')
+                images_gallery_wrap = etree.SubElement(parent, 'div')
+                images_gallery_wrap.set('class', 'images-gallery-wrapper')
+                images_gallery = etree.SubElement(images_gallery_wrap, 'div')
                 images_gallery.set('class', 'images-gallery')
 
                 columns_match = self.COLUMNS_RE.match(images_match.group('data'))
@@ -45,12 +46,19 @@ class ImagesGalleryProcessor(ParagraphProcessor):
                     image_dict = image_match.groupdict()
 
                     gallery_item = etree.SubElement(images_gallery, 'div')
-                    gallery_item.set('class', 'images-gallery-item col-xs-%s' % (12/columns_num, ))
+                    gallery_item.set('class', 'images-gallery-item col-sm-%s' % (12/columns_num, ))
 
-                    image = etree.SubElement(gallery_item, 'img')
+                    gallery_item_link = etree.SubElement(gallery_item, 'a')
+                    gallery_item_link.set('href', image_dict['image_url'])
+                    gallery_item_link.set('target', '_blank')
+
+                    image = etree.SubElement(gallery_item_link, 'img')
                     image.set('src', image_dict['image_url'])
                     image.set('alt', image_dict['alt_text'])
                     image.set('title', image_dict['title'])
+
+                images_paginator = etree.SubElement(images_gallery_wrap, 'div')
+                images_paginator.set('class', 'images-gallery-paginator')
 
 
 class ImagesGalleryExtension(Extension):

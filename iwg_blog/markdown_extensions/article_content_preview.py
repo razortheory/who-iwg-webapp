@@ -30,7 +30,7 @@ from markdown.util import etree, AtomicString
 
 
 class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}article-content-preview[-]{3,}\n(?P<data>(.*\n)+)[-]{10,}', re.MULTILINE)
+    RE = re.compile(r'^[-]{3,}article-content-preview[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
     DATA_RE = re.compile(r'(?P<key>[^:]+):(?P<value>[^\n]+)')
 
     def test(self, parent, block):
@@ -65,7 +65,7 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
                 body_title.text = data.get('text', '')
 
                 if 'description' in data:
-                    body_description = etree.SubElement(body_item, 'h4')
+                    body_description = etree.SubElement(body_item, 'div')
                     body_description.set('class', 'article-content-preview__text')
                     body_description.text = data.get('description', '')
 
