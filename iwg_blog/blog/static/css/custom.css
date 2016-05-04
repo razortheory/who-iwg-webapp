@@ -6,3 +6,12 @@
     width: 100%;
     height: auto;
 }
+
+article.article.markdown-cheatsheet div.article__body-content {
+    margin: 0 0 0 0;
+    max-width: none;
+}
+
+article.article.markdown-cheatsheet code {
+    white-space: pre-wrap;
+}
