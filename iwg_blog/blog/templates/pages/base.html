@@ -47,6 +47,9 @@
 
 {% block scripts %}
   {{ block.super }}
+  <script>
+    const SEARCH_URL = "{% url 'blog:search_view' %}";
+  </script>
   {% compress js %}
     <script src="{% static 'vendor/jquery.sticky-kit.min.js' %}"></script>
     <script src="{% static 'vendor/jquery.carouFredSel.js' %}"></script>
@@ -80,6 +83,42 @@
           fjs.parentNode.insertBefore(js, fjs);
         }
       }(document, "script", "twitter-wjs");
+    </script>
+    <script>
+      $(function () {
+        var $searchInput = $('#id__search-top__field'),
+            $searchResultsWrapper = $('#id__search-top-results'),
+            $searchResults = $('#id__search-top-results__list'),
+            searchItemTemplate = $('#id__search-top-result__template').html();
+
+        $searchInput.on('input', function (e) {
+          var searchTerm = $(this).val();
+          if (searchTerm.length < 3) {
+            $searchResultsWrapper.hide();
+            return;
+          }
+
+          $.get(SEARCH_URL, params={
+            q: searchTerm,
+          })
+            .done(function (data) {
+              var results = data.data;
+              if (results.length) {
+                $searchResults.empty();
+                for (var i = 0, result; result = results[i]; i++) {
+                  var itemHtml = searchItemTemplate.replace(/{\s*([a-zA-Z0-9-_]+)\s*}/g, function (_, key) {
+                    return result[key];
+                  });
+                  $searchResults.append(itemHtml);
+                }
+                $searchResultsWrapper.show();
+              } else {
+                $searchResultsWrapper.hide();
+              }
+            });
+        });
+
+      });
     </script>
   {% endcompress %}
 {% endblock %}

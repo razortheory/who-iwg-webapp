@@ -3,40 +3,33 @@
   <form action="{% url 'blog:search_view' %}" class="search-top__form">
     <div class="search-top__form-inner">
       <!-- for showing search results add class "field_active" to the block "search-top__field"-->
-      <input placeholder="Search Articles" class="field search-top__field" type="text" name="q">
+      <input id="id__search-top__field" placeholder="Search Articles" class="field search-top__field"
+             type="text" name="q" autocomplete="off">
       <button class="button button_full search-top__button">
         <svg class="icon icon_search">
           <use xlink:href="#icon_search"></use>
         </svg>
       </button>
     </div>
-    <div class="search-top-results">
-      <ul class="search-top-results__list">
-        <li class="search-top-results__item">
-          <div style="background-image:url(temp/top-article-pic-1.jpg)" class="search-top-results__thumbnail">
-          </div>
-          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
-            myths – and facts – about <strong>vaccinat</strong>ion</a>
-          </div>
-        </li>
-        <li class="search-top-results__item">
-          <div style="background-image:url(temp/top-article-pic-2.jpg)" class="search-top-results__thumbnail">
-          </div>
-          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
-            myths – and facts – about <strong>vaccinat</strong>ion</a>
-          </div>
-        </li>
-        <li class="search-top-results__item">
-          <div style="background-image:url(temp/top-article-pic-3.jpg)" class="search-top-results__thumbnail">
-          </div>
-          <div class="search-top-results__item-body"><a href="#" class="search-top-results__link">What are some of the
-            myths – and facts – about <strong>vaccinat</strong>ion</a>
-          </div>
-        </li>
+    <div id="id__search-top-results" class="search-top-results">
+      <ul id="id__search-top-results__list" class="search-top-results__list">
       </ul>
-      <div class="search-top-results__footer"><a href="#" class="button button_full search-top-results__more-link">SHOW
-        ALL RESULTS</a>
+      <div class="search-top-results__footer">
+        <button class="button button_full search-top-results__more-link">SHOW ALL RESULTS</button>
       </div>
     </div>
   </form>
 </div>
+
+
+<script id="id__search-top-result__template" type="text/x-custom-template">
+  <li class="search-top-results__item">
+    <a href="{ get_absolute_url }" class="search-top-results__link">
+      <div style="background-image:url({ cover_image })" class="search-top-results__thumbnail">
+      </div>
+      <div class="search-top-results__item-body">
+        { title }
+      </div>
+    </a>
+  </li>
+</script>

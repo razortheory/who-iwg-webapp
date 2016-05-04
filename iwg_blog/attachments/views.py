@@ -1,9 +1,10 @@
 from django.http import JsonResponse
 from django.views.generic import CreateView
 
+from iwg_blog.utils.views import JsonResponseMixin
 from .forms import UploadImageForm
 from .models import UploadedImage, Document
-from .serializers import JsonSerializer, UploadedImageSerializer
+from .serializers import UploadedImageSerializer
 
 
 class FeaturedDocumentsMixin(object):
@@ -16,17 +17,7 @@ class FeaturedDocumentsMixin(object):
         return super(FeaturedDocumentsMixin, self).get_context_data(**context)
 
 
-class JsonResponseView(object):
-    serializer_class = JsonSerializer
-
-    def get_serializer(self):
-        return self.serializer_class()
-
-    def serialize(self, obj):
-        return self.get_serializer().serialize(obj)
-
-
-class UploadImageAjaxView(JsonResponseView, CreateView):
+class UploadImageAjaxView(JsonResponseMixin, CreateView):
     form_class = UploadImageForm
     model = UploadedImage
     serializer_class = UploadedImageSerializer

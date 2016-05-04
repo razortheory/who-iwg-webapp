@@ -16,6 +16,8 @@ from meta.views import Meta
 from watson import search as watson
 
 from iwg_blog.attachments.views import FeaturedDocumentsMixin
+from iwg_blog.blog.serializers import ArticleSerializer
+from iwg_blog.utils.views import JsonResponseMixin
 from .forms import SubscribeForm, UnsubscribeForm
 from .models import Article, Subscriber, Tag, Category
 
@@ -136,14 +138,13 @@ class ArticleListView(BaseViewMixin, ListView):
                     )
 
 
-class SearchView(ArticleListView):
+class SearchView(JsonResponseMixin, ArticleListView):
     search_string = None
 
     template_name = 'pages/search-page.html'
 
-    def get(self, request, *args, **kwargs):
-        self.search_string = self.request.GET.get('q', '')
-        return super(SearchView, self).get(request, *args, **kwargs)
+    serializer_class = ArticleSerializer
+    ajax_search_result_count = 3
 
     def get_queryset(self):
         queryset = super(SearchView, self).get_queryset()
@@ -165,6 +166,17 @@ class SearchView(ArticleListView):
                     description='Search result.',
                     url=url
                     )
+
+    def get_ajax(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()[:self.ajax_search_result_count]
+        return JsonResponse(self.serialize(self.object_list))
+
+    def get(self, request, *args, **kwargs):
+        self.search_string = self.request.GET.get('q', '')
+
+        if request.is_ajax():
+            return self.get_ajax(request, *args, **kwargs)
+        return super(SearchView, self).get(request, *args, **kwargs)
 
 
 class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
