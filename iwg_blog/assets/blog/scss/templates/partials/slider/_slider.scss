@@ -78,6 +78,7 @@
 			height: 100%;
 			display: table-cell;
 			vertical-align: middle;
+			background: rgba(0, 0, 0, 0.35);
 			@include max-screen($M_XS) {
 				padding-top: 0;
 			}
