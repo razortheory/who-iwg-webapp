@@ -22,9 +22,37 @@
 }
 
 pre {
-    background: #D3D3D3 none repeat scroll 0% 0%;
-    border: 2px solid #808080;
+    background: #f0f0f0;
+    border: 1px solid #808080;
     border-radius: 10px;
     padding: 10px;
-    font-size: 0.75em !important;
+    font-size: 0.7em !important;
+}
+
+table {
+    width: 100%;
+    font-size: 0.8em;
+}
+table th, table td {
+    padding: 7px 15px;
+}
+table tr td:nth-child(n+2) {
+    border-left: 1px solid #e8e8e8;
+}
+table tr th {
+    background: #fafafa;
+    border-bottom: 1px solid #a8a8a8;
+}
+table tr td {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+figure {
+    text-align: center;
+}
+figure figcaption {
+    font-size: 0.75em;
+    font-style: italic;
+    max-width: 700px;
+    margin: 0px auto;
 }
