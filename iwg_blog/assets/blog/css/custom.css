@@ -21,7 +21,7 @@
     text-decoration: underline;
 }
 
-code {
+pre {
     background: #D3D3D3 none repeat scroll 0% 0%;
     border: 2px solid #808080;
     border-radius: 10px;

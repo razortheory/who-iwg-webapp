@@ -14,7 +14,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(this).toggleClass('opened');
         $dropdown.toggleClass('active');
-        if ( $dropdown.height() <= 0) {
+        if ($dropdown.hasClass('active')) {
             $dropdown.height($dropdown.find('.fixed-info__body-inner').innerHeight());
         }
         else {
