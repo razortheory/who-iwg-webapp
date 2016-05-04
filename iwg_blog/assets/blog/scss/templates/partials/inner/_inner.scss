@@ -1,0 +1,41 @@
+.inner {
+	max-width: 1510px;
+	margin: 0 auto;
+	position: relative;
+	@include clearfix;
+	&_index {
+		padding-top: 70px;
+		max-width: $content-width-mid;
+		@include max-screen($M_XS) {
+			padding-top: 60px;
+		}
+	}
+	&_category {
+		padding-top: 60px;
+		max-width: $content-width-max;
+		@include max-screen($M_XS) {
+			padding-top: 50px;
+		}
+	}
+	&_content {
+		padding-top: 60px;
+		max-width: $content-width-min;
+		@include max-screen($M_XS) {
+			padding-top: 50px;
+		}
+	}
+	&_text {
+		padding-top: 60px;
+		max-width: $content-width-text;
+		@include max-screen($M_XS) {
+			padding-top: 40px;
+		}
+	}
+	&_article {
+		padding-top: 60px;
+		max-width: $content-width-art;
+		@include max-screen($M_XS) {
+			padding-top: 40px;
+		}
+	}
+}

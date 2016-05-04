@@ -1,0 +1,90 @@
+//
+// Colors
+// --------------------------------------------------
+$light-grey: 	#f3f3f4;
+$pink: 		    #ce4483;
+
+$white:           #fff;
+$blue:            #4a90e2;
+$grey:            #9b9b9b;
+$black:           #333333;
+$dark:            #262626;
+$dark-grey:       #4d4b52;
+
+
+// Text
+$text: $dark;
+$text-grey: $grey;
+$text-white: $white;
+
+// Backgroud
+$bg: $white;
+$bg-page: $light-grey;
+
+
+// Links:
+$link: $pink;
+$link-hover: $dark;
+
+
+//
+// Typography
+// --------------------------------------------------
+$font-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-base-serif: "Times New Roman", Times, serif;
+$font: 'Open Sans', $font-base;
+$font-nice: "Montserrat", $font-base;
+$font-serif: "Lora", $font-base-serif;
+
+
+// Font sizes
+// -------------------------
+$font-size: 18px;
+
+// Line heights
+// -------------------------
+
+$line-height: 1.7;
+
+// Font weights
+// -------------------------
+$lighter: 300;
+$normal: 400;
+$semibold: 600;
+$bold: 700;
+$extrabold: 800;
+
+// Paths
+// -------------------------
+
+$font-img-path: '../images';
+
+
+//
+// Layout
+// --------------------------------------------------
+$content-width-max: 1520px;
+$content-width-mid: 1190px;
+$content-width-art: 1080px;
+$content-width-min: 960px;
+$content-width-text: 800px;
+
+//
+// Border radius
+// --------------------------------------------------
+$border-radius: 8px;
+
+
+
+// Media filters
+$M_X4S : 	319px; // (srv)
+$M_X3S : 	479px; // (srv)
+$M_X2S : 	639px; // (srv)
+$M_XS : 	767px; // phones
+$M_XSM : 	869px;
+$M_SM :		991px; // tablets
+$M_SMX : 	1023px;
+$M_SM2X : 	1099px;
+$M_SM3X : 	1149px;
+$M_MD : 	1199px; // medium desktop
+$M_LG : 	1200px; // large desktop

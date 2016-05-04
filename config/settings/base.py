@@ -101,6 +101,13 @@ TEMPLATES = [
 ]
 
 
+# Compressor compilers configurations
+# --------------------------------------------------------------------------
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
 # Fixture configurations
 # --------------------------------------------------------------------------
 
@@ -156,6 +163,7 @@ STATIC_ROOT = root('static')
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 STATICFILES_DIRS = [

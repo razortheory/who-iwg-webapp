@@ -1,0 +1,108 @@
+.subscribe {
+	&__form {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		&-inner {
+			position: relative;
+			@include clearfix;
+			text-align: center;
+		}
+	}
+	&__label {
+		position: relative;
+		float: left;
+		margin-top: 13px;
+		margin-right: 58px;
+		font-size: 18px;
+		line-height: 24px;
+		color: $dark-grey;
+		@include max-screen($M_XS) {
+			margin-right: 12px;
+		}
+		@include max-screen($M_X3S) {
+			margin: 0 0 20px;
+			float: none;
+			@include dib;
+			font-size: 22px;
+			line-height: 30px;
+			font-weight: $bold;
+			color: #444444;
+		}
+	}
+	&__field {
+		position: relative;
+		padding-right: 120px;
+		@include max-screen($M_X3S) {
+			margin-bottom: 20px;
+			padding: 11px 20px;
+			height: auto;
+			font-size: 14px;
+			line-height: 19px;
+			border: solid 1px #d4d4d4;
+			@include border-radius(14px);
+		}
+		&-wrap {
+			position: relative;
+			float: left;
+			max-width: 340px;
+			@include max-screen($M_X3S) {
+				float: none;
+				margin: 0 auto;
+				padding-left: 5px;
+				padding-right: 5px;
+			}
+		}
+	}
+	&__button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding-top: 14px;
+		padding-bottom: 12px;
+		width: 100px;
+		height: 50px;
+		min-width: 0;
+		display: block;
+		font-size: 18px;
+		line-height: 24px;
+		font-weight: $extrabold;
+		text-align: center;
+		@include border-radius(15px 15px 15px 0);
+		@include max-screen($M_X3S) {
+			position: static;
+			margin-left: auto;
+			margin-right: auto;
+			padding-top: 10px;
+			padding-bottom: 7px;
+			width: 100%;
+			max-width: 240px;
+			height: auto;
+			display: block;
+			font-size: 14px;
+			line-height: 17px;
+			font-weight: $bold;
+			@include border-radius;
+		}
+		&:hover {
+			padding-top: 14px;
+			padding-bottom: 12px;
+			@include max-screen($M_X3S) {
+				padding-top: 10px;
+				padding-bottom: 7px;
+			}
+		}
+		&_mobile-only {
+			display: none;
+			@include max-screen($M_X3S) {
+				display: block;
+			}
+		}
+		&_desktop-only {
+			@include max-screen($M_X3S) {
+				display: none;
+			}
+		}
+	}
+}

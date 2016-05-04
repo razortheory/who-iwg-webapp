@@ -1,0 +1,40 @@
+.blog-full {
+    width: 100%;
+    display: table;
+    margin-bottom: 85px;
+    @include max-screen(719px) {
+        display: block;
+        margin-bottom: 75px;
+    }
+    &__col {
+        display: table-cell;
+        vertical-align: top;
+        @include max-screen(719px) {
+            display: block;
+        }
+        &_posts {
+            width: 77.31%;
+            padding-right: 60px;
+            @include max-screen($M_SM3X) {
+                width: auto;
+                padding-right: 40px;
+            }
+            @include max-screen(719px) {
+                padding-right: 0;
+            }
+        }
+        &_sidebar {
+            padding-top: 13px;
+            @include max-screen($M_SM3X) {
+                width: 240px;
+            }
+            @include max-screen(719px) {
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 23px;
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    }
+}

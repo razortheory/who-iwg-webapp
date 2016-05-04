@@ -1,0 +1,39 @@
+.nav-shifted {
+	padding: 30px 20px 30px 25px;
+	&__title {
+		margin: 0 0 20px;
+		font-size: 20px;
+		line-height: 26px;
+		font-weight: $bold;
+		text-transform: uppercase;
+		text-align: center;
+	}
+	&__list {
+		@include list-reset;
+	}
+	&__item {
+		margin-bottom: 14px;
+		&_active {
+			.nav-shifted__link {
+				color: $blue;
+				border-color: $blue;
+			}
+		}
+	}
+	&__link {
+		display: block;
+		padding: 5px 11px 4px 14px;
+		font-family: $font;
+		font-size: 16px;
+		line-height: 22px;
+		color: $black;
+		text-transform: uppercase;
+		border-left: 2px solid transparent;
+		text-decoration: none;
+		&:focus {
+			color: $blue;
+			border-color: $blue;
+			text-decoration: none;
+		}
+	}
+}

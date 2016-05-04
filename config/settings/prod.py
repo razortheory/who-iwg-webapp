@@ -74,8 +74,6 @@ if USE_CLOUDFRONT or USE_COMPRESSOR:
     AWS_HEADERS = {'Cache-Control': str('public, max-age=604800')}
 
 if USE_COMPRESSOR:
-    STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
-
     # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
     COMPRESS_ENABLED = True
 

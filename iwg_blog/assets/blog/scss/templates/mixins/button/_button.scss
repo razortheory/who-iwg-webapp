@@ -1,0 +1,58 @@
+.button,
+a.button {
+    display: inline-block;
+    min-width: 202px;
+    padding: 14px 18px;
+    font-size: 15px;
+    line-height: 18px;
+    font-family: $font-nice;
+    color: $blue;
+    vertical-align: top;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    border: solid 2px $blue;
+    @include transition(#{background-color 0.3s ease, color 0.3s ease});
+    @include appearance;
+    @include box-shadow(none);
+    cursor: pointer;
+    @include border-radius;
+    @include max-screen($M_SM) {
+        padding: 11px 12px 10px;
+        min-width: 170px;
+        font-size: 12px;
+        line-height: 14px;
+    }
+    &:hover,
+    &:focus {
+        text-decoration: none;
+        background-color: $blue;
+        color: $white;
+        @include transition(#{background-color 0.3s ease, color 0.3s ease});
+        cursor: pointer;
+        outline: 0;
+        border: 0;
+        padding: 16px 20px;
+        @include box-shadow(none);
+        @include max-screen($M_SM) {
+            padding: 13px 14px 12px;
+        }
+    }
+    &_full {
+        background-color: $blue;
+        color: $white;
+        padding: 18px 24px;
+        border: 0;
+        @include max-screen($M_SM) {
+            padding: 14px 18px;
+        }
+        &:hover,
+        &:focus {
+            padding: 18px 24px;
+            background-color: darken($blue, 10%);
+            @include max-screen($M_SM) {
+                padding: 14px 18px;
+            }
+        }
+    }
+}

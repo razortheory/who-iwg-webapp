@@ -1,0 +1,93 @@
+.search {
+	margin-top: 10px;
+	margin-bottom: 45px;
+	@include max-screen($M_X3S) {
+		margin-top: 0;
+		margin-bottom: 30px;
+	}
+	&__form {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		&-inner {
+			position: relative;
+			z-index: 3;
+		}
+	}
+	&__field {
+		position: relative;
+		padding-right: 170px;
+		&:focus {
+			background-color: $white;
+			@include transition;
+		}
+		@include max-screen($M_X3S) {
+			padding: 11px 60px 11px 20px;
+			height: auto;
+			font-size: 14px;
+			line-height: 19px;
+			border: solid 1px #d4d4d4;
+			@include border-radius(14px);
+		}
+	}
+	&__button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 142px;
+		height: 50px;
+		min-width: 0;
+		padding-top: 14px;
+		padding-bottom: 12px;
+		display: block;
+		font-size: 18px;
+		line-height: 24px;
+		font-family: $font;
+		font-weight: $semibold;
+		letter-spacing: 1px;
+		@include border-radius(15px 15px 15px 0);
+		text-transform: uppercase;
+		&_desktop {
+			@include max-screen($M_X3S) {
+				display: none;
+			}
+		}
+		&_mobile {
+			display: none;
+			@include max-screen($M_X3S) {
+				display: block;
+				width: 50px;
+				height: 43px;
+				.icon {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					margin-left: -9px;
+					margin-top: -9px;
+					fill: $white;
+					width: 20px;
+					height: 20px;
+				}
+			}
+		}
+		&:hover,
+		&:focus {
+			padding-top: 14px;
+			padding-bottom: 12px;
+		}
+	}
+	&__result {
+		margin-top: 10px;
+		padding-left: 14px;
+		font-size: 18px;
+		line-height: 1.333333;
+		color: $grey;
+		font-style: italic;
+		@include max-screen($M_X3S) {
+			margin-top: 12px;
+			padding-left: 21px;
+			font-size: 14px;
+		}
+	}
+}

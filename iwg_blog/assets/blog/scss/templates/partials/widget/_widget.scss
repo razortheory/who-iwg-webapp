@@ -1,0 +1,58 @@
+.widget {
+    &__title {
+        margin-bottom: 30px;
+        padding: 0 10px 8px 20px;
+        font-size: 20px;
+        line-height: 27px;
+        color: #666666;
+        font-weight: $semibold;
+        text-transform: uppercase;
+        border-bottom: 2px solid $blue;
+        @include max-screen(719px) {
+            margin-bottom: 20px;
+            padding-bottom: 0;
+            font-size: 22px;
+            line-height: 30px;
+            font-weight: $bold;
+            text-align: center;
+            color: $dark;
+            border: 0;
+        }
+    }
+    &_links {
+        margin-bottom: 42px;
+        .widget__title {
+            margin-bottom: 24px;
+        }
+    }
+    &_top-articles {
+        margin-bottom: 42px;
+        //@include max-screen(719px) {
+        //    margin-bottom: 50px;
+        //}
+    }
+    &_latest-tweets {
+        margin-bottom: 43px;
+        .widget__title {
+            @include max-screen(719px) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+    &_tags {
+        margin-bottom: 24px;
+        @include max-screen(719px) {
+            margin-bottom: 40px;
+        }
+        .widget__title {
+            @include max-screen(719px) {
+                margin-bottom: 32px;
+            }
+        }
+    }
+    &_docs {
+        .widget__title {
+            margin-bottom: 20px;
+        }
+    }
+}

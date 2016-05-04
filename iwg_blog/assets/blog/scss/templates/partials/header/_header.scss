@@ -1,0 +1,151 @@
+.header {
+	width: 100%;
+	&-nav-shifted-handle {
+		position: relative;
+		float: right;
+		margin-top: 5px;
+		padding-left: 8px;
+		padding-top: 8px;
+		width: 41px;
+		height: 41px;
+		@include border-radius(5px);
+		@include transition;
+
+		display: none;
+
+		.icon {
+			width: 25px;
+			height: 25px;
+			display: block;
+			fill: $blue;
+			@include transition;
+		}
+		@include max-screen($M_XS) {
+			display: block;
+		}
+		.sb-active & {
+			background-color: $blue;
+			@include transition;
+			.icon {
+				fill: $white;
+				@include transition;
+			}
+		}
+	}
+	&__inner {
+		position: relative;
+		@include clearfix;
+		margin: 0 auto;
+		padding-left: 32px;
+		padding-top: 23px;
+		padding-right: 10px;
+		width: 100%;
+		max-width: 1940px;
+		border-bottom: solid 1px rgba(51, 51, 51, 0.4);
+		@include max-screen(1459px) {
+			padding-left: 12px;
+		}
+		@include max-screen($M_XS) {
+			padding-top: 10px;
+			padding-left: 17px;
+		}
+	}
+	&__logo {
+		position: relative;
+		float: left;
+		width: 147px;
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		background-size: contain;
+		@include max-screen(1459px) {
+			width: 10.8%;
+		}
+		@include max-screen(1279px) {
+			margin-bottom: 20px;
+		}
+		@include max-screen($M_SM3X) {
+			width: 140px;
+		}
+		@include max-screen($M_XS) {
+			width: 114px;
+		}
+		&:before {
+			padding-bottom: 44.2%;
+			width: 100%;
+			height: 0;
+			display: block;
+			content: '';
+		}
+	}
+	&__search-social {
+		position: absolute;
+		top: 30px;
+		right: 10px;
+		@include max-screen(1459px) {
+			top: 25px;
+		}
+		@include max-screen(1279px) {
+			position: relative;
+			float: right;
+			top: auto;
+			right: auto;
+			margin-top: 10px;
+		}
+		@include max-screen($M_XS) {
+			display: none;
+		}
+	}
+	&__social {
+		position: relative;
+		float: right;
+	}
+	&__search {
+		position: relative;
+		float: right;
+		margin-right: 34px;
+		@include max-screen(1459px) {
+			margin-right: 25px;
+		}
+		&-mobile {
+			position: absolute;
+			right: 60px;
+			top: 0;
+			z-index: 1000;
+			height: 100%;
+			width: 40px;
+			background-color: $white;
+			overflow: hidden;
+			@include transition(all 2s ease);
+			&.search-opened {
+				width: 100%;
+				@include transition(all 2s ease);
+			}
+			display: none;
+			@include max-screen($M_XS) {
+				display: block;
+			}
+		}
+	}
+	&__nav {
+		position: relative;
+		overflow: hidden;
+		margin-right: 32.8%;
+		margin-top: 47px;
+		margin-left: 10px;
+		@include max-screen(1609px) {
+			margin-right: 36.2%;
+		}
+		@include max-screen(1439px) {
+			margin-right: 37.1%;
+		}
+		@include max-screen(1279px) {
+			clear: both;
+			width: 100%;
+			max-width: 644px;
+			margin: 0 auto;
+		}
+		@include max-screen($M_XS) {
+			display: none;
+		}
+	}
+}

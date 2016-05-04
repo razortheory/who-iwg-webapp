@@ -1,0 +1,8 @@
+.blog-posts {
+    &__nav {
+        padding-bottom: 65px;
+        @include max-screen(639px) {
+            padding-bottom: 30px;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+.categories {
+	margin-left: -20px;
+	margin-right: -20px;
+	padding: 12px 20px 13px;
+	border-bottom: 1px solid #cccccc;
+	@include max-screen($M_X2S) {
+		padding-bottom: 11px;
+	}
+	&__list {
+		@include list-reset;
+		text-align: center;
+		@include max-screen($M_X2S) {
+			margin-right: auto;
+			max-width: 400px;
+			margin-left: auto;
+		}
+	}
+	&__item {
+		@include dib;
+		@include dib-fix;
+		padding-left: 25px;
+		padding-right: 25px;
+		@include max-screen($M_X2S) {
+			padding: 9px;
+		}
+	}
+	&__link {
+		position: relative;
+		display: block;
+		padding: 0 0 2px;
+		font-family: $font;
+		font-size: 18px;
+		line-height: 24px;
+		font-weight: $bold;
+		color: $blue;
+		text-transform: uppercase;
+		text-decoration: none;
+		@include transition();
+		@include max-screen($M_X2S) {
+			min-width: 120px;
+			min-height: 65px;
+			padding: 23px 15px 10px;
+			font-size: 15px;
+			line-height: 20px;
+			color: $white;
+			background-color: $blue;
+			@include border-radius;
+		}
+		&:after {
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			margin-left: -15px;
+			height: 1px;
+			width: 30px;
+			display: block;
+			content: '';
+			background-color: $blue;
+			@include transition();
+			@include max-screen($M_X2S) {
+				bottom: 20px;
+				background-color: $white;
+			}
+		}
+		&:hover {
+			color: darken($blue, 10%);
+			text-decoration: none;
+			@include transition();
+			@include max-screen($M_X2S) {
+				color: $white;
+				background-color: darken($blue, 10%);
+			}
+			&:after {
+				background-color: darken($blue, 10%);
+				@include transition();
+				@include max-screen($M_X2S) {
+					background-color: $white;
+				}
+			}
+		}
+	}
+}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static compress %}
 
 
 {% block head %}
@@ -38,7 +38,10 @@
 
 
 {% block styles %}
-  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet"><!-- [if gte IE 9]
+  {% compress css %}
+    <link href="{% static 'blog/scss/assets/stylesheets/style.scss' %}" type="text/x-scss" rel="stylesheet">
+  {% endcompress %}
+  <!-- [if gte IE 9]
     <style>
       .gradient {
       	filter: none;

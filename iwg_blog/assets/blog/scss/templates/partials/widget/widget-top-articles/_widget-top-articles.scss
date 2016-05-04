@@ -1,0 +1,43 @@
+.widget-top-articles {
+    &__list {
+        @include list-reset;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    &__item {
+        margin-bottom: 20px;
+        padding-top: 20px;
+        padding-right: 10px;
+        @include clearfix;
+        position: relative;
+        font-size: 14px;
+        line-height: 19px;
+        border-top: 2px solid rgba(159, 185, 164, 0.4);
+        &:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+        &-body {
+            padding-left: 15px;
+            overflow: hidden;
+            min-height: 64px;
+        }
+    }
+    &__thumbnail {
+        position: relative;
+        float: left;
+        width: 64px;
+        height: 64px;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        background-size: cover;
+        background-color: rgba(159, 185, 164, 0.4);
+    }
+    &__link {
+        color: #666666;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

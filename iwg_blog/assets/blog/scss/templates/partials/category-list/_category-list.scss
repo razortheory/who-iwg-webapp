@@ -1,0 +1,31 @@
+.category-list {
+	&_related {
+		padding-bottom: 75px;
+	}
+	&__list {
+		@include list-reset;
+		text-align: center;
+	}
+	&__item {
+		margin-bottom: 70px;
+		@include dib;
+		@include dib-fix;
+		padding-left: 15px;
+		padding-right: 15px;
+		width: 33.333%;
+		@include max-screen($M_MD) {
+			width: 50%;
+		}
+		@include max-screen(799px) {
+			display: block;
+			margin-left: 0;
+			margin-right: 0;
+			width: 100%;
+		}
+		@include max-screen(479px) {
+			margin-bottom: 40px;
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+}

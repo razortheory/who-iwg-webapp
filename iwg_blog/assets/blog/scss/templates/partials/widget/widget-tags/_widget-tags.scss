@@ -1,0 +1,30 @@
+.widget-tags {
+    &__list {
+        @include list-reset;
+        padding-left: 7px;
+    }
+    &__item {
+        @include dib;
+        @include dib-fix;
+        padding-right: 4px;
+        padding-bottom: 7px;
+        @include clearfix;
+    }
+    &__link {
+        padding: 9px 13px 7px;
+        display: block;
+        font-size: 12px;
+        line-height: 14px;
+        text-transform: uppercase;
+        color: #4d4b52;
+        background-color: #e4f0fd;
+        @include border-radius(15px);
+        @include transition();
+        &:hover {
+            text-decoration: none;
+            @include transition();
+            background-color: $blue;
+            color: $white;
+        }
+    }
+}

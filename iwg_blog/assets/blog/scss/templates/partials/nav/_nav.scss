@@ -1,0 +1,43 @@
+.nav {
+	position: relative;
+	float: right;
+	@include max-screen(1279px) {
+		float: none;
+	}
+	&__list {
+		@include list-reset;
+		text-align: right;
+	}
+	&__item {
+		position: relative;
+		float: left;
+		padding-left: 12px;
+		padding-right: 12px;
+		@include max-screen(1459px) {
+			padding-left: 8px;
+			padding-right: 8px;
+		}
+		&_active {
+			.nav__link {
+				color: $blue;
+				border-color: $blue;
+			}
+		}
+	}
+	&__link {
+		display: block;
+		padding: 4px 5px 11px;
+		font-family: $font;
+		font-size: 16px;
+		line-height: 22px;
+		color: $black;
+		text-transform: uppercase;
+		border-bottom: 2px solid transparent;
+		text-decoration: none;
+		&:hover {
+			color: $blue;
+			text-decoration: none;
+			border-color: $blue;
+		}
+	}
+}

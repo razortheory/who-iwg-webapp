@@ -1,0 +1,28 @@
+.posts-list {
+    &__title {
+        position: relative;
+        float: right;
+        width: 100%;
+        max-width: 496px;
+    }
+    &__list {
+        clear: both;
+        @include list-reset;
+        padding-bottom: 10px;
+    }
+    &__item {
+        display: block;
+        margin-bottom: 50px;
+        @include max-screen($M_X3S) {
+            margin-bottom: 40px;
+        }
+    }
+    &_full {
+        .posts-list__list{
+            padding-bottom: 45px;
+            @include max-screen(639px) {
+                padding-bottom: 0;
+            }
+        }
+    }
+}

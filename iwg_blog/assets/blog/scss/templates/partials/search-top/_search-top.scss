@@ -1,0 +1,122 @@
+.search-top {
+	@include max-screen($M_XS) {
+		display: none;
+	}
+	&__form {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		&-inner {
+			position: relative;
+			z-index: 3;
+		}
+	}
+	&_active {
+		.search-top-results {
+			display: block;
+		}
+	}
+	&__field {
+		position: relative;
+		padding-right: 70px;
+		width: 300px;
+		&.field_active,
+		&:focus {
+			width: 390px;
+			background-color: #f6f6f6;
+			@include transition;
+		}
+	}
+	&__button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 50px;
+		height: 40px;
+		min-width: 0;
+		display: block;
+		@include border-radius(15px 15px 15px 0);
+		.icon {
+			position: absolute;
+			right: 15px;
+			top: 11px;
+			width: 20px;
+			height: 20px;
+			display: block;
+			fill: $white;
+		}
+	}
+
+	&-results {
+		position: absolute;
+		z-index: 2;
+		top: 20px;
+		left: 0;
+		padding-top: 20px;
+		width: 100%;
+		display: none;
+		border: 1px solid $blue;
+		background-color: rgba(255, 255, 255, 0.9);
+		@include border-radius(0 0 15px 15px);
+		&__list {
+	        @include list-reset;
+	    }
+	    &__item {
+			padding: 16px 46px 16px 33px;
+	        @include clearfix;
+	        position: relative;
+	        font-size: 14px;
+	        line-height: 19px;
+	        border-bottom: 1px solid rgba(159, 185, 164, 0.4);
+			border-left: 2px solid transparent;
+			cursor: pointer;
+			@include transition;
+			&:hover {
+				background-color: #f2f2f2;
+				border-left-color: $blue;
+				@include transition;
+			}
+	        &-body {
+				padding-top: 10px;
+	            padding-left: 15px;
+	            overflow: hidden;
+	            min-height: 64px;
+	        }
+	    }
+	    &__thumbnail {
+	        position: relative;
+	        float: left;
+	        width: 64px;
+	        height: 64px;
+	        background-repeat: no-repeat;
+	        background-position: 0 0;
+	        background-size: cover;
+	        background-color: rgba(159, 185, 164, 0.4);
+	    }
+	    &__link {
+	        color: #666666;
+	        text-decoration: none;
+	        &:hover {
+	            text-decoration: none;
+	        }
+			strong {
+				color: $blue;
+			}
+	    }
+		&__footer {
+			text-align: center;
+			padding: 10px;
+		}
+		&__more-link.button {
+			padding: 9px 25px 10px;
+			min-width: 185px;
+			font-size: 13px;
+			line-height: 16px;
+			&:hover,
+			&:focus {
+				padding: 9px 25px 10px;
+			}
+		}
+	}
+}

@@ -1,0 +1,346 @@
+.content-text {
+	font-size: 22px;
+	line-height: 1.636363;
+	font-family: $font-serif;
+	@include max-screen($M_XSM) {
+		font-size: 18px;
+	}
+	@include max-screen($M_X3S) {
+		font-size: 16px;
+	}
+	h3 {
+		margin: 0 0 18px;
+		font-size: 30px;
+		line-height: 1.2;
+		font-family: $font-nice;
+		font-weight: $normal;
+		color: #7a7a7a;
+		@include max-screen($M_XSM) {
+			font-size: 24px;
+		}
+		@include max-screen($M_X3S) {
+			margin-bottom: 12px;
+			font-size: 22px;
+		}
+	}
+	h4 {
+		margin: 0 0 18px;
+		font-size: 22px;
+		line-height: 1.636363;
+		font-family: $font-serif;
+		font-weight: $bold;
+		color: $dark;
+		@include max-screen($M_XSM) {
+			font-size: 18px;
+		}
+		@include max-screen($M_X3S) {
+			margin-bottom: 12px;
+			font-size: 16px;
+		}
+	}
+	a {
+		text-decoration: underline;
+		font-style: italic;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	strong {
+		font-family: $font-serif;
+	}
+	img.full-width {
+		margin-bottom: 10px;
+		width: 100%;
+		height: auto;
+	}
+	p {
+		margin-bottom: 20px;
+		@include max-screen($M_XSM) {
+			margin-bottom: 15px;
+		}
+		& + h3 {
+			margin-top: 40px;
+			@include max-screen($M_XSM) {
+				margin-top: 30px;
+			}
+		}
+		& + .intro {
+			margin-top: 0;
+		}
+	}
+	ul,
+	ol {
+		margin: 30px 0;
+		padding: 0 70px 0 58px;
+		list-style: none outside none;
+		@include max-screen($M_XSM) {
+			margin: 20px 0;
+			padding-right: 40px;
+			padding-left: 38px;
+		}
+		@include max-screen($M_X2S) {
+			padding-left: 28px;
+			padding-right: 10px;
+		}
+		@include max-screen(419px) {
+			padding-right: 0;
+			padding-left: 18px;
+		}
+		& + h3 {
+			margin-top: 40px;
+			@include max-screen($M_XSM) {
+				margin-top: 30px;
+			}
+		}
+		& + .intro {
+			margin-top: 0;
+		}
+		li {
+			position: relative;
+			margin: 0 0 30px;
+			padding: 0 0 0 24px;
+			display: block;
+			font-size: 20px;
+			line-height: 1.5;
+			font-style: italic;
+			@include max-screen($M_XSM) {
+				margin-bottom: 20px;
+				font-size: 17px;
+			}
+			@include max-screen($M_X3S) {
+				margin-bottom: 16px;
+				font-size: 15px;
+			}
+			&:before {
+				position: absolute;
+				left: 0;
+				top: 11px;
+				width: 6px;
+				height: 7px;
+				display: block;
+				content: '';
+				background-color: $blue;
+				@include border-radius(3px);
+				@include max-screen($M_XSM) {
+					top: 8px;
+				}
+			}
+			ul,
+			ol {
+				padding-left: 29px;
+				padding-right: 0;
+				@include max-screen($M_XSM) {
+					padding-left: 12px;
+				}
+				@include max-screen($M_X2S) {
+					padding-left: 6px;
+				}
+				@include max-screen(419px) {
+					padding-left: 0;
+				}
+				li {
+					&:before {
+						top: 15px;
+						width: 8px;
+						height: 2px;
+						@include border-radius(0);
+						@include max-screen($M_XSM) {
+							top: 11px;
+						}
+					}
+				}
+			}
+		}
+	}
+	ol {
+		counter-reset: list1;
+		li {
+			&:before {
+				top: 0;
+				left: 0;
+				width: auto;
+				height: auto;
+				background: 0;
+				color: $blue;
+				@include border-radius(0);
+				counter-increment: list1;
+				content: counter(list1) ". ";
+				font-size: 20px;
+				line-height: 1.5;
+				@include max-screen($M_XSM) {
+					font-size: 17px;
+				}
+				@include max-screen($M_X3S) {
+					font-size: 15px;
+				}
+			}
+			ol {
+				counter-reset: list2;
+				li {
+					&:before {
+						top: 0;
+						left: 0;
+						width: auto;
+						height: auto;
+						background: 0;
+						@include border-radius(0);
+						counter-increment: list2;
+						content: counter(list2) ") ";
+					}
+					ol {
+						counter-reset: list3;
+						li {
+							&:before {
+								text-decoration: underline;
+								counter-increment: list3;
+								content: counter(list3);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.intro {
+		margin-top: -15px;
+		margin-bottom: 20px;
+		font-size: 25px;
+		line-height: 1.4;
+		font-family: $font;
+		font-weight: $bold;
+		color: #b5b5b5;
+		@include max-screen($M_XSM) {
+			margin-top: -8px;
+			margin-bottom: 18px;
+			font-size: 21px;
+		}
+		@include max-screen($M_X3S) {
+			font-size: 18px;
+		}
+	}
+	.info {
+		margin-top: 67px;
+		color: #7a7a7a;
+		font-size: 19px;
+		line-height: 1.263;
+		@include max-screen($M_XSM) {
+			margin-top: 47px;
+			font-size: 17px;
+		}
+		@include max-screen($M_X3S) {
+			margin-top: 38px;
+			font-size: 15px;
+			font-size: 1.4;
+		}
+		h5 {
+			margin: 0 0 27px;
+			font-size: 22px;
+			line-height: 1.6363;
+			font-family: $font-serif;
+			font-weight: $normal;
+			font-style: italic;
+			color: #7a7a7a;
+			@include max-screen($M_XSM) {
+				margin-bottom: 18px;
+				font-size: 20px;
+			}
+			@include max-screen($M_X3S) {
+				margin-bottom: 15px;
+				font-size: 18px;
+			}
+		}
+		p {
+			margin-bottom: 20px;
+			@include max-screen($M_X3S) {
+				margin-bottom: 18px;
+			}
+		}
+	}
+	.top-offset {
+		margin-top: 30px;
+	}
+	blockquote {
+		margin: 0 0 34px;
+		padding: 15px 86px 0 82px;
+		position: relative;
+		font-family: $font;
+		font-weight: $lighter;
+		font-style: italic;
+		@include max-screen($M_XSM) {
+			margin-bottom: 20px;
+			padding-top: 10px;
+			padding-right: 30px;
+			padding-left: 40px;
+		}
+		@include max-screen($M_X3S) {
+			margin-bottom: 16px;
+			padding-top: 0;
+			padding-right: 10px;
+			padding-left: 30px;
+		}
+		&:before {
+			position: absolute;
+			left: 45px;
+			top: 13px;
+			height: 96px;
+			display: block;
+			content: "\201C";
+			font-size: 70px;
+			line-height: 1;
+			font-weight: $normal;
+			color: $blue;
+			@include max-screen($M_XSM) {
+				font-size: 50px;
+				left: 12px;
+				top: 10px;
+			}
+			@include max-screen($M_X3S) {
+				font-size: 45px;
+				top: 0px;
+				left: 6px;
+			}
+		}
+		p {
+			margin-bottom: 5px;
+		}
+		cite {
+			display: block;
+			font-style: normal;
+			text-align: right;
+			&:before {
+				display: inline;
+				content: "\2014   ";
+			}
+		}
+	}
+	.article__body-text {
+		ul,
+		ol {
+			padding-left: 84px;
+			@include max-screen($M_XSM) {
+				padding-left: 58px;
+			}
+			@include max-screen($M_X2S) {
+				padding-left: 40px;
+			}
+			@include max-screen(419px) {
+				padding-left: 25px;
+			}
+			li {
+				ul,
+				ol {
+					padding-left: 29px;
+					@include max-screen($M_XSM) {
+						padding-left: 12px;
+					}
+					@include max-screen($M_X2S) {
+						padding-left: 6px;
+					}
+					@include max-screen(419px) {
+						padding-left: 0;
+					}
+				}
+			}
+		}
+	}
+}

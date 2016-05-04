@@ -1,0 +1,28 @@
+.widget-links {
+    &__list {
+        @include list-reset;
+    }
+    &__item {
+        position: relative;
+        margin-bottom: 20px;
+        padding-left: 66px;
+        font-size: 12px;
+        line-height: 17px;
+        .icon {
+            position: absolute;
+            left: 29px;
+            top: 50%;
+            margin-top: -6px;
+            display: block;
+            width: 14px;
+            height: 12px;
+            fill: $blue;
+        }
+    }
+    &__link {
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}

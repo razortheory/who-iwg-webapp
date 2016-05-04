@@ -1,0 +1,176 @@
+.category-post {
+	position: relative;
+	&:hover {
+		.category-post {
+			&__body {
+				visibility: visible;
+				@include opacity(1);
+				@include transition;
+			}
+			&__footer-devider {
+				visibility: hidden;
+				@include opacity(0);
+				@include transition;
+			}
+		}
+	}
+    &__image {
+        margin-bottom: 22px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+		@include max-screen(429px) {
+			margin-bottom: 14px;
+		}
+        &:before {
+            width: 100%;
+            padding-bottom: 67.226%;
+            height: 0;
+            display: block;
+            content: '';
+        }
+    }
+    &__title {
+        margin: 0 auto 20px;
+        width: 100%;
+        max-width: 380px;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: $bold;
+		text-transform: uppercase;
+        color: #1b1d17;
+		@include max-screen(429px) {
+			margin-bottom: 16px;
+			font-size: 18px;
+			line-height: 1.1;
+		}
+    }
+    &__footer {
+        @include clearfix;
+        position: relative;
+        padding-bottom: 28px;
+        font-size: 14px;
+        line-height: 19px;
+        letter-spacing: 2px;
+        color: $grey;
+        text-transform: uppercase;
+        border-top: 1px solid rgba(159, 185, 164, 0.4);
+		@include max-screen(1409px) {
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+		@include screen($M_XSM + 1, $M_MD) {
+			font-size: 14px;
+		}
+		@include max-screen(429px) {
+			padding-bottom: 20px;
+			font-size: 10px;
+			line-height: 1.4;
+		}
+        &-devider {
+			margin-left: -25.21%;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			height: 3px;
+			width: 50.42%;
+			display: block;
+			content: '';
+			background-color: $blue;
+			visibility: visible;
+			@include opacity(1);
+			@include transition;
+		}
+        &-tags {
+            position: relative;
+            float: left;
+            @include list-reset;
+            padding-top: 10px;
+			@include max-screen(429px) {
+				float: none;
+				@include clearfix;
+			}
+        }
+        &-tag {
+            position: relative;
+            float: left;
+            margin-right: 12px;
+			@include max-screen(1409px) {
+				margin-right: 8px;
+			}
+        }
+        &-link {
+            display: block;
+            color: $grey;
+            text-decoration: none;
+        }
+        &-date {
+            position: relative;
+            float: right;
+            padding-top: 10px;
+			@include max-screen(429px) {
+				float: none;
+				padding-top: 4px;
+				text-align: left;
+			}
+            sub {
+                position: static;
+                font-size: 12px;
+				line-height: 1.83;
+				@include max-screen($M_SM) {
+                    font-size: 11px;
+                }
+                @include max-screen($M_X2S) {
+                    font-size: 10px;
+                    line-height: 1.4;
+                }
+            }
+        }
+    }
+	&__body {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		padding: 38px 30px 70px;
+		width: 100%;
+		visibility: hidden;
+		@include opacity(0);
+		overflow: hidden;
+		background-color: rgba(74, 144, 226, 0.8);
+		@include transition;
+	}
+	&__text {
+		font-size: 24px;
+		line-height: 1.41666;
+		color: $white;
+		font-family: $font-serif;
+		text-align: center;
+		@include max-screen(1409px) {
+			font-size: 20px;
+		}
+		@include max-screen(399px) {
+			font-size: 16px;
+		}
+	}
+	&__button {
+		position: absolute;
+		right: 30px;
+		bottom: 30px;
+		width: 40px;
+		height: 40px;
+		background-color: $white;
+		display: block;
+		@include border-radius(50%);
+		.icon {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -6px;
+			margin-top: -12px;
+			width: 14px;
+			height: 24px;
+			fill: $blue;
+		}
+	}
+}

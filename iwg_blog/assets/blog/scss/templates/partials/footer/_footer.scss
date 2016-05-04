@@ -1,0 +1,76 @@
+.footer {
+	position: relative;
+	margin: 0 auto;
+	padding-right: 65px;
+	width: 100%;
+	max-width: 1190px;
+	@include max-screen($M_SMX) {
+		padding-right: 0;
+	}
+	&-wrap-inner {
+		padding: 58px 20px 37px;
+		border-top: 3px solid $blue;
+		@include max-screen($M_X2S) {
+			padding: 34px 10px 32px;
+		}
+	}
+	&__layer {
+		@include clearfix;
+		&_middle {
+			padding-top: 22px;
+			@include max-screen($M_X3S) {
+				padding-top: 38px;
+			}
+		}
+	}
+	&__subscribe {
+		position: relative;
+		float: left;
+		@include max-screen($M_X3S) {
+			float: none;
+		}
+	}
+	&__nav {
+		position: relative;
+		float: right;
+		@include max-screen($M_XSM) {
+			@include clearfix;
+			float: none;
+			margin-top: 20px;
+		}
+		@include max-screen($M_X3S) {
+			margin-top: 0;
+		}
+	}
+	&__partners {
+		position: relative;
+		float: left;
+		margin-top: 46px;
+		@include max-screen($M_XSM) {
+			@include clearfix;
+			float: none;
+			margin-top: 25px;
+		}
+	}
+	&__social {
+		position: absolute;
+		right: 65px;
+		top: 7px;
+		@include max-screen($M_SMX) {
+			right: 0;
+		}
+		@include max-screen($M_X2S) {
+			margin: 40px 0;
+			position: static;
+		}
+	}
+	&__copy {
+		margin: 33px auto 0;
+		width: 100%;
+		max-width: 300px;
+		font-size: 12px;
+		line-height: 17px;
+		color: $blue;
+		text-align: center;
+	}
+}

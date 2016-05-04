@@ -21,3 +21,5 @@ py-thumbnailer
 django-embedded-media
 
 django-watson
+
+django-libsass

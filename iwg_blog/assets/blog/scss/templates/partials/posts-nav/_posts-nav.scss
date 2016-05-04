@@ -1,0 +1,54 @@
+.posts-nav {
+    @include clearfix;
+    margin-bottom: 30px;
+    @include max-screen(639px) {
+        padding-top: 30px;
+    }
+    &__link {
+        position: relative;
+        display: block;
+        &:hover {
+            text-decoration: none;
+            @include transition;
+            .posts-nav__link-text {
+                color: $blue;
+                @include transition;
+            }
+        }
+        &_prev {
+            float: left;
+            padding-left: 18px;
+            .icon {
+                left: 0;
+            }
+        }
+        &_next {
+            float: right;
+            padding-right: 18px;
+            .icon {
+                right: 0;
+            }
+        }
+        &-text {
+            font-size: 18px;
+            line-height: 21px;
+            text-transform: uppercase;
+            color: $black;
+            @include transition;
+            &_no-mobile {
+                @include max-screen(639px) {
+                    display: none;
+                }
+            }
+        }
+        .icon {
+            position: absolute;
+            top: 50%;
+            margin-top: -8px;
+            width: 8px;
+            height: 16px;
+            display: block;
+            fill: $blue;
+        }
+    }
+}

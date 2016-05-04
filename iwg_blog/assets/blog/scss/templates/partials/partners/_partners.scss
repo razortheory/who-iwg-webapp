@@ -1,0 +1,37 @@
+.partners {
+	&__list {
+		@include list-reset;
+		@include max-screen($M_X2S) {
+			text-align: center;
+		}
+	}
+	&__item {
+		@include dib;
+		@include dib-fix;
+		vertical-align: middle;
+		padding-right: 28px;
+		@include max-screen($M_X3S) {
+			padding-right: 0;
+			margin-left: 30px;
+			width: 44%;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+		&:first-child {
+			@include max-screen($M_X3S) {
+				margin-left: 0;
+			}
+		}
+	}
+	&__link {
+		display: block;
+	}
+	&__logo {
+		display: block;
+		@include max-screen($M_X3S) {
+			width: 100%;
+			height: auto;
+		}
+	}
+}

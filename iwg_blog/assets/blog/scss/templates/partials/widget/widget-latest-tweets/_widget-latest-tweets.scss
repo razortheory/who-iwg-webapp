@@ -1,0 +1,53 @@
+.widget-latest-tweets {
+    &__list {
+        @include list-reset;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    &__item {
+        position: relative;
+        margin-bottom: 31px;
+        padding-top: 31px;
+        padding-left: 52px;
+        font-size: 14px;
+        line-height: 18px;
+        font-family: $font-serif;
+        color: #666666;
+        border-top: 2px solid rgba(159, 185, 164, 0.4);
+        &:first-child {
+            padding-top: 0;
+            border-top: 0;
+            .icon {
+                top: 8px;
+            }
+        }
+        .icon {
+            position: absolute;
+            left: 17px;
+            top: 38px;
+            margin-top: -6px;
+            display: block;
+            width: 22px;
+            height: 24px;
+            fill: #55acee;
+        }
+    }
+    &__text {
+        margin-bottom: 15px;
+    }
+    &__author {
+        position: relative;
+        padding-left: 4px;
+        &:before {
+			position: absolute;
+			top: 50%;
+			left: -40px;
+            margin-top: -1px;
+			height: 2px;
+			width: 30px;
+			display: block;
+			content: '';
+			background-color: rgba(159, 185, 164, 0.4);
+		}
+    }
+}

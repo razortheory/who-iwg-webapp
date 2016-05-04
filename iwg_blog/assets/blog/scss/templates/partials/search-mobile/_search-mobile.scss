@@ -1,0 +1,74 @@
+.search-mobile {
+	padding-top: 15px;
+	&__form {
+		display: block;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		&-inner {
+			position: relative;
+			z-index: 3;
+			width: 100%;
+			padding-right: 10px;
+		}
+	}
+	&__field {
+		position: relative;
+		float: left;
+		padding-right: 40px;
+		width: 100%;
+		border-color: darken($blue, 10%);
+		&-wrap {
+			@include clearfix;
+			position: relative;
+			z-index: 3;
+			float: right;
+			width: 100%;
+			max-width: 300px;
+			&-hider {
+				@include border-radius(15px);
+				overflow: hidden;
+				width: 100%;
+				padding-right: 5px;
+				padding-left: 20px;
+			}
+		}
+	}
+	&__button {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 4;
+		width: 40px;
+		height: 40px;
+		min-width: 0;
+		display: block;
+		@include border-radius(15px);
+		background-color: $white;
+		.icon {
+			position: absolute;
+			right: 9px;
+			top: 11px;
+			width: 20px;
+			height: 20px;
+			display: block;
+			fill: $blue !important;
+		}
+		&:focus {
+			background-color: $white;
+			.icon {
+				fill: $blue !important;
+			}
+		}
+	}
+	&-opened {
+		.search-mobile {
+			&__button {
+				background-color: darken($blue, 10%) !important;
+				.icon {
+					fill: $white !important;
+				}
+			}
+		}
+	}
+}
