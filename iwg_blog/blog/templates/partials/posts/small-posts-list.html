@@ -24,16 +24,18 @@
             <div class="category-post__footer-devider">
             </div>
           </div>
-          <div class="category-post__body">
-            <div class="category-post__text">
-              {{ article.short_description |markdown }}
+          <a href="{{ article.get_absolute_url }}">
+            <div class="category-post__body">
+              <div class="category-post__text">
+                {{ article.short_description |markdown }}
+              </div>
+              <span title="Read more" class="category-post__button">
+                <svg class="icon icon_arrow-right-simple">
+                  <use xlink:href="#icon_arrow-right-simple"></use>
+                </svg>
+              </span>
             </div>
-            <a href="{{ article.get_absolute_url }}" title="Read more" class="category-post__button">
-              <svg class="icon icon_arrow-right-simple">
-                <use xlink:href="#icon_arrow-right-simple"></use>
-              </svg>
-            </a>
-          </div>
+          </a>
         </div>
       </li>
     {% endfor %}
