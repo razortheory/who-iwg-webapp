@@ -76,7 +76,7 @@ class Article(ModelMeta, models.Model):
 
     cover_image = models.ImageField(upload_to='images')
 
-    short_description = MarkdownField()
+    short_description = models.TextField(max_length=300)
     content = MarkdownField()
     words_count = models.IntegerField(default=0, editable=False)
 
