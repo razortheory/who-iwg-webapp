@@ -1,18 +1,15 @@
-{% load django_markdown %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <style>
-        code {
-            white-space: pre;
-        }
-    </style>
-</head>
-<body>
+{% extends "pages/article.html" %}
+{% load django_markdown compress %}
 
-{{ flatpage.content | markdown }}
 
-</body>
-</html>
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      <article class="article markdown-cheatsheet">
+        <div class="article__body content-text">
+          {{ flatpage.content | markdown }}
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock %}
