@@ -1,0 +1,30 @@
+.article-content-preview_container .article-content-preview_link {
+    text-decoration: none;
+}
+
+.article-content-preview_container .article-content-preview_link:hover .article-content-preview {
+    border-color: #F18701;
+    border-width: 2px;
+    margin: -1px;
+}
+
+.article-content-preview_container .article-content-preview__title,
+.article-content-preview_container .article-content-preview__text {
+    font-style: normal;
+}
+
+.article-content-preview_container .article-content-preview__text {
+    color: #262626;
+}
+
+.article-content-preview_container .article-content-preview__link {
+    text-decoration: underline;
+}
+
+code {
+    background: #D3D3D3 none repeat scroll 0% 0%;
+    border: 2px solid #808080;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 0.75em !important;
+}

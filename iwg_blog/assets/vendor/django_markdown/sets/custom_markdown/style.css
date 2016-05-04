@@ -3,69 +3,82 @@
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
 .markItUp .mui-h1 a {
-	background-image:url(images/h1.png); 
+    background-image: url(images/h1.png);
 }
+
 .markItUp .mui-h2 a {
-	background-image:url(images/h2.png); 
+    background-image: url(images/h2.png);
 }
+
 .markItUp .mui-h3 a {
-	background-image:url(images/h3.png); 
+    background-image: url(images/h3.png);
 }
+
 .markItUp .mui-h4 a {
-	background-image:url(images/h4.png); 
+    background-image: url(images/h4.png);
 }
+
 .markItUp .mui-h5 a {
-	background-image:url(images/h5.png); 
+    background-image: url(images/h5.png);
 }
+
 .markItUp .mui-h6 a {
-	background-image:url(images/h6.png); 
+    background-image: url(images/h6.png);
 }
 
 .markItUp .mui-bold a {
-	background-image:url(images/bold.png);
+    background-image: url(images/bold.png);
 }
+
 .markItUp .mui-italic a {
-	background-image:url(images/italic.png);
+    background-image: url(images/italic.png);
 }
 
 .markItUp .mui-list-bulleted a {
-	background-image:url(images/list-bullet.png);
+    background-image: url(images/list-bullet.png);
 }
+
 .markItUp .mui-list-numeric a {
-	background-image:url(images/list-numeric.png);
+    background-image: url(images/list-numeric.png);
 }
 
 .markItUp .mui-picture a,
 .markItUp .mui-picture-modal a {
-	background-image:url(images/photo.png);
-}
-.markItUp .mui-picture-gallery a {
-	background-image:url(images/gallery.png);
-}
-.markItUp .mui-embed a {
-	background-image:url(images/multimedia.png);
-}
-.markItUp .mui-link a {
-	background-image:url(images/link.png);
-}
-.markItUp .mui-article-content-preview a {
-	background-image:url(images/earth-link.png);
+    background-image: url(images/photo.png);
 }
 
-.markItUp .mui-quotes a	{
-	background-image:url(images/quotes.png);
+.markItUp .mui-picture-gallery a {
+    background-image: url(images/gallery.png);
 }
-.markItUp .mui-table a	{
-	background-image:url(images/grid.png);
+
+.markItUp .mui-embed a {
+    background-image: url(images/multimedia.png);
+}
+
+.markItUp .mui-link a {
+    background-image: url(images/link.png);
+}
+
+.markItUp .mui-big-link a {
+    background-image: url(images/earth-link.png);
+}
+
+.markItUp .mui-quotes a {
+    background-image: url(images/quotes.png);
+}
+
+.markItUp .mui-table a {
+    background-image: url(images/grid.png);
 }
 
 .markItUp .preview a {
-	background-image:url(images/preview.png);
+    background-image: url(images/preview.png);
 }
 
 .markItUp .markItUpFullScreen a {
-	background-image:url(images/fullscreen.png);
+    background-image: url(images/fullscreen.png);
 }
+
 .markItUp .markItUpFullScreen-alt a {
-	background-image:url(images/fullscreen-alt.png);
+    background-image: url(images/fullscreen-alt.png);
 }

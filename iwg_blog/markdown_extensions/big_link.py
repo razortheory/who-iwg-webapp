@@ -2,7 +2,7 @@
 Article content preview Extension for Python-Markdown
 =============================================
 Input:
-    ----article-content-preview----
+    ----big-link----
     image: /media/images/tango_icon.png or ![alt_text](/media/images/country-flags_abXgWVp.jpg "title")
     text: What are some of the myths - and facts - about vaccination?
     description: The diseases we can vaccinate against will return if we stop vaccination programmes.
@@ -29,8 +29,8 @@ from markdown.inlinepatterns import IMAGE_LINK_RE
 from markdown.util import etree, AtomicString
 
 
-class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
-    RE = re.compile(r'^[-]{3,}article-content-preview[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
+class BigLinkGalleryProcessor(ParagraphProcessor):
+    RE = re.compile(r'^[-]{3,}big-link[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
     DATA_RE = re.compile(r'(?P<key>[^:]+):(?P<value>[^\n]+)')
 
     def test(self, parent, block):
@@ -41,7 +41,11 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
             images_match = self.RE.match(block)
             if images_match:
                 blocks.remove(block)
-                article_content_preview = etree.SubElement(parent, 'div')
+                parent_div = etree.SubElement(parent, 'div')
+                parent_div.set('class', 'article-content-preview_container')
+                parent_link = etree.SubElement(parent_div, 'a')
+                parent_link.set('class', 'article-content-preview_link')
+                article_content_preview = etree.SubElement(parent_link, 'div')
                 article_content_preview.set('class', 'article-content-preview')
 
                 data = {}
@@ -58,6 +62,9 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
                     image_item.set('style', 'background-image:url(%s)' % data['image'])
                     image_item.set('class', 'article-content-preview__thumbnail')
 
+                parent_link.set('href', data['url'])
+                parent_link.set('target', '_blank')
+
                 body_item = etree.SubElement(article_content_preview, 'div')
                 body_item.set('class', 'article-content-preview__body')
                 body_title = etree.SubElement(body_item, 'h4')
@@ -69,20 +76,18 @@ class ArticleContentPreviewGalleryProcessor(ParagraphProcessor):
                     body_description.set('class', 'article-content-preview__text')
                     body_description.text = data.get('description', '')
 
-                body_href = etree.SubElement(body_item, 'a')
+                body_href = etree.SubElement(body_item, 'span')
                 body_href.set('class', 'article-content-preview__link')
-                body_href.set('target', '_blank')
-                body_href.set('href', data['url'])
                 body_href.text = AtomicString(urlparse(data['url']).netloc or data['url'])
 
 
-class ArticleContentPreviewExtension(Extension):
+class BigLinkExtension(Extension):
     def extendMarkdown(self, md, md_globals):
         md.parser.blockprocessors.add(
-            'article-content-preview', ArticleContentPreviewGalleryProcessor(md.parser), '<paragraph'
+            'big-link', BigLinkGalleryProcessor(md.parser), '<paragraph'
         )
 
 
 def makeExtension(*args, **kwargs):
-    return ArticleContentPreviewExtension(*args, **kwargs)
+    return BigLinkExtension(*args, **kwargs)
 

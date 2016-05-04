@@ -78,11 +78,11 @@ mySettings = {
             closeWith: ')\n',
             placeHolder: 'http://'
         },
-        {className: 'mui-link', name:'Link', key:'L', openWith:'[', closeWith:']([![Url:!:http://]!] "[![Title]!]")', placeHolder:'Your text to link here...' },
+        {className: 'mui-link', name:'Link', key:'L', openWith:'[Your text to link here...](', closeWith:' "Link title")', placeHolder:'http://' },
         {
-            className: 'mui-article-content-preview',
-            name:'Article content preview',
-            openWith:'----article-content-preview----\nimage: ',
+            className: 'mui-big-link',
+            name:'Big link',
+            openWith:'----big-link----\nimage: ',
             closeWith: '\ntext: \ndescription: \nurl: \n',
             placeHolder:'Insert image url or tag here...'
         },
