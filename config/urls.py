@@ -20,9 +20,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 
+from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
 
 sitemaps = {
-    # Add your sitemap classes here
+    'articles': ArticlesSitemap,
+    'flatpages': PriorityFlatPageSitemap,
 }
 
 
