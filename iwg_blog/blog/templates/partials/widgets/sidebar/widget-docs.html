@@ -4,14 +4,16 @@
   <ul class="widget-docs__list">
     {% for document in documents %}
       <li class="widget-docs__item">
-        <div style="background-image:url({{ document.file_preview.url }})" class="widget-docs__thumbnail">
-          {% if document.file_type_icon_url %}
-            <img src="{{ document.file_type_icon_url }}" class="widget-docs__file-image" alt="">
-          {% endif %}
-        </div>
-        <div class="widget-docs__item-body">
-          <a href="{{ document.document_file.url }}" class="widget-docs__link">{{ document.name }}</a>
-        </div>
+        <a href="{{ document.document_file.url }}" target="_blank">
+          <div style="background-image:url({{ document.file_preview.url }})" class="widget-docs__thumbnail">
+            {% if document.file_type_icon_url %}
+              <img src="{{ document.file_type_icon_url }}" class="widget-docs__file-image" alt="">
+            {% endif %}
+          </div>
+          <div class="widget-docs__item-body">
+            <a href="{{ document.document_file.url }}" target="_blank" class="widget-docs__link">{{ document.name }}</a>
+          </div>
+        </a>
       </li>
     {% endfor %}
   </ul>
