@@ -125,6 +125,14 @@
             @include max-screen($M_XSM) {
                 margin-bottom: 30px;
             }
+
+            $justify-selector: "*";
+            @for $i from 1 through 6 {
+                $justify-selector: $justify-selector + ":not(h#{$i})";
+            }
+            #{$justify-selector} {
+                text-align: justify;
+            }
         }
         &-text,
         &-incut {
