@@ -1,6 +1,7 @@
 {% extends "admin/base.html" %}
 {% load i18n grp_tags %}
 {% load static %}
+{% load compress %}
 
 {% block title %}{{ title }} | {% get_site_title %}{% endblock %}
 
@@ -10,16 +11,20 @@
 {% endblock %}
 
 {% block extrastyle %}
-    <link rel="stylesheet" href="{% static 'vendor/jquery-ui-custom/jquery-ui.min.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/admin-markitup.css' %}">
-    <link rel="stylesheet" href="{% static 'admin/css/admin-modal-loading.css' %}">
+    {% compress css %}
+      <link rel="stylesheet" href="{% static 'vendor/jquery-ui-custom/jquery-ui.min.css' %}">
+      <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-tabs.css' %}">
+      <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
+      <link type="text/x-scss" rel="stylesheet" href="{% static 'admin/scss/admin-markitup.scss' %}">
+      <link rel="stylesheet" href="{% static 'admin/css/admin-modal-loading.css' %}">
+    {% endcompress %}
 {% endblock %}
 
 {% block javascripts %}
     <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
     <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
     <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
     <script src="{% static "admin/js/admin-markitup-image-insert-modal.js" %}"></script>
     {{ block.super }}
 {% endblock %}

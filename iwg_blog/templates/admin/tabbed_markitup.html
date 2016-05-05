@@ -1,0 +1,21 @@
+<div class="markItUp tabbed">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-target="#{{ field_id }}-edit" data-toggle="tab">Edit</a></li>
+        <li><a data-target="#{{ field_id }}-preview" data-toggle="tab">Preview</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="{{ field_id }}-edit">{{ editor }}</div>
+        <div class="tab-pane" id="{{ field_id }}-preview">
+            <iframe class="markItUpPreviewFrame"></iframe>
+        </div>
+    </div>
+    {{ editor_initialization }}
+    <script>
+        $(document).ready(function(){
+            $('a[data-target="#{{ field_id }}-preview"]').click(function(){
+                $('#{{ field_id }}-edit .markItUpEditor').trigger('focus.markItUp');
+                $.markItUp('refresh');
+            })
+        })
+    </script>
+</div>
