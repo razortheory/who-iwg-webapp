@@ -17,6 +17,8 @@ USE_COMPRESSOR=
 
 # true/false
 USE_CLOUDFRONT=
+# for cloudfront cache invalidation
+CLOUDFRONT_ID=
 # if cloudfront enabled
 AWS_S3_CUSTOM_DOMAIN=
 
