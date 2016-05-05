@@ -45,7 +45,7 @@ class CategoriesMixin(object):
 
 
 class FeaturedArticlesMixin(object):
-    featured_articles_count = 2
+    featured_articles_count = 5
 
     def get_context_data(self, **kwargs):
         context = dict()
