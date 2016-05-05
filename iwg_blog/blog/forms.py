@@ -5,7 +5,7 @@ import embedded_media
 
 from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
 from .models import Subscriber
-from .widgets import ArticleContentMarkdownWidget, TagsSelect2AdminWidget, AdminImageWidget
+from .widgets import TabbedMarkdownWidget, TagsSelect2AdminWidget, AdminImageWidget
 
 
 def set_attrs_for_field(field, attrs):
@@ -62,7 +62,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
         fields = forms.ALL_FIELDS
         widgets = {
             'tags': TagsSelect2AdminWidget,
-            'content': ArticleContentMarkdownWidget,
+            'content': TabbedMarkdownWidget,
             'cover_image': AdminImageWidget,
         }
         field_classes = {
