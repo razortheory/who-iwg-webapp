@@ -1,5 +1,6 @@
 from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse
+from django.template import loader
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
@@ -10,22 +11,24 @@ from django_select2.forms import ModelSelect2TagWidget
 from .models import Tag
 
 
-class ArticleContentMarkdownWidget(MarkdownWidget):
+class TabbedMarkdownWidget(MarkdownWidget):
     # Override to render content with some object context
     preview_path = None
+    template_path = 'admin/tabbed_markitup.html'
 
     def render(self, name, value, attrs=None):
-        html = super(MarkdownWidget, self).render(name, value, attrs)
+        editor_html = super(MarkdownWidget, self).render(name, value, attrs)
         attrs = self.build_attrs(attrs)
-        if self.preview_path:
-            preview_path = self.preview_path
-        else:
-            preview_path = reverse('django_markdown_preview')
-
-        html += editor_js_initialization(
-            "#%s" % attrs['id'], previewParserPath=preview_path
+        preview_path = self.preview_path or reverse('django_markdown_preview')
+        editor_initialization_html = editor_js_initialization(
+            "#%s" % attrs['id'], previewParserPath=preview_path, previewInElement='#%s-preview iframe' % attrs['id']
         )
-        return mark_safe(html)
+
+        return loader.get_template(self.template_path).render({
+            'field_id': attrs['id'],
+            'editor': editor_html,
+            'editor_initialization': editor_initialization_html,
+        })
 
 
 class AdminImageWidget(AdminFileWidget):
