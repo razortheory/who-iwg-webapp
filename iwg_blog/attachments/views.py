@@ -8,7 +8,7 @@ from .serializers import UploadedImageSerializer
 
 
 class FeaturedDocumentsMixin(object):
-    featured_documents_count = 2
+    featured_documents_count = 3
 
     def get_context_data(self, **kwargs):
         context = dict()
