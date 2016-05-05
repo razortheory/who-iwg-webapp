@@ -91,7 +91,7 @@ class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
 
 class ArticleView(BaseViewMixin, DetailView):
     model = Article
-    queryset = Article.published.all()
+    queryset = Article.objects.all()
     template_name = 'pages/article.html'
 
     related_articles_count = 3
