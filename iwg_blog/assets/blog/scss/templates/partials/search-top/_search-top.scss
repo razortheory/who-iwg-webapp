@@ -9,7 +9,7 @@
 		padding: 0;
 		&-inner {
 			position: relative;
-			z-index: 3;
+			z-index: 11;
 		}
 	}
 	&_active {
@@ -50,7 +50,7 @@
 
 	&-results {
 		position: absolute;
-		z-index: 2;
+		z-index: 10;
 		top: 20px;
 		left: 0;
 		padding-top: 20px;
