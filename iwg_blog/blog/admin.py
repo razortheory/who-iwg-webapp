@@ -1,15 +1,12 @@
-from django_markdown.widgets import MarkdownWidget
-
 from django.contrib import admin, messages
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
 from django.contrib.flatpages.models import FlatPage
 
 from watson.search import default_search_engine
 
-from .forms import ArticleAdminForm
+from .forms import ArticleAdminForm, FlatPagesAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
 from .utils import update_url_params
 from .adapters import ArticleAdapter
@@ -128,11 +125,9 @@ class TagAdmin(admin.ModelAdmin):
 class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'send_email')
 
+
 admin.site.unregister(FlatPage)
 @admin.register(FlatPage)
 class FlatPageAdmin(admin.ModelAdmin):
+    form = FlatPagesAdminForm
     change_form_template = 'admin/custom_change_form.html'
-    formfield_overrides = {
-        models.TextField: {'widget': MarkdownWidget}
-    }
-

@@ -1,5 +1,5 @@
 from django.contrib.admin.widgets import AdminFileWidget
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.template import loader
 from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
@@ -21,7 +21,7 @@ class TabbedMarkdownWidget(MarkdownWidget):
         attrs = self.build_attrs(attrs)
         preview_path = self.preview_path or reverse('django_markdown_preview')
         editor_initialization_html = editor_js_initialization(
-            "#%s" % attrs['id'], previewParserPath=preview_path, previewInElement='#%s-preview iframe' % attrs['id']
+            "#%s" % attrs['id'], previewParserPath=str(preview_path), previewInElement='#%s-preview iframe' % attrs['id']
         )
 
         return loader.get_template(self.template_path).render({
@@ -29,6 +29,18 @@ class TabbedMarkdownWidget(MarkdownWidget):
             'editor': editor_html,
             'editor_initialization': editor_initialization_html,
         })
+
+
+class CustomMarkdownWidget(TabbedMarkdownWidget):
+    preview_path = reverse_lazy('blog:article_preview_view')
+
+    def __init__(self, attrs=None):
+        attrs = attrs or {}
+        attrs.update({
+            'data-upload-image-url': reverse('upload_image_ajax'),
+            'data-preview-parser-url': self.preview_path,
+        })
+        super(CustomMarkdownWidget, self).__init__(attrs)
 
 
 class AdminImageWidget(AdminFileWidget):

@@ -5,7 +5,7 @@ import embedded_media
 
 from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
 from .models import Subscriber
-from .widgets import TabbedMarkdownWidget, TagsSelect2AdminWidget, AdminImageWidget
+from .widgets import TagsSelect2AdminWidget, AdminImageWidget, CustomMarkdownWidget
 
 
 def set_attrs_for_field(field, attrs):
@@ -45,24 +45,11 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     autosave_prefix = 'blog_article'
     autosave_fields = ['content', 'short_description']
 
-    def __init__(self, *args, **kwargs):
-        super(ArticleAdminForm, self).__init__(*args, **kwargs)
-
-        preview_path = reverse('blog:article_preview_view')
-
-        markdown_attrs = {
-            'data-upload-image-url': reverse('upload_image_ajax'),
-            'data-preview-parser-url': preview_path,
-        }
-        set_attrs_for_field(self.fields['content'], markdown_attrs)
-        set_attrs_for_field(self.fields['short_description'], markdown_attrs)
-        self.fields['content'].widget.preview_path = preview_path
-
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
             'tags': TagsSelect2AdminWidget,
-            'content': TabbedMarkdownWidget,
+            'content': CustomMarkdownWidget,
             'cover_image': AdminImageWidget,
         }
         field_classes = {
@@ -85,6 +72,14 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'admin/js/admin-article-slug-control.js'
         ])
         return media
+
+
+class FlatPagesAdminForm(forms.ModelForm):
+    class Meta:
+        fields = forms.ALL_FIELDS
+        widgets = {
+            'content': CustomMarkdownWidget
+        }
 
 
 class SubscribeForm(forms.ModelForm):
