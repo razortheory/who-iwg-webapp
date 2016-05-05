@@ -21,11 +21,13 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
-    <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
-    <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
-    <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
-    <script src="{% static "admin/js/admin-markitup-image-insert-modal.js" %}"></script>
+    {% compress js %}
+      <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
+      <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
+      <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
+      <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
+      <script src="{% static "admin/js/admin-markitup-image-insert-modal.js" %}"></script>
+    {% endcompress %}
     {{ block.super }}
 {% endblock %}
 
