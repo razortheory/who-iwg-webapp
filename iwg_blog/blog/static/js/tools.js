@@ -28,13 +28,18 @@ $(document).ready(function() {
     });
 });
 $('.search-mobile__button').click(function(){
-    var $wrapper = $('.header__search-mobile'),
+    var $form = $('.search-mobile__form'),
+        $wrapper = $('.header__search-mobile'),
         $wrapperInner = $('.search-mobile'),
+        $input = $wrapper.find('.search-mobile__field')
         isOpen = $wrapper.hasClass('search-opened');
-    $wrapperInner.toggleClass('search-mobile-opened');
-    $wrapper.toggleClass('search-opened')
-      .find('.search-mobile__field')[isOpen ? 'blur' : 'focus']();
-    return false;
+
+    if (!isOpen || !$input.val()) {
+        $wrapperInner.toggleClass('search-mobile-opened');
+        $wrapper.toggleClass('search-opened');
+        $input[isOpen ? 'blur' : 'focus']();
+        return false;
+    }
 });
 
 // Desktop search
