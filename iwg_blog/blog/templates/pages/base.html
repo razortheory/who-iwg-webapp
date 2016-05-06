@@ -47,9 +47,6 @@
 
 {% block scripts %}
   {{ block.super }}
-  <script>
-    const SEARCH_URL = "{% url 'blog:search_view' %}";
-  </script>
   {% compress js %}
     <script src="{% static 'vendor/jquery.sticky-kit.min.js' %}"></script>
     <script src="{% static 'vendor/jquery.carouFredSel.js' %}"></script>

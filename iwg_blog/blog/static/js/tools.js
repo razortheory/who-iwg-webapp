@@ -37,9 +37,10 @@ $('.search-mobile__button').click(function(){
     return false;
 });
 
-// Search
+// Desktop search
 $(function () {
   var $searchInput = $('#id__search-top__field'),
+    $searchForm = $('#id_search-top__form'),
     $searchResultsWrapper = $('#id__search-top-results'),
     $searchResults = $('#id__search-top-results__list'),
     searchItemTemplate = $('#id__search-top-result__template').html();
@@ -51,8 +52,8 @@ $(function () {
       return;
     }
 
-    $.get(SEARCH_URL, params = {
-      q: searchTerm,
+    $.get($searchForm.attr('action'), params = {
+      q: searchTerm
     })
     .done(function (data) {
       var results = data.data;
@@ -71,7 +72,6 @@ $(function () {
     });
   });
 
-  var $form = $('.search-top form');
   function onFormFocus(){
     $(this).addClass('active');
     $(this).find('input').trigger('input');
@@ -80,11 +80,11 @@ $(function () {
     if ($(this).find('input').val().length == 0){
       $(this).removeClass('active');
     }
-    $(this).find('.search-top-results').hide();
+    $searchResultsWrapper.hide();
   }
-  $form[0].addEventListener('focus', onFormFocus, true);
-  $form[0].addEventListener('blur', onFormBlur, true);
-  $('.search-top-results, .search-top__button', $form).on('mousedown', function(event){
+  $searchForm[0].addEventListener('focus', onFormFocus, true);
+  $searchForm[0].addEventListener('blur', onFormBlur, true);
+  $('.search-top-results, .search-top__button', $searchForm).on('mousedown', function(event){
     event.preventDefault();
   });
 });
