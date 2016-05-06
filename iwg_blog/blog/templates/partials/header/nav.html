@@ -1,6 +1,7 @@
 <nav class="nav">
   <ul class="nav__list">
     {% url 'blog:landing_view' as home_link %}
+    {% url 'django.contrib.flatpages.views.flatpage' 'opensrp/' as opensrp_link %}
     <li class="nav__item {% if request.path == home_link %} nav__item_active {% endif %}">
       <a href="{{ home_link }}" class="nav__link">HOME</a>
     </li>
@@ -10,7 +11,8 @@
     </li>
     <li class="nav__item"> <a href="#" class="nav__link">IWG GRANTEES</a>
     </li>
-    <li class="nav__item"> <a href="#" class="nav__link">OPENSRP</a>
+    <li class="nav__item {% if request.path == opensrp_link %} nav__item_active {% endif %}">
+      <a href="{{ opensrp_link }}" class="nav__link">OPENSRP</a>
     </li>
   </ul>
 </nav>
