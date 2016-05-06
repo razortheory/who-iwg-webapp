@@ -21,11 +21,16 @@
 		position: relative;
 		padding-right: 70px;
 		width: 300px;
-		&.field_active,
-		&:focus {
-			width: 390px;
-			background-color: #f6f6f6;
-			@include transition;
+	}
+	&__form{
+		&.active {
+			.search-top {
+				&__field {
+					width: 390px;
+					background-color: #f6f6f6;
+					@include transition;
+				}
+			}
 		}
 	}
 	&__button {
