@@ -51,10 +51,13 @@ figure {
     text-align: center;
 }
 figure figcaption {
-    font-size: 0.75em;
-    font-style: italic;
+    font-size: 0.727em;
     max-width: 700px;
-    margin: 0px auto;
+    margin: 10px auto 0px;
+    color: #9b9b9b;
+    font-family: Open Sans;
+    line-height: 1.4;
+    letter-spacing: 1px;
 }
 
 div.category-list ul.category-list__list {
