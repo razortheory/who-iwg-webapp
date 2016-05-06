@@ -16,6 +16,10 @@
         @include max-screen($M_X3S) {
             margin-bottom: 40px;
         }
+
+        a:hover {
+            text-decoration: none;
+        }
     }
     &_full {
         .posts-list__list{
