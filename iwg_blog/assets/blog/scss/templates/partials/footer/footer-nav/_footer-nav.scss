@@ -22,7 +22,7 @@
 			margin-bottom: 18px;
 			padding-left: 20px;
 			width: 100%;
-			max-width: 290px;
+			max-width: 410px;
 			text-align: left;
 		}
 	}
@@ -38,7 +38,7 @@
 			width: 50%;
 			padding-right: 10px;
 		}
-		@include min-screen(930px) {
+		@include min-screen(1200px) {
 			&:first-of-type {
 				padding-left: 12px;
 
