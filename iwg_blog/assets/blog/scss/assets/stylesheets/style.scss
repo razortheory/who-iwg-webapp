@@ -2,27 +2,31 @@
 //
 // Core
 // --------------------------------------------------
-@import 'helpers/vars';
-@import 'helpers/mixins';
+@import 'helpers/vars.scss';
+@import 'helpers/mixins.scss';
 
 
 //
 // Normalize
 // --------------------------------------------------
-@import 'base/normalize';
+@import 'base/normalize.scss';
 
 
 //
 // Typography
 // --------------------------------------------------
-@import 'base/fonts';
-@import 'base/typography';
+@import 'base/fonts.scss';
+@import 'base/typography.scss';
 
+//
+// Utils
+// --------------------------------------------------
+@import 'base/utils.scss';
 
 //
 // Scaffold
 // --------------------------------------------------
-@import 'base-scaffold/scaffold';
+@import 'base-scaffold/scaffold.scss';
 
 //
 // Framework
@@ -32,108 +36,108 @@
 //@import '../../templates/mixins/icon/icon';
 
 // Constructive elements
-@import '../../templates/mixins/button/button';
-@import '../../templates/mixins/field/field';
+@import '../../templates/mixins/button/button.scss';
+@import '../../templates/mixins/field/field.scss';
 
 //
 // Blocks
 // --------------------------------------------------
 
 // Header
-@import '../../templates/partials/header/header';
-@import '../../templates/partials/nav/nav';
-@import '../../templates/partials/nav/nav-shifted';
-@import '../../templates/partials/inner/inner';
-@import '../../templates/partials/menu-aside/menu-aside';
+@import '../../templates/partials/header/header.scss';
+@import '../../templates/partials/nav/nav.scss';
+@import '../../templates/partials/nav/nav-shifted.scss';
+@import '../../templates/partials/inner/inner.scss';
+@import '../../templates/partials/menu-aside/menu-aside.scss';
 
 // Home
 
 // Main
-@import '../../templates/partials/main/main';
+@import '../../templates/partials/main/main.scss';
 
 // Footer
-@import '../../templates/partials/footer/footer';
+@import '../../templates/partials/footer/footer.scss';
 
 // Footer-nav
-@import '../../templates/partials/footer/footer-nav/footer-nav';
+@import '../../templates/partials/footer/footer-nav/footer-nav.scss';
 
 // Search
-@import '../../templates/partials/search/search';
+@import '../../templates/partials/search/search.scss';
 
 // Search-top
-@import '../../templates/partials/search-top/search-top';
+@import '../../templates/partials/search-top/search-top.scss';
 
 // Search-mobile
-@import '../../templates/partials/search-mobile/search-mobile';
+@import '../../templates/partials/search-mobile/search-mobile.scss';
 
 // Social
-@import '../../templates/partials/social/social';
+@import '../../templates/partials/social/social.scss';
 
 // Slider
-@import '../../templates/partials/slider/slider';
+@import '../../templates/partials/slider/slider.scss';
 
 // Categories-links
-@import '../../templates/partials/categories-links/categories-links';
+@import '../../templates/partials/categories-links/categories-links.scss';
 
 // Blog-full
-@import '../../templates/partials/blog-full/blog-full';
+@import '../../templates/partials/blog-full/blog-full.scss';
 
 // Blog-posts
-@import '../../templates/partials/blog-posts/blog-posts';
+@import '../../templates/partials/blog-posts/blog-posts.scss';
 
 // Posts-list
-@import '../../templates/partials/posts-list/posts-list';
+@import '../../templates/partials/posts-list/posts-list.scss';
 
 // Posts-nav
-@import '../../templates/partials/posts-nav/posts-nav';
+@import '../../templates/partials/posts-nav/posts-nav.scss';
 
 // Post
-@import '../../templates/partials/post/post';
+@import '../../templates/partials/post/post.scss';
 
 // Post-page
-@import '../../templates/partials/post-page/post-page';
+@import '../../templates/partials/post-page/post-page.scss';
 
 // Widget
-@import '../../templates/partials/widget/widget';
+@import '../../templates/partials/widget/widget.scss';
 
 // Widget-links
-@import '../../templates/partials/widget/widget-links/widget-links';
+@import '../../templates/partials/widget/widget-links/widget-links.scss';
 
 // Widget-top-articles
-@import '../../templates/partials/widget/widget-top-articles/widget-top-articles';
+@import '../../templates/partials/widget/widget-top-articles/widget-top-articles.scss';
 
 // Widget-latest-tweets
-@import '../../templates/partials/widget/widget-latest-tweets/widget-latest-tweets';
+@import '../../templates/partials/widget/widget-latest-tweets/widget-latest-tweets.scss';
 
 // Widget-tags
-@import '../../templates/partials/widget/widget-tags/widget-tags';
+@import '../../templates/partials/widget/widget-tags/widget-tags.scss';
 
 // Widget-docs
-@import '../../templates/partials/widget/widget-docs/widget-docs';
+@import '../../templates/partials/widget/widget-docs/widget-docs.scss';
 
 
 // Subscribe
-@import '../../templates/partials/subscribe/subscribe';
+@import '../../templates/partials/subscribe/subscribe.scss';
 
 // Partners
-@import '../../templates/partials/partners/partners';
+@import '../../templates/partials/partners/partners.scss';
 
 // Fixed-info
-@import '../../templates/partials/fixed-info/fixed-info';
+@import '../../templates/partials/fixed-info/fixed-info.scss';
 
 
 
 // Category-page
-@import '../../templates/partials/category-page/category-page';
+@import '../../templates/partials/category-page/category-page.scss';
 
 // Category-list
-@import '../../templates/partials/category-list/category-list';
+@import '../../templates/partials/category-list/category-list.scss';
 
 // Category-post
-@import '../../templates/partials/category-post/category-post';
+@import '../../templates/partials/category-post/category-post.scss';
 
 // Сontent-text
-@import '../../templates/partials/content-text/content-text';
+@import '../../templates/partials/content-text/content-text.scss';
 
 // Article
-@import '../../templates/partials/article/article';
+@import '../../templates/partials/article/article.scss';

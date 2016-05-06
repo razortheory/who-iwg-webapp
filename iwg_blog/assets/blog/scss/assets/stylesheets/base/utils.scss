@@ -1,0 +1,15 @@
+$text-aligns: left right center;
+
+@each $text-align in $text-aligns{
+  .text-#{$text-align} {
+    text-align: #{$text-align};
+  }
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-italic {
+  font-style: italic;
+}

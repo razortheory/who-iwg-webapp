@@ -2,8 +2,6 @@
   <form action="{% url 'blog:subscribe_view' %}" class="subscribe__form" method="post">
     {% csrf_token %}
     <div class="subscribe__form-inner">
-      <label for="subscribe-field" class="filed-label subscribe__label">SUBSCRIBE
-      </label>
       <div class="subscribe__field-wrap">
         <input placeholder="Enter your email" id="subscribe-field" class="field field_full subscribe__field" type="text" name="email">
         <button class="button button_full subscribe__button subscribe__button_desktop-only">Send
