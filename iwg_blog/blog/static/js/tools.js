@@ -32,12 +32,38 @@ $('.search-mobile__button').click(function(){
         $wrapper = $('.header__search-mobile'),
         $wrapperInner = $('.search-mobile'),
         $input = $wrapper.find('.search-mobile__field')
-        isOpen = $wrapper.hasClass('search-opened');
+        isOpen = $wrapperInner.hasClass('search-mobile-opened');
 
     if (!isOpen || !$input.val()) {
-        $wrapperInner.toggleClass('search-mobile-opened');
-        $wrapper.toggleClass('search-opened');
-        $input[isOpen ? 'blur' : 'focus']();
+        if (isOpen) {
+
+            $wrapper.animate({
+                width: '40px'
+            }, {
+                duration: 1000,
+                start: function () {
+                    $input.blur();
+                },
+                done: function () {
+                    $wrapperInner.removeClass('search-mobile-opened');
+                },
+            });
+
+        } else {
+
+            $wrapper.animate({
+                width: ($wrapper.parent().width() - 33) + 'px'
+            }, {
+                duration: 1000,
+                start: function () {
+                    $wrapperInner.addClass('search-mobile-opened');
+                },
+                done: function () {
+                    $input.focus();
+                }
+            });
+
+        }
         return false;
     }
 });

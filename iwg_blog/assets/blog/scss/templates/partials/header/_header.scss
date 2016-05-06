@@ -116,11 +116,6 @@
 			width: 40px;
 			background-color: $white;
 			overflow: hidden;
-			@include transition(all 2s ease);
-			&.search-opened {
-				width: 100%;
-				@include transition(all 2s ease);
-			}
 			display: none;
 			@include max-screen($M_XS) {
 				display: block;
