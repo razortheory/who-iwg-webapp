@@ -23,7 +23,7 @@ class GranteeView(BaseViewMixin, DetailView):
 
     related_articles_count = 3
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         return self.get_object().as_meta(self.request)
 
 
@@ -34,7 +34,7 @@ class RoundView(RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
     template_name = 'grantee/pages/grantee-list.html'
     object_queryset = Round.objects.all()
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         return Meta(title='Article list',
                     description='List of articles.',
                     url=reverse('blog:articles_view')
