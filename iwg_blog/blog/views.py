@@ -128,6 +128,7 @@ class ArticlePreviewView(AccessMixin, TemplateView):
 class ArticleListView(BaseViewMixin, ListView):
     model = Article
     queryset = Article.published.all()
+    paginate_by = 6
 
     template_name = 'pages/article-list.html'
 
@@ -196,6 +197,7 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
 class CategoryView(RelatedListMixin, ArticleListView):
     template_name = 'pages/category-page.html'
     object_queryset = Category.objects.all()
+    paginate_by = 12
 
     def get_queryset(self):
         return super(CategoryView, self).get_queryset().filter(category=self.object)

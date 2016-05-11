@@ -1,9 +1,145 @@
 {% extends 'mailing/base.html' %}
+{% load static %}
+{% load blog_tags %}
+
+{% block body_bg_styles %}background-color: #E4F0FD;{% endblock %}
+{% block body_table_styles %}max-width: 700px; width: 98%; border-radius: 10px; background-color: white; margin: 0 auto;{% endblock %}
+
+{% block email_head_style %}
+  td[align="center"] {
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  }
+  a {
+  text-decoration: none;
+  color: inherit;
+  }
+  p {
+  line-height: 1.2;
+  }
+{% endblock %}
+
+{% block email_header %}
+  <table style="width: 95%; margin: 1em auto 0;">
+    <tr>
+      <td align="left">
+        {% static 'images/hrp-logo.png' as hrp_logo %}
+        <img src="{% absolute_url hrp_logo %}">
+      </td>
+      <td align="right" style="vertical-align: top;">
+        <p style="color: #0e7dc1; margin-top: 0;">{% now "jS F, Y" %}</p>
+      </td>
+    </tr>
+  </table>
+{% endblock %}
 
 {% block email_body %}
+  <table style="width: 90%; margin: 1em auto 0;">
+    <tr>
+      <td align="center" style="padding-top: 1em;">
+        <div style="border-bottom: solid 1px #d8d8d8;"></div>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="font-weight: bold; padding-top: 1em;">
+        New articles of the week
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding-top: 1em;">
+        <div style="border-bottom: solid 2px #C1C1C1;"></div>
+      </td>
+    </tr>
     {% for article in articles %}
-        <tr>
-            <td><a href="{{ scheme }}://{{ domain }}{% url 'article_detail_view' article.slug %}">{{ article.title }}</a></td>
-        </tr>
+      <tr>
+        <td>
+          <div style="height: 2em;"></div>
+        </td>
+      </tr>
+      <tr>
+        <td align="right">
+          <p style="color: #9b9b9b">{{ article.published_at |date:"jS F, Y" |safe }}</p>
+        </td>
+      </tr>
+      <tr>
+        <td align="left" style="padding-top: 0;">
+          {% url 'blog:article_detail_view' article.slug as article_url %}
+          <a href="{% absolute_url article_url %}" style="text-decoration: none;">
+            <img src="{% absolute_url article.cover_image.url %}" style="width: 100%; height: auto;">
+            <p style="font-size: 21px; color: #262626; font-weight: bold;">{{ article.title }}</p>
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <table style="width: 100%">
+            <tr>
+              <td align="left">
+                <p>{{ article.short_description_text }}</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="right">
+                {% url 'blog:article_detail_view' article.slug as article_url %}
+                <a href="{% absolute_url article_url %}"
+                   style="padding: 10px; border-radius: 5px; border: 1.2px solid #4a90e2; text-transform: uppercase; font-size: 11.5px; color: #4a90e2; text-decoration: none;">
+                  Continue&nbsp;reading
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td align="center" style="padding-top: 1em;">
+          <div style="border-bottom: solid 1px rgba(216, 216, 216, 0.4); padding: 1.5em 1.5em 0;"></div>
+        </td>
+      </tr>
     {% endfor %}
+    <tr>
+      <td align="center" style="padding-top: 2.5em;">
+        {% url 'blog:landing_view' as index_url %}
+        <a href="{% absolute_url index_url %}?from="
+           style="background-color: #4a90e2; border-radius: 5px; padding: 0.75em 1.3em; text-transform: uppercase; color: white; font-size: 12px; text-decoration: none;">More&nbsp;articles</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div style="border-bottom: solid 2px #C1C1C1; padding-top: 2.5em;"></div>
+      </td>
+    </tr>
+  </table>
+{% endblock %}
+
+{% block email_footer %}
+  <table style="width: 95%; margin: 1em auto;">
+    <tr>
+      <td align="left">
+        <a href="http://www.who.int/" target="_blank">
+          {% static 'images/w-h-o-logo.png' as who_logo %}
+          <img src="{% absolute_url who_logo %}"
+               style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em">
+        </a>
+        <a href="http://www.unfoundation.org/" target="_blank">
+          {% static 'images/u-n-f-logo.png' as unf_logo %}
+          <img src="{% absolute_url unf_logo %}"
+               style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em">
+        </a>
+      </td>
+      <td align="right" style="vertical-align: top; width: 50%;">
+        <a href="http://www.facebook.com/sharer/sharer.php?u={{ scheme }}://{{ domain }}" target="_blank">
+          {% static 'images/facebook-sharer.png' as fb_sharer %}
+          <img src="{% absolute_url fb_sharer %}" height="30" style="margin-right: 0.5em;">
+        </a>
+        <a href="http://twitter.com/share?&url={{ scheme }}://{{ domain }}" target="_blank">
+          {% static 'images/twitter-sharer.png' as twitter_sharer %}
+          <img src="{% absolute_url twitter_sharer %}" height="30" style="margin-right: 0.5em;">
+        </a>
+        <a href="https://plus.google.com/share?url={{ scheme }}://{{ domain }}" target="_blank">
+          {% static 'images/google-sharer.png' as google_sharer %}
+          <img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;">
+        </a>
+      </td>
+    </tr>
+  </table>
 {% endblock %}
