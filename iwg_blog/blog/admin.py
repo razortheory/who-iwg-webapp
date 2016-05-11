@@ -1,71 +1,36 @@
 from django.contrib import admin, messages
+from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
-from django.contrib.flatpages.models import FlatPage
-
 from watson.search import default_search_engine
 
+from ..utils.admin import ConfigurableModelAdmin
+from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
-from .utils import update_url_params
-from .adapters import ArticleAdapter
+from ..utils.base import update_url_params
 from ..attachments.admin import DocumentAdminInline
 
 
-class ConfigurableModelAdmin(admin.ModelAdmin):
-    def _filter_configurable_list(self, request, configurable_list, prefix):
-        for filter_attr in configurable_list:
-            filter_func_name = prefix + filter_attr
-            if hasattr(self, filter_func_name) and not getattr(self, filter_func_name)(request):
-                configurable_list.remove(filter_attr)
-        return configurable_list
-
-    def get_list_filter(self, request):
-        list_filter = super(ConfigurableModelAdmin, self).get_list_filter(request)[:]
-        return self._filter_configurable_list(request, list_filter, 'list_filter_')
-
-    def get_list_display(self, request):
-        list_display = super(ConfigurableModelAdmin, self).get_list_display(request)[:]
-        return self._filter_configurable_list(request, list_display, 'list_display_')
-
-
-@admin.register(Article)
-class ArticleAdmin(ConfigurableModelAdmin):
+class BaseArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
     change_form_template = 'admin/custom_change_form.html'
 
-    list_display = [
-        'title', 'category', 'tags_list', 'short_description_preview',
-        'published_at', 'is_featured', 'status', 'hits', 'words_count'
-    ]
-    list_filter = ['is_featured', 'status', 'category', 'published_at']
-    inlines = (DocumentAdminInline, )
-    readonly_fields = []
-
-    search_adapter_cls = ArticleAdapter
-    search_engine = default_search_engine
-    search_fields = [None]
+    inlines = (DocumentAdminInline,)
 
     def list_display_hits(self, request):
         return request.user.has_perm('blog.view_article_hits')
 
     def changelist_view(self, request, extra_context=None):
         self.request = request
-        return super(ArticleAdmin, self).changelist_view(request, extra_context=extra_context)
-
-    def get_queryset(self, request):
-        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
+        return super(BaseArticleAdmin, self).changelist_view(request, extra_context=extra_context)
 
     def get_fields(self, request, obj=None):
-        fields = super(ArticleAdmin, self).get_fields(request, obj=obj)[:]
+        fields = super(BaseArticleAdmin, self).get_fields(request, obj=obj)[:]
         if obj:
             fields.remove('slug')
         return fields
-
-    def short_description_preview(self, obj):
-        return obj.short_description_text
-    short_description_preview.short_description = 'Short description (text)'
 
     def tags_list(self, obj):
         return ', '.join([
@@ -75,6 +40,22 @@ class ArticleAdmin(ConfigurableModelAdmin):
         ])
     tags_list.short_description = 'Tags'
     tags_list.allow_tags = True
+
+
+@admin.register(Article)
+class ArticleAdmin(BaseArticleAdmin):
+    list_display = [
+        'title', 'category', 'tags_list', 'short_description',
+        'published_at', 'is_featured', 'status', 'hits', 'words_count'
+    ]
+    list_filter = ['is_featured', 'status', 'category', 'published_at']
+
+    search_adapter_cls = ArticleAdapter
+    search_engine = default_search_engine
+    search_fields = [None]
+
+    def get_queryset(self, request):
+        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
 
     def get_search_results(self, request, queryset, search_term):
         if not search_term:

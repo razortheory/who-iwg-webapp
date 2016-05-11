@@ -1,0 +1,22 @@
+{% extends "pages/base.html" %}
+
+
+{% block content %}
+  <div class="inner inner_content">
+    <div class="grantee-page">
+      <h2 class="grantee-page__title title-main"><span class="first"><span>I </span></span><span>wg Grantees</span>
+      </h2>
+      <div class="blog-full">
+
+        <section class="blog-full__col blog-full__col_sidebar">
+          <div class="sidebar">
+            {% include "grantee/partials/grantee-rounds.html" %}
+          </div>
+        </section>
+        <section class="blog-full__col blog-full__col_posts">
+          {% include "grantee/partials/grantee-list.html" %}
+        </section>
+      </div>
+    </div>
+  </div>
+{% endblock %}

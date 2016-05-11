@@ -1,0 +1,12 @@
+<aside class="widget">
+  <div class="widget-rounds">
+    {% url 'grantee:grantee_list_view' as grantees_link %}
+    <ul class="widget-rounds__list">
+      {% for round in rounds %}
+        <li class="widget-rounds__item {% if round.get_absolute_url == request.path %} widget-rounds__item_active {% endif %}">
+          <a href="{{ round.get_absolute_url }}" class="widget-rounds__link">{{ round.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</aside>

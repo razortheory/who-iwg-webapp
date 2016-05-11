@@ -1,23 +1,21 @@
 from django.contrib import admin
-from django.core.urlresolvers import reverse
 
 from .models import Document, UploadedImage
 
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ('name', 'article_link', 'is_featured', 'document_preview')
+    list_display = ('name', 'is_featured', 'document_preview')
     list_filter = ('is_featured', )
     search_fields = ('name', 'article')
     readonly_fields = ('document_preview', )
-    exclude = ('article', 'file_preview', )
+    exclude = ('article', 'grantee', 'file_preview', )
     list_per_page = 20
 
-    def article_link(self, obj):
-        return '<a href="%s">%s</a>' % (reverse('admin:blog_article_change', args=[obj.pk]), obj.article) if obj.article else '-'
-    article_link.short_description = 'Article'
-    article_link.allow_tags = True
-    article_link.admin_order_field = 'article'
+    def get_queryset(self, request):
+        return super(DocumentAdmin, self).get_queryset(request) \
+            .filter(article__isnull=True) \
+            .filter(grantee__isnull=True)
 
     def document_preview(self, obj):
         return '<img class="document-preview" src="%s">' % obj.get_preview_url()

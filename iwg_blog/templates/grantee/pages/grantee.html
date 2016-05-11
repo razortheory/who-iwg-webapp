@@ -1,0 +1,12 @@
+{% extends "pages/base.html" %}
+{% load static compress %}
+
+
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      {% include "partials/article.html" with article=grantee %}
+    </div>
+  </div>
+  <div class="inner inner_category"></div>
+{% endblock %}

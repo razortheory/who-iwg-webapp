@@ -1,6 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db import models
 
+from ..grantee.models import Grantee
 from .tasks import generate_document_preview
 from ..blog.models import Article
 from ..utils.file_types import get_file_type
@@ -10,6 +11,7 @@ class Document(models.Model):
     name = models.CharField(max_length=100)
 
     article = models.ForeignKey(Article, related_name='documents', blank=True, null=True)
+    grantee = models.ForeignKey(Grantee, related_name='documents', blank=True, null=True)
 
     document_file = models.FileField(upload_to='documents')
     file_preview = models.ImageField(upload_to='documents/thumbnails', blank=True, null=True)
@@ -36,9 +38,12 @@ class Document(models.Model):
             return self.file_preview.url
         return static('attachments/images/other.png')
 
+    @property
+    def file_type(self):
+        return get_file_type(self.document_file.name)
+
     def file_type_icon_url(self):
-        file_type = get_file_type(self.document_file.name)
-        return static('attachments/images/%s-icon.png' % file_type) if file_type else ''
+        return static('attachments/images/%s-icon.png' % self.file_type) if self.file_type else ''
 
 
 class UploadedImage(models.Model):

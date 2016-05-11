@@ -6,7 +6,6 @@ from django.db import models
 from django.utils import timezone
 
 from django_markdown.models import MarkdownField
-from markdown import markdown
 from meta.models import ModelMeta
 
 from .fields import AutoSlugField, OrderedManyToManyField
@@ -47,7 +46,7 @@ class Tag(models.Model):
         return reverse('blog:tag_detail_view', args=(self.slug,))
 
 
-class Article(ModelMeta, models.Model):
+class BaseArticle(ModelMeta, models.Model):
     STATUS_DRAFT = 'draft'
     STATUS_READY_FOR_PUBLISH = 'for_pub'
     STATUS_PUBLISHED = 'published'
@@ -58,31 +57,16 @@ class Article(ModelMeta, models.Model):
         (STATUS_PUBLISHED, 'Published')
     )
 
-    objects = ArticleManager()
-    published = PublishedArticleManager()
-    all_objects = models.Manager()
-
     title = models.CharField(max_length=255)
-    slug = AutoSlugField(
-        populate_from='title',
-        unique=True, db_index=True,
-        editable=True, blank=True,
-        help_text='optional; will be automatically populated from `title` field',
-        manager=all_objects,
-    )
 
-    category = models.ForeignKey(Category, related_name='articles')
-    tags = OrderedManyToManyField(Tag, related_name='articles', blank=True)
+    tags = OrderedManyToManyField(Tag, related_name='%(class)ss', blank=True)
 
     cover_image = models.ImageField(upload_to='images')
 
-    short_description = models.TextField(max_length=300)
     content = MarkdownField()
     words_count = models.IntegerField(default=0, editable=False)
 
     status = models.CharField(max_length=10, default=STATUS_DRAFT, choices=CHOICES_STATUS)
-    is_featured = models.BooleanField(default=False)
-    is_sample = models.BooleanField(default=False, editable=False)
 
     hits = models.IntegerField(default=0, editable=False)
 
@@ -90,30 +74,26 @@ class Article(ModelMeta, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, editable=False)
 
-    def __init__(self, *args, **kwargs):
-        sample = kwargs.pop('sample', None)
-        if sample:
-            for field in ['title', 'category', 'cover_image', 'short_description', 'content']:
-                kwargs[field] = getattr(sample, field)
+    class Meta:
+        abstract = True
 
-        super(Article, self).__init__(*args, **kwargs)
+        ordering = ['-published_at']
 
     def __unicode__(self):
         return self.title
 
     def save(self, **kwargs):
         if self.pk:
-            old_obj = Article.all_objects.get(pk=self.pk)
+            old_obj = self._meta.model.objects.get(pk=self.pk)
 
             if old_obj.status != self.status and self.status == self.STATUS_PUBLISHED:
                 self.published_at = timezone.now()
+        else:
+            if self.status == self.STATUS_PUBLISHED:
+                self.published_at = timezone.now()
 
         self.words_count = len(re.findall(r"\S+", self.content_text))
-        super(Article, self).save(**kwargs)
-
-    @property
-    def short_description_text(self):
-        return markdown_to_text(self.short_description)
+        super(BaseArticle, self).save(**kwargs)
 
     @property
     def content_text(self):
@@ -132,10 +112,7 @@ class Article(ModelMeta, models.Model):
         return self.tags.values_list('slug', flat=True)
 
     def get_absolute_url(self):
-        return reverse('blog:article_detail_view', args=(self.slug, ))
-
-    def short_description_html(self):
-        return markdown(self.short_description)
+        raise NotImplementedError()
 
     @classmethod
     def generate_slug(cls, title, instance_pk=None):
@@ -149,18 +126,53 @@ class Article(ModelMeta, models.Model):
 
     _metadata = {
         'title': 'title',
-        'description': 'short_description_html',
+        'description': 'short_description_text',
         'image': 'cover_image_url',
         'url': 'absolute_url',
         'keywords': 'keywords'
     }
 
-    class Meta:
-        ordering = ['-published_at']
+
+class Article(BaseArticle):
+    objects = ArticleManager()
+    published = PublishedArticleManager()
+    all_objects = models.Manager()
+
+    category = models.ForeignKey(Category, related_name='articles')
+    slug = AutoSlugField(
+        populate_from='title',
+        unique=True, db_index=True,
+        editable=True, blank=True,
+        help_text='optional; will be automatically populated from `title` field',
+        manager=all_objects,
+    )
+
+    short_description = models.TextField(max_length=300)
+
+    is_featured = models.BooleanField(default=False)
+    is_sample = models.BooleanField(default=False, editable=False)
+
+    class Meta(BaseArticle.Meta):
+        abstract = False
+
         permissions = (
             ('view_article_hits', 'Can view article hits'),
             ('change_article_slug', 'Can change article slug'),
         )
+
+    def __init__(self, *args, **kwargs):
+        sample = kwargs.pop('sample', None)
+        if sample:
+            for field in ['title', 'category', 'cover_image', 'short_description', 'content']:
+                kwargs[field] = getattr(sample, field)
+
+        super(Article, self).__init__(*args, **kwargs)
+
+    def short_description_text(self):
+        return self.short_description
+
+    def get_absolute_url(self):
+        return reverse('blog:article_detail_view', args=(self.slug,))
 
 
 class SampleArticle(Article):

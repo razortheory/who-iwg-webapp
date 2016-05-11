@@ -1,0 +1,19 @@
+<a href="{{ document.document_file.url }}" class="article-download__wrapper">
+  <div class="article-download">
+    <div style="background-image:url({{ document.get_preview_url }})" class="article-download__thumbnail">
+      <img src="{{ document.file_type_icon_url }}" class="article-download__file-image" alt="">
+    </div>
+    <div class="article-download__body">
+      <h4 class="article-download__title">
+        “{{ document.name }}”
+      </h4>
+      <div class="article-download__file-name">
+        Download this {{ document.file_type | upper }}
+      </div>
+      <span class="article-download__link">
+        <svg class="icon icon_download"><use xlink:href="#icon_download"></use>
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>

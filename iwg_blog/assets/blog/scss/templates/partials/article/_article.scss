@@ -265,8 +265,6 @@
                     }
                 }
                 &-download {
-                    margin-top: 90px;
-                    margin-bottom: 70px;
                     position: relative;
                     @include clearfix;
                     padding: 25px 44px 30px 54px;
@@ -321,12 +319,11 @@
                         }
                     }
                     &__title {
-                        margin: 27px 0 0;
-                        font-size: 45px;
+                        font-size: 30px;
                         line-height: 1.355;
                         font-family: $font;
-                        font-weight: $bold;
-                        color: #7a7a7a;
+                        font-weight: $normal;
+                        color: #666666;
                         @include max-screen($M_SM) {
                             margin-top: 15px;
                         }
@@ -344,11 +341,10 @@
 
                     }
                     &__file-name {
-                        font-size: 14px;
+                        font-size: 18px;
                         line-height: 1.357;
-                        font-family: $font;
-                        font-style: italic;
-                        color: #666666;
+                        font-family: $font-serif;
+                        color: #7a7a7a;
                         @include max-screen($M_XSM) {
                             margin-bottom: 20px;
                         }

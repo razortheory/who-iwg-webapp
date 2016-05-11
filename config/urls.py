@@ -40,6 +40,7 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
 
     url(r'', include('iwg_blog.blog.urls')),
+    url(r'', include('iwg_blog.grantee.urls')),
     url(r'^pages/', include('django.contrib.flatpages.urls')),
 ]
 
