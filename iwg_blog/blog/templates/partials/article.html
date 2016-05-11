@@ -24,6 +24,12 @@
   <img src="{{ article.cover_image.url }}" class="article__main-image" alt="">
   <div class="article__body content-text">
     {{ article.content |markdown }}
+
+    {% for document in article.documents.all %}
+      <div class="article__body-incut">
+        {% include "attachments/widgets/document-link.html" %}
+      </div>
+    {% endfor %}
   </div>
 </article>
 

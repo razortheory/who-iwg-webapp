@@ -1,3 +1,5 @@
+import copy
+
 from django.contrib import admin, messages
 from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
@@ -16,6 +18,11 @@ from ..attachments.admin import DocumentAdminInline
 class BaseArticleAdmin(ConfigurableModelAdmin):
     form = ArticleAdminForm
     change_form_template = 'admin/custom_change_form.html'
+
+    fieldsets = (
+        (None, {'fields': ['title', 'slug', 'tags', 'status']}),
+        (None, {'fields': ['cover_image', 'short_description', 'content']}),
+    )
 
     inlines = (DocumentAdminInline,)
 
@@ -49,6 +56,9 @@ class ArticleAdmin(BaseArticleAdmin):
         'published_at', 'is_featured', 'status', 'hits', 'words_count'
     ]
     list_filter = ['is_featured', 'status', 'category', 'published_at']
+
+    fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
+    fieldsets[0][1]['fields'] += ['is_featured']
 
     search_adapter_cls = ArticleAdapter
     search_engine = default_search_engine

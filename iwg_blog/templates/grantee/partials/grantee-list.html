@@ -27,5 +27,7 @@
         {% include "attachments/widgets/document-link.html" with document=grantee.documents.all.0 %}
       </div>
     {% endif %}
+  {% empty %}
+    <p>No Grantees</p>
   {% endfor %}
 </div>

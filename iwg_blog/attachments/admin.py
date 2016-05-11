@@ -33,6 +33,12 @@ class DocumentAdminInline(admin.TabularInline):
     document_preview_thumb.short_description = 'Preview'
     document_preview_thumb.allow_tags = True
 
+    def get_fields(self, request, obj=None):
+        fields = super(DocumentAdminInline, self).get_fields(request, obj=None)
+        fields.remove('article')
+        fields.remove('grantee')
+        return fields
+
 
 @admin.register(UploadedImage)
 class UploadedImageAdmin(admin.ModelAdmin):
