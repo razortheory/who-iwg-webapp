@@ -25,14 +25,16 @@ def send_emails_for_subscribers():
 
     articles = Article.objects.filter(status=Article.STATUS_PUBLISHED,
                                       published_at__gte=published_from,
-                                      published_at__lte=published_to)[:10]
+                                      published_at__lte=published_to)[:6]
 
     if not articles:
         return
 
-    data = {'articles': articles,
-            'domain': Site.objects.get_current(),
-            'scheme': settings.META_SITE_PROTOCOL}
+    data = {
+        'articles': articles,
+        'domain': Site.objects.get_current(),
+        'scheme': settings.META_SITE_PROTOCOL
+    }
 
     batch_size = 20
 
