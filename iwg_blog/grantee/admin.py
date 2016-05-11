@@ -1,3 +1,5 @@
+import copy
+
 from django.contrib import admin
 
 from ..blog.admin import BaseArticleAdmin
@@ -20,6 +22,9 @@ class GranteeAdmin(BaseArticleAdmin):
     ]
     list_filter = ['status', 'round', 'published_at']
     readonly_fields = []
+
+    fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
+    fieldsets[0][1]['fields'].insert(2, 'round')
 
     def get_queryset(self, request):
         return super(GranteeAdmin, self).get_queryset(request).prefetch_related('round')

@@ -58,6 +58,7 @@ class ArticleAdmin(BaseArticleAdmin):
     list_filter = ['is_featured', 'status', 'category', 'published_at']
 
     fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
+    fieldsets[0][1]['fields'].insert(2, 'category')
     fieldsets[0][1]['fields'] += ['is_featured']
 
     search_adapter_cls = ArticleAdapter
