@@ -22,7 +22,7 @@
 
     {{ grantee.short_description | markdown }}
 
-    {% if grantee.documents %}
+    {% if grantee.documents.all.0 %}
       <div class="article__body-incut">
         {% include "attachments/widgets/document-link.html" with document=grantee.documents.all.0 %}
       </div>
