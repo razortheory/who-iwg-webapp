@@ -4,11 +4,12 @@
     {% url 'grantee:grantee_list_view' as grantees_link %}
     {% url 'django.contrib.flatpages.views.flatpage' 'opensrp/' as opensrp_link %}
     {% url 'django.contrib.flatpages.views.flatpage' 'about/' as about_link %}
+    {% url 'django.contrib.flatpages.views.flatpage' 'expert-group/' as expert_group %}
     <li class="nav__item {% if request.path == home_link %} nav__item_active {% endif %}">
       <a href="{{ home_link }}" class="nav__link">HOME</a>
     </li>
-    <li class="nav__item">
-      <a href="#" class="nav__link">EXPERT ADVISORY GROUP</a>
+    <li class="nav__item {% if request.path == expert_group %} nav__item_active {% endif %}">
+      <a href="{{ expert_group }}" class="nav__link">EXPERT ADVISORY GROUP</a>
     </li>
     <li class="nav__item {% if request.path == about_link %} nav__item_active {% endif %}">
       <a href="{{ about_link }}" class="nav__link">ABOUT US</a>
