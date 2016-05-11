@@ -10,6 +10,7 @@
     <link href="{% static 'css/bootstrap-grid.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'blog/css/images-gallery.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'blog/css/custom.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'blog/scss/cookies-policy.scss' %}" type="text/x-scss" rel="stylesheet">
   {% endcompress %}
 {% endblock %}
 
@@ -53,6 +54,7 @@
     <script src="{% static 'vendor/jquery.touchSwipe.min.js' %}"></script>
     <script src="{% static 'vendor/fancybox/jquery.fancybox.pack.js' %}"></script>
     <script src="{% static 'blog/js/images-gallery.js' %}"></script>
+    <script src="{% static 'blog/js/cookies-policy.js' %}"></script>
     <script>
       $(function () {
         $('.messages-wrap').stick_in_parent();
@@ -82,4 +84,5 @@
       }(document, "script", "twitter-wjs");
     </script>
   {% endcompress %}
+  {% include "include/cookies-policy.html" %}
 {% endblock %}

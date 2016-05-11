@@ -1,24 +1,23 @@
 <nav class="footer-nav">
-  <h4 class="footer-nav__title">Help and Services
-  </h4>
   <div class="footer-nav__cols">
     <ul class="footer-nav__list">
-      <li class="footer-nav__item"><a href="#" class="footer-nav__link">Teem</a>
-      </li>
-      <li class="footer-nav__item"> <a href="#" class="footer-nav__link">Feedback</a>
-      </li>
-    </ul>
-    <ul class="footer-nav__list">
-      <li class="footer-nav__item"> <a href="#" class="footer-nav__link">Contacts</a>
-      </li>
-      <li class="footer-nav__item"> <a href="#" class="footer-nav__link">Partners</a>
-      </li>
-    </ul>
-    <ul class="footer-nav__list">
       <li class="footer-nav__item">
-        <a href="{% url 'django.contrib.flatpages.views.flatpage' 'privacy/' %}" class="footer-nav__link">Privacy</a>
+        <a href="{% url 'blog:landing_view' %}" class="footer-nav__link">Home</a>
       </li>
-      <li class="footer-nav__item"> <a href="#" class="footer-nav__link">Programms</a>
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Expert Advisory Group</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="{% url 'django.contrib.flatpages.views.flatpage' 'about/' %}" class="footer-nav__link">About Us</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="#" class="footer-nav__link">Iwg Grantees</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="{% url 'django.contrib.flatpages.views.flatpage' 'opensrp/' %}" class="footer-nav__link">OpenSRP</a>
+      </li>
+      <li class="footer-nav__item">
+        <a href="{% url 'django.contrib.flatpages.views.flatpage' 'privacy/' %}" class="footer-nav__link">Privacy policy</a>
       </li>
     </ul>
   </div>

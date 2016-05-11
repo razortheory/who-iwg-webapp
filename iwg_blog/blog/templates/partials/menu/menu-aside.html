@@ -7,12 +7,15 @@
         {% url 'blog:landing_view' as home_link %}
         {% url 'grantee:grantee_list_view' as grantees_link %}
         {% url 'django.contrib.flatpages.views.flatpage' 'opensrp/' as opensrp_link %}
+        {% url 'django.contrib.flatpages.views.flatpage' 'about/' as about_link%}
         <li class="nav-shifted__item {% if request.path == home_link %} nav-shifted__item_active {% endif %}">
           <a href="{{ home_link }}" class="nav-shifted__link">HOME</a>
         </li>
-        <li class="nav-shifted__item"><a href="#" class="nav-shifted__link">EXPERT ADVISORY GROUP</a>
+        <li class="nav-shifted__item">
+          <a href="#" class="nav-shifted__link">EXPERT ADVISORY GROUP</a>
         </li>
-        <li class="nav-shifted__item"><a href="#" class="nav-shifted__link">ABOUT US</a>
+        <li class="nav-shifted__item {% if request.path == about_link %} nav-shifted__item_active {% endif %}">
+          <a href="{{ about_link }}" class="nav-shifted__link">ABOUT US</a>
         </li>
         <li class="nav-shifted__item {% if request.path == grantees_link %} nav-shifted__item_active {% endif %}">
           <a href="{{ grantees_link }}" class="nav-shifted__link">IWG GRANTEES</a>

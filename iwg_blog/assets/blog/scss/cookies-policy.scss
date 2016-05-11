@@ -1,0 +1,51 @@
+@import "./assets/stylesheets/helpers/_mixins.scss";
+
+.cookies-policy {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  background-color: rgba(0, 0, 0, 0.6);
+  @include border-radius(8px);
+  border: 1px solid black;
+  width: 90%;
+  max-width: 400px;
+  height: 200px;
+  color: white;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  &_inner {
+    padding: 1.5em;
+  }
+
+  &_title {
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  &_text {
+    font-size: 15px;
+  }
+
+  &_confirm {
+    position: absolute;
+    color: white;
+    right: 1.5em;
+    bottom: 1em;
+    @include border-radius(8px);
+    border: 1px solid white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0.5em 1.5em;
+    text-transform: uppercase;
+
+    &:hover, &:focus, &:active {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}

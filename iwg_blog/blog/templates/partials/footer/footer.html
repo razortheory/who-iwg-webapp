@@ -1,23 +1,34 @@
 <!--footer-->
 <div class="footer-wrap-inner">
   <footer class="footer">
-    <div class="footer__layer footer__layer_top">
+    <div class="footer__layer footer__layer__column">
       <aside class="footer__subscribe">
+        <p class="footer__subscribe__title">Subscribe</p>
         {% include "partials/footer/subscribe.html" %}
       </aside>
+      <div class="footer__copy">Copyright &copy; {% now "Y" %} IWG. All rights reserved.</div>
     </div>
-    <div class="footer__layer footer__layer_middle">
+    <div class="footer__layer footer__layer__column">
+      <div class="footer__partners">
+        <p class="text-left text-bold">Our partners</p>
+        {% include "partials/footer/partners.html" %}
+      </div>
       <div class="footer__nav">
+        <p class="footer__nav__title">Site navigation</p>
         {% include "partials/footer/footer-nav.html" %}
       </div>
-      <div class="footer__partners">
+      <div class="footer__partners__mobile">
         {% include "partials/footer/partners.html" %}
       </div>
     </div>
-    <div class="footer__social">
-      {% include "partials/social/social.html" %}
+    <div class="footer__layer footer__layer__column footer__layer__column__social">
+      <div class="footer__social">
+        <p class="footer__social__title">We are social</p>
+        {% include "partials/social/social.html" %}
+      </div>
     </div>
-    <div class="footer__copy">&copy; IWG {% now "Y" %}
+    <div class="footer__layer footer__layer__column">
+      <div class="footer__copy__mobile">&copy; IWG {% now "Y" %}</div>
     </div>
   </footer>
 </div>

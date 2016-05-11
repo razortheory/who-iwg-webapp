@@ -15,24 +15,31 @@
 		}
 	}
 	&__layer {
-		@include clearfix;
-		&_middle {
-			padding-top: 22px;
-			@include max-screen($M_X3S) {
-				padding-top: 38px;
+		&__column {
+			float: left;
+			padding-left: 1.5rem;
+    	padding-right: 1.5rem;
+			margin-bottom: 2rem;
+
+			&__social {
+				@include min-screen(931px){
+					position: absolute;
+					right: 0;
+				}
+			}
+
+			& > * {
+				margin-bottom: 2rem;
 			}
 		}
 	}
 	&__subscribe {
-		position: relative;
-		float: left;
 		@include max-screen($M_X3S) {
 			float: none;
+			margin-bottom: 2em;
 		}
 	}
 	&__nav {
-		position: relative;
-		float: right;
 		@include max-screen($M_XSM) {
 			@include clearfix;
 			float: none;
@@ -43,34 +50,88 @@
 		}
 	}
 	&__partners {
-		position: relative;
-		float: left;
-		margin-top: 46px;
 		@include max-screen($M_XSM) {
 			@include clearfix;
 			float: none;
-			margin-top: 25px;
+			width: auto;
 		}
 	}
 	&__social {
-		position: absolute;
-		right: 65px;
-		top: 7px;
-		@include max-screen($M_SMX) {
-			right: 0;
+		&__text {
+			text-align: left;
+			font-weight: bold;
 		}
-		@include max-screen($M_X2S) {
-			margin: 40px 0;
-			position: static;
+	}
+	&__social, &__nav, &__subscribe {
+		&__title {
+			text-align: left;
+			font-weight: bold;
 		}
 	}
 	&__copy {
-		margin: 33px auto 0;
-		width: 100%;
-		max-width: 300px;
-		font-size: 12px;
+		font-size: 15px;
 		line-height: 17px;
-		color: $blue;
-		text-align: center;
+    padding-top: 3rem;
+	}
+}
+
+@media (max-width: 980px) and (min-width: 931px) {
+	.footer__social {
+		display: none;
+	}
+}
+
+@include min-screen(931px) {
+		.footer__copy__mobile {
+			display: none;
+		}
+
+		.footer__partners__mobile {
+			display: none;
+		}
+}
+
+@include max-screen(1200px) {
+	.footer-nav__list {
+		max-width: 400px;
+	}
+}
+
+@include max-screen(930px) {
+	.footer {
+		&__copy, &__partners {
+			display: none;
+		}
+
+		&__layer__column {
+			width: 100%;
+			text-align: center;
+		}
+
+		&__nav:after {
+			display: block;
+			content: " ";
+			clear: both;
+		}
+
+		&__social {
+			&__title {
+				display: none;
+			}
+
+			.social {
+				&__item {
+					float: none;
+					display: inline-block;
+				}
+			}
+		}
+
+		&__nav, &__subscribe {
+			&__title {
+				text-align: center;
+				font-weight: bold;
+			}
+		}
 	}
 }

@@ -1,8 +1,11 @@
 .partners {
 	&__list {
 		@include list-reset;
-		@include max-screen($M_X2S) {
+		@include max-screen(930px) {
 			text-align: center;
+			max-width: 400px;
+			margin-left: auto;
+			margin-right: auto;
 		}
 	}
 	&__item {
@@ -10,16 +13,17 @@
 		@include dib-fix;
 		vertical-align: middle;
 		padding-right: 28px;
-		@include max-screen($M_X3S) {
+		@include max-screen(930px) {
 			padding-right: 0;
-			margin-left: 30px;
+			margin-left: 3%;
+			margin-right: 3%;
 			width: 44%;
 		}
 		&:last-child {
 			padding-right: 0;
 		}
 		&:first-child {
-			@include max-screen($M_X3S) {
+			@include max-screen(930px) {
 				margin-left: 0;
 			}
 		}
@@ -29,7 +33,7 @@
 	}
 	&__logo {
 		display: block;
-		@include max-screen($M_X3S) {
+		@include max-screen(930px) {
 			width: 100%;
 			height: auto;
 		}

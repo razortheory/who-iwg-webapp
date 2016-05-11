@@ -23,7 +23,7 @@ from .models import Article, Subscriber, Tag, Category
 
 
 class BaseViewMixin(object):
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         raise NotImplementedError
 
     def get_context_data(self, **kwargs):
@@ -31,7 +31,7 @@ class BaseViewMixin(object):
         context['site'] = Site.objects.get_current()
         context['scheme'] = settings.META_SITE_PROTOCOL
 
-        context['meta'] = self.get_meta_context()
+        context['meta'] = self.get_meta_context(**context)
 
         return context
 
@@ -96,7 +96,7 @@ class ArticleView(BaseViewMixin, DetailView):
 
     related_articles_count = 3
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         return self.get_object().as_meta(self.request)
 
     def get_context_data(self, **kwargs):
@@ -131,7 +131,7 @@ class ArticleListView(BaseViewMixin, ListView):
 
     template_name = 'pages/article-list.html'
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         return Meta(title='Article list',
                     description='List of articles.',
                     url=reverse('blog:articles_view')
@@ -160,7 +160,7 @@ class SearchView(JsonResponseMixin, ArticleListView):
         context.update(kwargs)
         return super(SearchView, self).get_context_data(**context)
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
         url = reverse('blog:search_view') + '?' + self.request.GET.urlencode()
         return Meta(title='Search result',
                     description='Search result.',
@@ -183,10 +183,13 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
                   FeaturedDocumentsMixin, CategoriesMixin, ArticleListView):
     template_name = 'pages/index.html'
 
-    def get_meta_context(self):
+    def get_meta_context(self, **context):
+        article = context.get('featured_articles').first()
+        image_url = getattr(article, 'cover_image_url', '')
         return Meta(title='IWG Portal',
                     description='IWG Portal',
                     url=reverse('blog:landing_view'),
+                    image=image_url
                     )
 
 

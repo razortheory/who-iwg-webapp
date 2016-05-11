@@ -5,7 +5,7 @@
 		line-height: 20px;
 		font-weight: $bold;
 		color: $dark-grey;
-		@include max-screen($M_X3S) {
+		@include max-screen(930px) {
 			margin-bottom: 28px;
 			text-align: center;
 		}
@@ -14,8 +14,7 @@
 		@include list-reset;
 		position: relative;
 		float: left;
-		padding-left: 40px;
-		@include max-screen($M_X3S) {
+		@include max-screen(930px) {
 			@include clearfix;
 			float: none;
 			margin-left: auto;
@@ -23,7 +22,8 @@
 			margin-bottom: 18px;
 			padding-left: 20px;
 			width: 100%;
-			max-width: 290px;
+			max-width: 410px;
+			text-align: left;
 		}
 	}
 	&__item {
@@ -32,20 +32,41 @@
 		font-size: 15px;
 		line-height: 20px;
 		color: $dark-grey;
-		@include max-screen($M_X3S) {
+		display: inline-block;
+		@include max-screen(930px) {
 			float: left;
 			width: 50%;
 			padding-right: 10px;
 		}
+		@include min-screen(1200px) {
+			&:first-of-type {
+				padding-left: 12px;
+
+				&:before {
+					left: 0;
+				}
+			}
+		}
 		&:before {
 			position: absolute;
-			left: 0;
-			top: 8px;
+			left: 13px;
+	    top: 8px;
 			display: block;
 			content: '';
-			width: 4px;
-			height: 3px;
+			width: 6px;
+			height: 6px;
+			border-radius: 3px;
 			background-color: $dark-grey;
+		}
+		a:hover {
+			text-decoration: none;
+		}
+		&:hover {
+			color: $blue;
+
+			&:before {
+				background-color: $blue;
+			}
 		}
 	}
 	&__link {
