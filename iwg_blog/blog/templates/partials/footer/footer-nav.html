@@ -5,7 +5,7 @@
         <a href="{% url 'blog:landing_view' %}" class="footer-nav__link">Home</a>
       </li>
       <li class="footer-nav__item">
-        <a href="#" class="footer-nav__link">Expert Advisory Group</a>
+        <a href="{% url 'django.contrib.flatpages.views.flatpage' 'expert-group/' %}" class="footer-nav__link">Expert Advisory Group</a>
       </li>
       <li class="footer-nav__item">
         <a href="{% url 'django.contrib.flatpages.views.flatpage' 'about/' %}" class="footer-nav__link">About Us</a>
