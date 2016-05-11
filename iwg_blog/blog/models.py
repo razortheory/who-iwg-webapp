@@ -113,7 +113,7 @@ class Article(ModelMeta, models.Model):
 
     @property
     def short_description_text(self):
-        return markdown_to_text(self.short_description)
+        return self.short_description
 
     @property
     def content_text(self):
@@ -149,7 +149,7 @@ class Article(ModelMeta, models.Model):
 
     _metadata = {
         'title': 'title',
-        'description': 'short_description_html',
+        'description': 'short_description_text',
         'image': 'cover_image_url',
         'url': 'absolute_url',
         'keywords': 'keywords'
