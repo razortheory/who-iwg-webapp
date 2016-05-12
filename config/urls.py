@@ -30,7 +30,7 @@ sitemaps = {
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^cms/adminpanel/', admin.site.urls),
     url(r'^markdown/', include('django_markdown.urls')),
     url(r'^select2/', include('django_select2.urls')),
 
