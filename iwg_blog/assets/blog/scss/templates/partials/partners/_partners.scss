@@ -12,7 +12,7 @@
 		@include dib;
 		@include dib-fix;
 		vertical-align: middle;
-		padding-right: 28px;
+		padding-right: round(28px*$x);
 		@include max-screen(930px) {
 			padding-right: 0;
 			margin-left: 3%;
@@ -36,6 +36,14 @@
 		@include max-screen(930px) {
 			width: 100%;
 			height: auto;
+		}
+
+		&__unf {
+			width: 181px*$x;
+		}
+
+		&__who {
+			width: 162px*$x;
 		}
 	}
 }

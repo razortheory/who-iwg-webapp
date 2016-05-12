@@ -1,7 +1,7 @@
 .blog-full {
     width: 100%;
     display: table;
-    margin-bottom: 85px;
+    margin-bottom: round(85px*$x);
     @include max-screen(719px) {
         display: block;
         margin-bottom: 75px;
@@ -14,19 +14,19 @@
         }
         &_posts {
             width: 77.31%;
-            padding-right: 60px;
+            padding-right: round(60px*$x);
             @include max-screen($M_SM3X) {
                 width: auto;
-                padding-right: 40px;
+                padding-right: round(40px*$x);
             }
             @include max-screen(719px) {
                 padding-right: 0;
             }
         }
         &_sidebar {
-            padding-top: 13px;
+            padding-top: round(13px*$x);
             @include max-screen($M_SM3X) {
-                width: 240px;
+                width: round(240px*$x);
             }
             @include max-screen(719px) {
                 margin-left: auto;

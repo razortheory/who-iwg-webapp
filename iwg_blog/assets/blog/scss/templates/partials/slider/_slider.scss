@@ -1,13 +1,13 @@
 .slider {
 	position: relative;
 	margin-top: -1px;
-	margin-left: -20px;
-	margin-right: -20px;
-	height: 500px;
+	margin-left: round(-20px*$x);
+	margin-right: round(-20px*$x);
+	height: round(500px*$x);
 	@include min-screen($M_SM + 1) {
-		min-height: 635px;
-		height: 746px;
-		max-height: 800px;
+		min-height: round(635px*$x);
+		height: round(746px*$x);
+		max-height: round(800px*$x);
 	}
 	@include max-screen($M_XS) {
 		min-height: 520px;
@@ -53,16 +53,16 @@
 		position: relative;
 		z-index: 2;
 		width: 100%;
-		max-width: 820px;
+		max-width: round(820px*$x);
 		margin: 0 auto;
-		padding-left: 30px;
-		padding-right: 30px;
-		font-size: 16px;
+		padding-left: round(30px*$x);
+		padding-right: round(30px*$x);
+		font-size: round(16px*$x);
 		line-height: 1.375;
 		font-weight: $semibold;
 		color: $white;
 		@include max-screen($M_XS) {
-			font-size: 14x;
+			font-size: 14px;
 		}
 		@include max-screen($M_X2S) {
 			font-size: 12px;
@@ -72,7 +72,7 @@
 			padding-right: 45px;
 		}
 		&-wrap {
-			padding-top: 60px;
+			padding-top: round(60px*$x);
 			position: relative;
 			width: 100%;
 			height: 100%;
@@ -95,8 +95,8 @@
 		}
 	}
 	&__date {
-		margin-bottom: 10px;
-		letter-spacing: 2px;
+		margin-bottom: round(10px*$x);
+		letter-spacing: round(2px*$x);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 		text-align: center;
 		@include max-screen($M_X3S) {
@@ -104,8 +104,8 @@
 		}
 	}
 	&__category {
-		margin-bottom: 30px;
-		letter-spacing: 2px;
+		margin-bottom: round(30px*$x);
+		letter-spacing: round(2px*$x);
 		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 		text-align: center;
 		text-transform: uppercase;
@@ -115,15 +115,15 @@
 	}
 	&__title {
 		position: relative;
-		margin: 10px 0;
-		padding-bottom: 10px;
+		margin: round(10px*$x) 0;
+		padding-bottom: round(10px*$x);
 		font-size: 40px;
 		line-height: 1.2;
 		font-weight: $extrabold;
 		text-transform: uppercase;
 		text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
 		@include min-screen($M_SM + 1) {
-			font-size: 50px;
+			font-size: round(50px*$x);
 		}
 		@include max-screen($M_XS) {
 			font-size: 30px;
@@ -135,14 +135,14 @@
 			margin-bottom: 17px;
 			padding-bottom: 20px;
 			font-size: 16px;
-			line-height: 18px;
+			line-height: 1.8
 		}
 		&:after {
 			position: absolute;
 			bottom: 0;
 			left: 50%;
 			margin-left: -18.29%;
-			height: 3px;
+			height: round(3px*$x);
 			width: 36.58%;
 			display: block;
 			content: '';
@@ -157,20 +157,20 @@
 		}
 	}
 	&__button.button {
-		min-width: 225px;
-		padding-top: 17px;
-		padding-bottom: 15px;
+		min-width: round(225px*$x);
+		padding-top: round(17px*$x);
+		padding-bottom: round(15px*$x);
 		font-weight: $normal;
 		@include max-screen($M_X3S) {
 			padding: 10px 18px 8px;
 			min-width: 0;
 			font-size: 10px;
-			line-height: 12px;
+			line-height: 1.2
 		}
 		&:hover,
 		&:focus {
-			padding-top: 17px;
-			padding-bottom: 15px;
+			padding-top: round(17px*$x);
+			padding-bottom: round(15px*$x);
 		}
 	}
 	&__pagination {
@@ -179,10 +179,10 @@
 		left: 0;
 		z-index: 50;
 		width: 100%;
-		height: 10px;
+		height: round(10px*$x);
 		text-align: center;
 		@include min-screen($M_SM + 1) {
-			bottom: 30px;
+			bottom: round(30px*$x);
 		}
 		a {
 			position: relative;
@@ -195,9 +195,9 @@
 			@include border-radius(100%);
 			@include transition();
 			@include min-screen($M_XS + 1) {
-				margin-left: 20px;
-				width: 20px;
-				height: 20px;
+				margin-left: round(20px*$x);
+				width: round(21px*$x);
+				height: round(21px*$x);
 			}
 			&:before {
 				position: absolute;
@@ -214,10 +214,10 @@
 				@include transition();
 				@include opacity(0);
 				@include min-screen($M_XS + 1) {
-					margin-top: -6px;
-					margin-left: -6px;
-					width: 12px;
-					height: 12px;
+					margin-top: round(-6px*$x);
+					margin-left: round(-6px*$x);
+					width: round(12px*$x);
+					height: round(12px*$x);
 				}
 			}
 			&:first-child {

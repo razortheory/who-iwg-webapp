@@ -1,5 +1,5 @@
 .tagged-page {
     &__title {
-        margin-bottom: 78px;
+        margin-bottom: round(78px*$x);
     }
 }

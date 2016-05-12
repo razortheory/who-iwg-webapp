@@ -1,25 +1,25 @@
 .footer {
 	position: relative;
 	margin: 0 auto;
-	padding-right: 65px;
+	padding-right: round(65px*$x);
 	width: 100%;
-	max-width: 1190px;
+	max-width: round(1190px*$x);
 	@include max-screen($M_SMX) {
 		padding-right: 0;
 	}
 	&-wrap-inner {
-		padding: 58px 20px 37px;
+		padding: round(58px*$x) round(20px*$x) round(37px*$x);
 		border-top: 3px solid $blue;
 		@include max-screen($M_X2S) {
-			padding: 34px 10px 32px;
+			padding: round(34px*$x) round(10px*$x) round(32px*$x);
 		}
 	}
 	&__layer {
 		&__column {
 			float: left;
-			padding-left: 1.5rem;
-    	padding-right: 1.5rem;
-			margin-bottom: 2rem;
+			padding-left: 1.5rem*$x;
+    	padding-right: 1.5rem*$x;
+			margin-bottom: 2rem*$x;
 
 			&__social {
 				@include min-screen(931px){
@@ -36,14 +36,14 @@
 	&__subscribe {
 		@include max-screen($M_X3S) {
 			float: none;
-			margin-bottom: 2em;
+			margin-bottom: 2em*$x;
 		}
 	}
 	&__nav {
 		@include max-screen($M_XSM) {
 			@include clearfix;
 			float: none;
-			margin-top: 20px;
+			margin-top: round(20px*$x);
 		}
 		@include max-screen($M_X3S) {
 			margin-top: 0;
@@ -69,9 +69,9 @@
 		}
 	}
 	&__copy {
-		font-size: 15px;
-		line-height: 17px;
-    padding-top: 3rem;
+		font-size: round(15px*$x);
+		line-height: round(17px*$x);
+    padding-top: 3rem*$x;
 	}
 }
 
@@ -93,7 +93,7 @@
 
 @include max-screen(1200px) {
 	.footer-nav__list {
-		max-width: 400px;
+		max-width: round(400px*$x);
 	}
 }
 

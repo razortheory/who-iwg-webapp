@@ -1,9 +1,9 @@
 .widget {
     &__title {
-        margin-bottom: 30px;
-        padding: 0 10px 8px 20px;
-        font-size: 20px;
-        line-height: 27px;
+        margin-bottom: round(30px*$x);
+        padding: 0 round(10px*$x) round(8px*$x) round(20px*$x);
+        font-size: round(20px*$x);
+        line-height: round(27px*$x);
         color: #666666;
         font-weight: $semibold;
         text-transform: uppercase;
@@ -20,19 +20,16 @@
         }
     }
     &_links {
-        margin-bottom: 42px;
+        margin-bottom: round(42px*$x);
         .widget__title {
-            margin-bottom: 24px;
+            margin-bottom: round(24px*$x);
         }
     }
     &_top-articles {
-        margin-bottom: 42px;
-        //@include max-screen(719px) {
-        //    margin-bottom: 50px;
-        //}
+        margin-bottom: round(42px*$x);
     }
     &_latest-tweets {
-        margin-bottom: 43px;
+        margin-bottom: round(43px*$x);
         .widget__title {
             @include max-screen(719px) {
                 margin-bottom: 20px;
@@ -40,7 +37,7 @@
         }
     }
     &_tags {
-        margin-bottom: 24px;
+        margin-bottom: round(24px*$x);
         @include max-screen(719px) {
             margin-bottom: 40px;
         }
@@ -52,7 +49,7 @@
     }
     &_docs {
         .widget__title {
-            margin-bottom: 20px;
+            margin-bottom: round(20px*$x);
         }
     }
 }

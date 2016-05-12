@@ -15,7 +15,7 @@
 		}
 	}
     &__image {
-        margin-bottom: 22px;
+        margin-bottom: round(22px*$x);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
@@ -31,11 +31,11 @@
         }
     }
     &__title {
-        margin: 0 auto 20px;
+        margin: 0 auto round(20px*$x);
         width: 100%;
-        max-width: 380px;
-        font-size: 24px;
-        line-height: 32px;
+        max-width: round(380px*$x);
+        font-size: round(24px*$x);
+        line-height: round(32px*$x);
         font-weight: $bold;
 		text-transform: uppercase;
         color: #1b1d17;
@@ -48,19 +48,19 @@
     &__footer {
         @include clearfix;
         position: relative;
-        padding-bottom: 28px;
-        font-size: 14px;
-        line-height: 19px;
-        letter-spacing: 2px;
+        padding-bottom: round(28px*$x);
+        font-size: round(14px*$x);
+        line-height: round(19px*$x);
+        letter-spacing: round(2px*$x);
         color: $grey;
         text-transform: uppercase;
         border-top: 1px solid rgba(159, 185, 164, 0.4);
 		@include max-screen(1409px) {
-            font-size: 13px;
+            font-size: round(13px*$x);
             letter-spacing: 1px;
         }
 		@include screen($M_XSM + 1, $M_MD) {
-			font-size: 14px;
+			font-size: round(14px*$x);
 		}
 		@include max-screen(429px) {
 			padding-bottom: 20px;
@@ -72,7 +72,7 @@
 			position: absolute;
 			bottom: 0;
 			left: 50%;
-			height: 3px;
+			height: round(3px*$x);
 			width: 50.42%;
 			display: block;
 			content: '';
@@ -85,7 +85,7 @@
             position: relative;
             float: left;
             @include list-reset;
-            padding-top: 10px;
+            padding-top: round(10px*$x);
 			@include max-screen(429px) {
 				float: none;
 				@include clearfix;
@@ -94,9 +94,9 @@
         &-tag {
             position: relative;
             float: left;
-            margin-right: 12px;
+            margin-right: round(12px*$x);
 			@include max-screen(1409px) {
-				margin-right: 8px;
+				margin-right: round(8px*$x);
 			}
         }
         &-link {
@@ -107,7 +107,7 @@
         &-date {
             position: relative;
             float: right;
-            padding-top: 10px;
+            padding-top: round(10px*$x);
 			@include max-screen(429px) {
 				float: none;
 				padding-top: 4px;
@@ -115,7 +115,7 @@
 			}
             sub {
                 position: static;
-                font-size: 12px;
+                font-size: round(12px*$x);
 				line-height: 1.83;
 				@include max-screen($M_SM) {
                     font-size: 11px;
@@ -132,7 +132,7 @@
 		top: 0;
 		left: 0;
 		bottom: 0;
-		padding: 38px 30px 70px;
+		padding: round(38px*$x) round(30px*$x) round(70px*$x);
 		width: 100%;
 		visibility: hidden;
 		@include opacity(0);
@@ -141,13 +141,13 @@
 		@include transition;
 	}
 	&__text {
-		font-size: 24px;
+		font-size: round(24px*$x);
 		line-height: 1.41666;
 		color: $white;
 		font-family: $font-serif;
 		text-align: center;
 		@include max-screen(1409px) {
-			font-size: 20px;
+			font-size: round(20px*$x);
 		}
 		@include max-screen(399px) {
 			font-size: 16px;
@@ -155,10 +155,10 @@
 	}
 	&__button {
 		position: absolute;
-		right: 30px;
-		bottom: 30px;
-		width: 40px;
-		height: 40px;
+		right: round(30px*$x);
+		bottom: round(30px*$x);
+		width: round(40px*$x);
+		height: round(40px*$x);
 		background-color: $white;
 		display: block;
 		@include border-radius(50%);
@@ -166,10 +166,10 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			margin-left: -6px;
-			margin-top: -12px;
-			width: 14px;
-			height: 24px;
+			margin-left: round(-6px*$x);
+			margin-top: round(-12px*$x);
+			width: round(14px*$x);
+			height: round(24px*$x);
 			fill: $blue;
 		}
 	}

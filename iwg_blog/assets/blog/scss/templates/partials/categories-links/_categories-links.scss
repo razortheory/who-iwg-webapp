@@ -1,7 +1,7 @@
 .categories {
-	margin-left: -20px;
-	margin-right: -20px;
-	padding: 12px 20px 13px;
+	margin-left: round(-20px*$x);
+	margin-right: round(-20px*$x);
+	padding: round(12px*$x) round(20px*$x) round(13px*$x);
 	border-bottom: 1px solid #cccccc;
 	@include max-screen($M_X2S) {
 		padding-bottom: 11px;
@@ -18,8 +18,8 @@
 	&__item {
 		@include dib;
 		@include dib-fix;
-		padding-left: 25px;
-		padding-right: 25px;
+		padding-left: round(25px*$x);
+		padding-right: round(25px*$x);
 		@include max-screen($M_X2S) {
 			padding: 9px;
 		}
@@ -27,10 +27,10 @@
 	&__link {
 		position: relative;
 		display: block;
-		padding: 0 0 2px;
+		padding: 0 0 round(2px*$x);
 		font-family: $font;
-		font-size: 18px;
-		line-height: 24px;
+		font-size: round(18px*$x);
+		line-height: round(24px*$x);
 		font-weight: $bold;
 		color: $blue;
 		text-transform: uppercase;
@@ -50,9 +50,9 @@
 			position: absolute;
 			bottom: 0;
 			left: 50%;
-			margin-left: -15px;
+			margin-left: round(-15px*$x);
 			height: 1px;
-			width: 30px;
+			width: round(30px*$x);
 			display: block;
 			content: '';
 			background-color: $blue;

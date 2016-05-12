@@ -1,16 +1,16 @@
 .field {
 	width: 100%;
 	display: block;
-	padding: 6px 20px;
-	height: 40px;
-	font-size: 18px;
-	line-height: 24px;
+	padding: round(6px*$x) round(20px*$x);
+	height: round(40px*$x);
+	font-size: round(18px*$x);
+	line-height: round(24px*$x);
 	font-family: $font;
 	font-weight: $normal;
 	color: $black;
 	border: 2px solid $blue;
 	background-color: $white;
-    @include border-radius(15px);
+    @include border-radius(round(15px*$x));
     @include appearance;
 	outline: 0 none;
 	@include box-shadow (none);
@@ -27,40 +27,9 @@
 		@include transition;
     }
 	&_full {
-		height: 50px;
-		padding: 11px;
-		padding-bottom: 11px;
-		padding-left: 12px;
+		height: round(50px*$x);
+		padding: round(11px*$x);
+		padding-bottom: round(11px*$x);
+		padding-left: round(12px*$x);
 	}
-
-	//&-multi {
-	//	padding: 20px;
-	//	width: 100%;
-	//	display: block;
-	//	font-size: 14px;
-	//	line-height: 20px;
-	//	color: #515151;
-	//	resize: none;
-	//	background-color: #fff;
-	//	border: 1px solid #e8e8e8;
-	//	@include border-radius(5px);
-	//	@include appearance;
-	//	@include box-shadow (none);
-	//	outline: 0 none;
-	//	@include placeholder {
-	//		color: #838383;
-	//	}
-	//	&:focus {
-	//	    @include appearance;
-	//	    outline: 0 none;
-	//	    @include box-shadow (none);
-	//	    border-color: #aed9f7;
-	//    }
-	//    &_small {
-	//    	padding: 12px;
-	//		@include min-screen(768px) {
-	//			padding: 12px 15px;
-	//		}
-	//    }
-	//}
 }

@@ -1,16 +1,16 @@
 .widget-latest-tweets {
     &__list {
         @include list-reset;
-        padding-right: 10px;
-        padding-left: 10px;
+        padding-right: round(10px*$x);
+        padding-left: round(10px*$x);
     }
     &__item {
         position: relative;
-        margin-bottom: 31px;
-        padding-top: 31px;
-        padding-left: 52px;
-        font-size: 14px;
-        line-height: 18px;
+        margin-bottom: round(31px*$x);
+        padding-top: round(31px*$x);
+        padding-left: round(52px*$x);
+        font-size: round(14px*$x);
+        line-height: round(18px*$x);
         font-family: $font-serif;
         color: #666666;
         border-top: 2px solid rgba(159, 185, 164, 0.4);
@@ -18,33 +18,33 @@
             padding-top: 0;
             border-top: 0;
             .icon {
-                top: 8px;
+                top: round(8px*$x);
             }
         }
         .icon {
             position: absolute;
-            left: 17px;
-            top: 38px;
-            margin-top: -6px;
+            left: round(17px*$x);
+            top: round(38px*$x);
+            margin-top: round(-6px*$x);
             display: block;
-            width: 22px;
-            height: 24px;
+            width: round(22px*$x);
+            height: round(24px*$x);
             fill: #55acee;
         }
     }
     &__text {
-        margin-bottom: 15px;
+        margin-bottom: round(15px*$x);
     }
     &__author {
         position: relative;
-        padding-left: 4px;
+        padding-left: round(4px*$x);
         &:before {
 			position: absolute;
 			top: 50%;
-			left: -40px;
+			left: round(-40px*$x);
             margin-top: -1px;
-			height: 2px;
-			width: 30px;
+			height: round(2px*$x);
+			width: round(30px*$x);
 			display: block;
 			content: '';
 			background-color: rgba(159, 185, 164, 0.4);

@@ -1,12 +1,12 @@
 .footer-nav {
 	&__title {
-		margin: 0 0 20px;
-		font-size: 15px;
-		line-height: 20px;
+		margin: 0 0 round(20px*$x);
+		font-size: round(15px*$x);
+		line-height: round(20px*$x);
 		font-weight: $bold;
 		color: $dark-grey;
 		@include max-screen(930px) {
-			margin-bottom: 28px;
+			margin-bottom: round(28px*$x);
 			text-align: center;
 		}
 	}
@@ -19,8 +19,8 @@
 			float: none;
 			margin-left: auto;
 			margin-right: auto;
-			margin-bottom: 18px;
-			padding-left: 20px;
+			margin-bottom: round(18px*$x);
+			padding-left: round(20px*$x);
 			width: 100%;
 			max-width: 410px;
 			text-align: left;
@@ -28,19 +28,19 @@
 	}
 	&__item {
 		position: relative;
-		padding-left: 26px;
-		font-size: 15px;
-		line-height: 20px;
+		padding-left: round(26px*$x);
+		font-size: round(15px*$x);
+		line-height: round(20px*$x);
 		color: $dark-grey;
 		display: inline-block;
 		@include max-screen(930px) {
 			float: left;
 			width: 50%;
-			padding-right: 10px;
+			padding-right: round(10px*$x);
 		}
 		@include min-screen(1200px) {
 			&:first-of-type {
-				padding-left: 12px;
+				padding-left: round(12px*$x);
 
 				&:before {
 					left: 0;
@@ -49,13 +49,13 @@
 		}
 		&:before {
 			position: absolute;
-			left: 13px;
-	    top: 8px;
+			left: round(13px*$x);
+	    top: round(8px*$x);
 			display: block;
 			content: '';
-			width: 6px;
-			height: 6px;
-			border-radius: 3px;
+			width: round(6px*$x);
+			height: round(6px*$x);
+			border-radius: round(3px*$x);
 			background-color: $dark-grey;
 		}
 		a:hover {
@@ -73,8 +73,8 @@
 		display: inline-block;
 		vertical-align: top;
 		font-family: $font;
-		font-size: 15px;
-		line-height: 20px;
+		font-size: round(15px*$x);
+		line-height: round(20px*$x);
 		color: $dark-grey;
 		text-decoration: none;
 		&:hover {

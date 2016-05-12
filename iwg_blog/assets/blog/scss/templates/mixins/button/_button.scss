@@ -1,10 +1,10 @@
 .button,
 a.button {
     display: inline-block;
-    min-width: 202px;
-    padding: 14px 18px;
-    font-size: 15px;
-    line-height: 18px;
+    min-width: round(202px*$x);
+    padding: round(14px*$x) round(18px*$x);
+    font-size: round(15px*$x);
+    line-height: round(18px*$x);
     font-family: $font-nice;
     color: $blue;
     vertical-align: top;
@@ -32,7 +32,7 @@ a.button {
         cursor: pointer;
         outline: 0;
         border: 0;
-        padding: 16px 20px;
+        padding: round(16px*$x) round(20px*$x);
         @include box-shadow(none);
         @include max-screen($M_SM) {
             padding: 13px 14px 12px;
@@ -41,14 +41,14 @@ a.button {
     &_full {
         background-color: $blue;
         color: $white;
-        padding: 18px 24px;
+        padding: round(18px*$x) round(24px*$x);
         border: 0;
         @include max-screen($M_SM) {
             padding: 14px 18px;
         }
         &:hover,
         &:focus {
-            padding: 18px 24px;
+            padding: round(18px*$x) round(24px*$x);
             background-color: darken($blue, 10%);
             @include max-screen($M_SM) {
                 padding: 14px 18px;

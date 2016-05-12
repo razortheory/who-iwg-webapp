@@ -1,13 +1,13 @@
 .article {
     margin: 0 auto;
-    padding-bottom: 20px;
+    padding-bottom: round(20px*$x);
     width: 100%;
     max-width: $content-width-min;
     @include max-screen($M_X3S) {
         padding-bottom: 10px;
     }
     &__header {
-        margin-bottom: 40px;
+        margin-bottom: round(40px*$x);
         @include max-screen($M_XS) {
             margin-bottom: 30px;
         }
@@ -16,14 +16,14 @@
         }
     }
     &__title {
-        margin: 0 0 10px;
+        margin: 0 0 round(10px*$x);
         font-size: 40px;
         line-height: 1.2;
         font-family: $font-nice;
         font-weight: $bold;
         color: $dark-grey;
         @include min-screen($M_SM + 1) {
-            font-size: 50px;
+            font-size: round(50px*$x);
         }
         @include max-screen($M_XS) {
             font-size: 30px;
@@ -33,9 +33,9 @@
         }
     }
     &__category {
-        font-size: 22px;
+        font-size: round(22px*$x);
         line-height: 1.3636;
-        letter-spacing: 3px;
+        letter-spacing: round(3px*$x);
         color: $grey;
         @include max-screen($M_X2S) {
             font-size: 18px;
@@ -45,10 +45,10 @@
     &__meta {
         @include clearfix;
         position: relative;
-        padding-bottom: 10px;
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: 2px;
+        padding-bottom: round(10px*$x);
+        font-size: round(16px*$x);
+        line-height: round(22px*$x);
+        letter-spacing: round(2px*$x);
         color: $grey;
         text-transform: uppercase;
         @include max-screen($M_X2S) {
@@ -71,7 +71,7 @@
         &-tag {
             position: relative;
             float: left;
-            margin-right: 15px;
+            margin-right: round(15px*$x);
             @include max-screen($M_X2S) {
 				margin-right: 8px;
 			}
@@ -97,8 +97,8 @@
             }
             sub {
                 position: static;
-                font-size: 12px;
-                line-height: 22px;
+                font-size: round(12px*$x);
+                line-height: round(22px*$x);
                 @include max-screen($M_SM) {
                     font-size: 11px;
                 }
@@ -110,7 +110,7 @@
         }
     }
     &__main-image {
-        margin-bottom: 40px;
+        margin-bottom: round(40px*$x);
         width: 100%;
         height: auto;
         @include max-screen($M_XSM) {
@@ -119,9 +119,9 @@
     }
     &__body {
         &-content {
-            margin: 0 auto 40px;
+            margin: 0 auto round(40px*$x);
             width: 100%;
-            max-width: 700px;
+            max-width: round(700px*$x);
             @include max-screen($M_XSM) {
                 margin-bottom: 30px;
             }
@@ -136,10 +136,16 @@
         }
         &-text,
         &-incut {
-            margin-bottom: 40px;
+            margin-bottom: round(40px*$x);
             width: 100%;
             @include max-screen($M_XSM) {
                 margin-bottom: 30px;
+            }
+
+            & > img {
+                display: block;
+                margin-right: auto;
+                margin-left: auto;
             }
         }
         &-incut {
@@ -164,7 +170,7 @@
             .article {
                 &-content-preview {
                     @include clearfix;
-                    padding: 28px 36px 30px;
+                    padding: round(28px*$x) round(36px*$x) round(30px*$x);
                     border: 1px solid $blue;
                     @include border-radius;
                     @include max-screen($M_X2S) {
@@ -176,9 +182,9 @@
                     &__thumbnail {
                         position: relative;
                         float: left;
-                        margin-top: 8px;
-                        width: 128px;
-                        height: 128px;
+                        margin-top: round(8px*$x);
+                        width: round(128px*$x);
+                        height: round(128px*$x);
                         display: block;
                         background-color: $light-grey;
                         background-position: center center;
@@ -194,8 +200,8 @@
                     }
                     &__body {
                         overflow: hidden;
-                        padding-left: 36px;
-                        min-height: 128px;
+                        padding-left: round(36px*$x);
+                        min-height: round(128px*$x);
                         @include max-screen($M_X2S) {
                             padding-left: 20px;
                         }
@@ -204,8 +210,8 @@
                         }
                     }
                     &__title {
-                        margin: 0 0 4px;
-                        font-size: 26px;
+                        margin: 0 0 round(4px*$x);
+                        font-size: round(26px*$x);
                         line-height: 1.384;
                         font-family: $font;
                         font-weight: $normal;
@@ -218,8 +224,8 @@
                         }
                     }
                     &__text {
-                        margin-bottom: 7px;
-                        font-size: 18px;
+                        margin-bottom: round(7px*$x);
+                        font-size: round(18px*$x);
                         line-height: 1.6667;
                         font-family: $font-serif;
                         @include max-screen($M_X2S) {
@@ -231,7 +237,7 @@
                         }
                     }
                     &__link {
-                        font-size: 18px;
+                        font-size: round(18px*$x);
                         line-height: 1.6667;
                         font-family: $font-serif;
                         color: #7a7a7a;
@@ -246,16 +252,16 @@
                 }
                 &-gallery {
                     @include clearfix;
-                    margin-left: -5px;
-                    margin-right: -5px;
+                    margin-left: round(-5px*$x);
+                    margin-right: round(-5px*$x);
                     @include max-screen(999px) {
                         text-align: center;
                     }
                     &__img {
                         max-width: none;
                         float: left;
-                        margin-bottom: 10px;
-                        margin-right: 10px;
+                        margin-bottom: round(10px*$x);
+                        margin-right: round(10px*$x);
                         @include max-screen(999px) {
                             float: none;
                             margin-bottom: 20px;
@@ -267,7 +273,7 @@
                 &-download {
                     position: relative;
                     @include clearfix;
-                    padding: 25px 44px 30px 54px;
+                    padding: round(25px*$x) round(44px*$x) round(30px*$x) round(54px*$x);
                     border: 1px solid $blue;
                     @include border-radius;
                     @include max-screen($M_SM) {
@@ -279,8 +285,8 @@
                     &__thumbnail {
                         position: relative;
                         float: left;
-                        width: 99px;
-                        height: 145px;
+                        width: round(99px*$x);
+                        height: round(145px*$x);
                         display: block;
                         background-color: $light-grey;
                         background-position: center center;
@@ -291,10 +297,10 @@
                         }
                         img {
                             position: absolute;
-                            left: 52px;
-                            top: 95px;
-                            width: 59px;
-                            height: 59px;
+                            left: round(52px*$x);
+                            top: round(95px*$x);
+                            width: round(59px*$x);
+                            height: round(59px*$x);
                             @include max-screen($M_X3S) {
                                 left: 38px;
                                 top: 70px;
@@ -305,8 +311,8 @@
                     }
                     &__body {
                         overflow: hidden;
-                        padding-left: 32px;
-                        min-height: 145px;
+                        padding-left: round(32px*$x);
+                        min-height: round(145px*$x);
                         @include max-screen($M_X2S) {
                             padding-left: 20px;
                         }
@@ -315,7 +321,7 @@
                         }
                     }
                     &__title {
-                        font-size: 30px;
+                        font-size: round(30px*$x);
                         line-height: 1.355;
                         font-family: $font;
                         font-weight: $normal;
@@ -337,7 +343,7 @@
 
                     }
                     &__file-name {
-                        font-size: 18px;
+                        font-size: round(18px*$x);
                         line-height: 1.357;
                         font-family: $font-serif;
                         color: #7a7a7a;
@@ -351,11 +357,11 @@
                     }
                     &__link {
                         position: absolute;
-                        right: 23px;
-                        bottom: 21px;
+                        right: round(23px*$x);
+                        bottom: round(21px*$x);
                         display: block;
-                        width: 43px;
-                        height: 43px;
+                        width: round(43px*$x);
+                        height: round(43px*$x);
                         @include border-radius(50%);
                         background-color: $white;
                         @include transition();
@@ -377,16 +383,18 @@
                         }
                         .icon {
                             position: absolute;
-                            left: -1px;
-                            top: -1px;
+                            left: -0px;
+                            top: -0.5px;
                             display: block;
-                            width: 45px;
-                            height: 45px;
+                            width: round(45px*$x);
+                            height: round(45px*$x);
                             fill: $blue;
                             @include transition();
                             @include max-screen($M_XSM) {
                                 width: 30px;
                                 height: 30px;
+                                left: -1px;
+                                top: -1px;
                             }
                         }
                     }
@@ -397,11 +405,11 @@
     &-footer {
         @include clearfix;
         position: relative;
-        padding-left: 10px;
-        padding-right: 10px;
-        font-size: 16px;
-        line-height: 22px;
-        letter-spacing: 2px;
+        padding-left: round(10px*$x);
+        padding-right: round(10px*$x);
+        font-size: round(16px*$x);
+        line-height: round(22px*$x);
+        letter-spacing: round(2px*$x);
         color: $grey;
         text-transform: uppercase;
         border-top: 2px solid rgba(159, 185, 164, 0.4);
@@ -417,7 +425,7 @@
             position: relative;
             float: left;
             @include list-reset;
-            padding-top: 19px;
+            padding-top: round(19px*$x);
             @include max-screen($M_X2S) {
                 padding-top: 12px;
             }
@@ -429,7 +437,7 @@
         &__tag {
             position: relative;
             float: left;
-            margin-right: 15px;
+            margin-right: round(15px*$x);
             @include max-screen($M_X2S) {
 				margin-right: 8px;
 			}
@@ -446,7 +454,7 @@
         &__social {
             position: relative;
             float: right;
-            padding-top: 15px;
+            padding-top: round(15px*$x);
             @include max-screen($M_X2S) {
                 padding-top: 10px;
             }
