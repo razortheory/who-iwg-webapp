@@ -4,14 +4,14 @@
       <svg class="icon icon_arrow-left">
         <use xlink:href="#icon_arrow-left"></use>
       </svg>
-      <span class="posts-nav__link-text">NEWER <span
-          class="posts-nav__link-text posts-nav__link-text_no-mobile">POSTS</span></span>
+      <span class="posts-nav__link-text">{{ previous_prefix | default:"NEWER" }} <span
+          class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
     </a>
   {% endif %}
   {% if page_obj.has_next %}
     <a href="?page={{ page_obj.next_page_number }}" class="posts-nav__link posts-nav__link_next">
-      <span class="posts-nav__link-text">OLDER <span
-          class="posts-nav__link-text posts-nav__link-text_no-mobile">POSTS</span></span>
+      <span class="posts-nav__link-text">{{ next_prefix | default:"OLDER" }} <span
+          class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
       <svg class="icon icon_arrow-right">
         <use xlink:href="#icon_arrow-right"></use>
       </svg>

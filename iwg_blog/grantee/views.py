@@ -34,6 +34,8 @@ class RoundView(RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
     template_name = 'grantee/pages/grantee-list.html'
     object_queryset = Round.objects.all()
 
+    paginate_by = 6
+
     def get_meta_context(self, **context):
         return Meta(title='Article list',
                     description='List of articles.',
