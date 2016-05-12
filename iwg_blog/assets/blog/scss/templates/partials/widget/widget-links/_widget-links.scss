@@ -4,18 +4,18 @@
     }
     &__item {
         position: relative;
-        margin-bottom: 20px;
-        padding-left: 66px;
-        font-size: 14px;
-        line-height: 17px;
+        margin-bottom: round(20px*$x);
+        padding-left: round(66px*$x);
+        font-size: round(14px*$x);
+        line-height: round(17px*$x);
         .icon {
             position: absolute;
-            left: 29px;
+            left: round(29px*$x);
             top: 50%;
-            margin-top: -6px;
+            margin-top: round(-6px*$x);
             display: block;
-            width: 14px;
-            height: 12px;
+            width: round(14px*$x);
+            height: round(12px*$x);
             fill: $blue;
         }
     }

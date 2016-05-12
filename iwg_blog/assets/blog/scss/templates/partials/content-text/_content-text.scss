@@ -1,5 +1,5 @@
 .content-text {
-	font-size: 22px;
+	font-size: round(22px*$x);
 	line-height: 1.636363;
 	font-family: $font-serif;
 	@include max-screen($M_XSM) {
@@ -9,8 +9,8 @@
 		font-size: 16px;
 	}
 	h3 {
-		margin: 0 0 18px;
-		font-size: 30px;
+		margin: 0 0 round(18px*$x);
+		font-size: round(30px*$x);
 		line-height: 1.2;
 		font-family: $font-nice;
 		font-weight: $normal;
@@ -24,8 +24,8 @@
 		}
 	}
 	h4 {
-		margin: 0 0 18px;
-		font-size: 22px;
+		margin: 0 0 round(18px*$x);
+		font-size: round(22px*$x);
 		line-height: 1.636363;
 		font-family: $font-serif;
 		font-weight: $bold;
@@ -49,17 +49,17 @@
 		font-family: $font-serif;
 	}
 	img.full-width {
-		margin-bottom: 10px;
+		margin-bottom: round(10px*$x);
 		width: 100%;
 		height: auto;
 	}
 	p {
-		margin-bottom: 20px;
+		margin-bottom: round(20px*$x);
 		@include max-screen($M_XSM) {
 			margin-bottom: 15px;
 		}
 		& + h3 {
-			margin-top: 40px;
+			margin-top: round(40px*$x);
 			@include max-screen($M_XSM) {
 				margin-top: 30px;
 			}
@@ -70,8 +70,8 @@
 	}
 	ul,
 	ol {
-		margin: 30px 0;
-		padding: 0 70px 0 58px;
+		margin: round(30px*$x) 0;
+		padding: 0 round(70px*$x) 0 round(58px*$x);
 		list-style: none outside none;
 		@include max-screen($M_XSM) {
 			margin: 20px 0;
@@ -87,7 +87,7 @@
 			padding-left: 18px;
 		}
 		& + h3 {
-			margin-top: 40px;
+			margin-top: round(40px*$x);
 			@include max-screen($M_XSM) {
 				margin-top: 30px;
 			}
@@ -97,10 +97,10 @@
 		}
 		li {
 			position: relative;
-			margin: 0 0 30px;
-			padding: 0 0 0 24px;
+			margin: 0 0 round(30px*$x);
+			padding: 0 0 0 round(24px*$x);
 			display: block;
-			font-size: 20px;
+			font-size: round(20px*$x);
 			line-height: 1.5;
 			font-style: italic;
 			@include max-screen($M_XSM) {
@@ -114,20 +114,20 @@
 			&:before {
 				position: absolute;
 				left: 0;
-				top: 11px;
-				width: 6px;
-				height: 7px;
+				top: round(11px*$x);
+				width: round(7px*$x);
+				height: round(8px*$x);
 				display: block;
 				content: '';
 				background-color: $blue;
-				@include border-radius(3px);
+				@include border-radius(round(3px*$x));
 				@include max-screen($M_XSM) {
 					top: 8px;
 				}
 			}
 			ul,
 			ol {
-				padding-left: 29px;
+				padding-left: round(29px*$x);
 				padding-right: 0;
 				@include max-screen($M_XSM) {
 					padding-left: 12px;
@@ -140,9 +140,9 @@
 				}
 				li {
 					&:before {
-						top: 15px;
-						width: 8px;
-						height: 2px;
+						top: round(15px*$x);
+						width: round(8px*$x);
+						height: round(2px*$x);
 						@include border-radius(0);
 						@include max-screen($M_XSM) {
 							top: 11px;
@@ -165,7 +165,7 @@
 				@include border-radius(0);
 				counter-increment: list1;
 				content: counter(list1) ". ";
-				font-size: 20px;
+				font-size: round(20px*$x);
 				line-height: 1.5;
 				@include max-screen($M_XSM) {
 					font-size: 17px;
@@ -202,9 +202,9 @@
 		}
 	}
 	.intro {
-		margin-top: -15px;
-		margin-bottom: 20px;
-		font-size: 25px;
+		margin-top: round(-15px*$x);
+		margin-bottom: round(20px*$x);
+		font-size: round(25px*$x);
 		line-height: 1.4;
 		font-family: $font;
 		font-weight: $bold;
@@ -219,9 +219,9 @@
 		}
 	}
 	.info {
-		margin-top: 67px;
+		margin-top: round(67px*$x);
 		color: #7a7a7a;
-		font-size: 19px;
+		font-size: round(19px*$x);
 		line-height: 1.263;
 		@include max-screen($M_XSM) {
 			margin-top: 47px;
@@ -230,11 +230,10 @@
 		@include max-screen($M_X3S) {
 			margin-top: 38px;
 			font-size: 15px;
-			font-size: 1.4;
 		}
 		h5 {
-			margin: 0 0 27px;
-			font-size: 22px;
+			margin: 0 0 round(27px*$x);
+			font-size: round(22px*$x);
 			line-height: 1.6363;
 			font-family: $font-serif;
 			font-weight: $normal;
@@ -250,18 +249,18 @@
 			}
 		}
 		p {
-			margin-bottom: 20px;
+			margin-bottom: round(20px*$x);
 			@include max-screen($M_X3S) {
 				margin-bottom: 18px;
 			}
 		}
 	}
 	.top-offset {
-		margin-top: 30px;
+		margin-top: round(30px*$x);
 	}
 	blockquote {
-		margin: 0 0 34px;
-		padding: 15px 86px 0 82px;
+		margin: 0 0 round(34px*$x);
+		padding: round(15px*$x) round(86px*$x) 0 round(82px*$x);
 		position: relative;
 		font-family: $font;
 		font-weight: $lighter;
@@ -280,12 +279,12 @@
 		}
 		&:before {
 			position: absolute;
-			left: 45px;
-			top: 13px;
-			height: 96px;
+			left: round(45px*$x);
+			top: round(13px*$x);
+			height: round(96px*$x);
 			display: block;
 			content: "\201C";
-			font-size: 70px;
+			font-size: round(70px*$x);
 			line-height: 1;
 			font-weight: $normal;
 			color: $blue;
@@ -301,7 +300,7 @@
 			}
 		}
 		p {
-			margin-bottom: 5px;
+			margin-bottom: round(5px*$x);
 		}
 		cite {
 			display: block;
@@ -316,7 +315,7 @@
 	.article__body-text {
 		ul,
 		ol {
-			padding-left: 84px;
+			padding-left: round(84px*$x);
 			@include max-screen($M_XSM) {
 				padding-left: 58px;
 			}
@@ -329,7 +328,7 @@
 			li {
 				ul,
 				ol {
-					padding-left: 29px;
+					padding-left: round(29px*$x);
 					@include max-screen($M_XSM) {
 						padding-left: 12px;
 					}

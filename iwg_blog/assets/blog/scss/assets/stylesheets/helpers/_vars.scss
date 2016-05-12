@@ -39,7 +39,7 @@ $font-serif: "Lora", $font-base-serif;
 
 // Font sizes
 // -------------------------
-$font-size: 18px;
+$x: 0.85;
 
 // Line heights
 // -------------------------
@@ -63,11 +63,11 @@ $font-img-path: '../images';
 //
 // Layout
 // --------------------------------------------------
-$content-width-max: 1520px;
-$content-width-mid: 1190px;
-$content-width-art: 1080px;
-$content-width-min: 960px;
-$content-width-text: 800px;
+$content-width-max: round(1520px*$x);
+$content-width-mid: round(1190px*$x);
+$content-width-art: round(1080px*$x);
+$content-width-min: round(960px*$x);
+$content-width-text: round(800px*$x);
 
 //
 // Border radius

@@ -1,6 +1,6 @@
 .posts-nav {
     @include clearfix;
-    margin-bottom: 30px;
+    margin-bottom: round(30px*$x);
     @include max-screen(639px) {
         padding-top: 30px;
     }
@@ -17,21 +17,21 @@
         }
         &_prev {
             float: left;
-            padding-left: 18px;
+            padding-left: round(18px*$x);
             .icon {
                 left: 0;
             }
         }
         &_next {
             float: right;
-            padding-right: 18px;
+            padding-right: round(18px*$x);
             .icon {
                 right: 0;
             }
         }
         &-text {
-            font-size: 18px;
-            line-height: 21px;
+            font-size: round(18px*$x);
+            line-height: round(21px*$x);
             text-transform: uppercase;
             color: $black;
             @include transition;
@@ -44,9 +44,9 @@
         .icon {
             position: absolute;
             top: 50%;
-            margin-top: -8px;
-            width: 8px;
-            height: 16px;
+            margin-top: round(-8px*$x);
+            width: round(8px*$x);
+            height: round(16px*$x);
             display: block;
             fill: $blue;
         }

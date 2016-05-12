@@ -9,9 +9,10 @@
   border: 1px solid black;
   width: 90%;
   max-width: 400px;
-  height: 200px;
+  height: 230px;
   color: white;
   display: none;
+  z-index: 20;
 
   &.active {
     display: block;

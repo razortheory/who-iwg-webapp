@@ -1,33 +1,33 @@
 .widget-top-articles {
     &__list {
         @include list-reset;
-        padding-right: 10px;
-        padding-left: 10px;
+        padding-right: round(10px*$x);
+        padding-left: round(10px*$x);
     }
     &__item {
-        margin-bottom: 20px;
-        padding-top: 20px;
-        padding-right: 10px;
+        margin-bottom: round(20px*$x);
+        padding-top: round(20px*$x);
+        padding-right: round(10px*$x);
         @include clearfix;
         position: relative;
-        font-size: 14px;
-        line-height: 19px;
+        font-size: round(14px*$x);
+        line-height: round(19px*$x);
         border-top: 2px solid rgba(159, 185, 164, 0.4);
         &:first-child {
             padding-top: 0;
             border-top: 0;
         }
         &-body {
-            padding-left: 15px;
+            padding-left: round(15px*$x);
             overflow: hidden;
-            min-height: 64px;
+            min-height: round(64px*$x);
         }
     }
     &__thumbnail {
         position: relative;
         float: left;
-        width: 64px;
-        height: 64px;
+        width: round(64px*$x);
+        height: round(64px*$x);
         background-repeat: no-repeat;
         background-position: 0 0;
         background-size: cover;

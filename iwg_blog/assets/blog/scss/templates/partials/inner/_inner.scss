@@ -1,38 +1,38 @@
 .inner {
-	max-width: 1510px;
+	max-width: round(1510px*$x);
 	margin: 0 auto;
 	position: relative;
 	@include clearfix;
 	&_index {
-		padding-top: 70px;
+		padding-top: round(70px*$x);
 		max-width: $content-width-mid;
 		@include max-screen($M_XS) {
 			padding-top: 60px;
 		}
 	}
 	&_category {
-		padding-top: 60px;
+		padding-top: round(60px*$x);
 		max-width: $content-width-max;
 		@include max-screen($M_XS) {
 			padding-top: 50px;
 		}
 	}
 	&_content {
-		padding-top: 60px;
+		padding-top: round(60px*$x);
 		max-width: $content-width-min;
 		@include max-screen($M_XS) {
 			padding-top: 50px;
 		}
 	}
 	&_text {
-		padding-top: 60px;
+		padding-top: round(60px*$x);
 		max-width: $content-width-text;
 		@include max-screen($M_XS) {
 			padding-top: 40px;
 		}
 	}
 	&_article {
-		padding-top: 60px;
+		padding-top: round(60px*$x);
 		max-width: $content-width-art;
 		@include max-screen($M_XS) {
 			padding-top: 40px;

@@ -2,7 +2,7 @@
     &__nav {
         margin: 0 auto;
         width: 100%;
-        max-width: 860px;
-        padding-bottom: 70px;
+        max-width: round(860px*$x);
+        padding-bottom: round(70px*$x);
     }
 }

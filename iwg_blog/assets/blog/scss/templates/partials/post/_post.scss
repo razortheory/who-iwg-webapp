@@ -1,6 +1,6 @@
 .post {
     &__image {
-        margin-bottom: 30px;
+        margin-bottom: round(30px*$x);
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
@@ -25,10 +25,10 @@
         }
     }
     &__title {
-        margin: 0 0 20px;
+        margin: 0 0 round(20px*$x);
         width: 100%;
-        max-width: 760px;
-        font-size: 36px;
+        max-width: round(760px*$x);
+        font-size: round(36px*$x);
         line-height: 1.36;
         font-weight: $bold;
         color: $dark;
@@ -44,12 +44,12 @@
     }
     &__body {
         @include clearfix;
-        padding-bottom: 16px;
+        padding-bottom: round(16px*$x);
     }
     &__button {
         position: relative;
         float: right;
-        margin-top: 12px;
+        margin-top: round(12px*$x);
         @include max-screen($M_SM) {
             margin-top: 6px;
         }
@@ -64,8 +64,8 @@
     }
     &__text {
         overflow: hidden;
-        padding-right: 30px;
-        font-size: 18px;
+        padding-right: round(30px*$x);
+        font-size: round(18px*$x);
         line-height: 1.6666;
         font-family: $font-serif;
         @include max-screen($M_SM) {
@@ -83,10 +83,10 @@
     &__footer {
         @include clearfix;
         position: relative;
-        padding-bottom: 53px;
-        font-size: 16px;
+        padding-bottom: round(53px*$x);
+        font-size: round(16px*$x);
         line-height: 1.375;
-        letter-spacing: 2px;
+        letter-spacing: round(2px*$x);
         color: $grey;
         text-transform: uppercase;
         border-top: 1px solid rgba(159, 185, 164, 0.4);
@@ -110,7 +110,7 @@
 			position: absolute;
 			bottom: 0;
 			left: 0;
-			height: 3px;
+			height: round(3px*$x);
 			width: 46.51%;
 			display: block;
 			content: '';
@@ -126,7 +126,7 @@
             position: relative;
             float: left;
             @include list-reset;
-            padding-top: 10px;
+            padding-top: round(10px*$x);
             @include max-screen($M_X3S) {
                 @include clearfix;
                 float: none;
@@ -136,7 +136,7 @@
         &-tag {
             position: relative;
             float: left;
-            margin-right: 15px;
+            margin-right: round(15px*$x);
             @include max-screen($M_SM) {
                 margin-right: 10px;
             }
@@ -159,10 +159,10 @@
         &-date {
             position: relative;
             float: right;
-            padding-top: 10px;
+            padding-top: round(10px*$x);
             sub {
                 position: static;
-                font-size: 12px;
+                font-size: round(12px*$x);
                 line-height: 1.83;
                 @include max-screen($M_SM) {
                     font-size: 11px;
@@ -183,9 +183,9 @@
             }
             &-wrap {
                 clear: both;
-                padding-top: 26px;
-                padding-left: 35px;
-                padding-right: 35px;
+                padding-top: round(26px*$x);
+                padding-left: round(35px*$x);
+                padding-right: round(35px*$x);
                 &.mobile-only {
                     display: none;
                     @include screen(719px, $M_XS) {
@@ -207,7 +207,7 @@
                 }
             }
             &__title {
-                margin: 0 0 17px;
+                margin: 0 0 round(17px*$x);
                 max-width: none;
                 @include max-screen($M_SM) {
                     margin-bottom: 15px;
@@ -220,7 +220,7 @@
                 }
             }
             &__body {
-                padding-bottom: 54px;
+                padding-bottom: round(54px*$x);
                 @include max-screen($M_XS) {
                     padding-bottom: 20px;
                 }
@@ -229,11 +229,11 @@
                 margin-top: 0;
             }
             &__text {
-                padding-right: 50px;
+                padding-right: round(50px*$x);
             }
             &__footer {
                 &-devider {
-        			width: 300px;
+        			width: round(300px*$x);
         		}
             }
         }

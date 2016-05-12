@@ -1,24 +1,24 @@
 .widget-tags {
     &__list {
         @include list-reset;
-        padding-left: 7px;
+        padding-left: round(7px*$x);
     }
     &__item {
         @include dib;
         @include dib-fix;
-        padding-right: 4px;
-        padding-bottom: 7px;
+        padding-right: round(4px*$x);
+        padding-bottom: round(7px*$x);
         @include clearfix;
     }
     &__link {
-        padding: 9px 13px 7px;
+        padding: round(9px*$x) round(13px*$x) round(7px*$x);
         display: block;
-        font-size: 12px;
-        line-height: 14px;
+        font-size: round(12px*$x);
+        line-height: round(14px*$x);
         text-transform: uppercase;
         color: #4d4b52;
         background-color: #e4f0fd;
-        @include border-radius(15px);
+        @include border-radius(round(15px*$x));
         @include transition();
         &:hover {
             text-decoration: none;

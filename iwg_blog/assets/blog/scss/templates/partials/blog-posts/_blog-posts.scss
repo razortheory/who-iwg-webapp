@@ -1,6 +1,6 @@
 .blog-posts {
     &__nav {
-        padding-bottom: 65px;
+        padding-bottom: round(65px*$x);
         @include max-screen(639px) {
             padding-bottom: 30px;
         }

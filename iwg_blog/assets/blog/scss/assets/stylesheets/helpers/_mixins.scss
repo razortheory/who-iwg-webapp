@@ -97,7 +97,7 @@
 }
 
 
-@mixin fsResponsiveM($font-size, $line-height: false) {
+@mixin fsResponsiveM($line-height: false) {
 
   // If need to change the line-heigtht, we set it. If we don't need to change the line-height, we dont't set the number or true value.
 
@@ -108,7 +108,7 @@
 
   // default line-heigtht
   @if $line-height == true {
-    line-height: round($font-size*$line-height);
+    line-height: round($x*$line-height);
   }
 
   // new line-height
@@ -117,11 +117,11 @@
   }
 
   @media #{$M_SM} {
-    font-size: round($font-size*$sm);
+    font-size: round($x*$sm);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$sm);
+      line-height: round($x*$line-height*$sm);
     }
 
     // new line-height
@@ -131,11 +131,11 @@
   }
 
   @media #{$M_XSM} {
-    font-size: round($font-size*$x2s);
+    font-size: round($x*$x2s);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$x2s);
+      line-height: round($x*$line-height*$x2s);
     }
 
     // new line-height
@@ -145,11 +145,11 @@
   }
 
   @media #{$M_XS }{
-    font-size: round($font-size*$x3s);
+    font-size: round($x*$x3s);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$x3s);
+      line-height: round($x*$line-height*$x3s);
     }
 
     // new line-height
@@ -159,11 +159,11 @@
   }
 
   @media #{$M_X3S} {
-    font-size: round($font-size*$x4s);
+    font-size: round($x*$x4s);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$x4s);
+      line-height: round($x*$line-height*$x4s);
     }
 
     // new line-height
@@ -175,7 +175,7 @@
 }
 
 
-@mixin fsResponsive($font-size, $line-height: false) {
+@mixin fsResponsive($line-height: false) {
 
   // If need to change the line-heigtht, we set it. If we don't need to change the line-height, we dont't set the number or true value.
 
@@ -184,7 +184,7 @@
 
   // default line-heigtht
   @if $line-height == true {
-    line-height: round($font-size*$line-height);
+    line-height: round($x*$line-height);
   }
 
   // new line-height
@@ -193,11 +193,11 @@
   }
 
   @media #{$M_SM }{
-    font-size: round($font-size*$sm);
+    font-size: round($x*$sm);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$sm);
+      line-height: round($x*$line-height*$sm);
     }
 
     // new line-height
@@ -207,11 +207,11 @@
   }
 
   @media #{$M_X2S} {
-    font-size: round($font-size*$x2s);
+    font-size: round($x*$x2s);
 
     // default line-heigtht
     @if $line-height == true {
-      line-height: round($font-size*$line-height*$x2s);
+      line-height: round($x*$line-height*$x2s);
     }
 
     // new line-height

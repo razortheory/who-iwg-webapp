@@ -1,17 +1,17 @@
 .category-list {
 	&_related {
-		padding-bottom: 75px;
+		padding-bottom: round(75px*$x);
 	}
 	&__list {
 		@include list-reset;
 		text-align: center;
 	}
 	&__item {
-		margin-bottom: 70px;
+		margin-bottom: round(70px*$x);
 		@include dib;
 		@include dib-fix;
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: round(15px*$x);
+		padding-right: round(15px*$x);
 		width: 33.333%;
 		@include max-screen($M_MD) {
 			width: 50%;
