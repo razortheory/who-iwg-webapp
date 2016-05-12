@@ -5,7 +5,7 @@ from bs4.element import Tag, NavigableString
 
 
 class IncutProcessor(Postprocessor):
-    incut_tags = ['div', 'iframe', 'figure', 'table', 'pre', 'hr']
+    incut_tags = ['img', 'div', 'iframe', 'figure', 'table', 'pre', 'hr']
     incut_class = 'article__body-incut'
     incut_video_class = 'article__body-incut-video'
     content_class = 'article__body-content'
@@ -17,6 +17,12 @@ class IncutProcessor(Postprocessor):
         content = new_soup.new_tag('div', **{'class': self.content_class})
 
         for tag in soup.children:
+            if isinstance(tag, NavigableString):
+                continue
+
+            if tag.name not in self.incut_tags and len(tag.contents) == 1 and tag.contents[0].name in self.incut_tags:
+                tag = tag.contents[0]
+
             if tag.name in self.incut_tags:
                 if len(content):
                     new_soup.append(content)
@@ -29,8 +35,6 @@ class IncutProcessor(Postprocessor):
                 incut = soup.new_tag('div', **{'class': klass})
                 incut.append(tag)
                 new_soup.append(incut)
-            elif isinstance(tag, NavigableString):
-                tag.extract()
             else:
                 content.append(tag)
 
