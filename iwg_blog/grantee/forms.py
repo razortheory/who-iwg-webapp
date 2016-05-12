@@ -6,6 +6,8 @@ from ..blog.forms import ArticleAdminForm
 
 
 class GranteeAdminForm(ArticleAdminForm):
+    autosave_prefix = 'blog_grantee'
+
     class Meta(ArticleAdminForm.Meta):
         widgets = copy.deepcopy(ArticleAdminForm.Meta.widgets)
         widgets['short_description'] = CustomMarkdownWidget
