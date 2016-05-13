@@ -89,7 +89,30 @@ class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
         return context
 
 
-class ArticleView(BaseViewMixin, DetailView):
+class HitsTrackingMixin(object):
+    def get_hit_flag_name(self, obj):
+        opts = obj._meta
+        return 'hit_%s_%s_%s' % (opts.app_label, opts.model_name, obj.slug)
+
+    def set_hit(self, obj):
+        obj.hits = models.F('hits') + 1
+        obj.save()
+
+        self.request.session[self.get_hit_flag_name(obj)] = True
+
+    def has_hit(self, obj):
+        return self.request.session.get(self.get_hit_flag_name(obj))
+
+    def get_object(self, queryset=None):
+        obj = super(HitsTrackingMixin, self).get_object(queryset)
+
+        if obj.status == obj.STATUS_PUBLISHED and not self.has_hit(obj):
+            self.set_hit(obj)
+
+        return obj
+
+
+class ArticleView(HitsTrackingMixin, BaseViewMixin, DetailView):
     model = Article
     queryset = Article.objects.all()
     template_name = 'pages/article.html'

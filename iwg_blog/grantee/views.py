@@ -4,7 +4,7 @@ from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
 from meta.views import Meta
 
-from ..blog.views import BaseViewMixin, RelatedListMixin
+from ..blog.views import BaseViewMixin, RelatedListMixin, HitsTrackingMixin
 from .models import Grantee, Round
 
 
@@ -16,7 +16,7 @@ class RoundsMixin(object):
         return super(RoundsMixin, self).get_context_data(**context)
 
 
-class GranteeView(BaseViewMixin, DetailView):
+class GranteeView(HitsTrackingMixin, BaseViewMixin, DetailView):
     model = Grantee
     queryset = Grantee.objects.all()
     template_name = 'grantee/pages/grantee.html'
