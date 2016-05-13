@@ -4,3 +4,4 @@ libjpeg-dev
 ffmpeg
 poppler-utils
 unoconv
+redis-server

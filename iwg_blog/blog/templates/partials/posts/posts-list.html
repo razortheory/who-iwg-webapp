@@ -1,4 +1,5 @@
 {% load django_markdown %}
+{% load thumbnail %}
 
 
 <div class="posts-list {% if full %} posts-list_full {% endif %}">
@@ -11,7 +12,9 @@
     {% for article in articles %}
       <li class="post posts-list__item">
         <a href="{{ article.get_absolute_url }}">
-          <div style="background-image:url({{ article.cover_image.url }})" class="post__image"></div>
+          {% thumbnail article.cover_image "800" as im %}
+            <div style="background-image:url({{ im.url }})" class="post__image"></div>
+          {% endthumbnail %}
           <h3 class="post__title">
             {{ article.title }}
           </h3>

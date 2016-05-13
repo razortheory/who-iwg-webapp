@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     'compressor',
     'meta',
     'watson',
+    'sorl.thumbnail',
 ]
 
 LOCAL_APPS = [
@@ -90,7 +91,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'iwg_blog.context_processors.google_analytics',
-                'iwg_blog.context_processors.twitter_config',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -218,6 +218,3 @@ MARKDOWN_EXTENSION_CONFIGS = {
         'smart_angled_quotes': True
     }
 }
-
-TWITTER_LIMIT = 3
-TWITTER_LINK = 'https://twitter.com/who'
