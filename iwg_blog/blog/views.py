@@ -19,7 +19,7 @@ from iwg_blog.attachments.views import FeaturedDocumentsMixin
 from iwg_blog.blog.serializers import ArticleSerializer
 from iwg_blog.utils.views import JsonResponseMixin
 from .forms import SubscribeForm, UnsubscribeForm
-from .models import Article, Subscriber, Tag, Category
+from .models import Article, Subscriber, Tag, Category, BaseArticle
 
 
 class BaseViewMixin(object):
@@ -101,7 +101,8 @@ class ArticleView(BaseViewMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = dict()
-        context['related_articles'] = self.get_queryset().exclude(pk=self.object.pk) \
+        context['related_articles'] = self.get_queryset() \
+            .filter(status=BaseArticle.STATUS_PUBLISHED).exclude(pk=self.object.pk) \
             .filter(category=self.object.category)[:self.related_articles_count]
         context.update(kwargs)
         return super(ArticleView, self).get_context_data(**context)
