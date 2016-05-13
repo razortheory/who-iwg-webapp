@@ -1,0 +1,39 @@
+ul.tagit li.tagit-new {
+    position: relative;
+}
+fieldset.grp-module .grp-row.tags {
+    overflow: visible;
+}
+ul.tagit {
+    overflow: visible;
+    width: 758px;
+    margin: 0px;
+    padding: 2px 5px;
+    min-height: 25px;
+    font-family: Arial,sans-serif;
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+    color: #555;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    background: #FDFDFD none repeat scroll 0% 0%;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 3px 0px #EEE inset;
+    vertical-align: middle;
+}
+ul.tagit:after {
+    content: "";
+    height: 0px;
+    width: 100%;
+    display: block;
+    clear: both;
+}
+ul.tagit li.tagit-new {
+    margin: 0px;
+    padding: 0px;
+}
+ul.tagit li.tagit-new .ui-menu-item {
+    padding: 3px 5px;
+    box-sizing: border-box;
+}

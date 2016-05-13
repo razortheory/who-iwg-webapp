@@ -14,10 +14,11 @@ class Position(Func):
 
 
 class OrderableQuerySet(QuerySet):
-    def order_by_array(self, ordering_array):
+    def order_by_array(self, ordering_array, field_name=None, separator='\a'):
+        field_name = field_name or 'pk'
         return self.annotate(
             element_position=Position(
-                Concat(Value(','), F('pk'), Value(',')),
-                Value(',%s,' % ','.join(map(str, ordering_array))),
+                Concat(Value(separator), F(field_name), Value(separator)),
+                Value(separator + separator.join(map(str, ordering_array)) + separator),
             )
         ).order_by('element_position')

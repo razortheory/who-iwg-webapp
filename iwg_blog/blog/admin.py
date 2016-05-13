@@ -39,6 +39,11 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
             fields.remove('slug')
         return fields
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(BaseArticleAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['tags'].widget.can_add_related = False
+        return form
+
     def tags_list(self, obj):
         return ', '.join([
              u'<a href="%s">%s</a>' % (

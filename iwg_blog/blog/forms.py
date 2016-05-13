@@ -3,9 +3,9 @@ from django.core.urlresolvers import reverse
 
 import embedded_media
 
-from .fields import MarkdownFormField, OrderedModelMultipleChoiceField
+from .fields import MarkdownFormField, TagitField
 from .models import Subscriber
-from .widgets import TagsSelect2AdminWidget, AdminImageWidget, CustomMarkdownWidget
+from .widgets import AdminImageWidget, CustomMarkdownWidget
 
 
 def set_attrs_for_field(field, attrs):
@@ -48,17 +48,23 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
-            'tags': TagsSelect2AdminWidget,
             'content': CustomMarkdownWidget,
             'cover_image': AdminImageWidget,
         }
         field_classes = {
-            'tags': OrderedModelMultipleChoiceField,
+            'tags': TagitField,
             'content': MarkdownFormField,
         }
         help_texts = {
             'slug': ' '
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleAdminForm, self).__init__(*args, **kwargs)
+
+        self.fields['tags'].to_field_name = 'name'
+        if self.instance.pk is not None:
+            self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
 
     @property
     def media(self):
