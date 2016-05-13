@@ -1,4 +1,5 @@
 {% load django_markdown %}
+{% load thumbnail %}
 
 
 <article class="article">
@@ -21,7 +22,9 @@
       {{ article.published_at |date:"j<\s\u\b>S</\s\u\b> F, Y" |safe }}
     </div>
   </div>
-  <img src="{{ article.cover_image.url }}" class="article__main-image" alt="">
+  {% thumbnail article.cover_image "1200" as im %}
+    <img src="{{ im.url }}" class="article__main-image" alt="">
+  {% endthumbnail %}
   <div class="article__body content-text">
     {{ article.content |markdown }}
 
@@ -42,6 +45,6 @@
     {% endfor %}
   </ul>
   <div class="article-footer__social">
-    {% include "partials/social/social-footer.html" %}
+    {% include "partials/social/social-footer.html" with sharer_url=article.get_absolute_url %}
   </div>
 </div>

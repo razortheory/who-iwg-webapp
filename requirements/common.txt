@@ -23,3 +23,5 @@ django-embedded-media
 django-watson
 
 django-libsass
+sorl-thumbnail
+redis

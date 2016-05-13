@@ -62,3 +62,10 @@ META_SITE_PROTOCOL = 'http'
 
 NEWRELIC_DJANGO_ACTIVE = False
 NEWRELIC_AVAILABILITY_TEST_ACTIVE = False
+
+
+# Thumbnails configuration
+# --------------------------------------------------------------------------
+
+THUMBNAIL_DEBUG = True
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'

@@ -1,4 +1,5 @@
 {% load django_markdown %}
+{% load thumbnail %}
 
 
 <div class="category-list {% if related %} category-list_related {% endif %}">
@@ -6,8 +7,9 @@
     {% for article in articles %}
       <li class="category-list__item">
         <div class="category-post">
-          <div style="background-image:url({{ article.cover_image.url }})" class="category-post__image">
-          </div>
+          {% thumbnail article.cover_image "600" as im %}
+            <div style="background-image:url({{ im.url }})" class="category-post__image"></div>
+          {% endthumbnail %}
           <h3 class="category-post__title">{{ article.title }}
           </h3>
           <div class="category-post__footer">

@@ -1,9 +1,13 @@
+{% load thumbnail %}
+
 <div class="widget-top-articles">
   <ul class="widget-top-articles__list">
     {% for article in articles %}
       <li class="widget-top-articles__item">
         <a href="{{ article.get_absolute_url }}" class="widget-top-articles__link">
-          <div style="background-image:url({{ article.cover_image.url }})" class="widget-top-articles__thumbnail">
+          {% thumbnail article.cover_image "100x100" crop="center" as im %}
+            <div style="background-image:url({{ im.url }})" class="widget-top-articles__thumbnail">
+          {% endthumbnail %}
           </div>
           <div class="widget-top-articles__item-body">
             {{ article.title }}

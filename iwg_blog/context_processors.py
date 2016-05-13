@@ -21,12 +21,3 @@ def google_analytics(request):
         "GA_CODE": getattr(settings, 'GOOGLE_ANALYTICS_PROPERTY_ID', ''),
     }
     return context_ext
-
-
-def twitter_config(request):
-    return {
-        'twitter': {
-            'limit': settings.TWITTER_LIMIT,
-            'link': settings.TWITTER_LINK
-        }
-    }

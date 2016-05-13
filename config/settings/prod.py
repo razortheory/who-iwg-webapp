@@ -150,3 +150,15 @@ if NEWRELIC_AVAILABILITY_TEST_ACTIVE:
     INSTALLED_APPS += [
         'iwg_blog.availability_monitor',
     ]
+
+
+# Thumbnails configuration
+# --------------------------------------------------------------------------
+
+THUMBNAIL_FORCE_OVERWRITE = True
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+THUMBNAIL_PREFIX = 'media/cache'
+THUMBNAIL_REDIS_DB = env('REDIS_DB')
+THUMBNAIL_REDIS_PASSWORD = env('REDIS_PASSWORD')
+THUMBNAIL_REDIS_HOST = env('REDIS_HOST')
+THUMBNAIL_REDIS_PORT = env('REDIS_PORT')

@@ -1,6 +1,7 @@
 {% extends 'mailing/base.html' %}
 {% load static %}
 {% load blog_tags %}
+{% load thumbnail %}
 
 {% block body_bg_styles %}background-color: #E4F0FD;{% endblock %}
 {% block body_table_styles %}max-width: 700px; width: 98%; border-radius: 10px; background-color: white; margin: 0 auto;{% endblock %}
@@ -65,7 +66,9 @@
         <td align="left" style="padding-top: 0;">
           {% url 'blog:article_detail_view' article.slug as article_url %}
           <a href="{% absolute_url article_url %}" style="text-decoration: none;">
-            <img src="{% absolute_url article.cover_image.url %}" style="width: 100%; height: auto;">
+            {% thumbnail article.cover_image "800" as im %}
+              <img src="{{ im.url }}" style="width: 100%; height: auto;">
+            {% endthumbnail %}
             <p style="font-size: 21px; color: #262626; font-weight: bold;">{{ article.title }}</p>
           </a>
         </td>
