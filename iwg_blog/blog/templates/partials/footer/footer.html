@@ -24,7 +24,8 @@
     <div class="footer__layer footer__layer__column footer__layer__column__social">
       <div class="footer__social">
         <p class="footer__social__title">We are social</p>
-        {% include "partials/social/social.html" %}
+        {% url 'blog:landing_view' as landing_url %}
+        {% include "partials/social/social.html" with sharer_url=landing_url %}
       </div>
     </div>
     <div class="footer__layer footer__layer__column">

@@ -42,6 +42,6 @@
     {% endfor %}
   </ul>
   <div class="article-footer__social">
-    {% include "partials/social/social-footer.html" %}
+    {% include "partials/social/social-footer.html" with sharer_url=article.get_absolute_url %}
   </div>
 </div>

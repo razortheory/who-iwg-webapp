@@ -1,3 +1,5 @@
+{% load blog_tags %}
+
 <div id="js-fixed-info" class="fixed-info">
   <div class="fixed-info__header"><span id="js-fixed-toggle" class="fixed-info__button">
       <svg class="icon icon_burger"><use xlink:href="#icon_burger"></use>
@@ -14,7 +16,8 @@
       <div class="fixed-info__body-text">This is a joint effort between <strong>UNF</strong> and <strong>WHO/HRPand </strong> reflects the work conducted related to the <strong>Innovation Working Group Catalytic Grant Mechanism </strong> and guidance materials.
       </div>
       <div class="fixed-info__socials">
-        {% include "partials/social/social.html" %}
+        {% url 'blog:landing_view' as landing_url %}
+        {% include "partials/social/social.html" with sharer_url=landing_url %}
       </div>
     </div>
   </div>

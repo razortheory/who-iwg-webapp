@@ -133,10 +133,14 @@ class ArticleListView(BaseViewMixin, ListView):
     template_name = 'pages/article-list.html'
 
     def get_meta_context(self, **context):
-        return Meta(title='Article list',
-                    description='List of articles.',
-                    url=reverse('blog:articles_view')
-                    )
+        objects = context['object_list']
+        image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
+        return Meta(
+            title='IWG Portal',
+            description='List of articles.',
+            url=reverse('blog:articles_view'),
+            image=image_url,
+        )
 
 
 class SearchView(JsonResponseMixin, ArticleListView):
@@ -163,10 +167,14 @@ class SearchView(JsonResponseMixin, ArticleListView):
 
     def get_meta_context(self, **context):
         url = reverse('blog:search_view') + '?' + self.request.GET.urlencode()
-        return Meta(title='Search result',
-                    description='Search result.',
-                    url=url
-                    )
+        objects = context['object_list']
+        image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
+        return Meta(
+            title='IWG Portal',
+            description='Search result.',
+            url=url,
+            image=image_url,
+        )
 
     def get_ajax(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()[:self.ajax_search_result_count]
@@ -187,11 +195,12 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
     def get_meta_context(self, **context):
         article = context.get('featured_articles').first()
         image_url = getattr(article, 'cover_image_url', '')
-        return Meta(title='IWG Portal',
-                    description='IWG Portal',
-                    url=reverse('blog:landing_view'),
-                    image=image_url
-                    )
+        return Meta(
+            title='IWG Portal',
+            description='IWG Portal',
+            url=reverse('blog:landing_view'),
+            image=image_url
+        )
 
 
 class CategoryView(RelatedListMixin, ArticleListView):
