@@ -19,7 +19,7 @@ from iwg_blog.attachments.views import FeaturedDocumentsMixin
 from iwg_blog.blog.serializers import ArticleSerializer
 from iwg_blog.utils.views import JsonResponseMixin
 from .forms import SubscribeForm, UnsubscribeForm
-from .models import Article, Subscriber, Tag, Category
+from .models import Article, Subscriber, Tag, Category, BaseArticle
 
 
 class BaseViewMixin(object):
@@ -89,7 +89,30 @@ class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
         return context
 
 
-class ArticleView(BaseViewMixin, DetailView):
+class HitsTrackingMixin(object):
+    def get_hit_flag_name(self, obj):
+        opts = obj._meta
+        return 'hit_%s_%s_%s' % (opts.app_label, opts.model_name, obj.slug)
+
+    def set_hit(self, obj):
+        obj.hits = models.F('hits') + 1
+        obj.save()
+
+        self.request.session[self.get_hit_flag_name(obj)] = True
+
+    def has_hit(self, obj):
+        return self.request.session.get(self.get_hit_flag_name(obj))
+
+    def get_object(self, queryset=None):
+        obj = super(HitsTrackingMixin, self).get_object(queryset)
+
+        if obj.status == obj.STATUS_PUBLISHED and not self.has_hit(obj):
+            self.set_hit(obj)
+
+        return obj
+
+
+class ArticleView(HitsTrackingMixin, BaseViewMixin, DetailView):
     model = Article
     queryset = Article.objects.all()
     template_name = 'pages/article.html'
@@ -101,7 +124,8 @@ class ArticleView(BaseViewMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = dict()
-        context['related_articles'] = self.get_queryset().exclude(pk=self.object.pk) \
+        context['related_articles'] = self.get_queryset() \
+            .filter(status=BaseArticle.STATUS_PUBLISHED).exclude(pk=self.object.pk) \
             .filter(category=self.object.category)[:self.related_articles_count]
         context.update(kwargs)
         return super(ArticleView, self).get_context_data(**context)
