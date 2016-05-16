@@ -101,3 +101,28 @@
 .alert-error .alert-link {
     color: #843534;
 }
+
+.subscribe-alerts {
+    position: absolute;
+    width: 100%;
+    text-align: left;
+}
+.subscribe-alerts .alert {
+    padding: 3px 12px;
+    background: none;
+    border: none;
+    margin-bottom: 0px;
+}
+@media screen and (max-width: 930px) {
+    .subscribe-alerts {
+        text-align: center;
+        position: relative;
+        min-height: 17px;
+        top: -17px;
+        margin-bottom: -17px;
+    }
+    .subscribe-alerts .alert {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}

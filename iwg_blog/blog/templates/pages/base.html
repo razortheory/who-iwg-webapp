@@ -85,6 +85,38 @@
         }
       }(document, "script", "twitter-wjs");
     </script>
+    <script>
+      $(function () {
+        var $subscribeForm = $('#id__subscribe__form'),
+            $subscribeAlerts = $subscribeForm.find('.subscribe-alerts'),
+            subscribeUrl = $subscribeForm.attr('action'),
+            cleanTimeout = 5000;
+        $subscribeForm.on('submit', function (e) {
+
+          $.post(subscribeUrl, $subscribeForm.serialize())
+            .done(function (data) {
+              $subscribeAlerts.empty();
+
+              $subscribeAlerts.append('<div class="alert alert-success">' + data.message + '</div>');
+
+              setTimeout(function () { $subscribeAlerts.empty(); }, cleanTimeout);
+            }).error(function ($xhr) {
+              var data = $xhr.responseJSON;
+
+              $subscribeAlerts.empty();
+
+              for (key in data.errors) {
+                for (var i = 0; i < data.errors[key].length; i++) {
+                  $subscribeAlerts.append('<div class="alert alert-error">' + data.errors[key][i] + '</div>');
+                }
+              }
+
+              setTimeout(function () { $subscribeAlerts.empty(); }, cleanTimeout);
+            });
+          e.preventDefault();
+        });
+      });
+    </script>
   {% endcompress %}
   {% include "include/cookies-policy.html" %}
 {% endblock %}

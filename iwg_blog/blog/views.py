@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.db import models
 from django.http import JsonResponse
-from django.shortcuts import redirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
@@ -250,17 +249,21 @@ class SubscribeForUpdates(CreateView):
     template_name = 'subscribe_form.html'
     success_url = reverse_lazy('blog:landing_view')
 
+    success_message = 'You\'re successfully subscribed.'
+
     def form_valid(self, form):
-        messages.success(self.request, 'You\'re successfully subscribed.')
+        if self.request.is_ajax():
+            self.object = form.save()
+            return JsonResponse({'message': self.success_message})
+
+        messages.success(self.request, self.success_message)
         return super(SubscribeForUpdates, self).form_valid(form)
 
     def form_invalid(self, form):
-        for errorlist in form.errors.values():
-            for error in errorlist:
-                messages.error(self.request, error)
+        if self.request.is_ajax():
+            return JsonResponse({'errors': form.errors}, status=400)
 
-        next_url = self.request.META.get('HTTP_REFERER') or 'blog:landing_view'
-        return redirect(next_url)
+        return super(SubscribeForUpdates, self).form_invalid(form)
 
 
 class UnsubscribeFromUpdates(UpdateView):
