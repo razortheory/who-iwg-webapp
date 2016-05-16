@@ -202,6 +202,7 @@ META_SITE_NAME = 'IWG Portal'
 MARKDOWN_SET_PATH = 'vendor/django_markdown/sets'
 MARKDOWN_SET_NAME = 'custom_markdown'
 MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.nl2br',
     'markdown.extensions.smarty',
     'markdown.extensions.tables',
     'markdown.extensions.attr_list',
