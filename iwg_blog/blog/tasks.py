@@ -14,7 +14,7 @@ from mailing.shortcuts import render_send_email
 from .models import Article, Subscriber
 
 
-@periodic_task(run_every=crontab(day_of_week=1, hour=15), ignore_result=True)
+@periodic_task(run_every=crontab(day_of_week=1, hour=15, minute=0), ignore_result=True)
 def send_emails_for_subscribers():
     emails = Subscriber.objects.filter(send_email=True).values_list('email', flat=True)
 
