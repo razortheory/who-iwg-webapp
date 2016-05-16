@@ -118,30 +118,18 @@
   <table style="width: 95%; margin: 1em auto;">
     <tr>
       <td align="left">
-        <a href="http://www.who.int/" target="_blank">
-          {% static 'images/w-h-o-logo.png' as who_logo %}
-          <img src="{% absolute_url who_logo %}"
-               style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em">
-        </a>
-        <a href="http://www.unfoundation.org/" target="_blank">
-          {% static 'images/u-n-f-logo.png' as unf_logo %}
-          <img src="{% absolute_url unf_logo %}"
-               style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em">
-        </a>
+        {% static 'images/w-h-o-logo.png' as who_logo %}
+        <a href="http://www.who.int/" target="_blank"><img src="{% absolute_url who_logo %}" style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em"></a>
+        {% static 'images/u-n-f-logo.png' as unf_logo %}
+        <a href="http://www.unfoundation.org/" target="_blank"><img src="{% absolute_url unf_logo %}" style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em"></a>
       </td>
       <td align="right" style="vertical-align: top; width: 50%;">
-        <a href="http://www.facebook.com/sharer/sharer.php?u={{ scheme }}://{{ domain }}" target="_blank">
-          {% static 'images/facebook-sharer.png' as fb_sharer %}
-          <img src="{% absolute_url fb_sharer %}" height="30" style="margin-right: 0.5em;">
-        </a>
-        <a href="http://twitter.com/share?&url={{ scheme }}://{{ domain }}" target="_blank">
-          {% static 'images/twitter-sharer.png' as twitter_sharer %}
-          <img src="{% absolute_url twitter_sharer %}" height="30" style="margin-right: 0.5em;">
-        </a>
-        <a href="https://plus.google.com/share?url={{ scheme }}://{{ domain }}" target="_blank">
-          {% static 'images/google-sharer.png' as google_sharer %}
-          <img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;">
-        </a>
+        {% static 'images/facebook-sharer.png' as fb_sharer %}
+        <a href="http://www.facebook.com/sharer/sharer.php?u={{ scheme }}://{{ domain }}" target="_blank"><img src="{% absolute_url fb_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+        {% static 'images/twitter-sharer.png' as twitter_sharer %}
+        <a href="http://twitter.com/share?&url={{ scheme }}://{{ domain }}" target="_blank"><img src="{% absolute_url twitter_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+        {% static 'images/google-sharer.png' as google_sharer %}
+        <a href="https://plus.google.com/share?url={{ scheme }}://{{ domain }}" target="_blank"><img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;"></a>
       </td>
     </tr>
   </table>
