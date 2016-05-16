@@ -2,6 +2,9 @@
 {% load django_markdown compress %}
 
 
+{% block title %}{{ flatpage.title }} &mdash; {{ request.site.name }}{% endblock %}
+
+
 {% block content %}
   <div class="inner inner_article">
     <div class="post-page">
