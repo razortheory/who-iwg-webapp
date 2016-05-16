@@ -105,7 +105,7 @@ mySettings = {
       name: 'Link',
       key: 'L',
       openWith: '[Your text to link here...](',
-      closeWith: ' "Link title")',
+      closeWith: ')',
       placeHolder: 'http://'
     },
     {
@@ -276,7 +276,7 @@ $(document).ready(function () {
         processData: false,
         contentType: false,
         success: function (data, textStatus, jqXHR) {
-          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
+          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n'});
         },
         error: function (data, textStatus, errorThrown) {
           console.log('ERRORS: ' + data.statusText);

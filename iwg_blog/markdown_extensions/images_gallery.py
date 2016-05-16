@@ -5,12 +5,12 @@ Input:
     ----images-gallery----
     ![alt_text](/media/images/andrew_galves_paORKUs.png "title")
     ![alt_text](/media/images/ellie_JrzWbFV.png "title")
-    ![alt_text](/media/images/thomas_jbLH2AI.png "title")
+    ![alt_text](/media/images/thomas_jbLH2AI.png)
 Outputs:
     <div class="images-gallery">
         <div class="images-gallery-item"><img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title"></div>
         <div class="images-gallery-item"><img alt="alt_text" src="/media/images/ellie_JrzWbFV.png" title="title"></div>
-        <div class="images-gallery-item"><img alt="alt_text" src="/media/images/thomas_jbLH2AI.png" title="title"></div>
+        <div class="images-gallery-item"><img alt="alt_text" src="/media/images/thomas_jbLH2AI.png"></div>
     </div>
 """
 
@@ -23,7 +23,7 @@ from markdown.util import etree
 
 class ImagesGalleryProcessor(ParagraphProcessor):
     RE = re.compile(r'^[-]{3,}images-gallery[-]{3,}\n(?P<data>(.*\n?)+)', re.MULTILINE)
-    IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_url>[^ ]+) "(?P<title>[^"]+)"\)')
+    IMAGE_RE = re.compile(r'!\[(?P<alt_text>[^\]]+)\]\((?P<image_data>[^)]+)\)')
     COLUMNS_RE = re.compile(r'columns:[ ]?(?P<columns_num>\d+)\n')
 
     def test(self, parent, block):
@@ -43,18 +43,22 @@ class ImagesGalleryProcessor(ParagraphProcessor):
 
         for image_match in self.IMAGE_RE.finditer(images_match.group('data')):
             image_dict = image_match.groupdict()
+            image_data = image_dict['image_data']
+            image_link = image_data.split()[0]
 
             gallery_item = etree.SubElement(images_gallery, 'div')
             gallery_item.set('class', 'images-gallery-item col-sm-%s' % (12/columns_num, ))
 
             gallery_item_link = etree.SubElement(gallery_item, 'a')
-            gallery_item_link.set('href', image_dict['image_url'])
+            gallery_item_link.set('href', image_link)
             gallery_item_link.set('target', '_blank')
 
             image = etree.SubElement(gallery_item_link, 'img')
-            image.set('src', image_dict['image_url'])
+            image.set('src', image_link)
             image.set('alt', image_dict['alt_text'])
-            image.set('title', image_dict['title'])
+            if len(image_data) > 1:
+                image_title = ''.join(image_data.split()[1:]).strip(u' "')
+                image.set('title', image_title)
 
         images_paginator = etree.SubElement(images_gallery_wrap, 'div')
         images_paginator.set('class', 'images-gallery-paginator')

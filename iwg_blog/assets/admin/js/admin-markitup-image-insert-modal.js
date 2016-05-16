@@ -3,7 +3,7 @@ $(function () {
         var form = window.imageModalForm;
         var url = form.find('#image-insert-url').val();
         if (url){
-            $.markItUp({replaceWith: '![alt_text](' + url + ' "title")\n'});
+            $.markItUp({replaceWith: '![alt_text](' + url + ')\n'});
             window.imageModalDialog.dialog("close");
             return;
         }
@@ -27,7 +27,7 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (data, textStatus, jqXHR) {
-                $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ' "title")\n'});
+                $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n'});
             },
             error: function (data, textStatus, errorThrown) {
                 console.log('ERRORS: ' + data.statusText);
