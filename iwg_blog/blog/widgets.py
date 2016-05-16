@@ -1,7 +1,7 @@
 from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms.utils import flatatt
-from django.forms.widgets import CheckboxSelectMultiple
+from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.template import loader
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -74,8 +74,22 @@ class TagitWidget(CheckboxSelectMultiple):
             value = []
         final_attrs = self.build_attrs(attrs, name=name)
 
-        output = [format_html('<ul{}>', flatatt(final_attrs))]
-        output.extend([format_html('<li>{}</li>', label) for label in value])
-        output.append('</ul>')
+        output = [format_html(u'<ul{}>', flatatt(final_attrs))]
+        output.extend([format_html(u'<li>{}</li>', label) for label in value])
+        output.append(u'</ul>')
 
         return mark_safe('\n'.join(output))
+
+
+class LimitedTextarea(Textarea):
+    wrapper_template = u'<div class="limited-textarea">{} <div class="counter"></div></div>'
+
+    class Media:
+        css = {
+            'all': ['admin/css/limited-textarea.css'],
+        }
+        js = ['admin/js/limited-textarea.js']
+
+    def render(self, name, value, attrs=None):
+        textarea = super(LimitedTextarea, self).render(name, value, attrs)
+        return format_html(self.wrapper_template, textarea)

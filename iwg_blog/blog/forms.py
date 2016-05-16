@@ -7,7 +7,7 @@ import embedded_media
 
 from .fields import MarkdownFormField, TagitField
 from .models import Subscriber
-from .widgets import AdminImageWidget, CustomMarkdownWidget
+from .widgets import AdminImageWidget, CustomMarkdownWidget, LimitedTextarea
 
 
 def set_attrs_for_field(field, attrs):
@@ -50,6 +50,7 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
+            'short_description': LimitedTextarea,
             'content': CustomMarkdownWidget,
             'cover_image': AdminImageWidget,
         }
