@@ -1,4 +1,5 @@
 from django.contrib import admin
+from six import string_types
 
 
 class ConfigurableModelAdmin(admin.ModelAdmin):
@@ -16,3 +17,19 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
     def get_list_display(self, request):
         list_display = super(ConfigurableModelAdmin, self).get_list_display(request)[:]
         return self._filter_configurable_list(request, list_display, 'list_display_')
+
+
+def remove_from_fieldsets(fieldsets, fields):
+    if isinstance(fields, string_types):
+        fields = [fields, ]
+
+    for fieldset in fieldsets:
+        for field in fields:
+            if field in fieldset[1]['fields']:
+                newfields = []
+                for myfield in fieldset[1]['fields']:
+                    if not myfield in fields:
+                        newfields.append(myfield)
+
+                fieldset[1]['fields'] = tuple(newfields)
+                break
