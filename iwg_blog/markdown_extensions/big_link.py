@@ -37,48 +37,48 @@ class BigLinkGalleryProcessor(ParagraphProcessor):
         return bool(self.RE.match(block))
 
     def run(self, parent, blocks):
-        for block in blocks:
-            images_match = self.RE.match(block)
-            if images_match:
-                blocks.remove(block)
-                parent_div = etree.SubElement(parent, 'div')
-                parent_div.set('class', 'article-content-preview_container')
-                parent_link = etree.SubElement(parent_div, 'a')
-                parent_link.set('class', 'article-content-preview_link')
-                article_content_preview = etree.SubElement(parent_link, 'div')
-                article_content_preview.set('class', 'article-content-preview')
+        block = blocks.pop(0)
+        block_match = self.RE.match(block)
 
-                data = {}
-                for data_match in self.DATA_RE.finditer(images_match.group('data')):
-                    data_dict = data_match.groupdict()
-                    data[data_dict['key'].strip()] = data_dict['value'].strip()
+        parent_div = etree.SubElement(parent, 'div')
+        parent_div.set('class', 'article-content-preview_container')
+        parent_link = etree.SubElement(parent_div, 'a')
+        parent_link.set('class', 'article-content-preview_link')
+        article_content_preview = etree.SubElement(parent_link, 'div')
+        article_content_preview.set('class', 'article-content-preview')
 
-                if 'image' in data:
-                    image_tag_match = re.match(IMAGE_LINK_RE, data['image'])
-                    if image_tag_match:
-                        data['image'] = image_tag_match.group(9).split()[0]
+        data = {}
+        for data_match in self.DATA_RE.finditer(block_match.group('data')):
+            data_dict = data_match.groupdict()
+            data[data_dict['key'].strip()] = data_dict['value'].strip()
 
-                    image_item = etree.SubElement(article_content_preview, 'div')
-                    image_item.set('style', 'background-image:url(%s)' % data['image'])
-                    image_item.set('class', 'article-content-preview__thumbnail')
+        if 'image' in data:
+            image_tag_match = re.match(IMAGE_LINK_RE, data['image'])
+            if image_tag_match:
+                img_data = image_tag_match.group(9).split()
+                data['image'] = img_data[0] if img_data else ''
 
-                parent_link.set('href', data['url'])
-                parent_link.set('target', '_blank')
+            image_item = etree.SubElement(article_content_preview, 'div')
+            image_item.set('style', 'background-image:url(%s)' % data['image'])
+            image_item.set('class', 'article-content-preview__thumbnail')
 
-                body_item = etree.SubElement(article_content_preview, 'div')
-                body_item.set('class', 'article-content-preview__body')
-                body_title = etree.SubElement(body_item, 'h4')
-                body_title.set('class', 'article-content-preview__title')
-                body_title.text = data.get('text', '')
+        parent_link.set('href', data['url'])
+        parent_link.set('target', '_blank')
 
-                if 'description' in data:
-                    body_description = etree.SubElement(body_item, 'div')
-                    body_description.set('class', 'article-content-preview__text')
-                    body_description.text = data.get('description', '')
+        body_item = etree.SubElement(article_content_preview, 'div')
+        body_item.set('class', 'article-content-preview__body')
+        body_title = etree.SubElement(body_item, 'h4')
+        body_title.set('class', 'article-content-preview__title')
+        body_title.text = data.get('text', '')
 
-                body_href = etree.SubElement(body_item, 'span')
-                body_href.set('class', 'article-content-preview__link')
-                body_href.text = AtomicString(urlparse(data['url']).netloc or data['url'])
+        if 'description' in data:
+            body_description = etree.SubElement(body_item, 'div')
+            body_description.set('class', 'article-content-preview__text')
+            body_description.text = data.get('description', '')
+
+        body_href = etree.SubElement(body_item, 'span')
+        body_href.set('class', 'article-content-preview__link')
+        body_href.text = AtomicString(urlparse(data['url']).netloc or data['url'])
 
 
 class BigLinkExtension(Extension):

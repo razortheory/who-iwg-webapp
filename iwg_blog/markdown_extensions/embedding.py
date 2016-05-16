@@ -23,26 +23,22 @@ class EmbeddingProcessor(ParagraphProcessor):
         return bool(self.RE.match(block))
 
     def run(self, parent, blocks):
-        for block in blocks:
-            m = self.RE.match(block)
-            if not m:
-                continue
+        block = blocks.pop(0)
+        block_match = self.RE.match(block)
 
-            el = etree.SubElement(parent, 'iframe')
-            el.set('class', 'embed')
-            el.set('webkitallowfullscreen', '')
-            el.set('mozallowfullscreen', '')
-            el.set('allowfullscreen', '')
-            el.set('frameborder', '0')
-            el.set('width', '100%')
-            el.set('src', m.groupdict()['url'])
-            params = m.groupdict()['params'] or ''
-            for param in params.split('&'):
-                param = param.split('=')
-                if len(param) == 2:
-                    el.set(*param)
-
-            blocks.remove(block)
+        el = etree.SubElement(parent, 'iframe')
+        el.set('class', 'embed')
+        el.set('webkitallowfullscreen', '')
+        el.set('mozallowfullscreen', '')
+        el.set('allowfullscreen', '')
+        el.set('frameborder', '0')
+        el.set('width', '100%')
+        el.set('src', block_match.groupdict()['url'])
+        params = block_match.groupdict()['params'] or ''
+        for param in params.split('&'):
+            param = param.split('=')
+            if len(param) == 2:
+                el.set(*param)
 
 
 class EmbeddingExtension(Extension):
