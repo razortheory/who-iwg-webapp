@@ -1,15 +1,15 @@
 import re
-from autoslug.utils import slugify, generate_unique_slug
 
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 
+from autoslug.utils import generate_unique_slug, slugify
 from django_markdown.models import MarkdownField
 from meta.models import ModelMeta
 
 from .fields import AutoSlugField, OrderedManyToManyField
-from .managers import ArticleManager, SampleArticleManager, ArticleTagManager, PublishedArticleManager
+from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager, SampleArticleManager
 from .utils import markdown_to_text
 
 
@@ -72,7 +72,7 @@ class BaseArticle(ModelMeta, models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True, editable=False)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -83,14 +83,8 @@ class BaseArticle(ModelMeta, models.Model):
         return self.title
 
     def save(self, **kwargs):
-        if self.pk:
-            old_obj = self._meta.model.objects.get(pk=self.pk)
-
-            if old_obj.status != self.status and self.status == self.STATUS_PUBLISHED:
-                self.published_at = timezone.now()
-        else:
-            if self.status == self.STATUS_PUBLISHED:
-                self.published_at = timezone.now()
+        if not self.published_at and self.status == self.STATUS_PUBLISHED:
+            self.published_at = timezone.now()
 
         self.words_count = len(re.findall(r"\S+", self.content_text))
         super(BaseArticle, self).save(**kwargs)

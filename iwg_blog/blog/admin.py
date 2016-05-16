@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.utils.encoding import force_text
 from watson.search import default_search_engine
 
-from ..utils.admin import ConfigurableModelAdmin
+from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
 from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
 from .models import Article, Category, SampleArticle, Tag, Subscriber
@@ -20,7 +20,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
     change_form_template = 'admin/custom_change_form.html'
 
     fieldsets = (
-        (None, {'fields': ['title', 'slug', 'tags', 'status']}),
+        (None, {'fields': ['title', 'slug', 'tags', 'status', 'published_at']}),
         (None, {'fields': ['cover_image', 'short_description', 'content']}),
     )
 
@@ -29,15 +29,21 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
     def list_display_hits(self, request):
         return request.user.has_perm('blog.view_article_hits')
 
+    def get_readonly_fields(self, request, obj=None):
+        readonly_fields = super(BaseArticleAdmin, self).get_readonly_fields(request, obj=obj)[:]
+        if obj:
+            readonly_fields += ('slug', )
+        return readonly_fields
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = copy.deepcopy(super(BaseArticleAdmin, self).get_fieldsets(request, obj=obj))
+        if not obj:
+            remove_from_fieldsets(fieldsets, 'published_at')
+        return fieldsets
+
     def changelist_view(self, request, extra_context=None):
         self.request = request
         return super(BaseArticleAdmin, self).changelist_view(request, extra_context=extra_context)
-
-    def get_fields(self, request, obj=None):
-        fields = super(BaseArticleAdmin, self).get_fields(request, obj=obj)[:]
-        if obj:
-            fields.remove('slug')
-        return fields
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(BaseArticleAdmin, self).get_form(request, obj, **kwargs)
