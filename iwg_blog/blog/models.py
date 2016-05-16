@@ -72,7 +72,7 @@ class BaseArticle(ModelMeta, models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    published_at = models.DateTimeField(null=True)
+    published_at = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         abstract = True
@@ -83,14 +83,8 @@ class BaseArticle(ModelMeta, models.Model):
         return self.title
 
     def save(self, **kwargs):
-        if self.pk:
-            old_obj = self._meta.model.objects.get(pk=self.pk)
-
-            if not self.published_at and old_obj.status != self.status and self.status == self.STATUS_PUBLISHED:
-                self.published_at = timezone.now()
-        else:
-            if not self.published_at and self.status == self.STATUS_PUBLISHED:
-                self.published_at = timezone.now()
+        if not self.published_at and self.status == self.STATUS_PUBLISHED:
+            self.published_at = timezone.now()
 
         self.words_count = len(re.findall(r"\S+", self.content_text))
         super(BaseArticle, self).save(**kwargs)
