@@ -1,4 +1,5 @@
 import copy
+from pprint import pprint
 
 from django.contrib import admin, messages
 from django.contrib.flatpages.models import FlatPage
@@ -10,7 +11,7 @@ from watson.search import default_search_engine
 from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
 from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
-from .models import Article, Category, SampleArticle, Tag, Subscriber
+from .models import Article, Category, SampleArticle, Tag, Subscriber, BaseArticle
 from ..utils.base import update_url_params
 from ..attachments.admin import DocumentAdminInline
 
@@ -25,6 +26,40 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
     )
 
     inlines = (DocumentAdminInline,)
+
+    def change_status(self, request, queryset, status):
+        model = queryset.model
+        opts = model._meta
+
+        status_display = force_text(dict(opts.get_field('status').flatchoices).get(status, status), strings_only=True)
+        objects_count = queryset.count()
+
+        queryset.update(status=status)
+        messages.success(request, 'Status set to "%s" in %s %s.' % (
+            status_display, objects_count, opts.verbose_name if objects_count == 1 else opts.verbose_name_plural
+        ))
+    change_status.short_description = 'Mark as "%(status_name)s"'
+
+    def make_action(self, action, kwargs, context):
+        if callable(action):
+            func = action
+            action = action.__name__
+
+        elif hasattr(self.__class__, action):
+            func = getattr(self.__class__, action)
+
+        description = func.short_description % context
+        action += '__' + '__'.join(map(lambda x: '%s__%s' % x, kwargs.items()))
+        return lambda s, r, q: func(s, r, q, **kwargs), action, description
+
+    def get_actions(self, request):
+        actions = super(BaseArticleAdmin, self).get_actions(request)
+
+        for value, name in BaseArticle.CHOICES_STATUS:
+            action = self.make_action('change_status', {'status': value}, {'status_name': name})
+            actions[action[1]] = action
+
+        return actions
 
     def list_display_hits(self, request):
         return request.user.has_perm('blog.view_article_hits')
@@ -75,6 +110,32 @@ class ArticleAdmin(BaseArticleAdmin):
     search_adapter_cls = ArticleAdapter
     search_engine = default_search_engine
     search_fields = [None]
+
+    actions = ['mark_featured', 'unmark_featured']
+
+    def mark_featured(self, request, queryset):
+        model = queryset.model
+        opts = model._meta
+
+        objects_count = queryset.count()
+
+        queryset.update(is_featured=True)
+        messages.success(request, '%s %s marked as featured.' % (
+            objects_count, opts.verbose_name if objects_count == 1 else opts.verbose_name_plural
+        ))
+    mark_featured.short_description = 'Mark as featured'
+
+    def unmark_featured(self, request, queryset):
+        model = queryset.model
+        opts = model._meta
+
+        objects_count = queryset.count()
+
+        queryset.update(is_featured=False)
+        messages.success(request, 'Featured flag removed from %s %s.' % (
+            objects_count, opts.verbose_name if objects_count == 1 else opts.verbose_name_plural
+        ))
+    unmark_featured.short_description = 'Remove featured flag'
 
     def get_queryset(self, request):
         return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
