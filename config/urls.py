@@ -19,6 +19,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 
 from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
 
@@ -38,6 +39,9 @@ urlpatterns = [
 
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
+    url(r'^robots.txt$', TemplateView.as_view(
+        template_name='robots_allow.txt',
+        content_type='text/plain'), name='robots'),
 
     url(r'', include('iwg_blog.blog.urls')),
     url(r'', include('iwg_blog.grantee.urls')),
