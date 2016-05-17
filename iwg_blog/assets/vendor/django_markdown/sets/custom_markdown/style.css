@@ -2,73 +2,80 @@
 // markItUp!
 // By Jay Salvat - http://markitup.jaysalvat.com/
 // ------------------------------------------------------------------*/
+.markItUp .markItUpButton a {
+    background-size: contain;
+    background-position: 50% 50%;
+    padding: 0;
+    margin: 3px;
+}
+
 .markItUp .mui-h1 a {
-    background-image: url(images/h1.png);
+    background-image: url(images/svg/h1.svg);
 }
 
 .markItUp .mui-h2 a {
-    background-image: url(images/h2.png);
+    background-image: url(images/svg/h2.svg);
 }
 
 .markItUp .mui-h3 a {
-    background-image: url(images/h3.png);
+    background-image: url(images/svg/h3.svg);
 }
 
 .markItUp .mui-h4 a {
-    background-image: url(images/h4.png);
+    background-image: url(images/svg/h4.svg);
 }
 
 .markItUp .mui-h5 a {
-    background-image: url(images/h5.png);
+    background-image: url(images/svg/h5.svg);
 }
 
 .markItUp .mui-h6 a {
-    background-image: url(images/h6.png);
+    background-image: url(images/svg/h6.svg);
 }
 
 .markItUp .mui-bold a {
-    background-image: url(images/bold.png);
+    background-image: url(images/svg/bold.svg);
 }
 
 .markItUp .mui-italic a {
-    background-image: url(images/italic.png);
+    background-image: url(images/svg/i.svg);
 }
 
 .markItUp .mui-list-bulleted a {
-    background-image: url(images/list-bullet.png);
+    background-image: url(images/svg/list-button.svg);
 }
 
 .markItUp .mui-list-numeric a {
-    background-image: url(images/list-numeric.png);
+    background-image: url(images/svg/list.svg);
 }
 
 .markItUp .mui-picture a,
 .markItUp .mui-picture-modal a {
-    background-image: url(images/photo.png);
+    background-image: url(images/svg/image.svg);
 }
 
 .markItUp .mui-picture-gallery a {
-    background-image: url(images/gallery.png);
+    background-image: url(images/svg/gallery.svg);
 }
 
 .markItUp .mui-embed a {
-    background-image: url(images/multimedia.png);
+    background-image: url(images/svg/embed.svg);
 }
 
 .markItUp .mui-link a {
-    background-image: url(images/link.png);
+    background-image: url(images/svg/link.svg);
 }
 
 .markItUp .mui-big-link a {
-    background-image: url(images/earth-link.png);
+    background-image: url(images/svg/big-link.svg);
 }
 
 .markItUp .mui-quotes a {
-    background-image: url(images/quotes.png);
+    background-image: url(images/svg/quote.svg);
 }
 
 .markItUp .mui-table a {
-    background-image: url(images/grid.png);
+    background-image: url(images/svg/table.svg);
 }
 
 .markItUp .preview a {
