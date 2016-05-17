@@ -227,4 +227,3 @@ MARKDOWN_EXTENSION_CONFIGS = {
 
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 THUMBNAIL_BACKEND = 'iwg_blog.thumbnail_lazy.backends.LazyThumbnailBackend'
-THUMBNAIL_STORAGE = 'config.settings.s3utils.ThumbnailS3BotoStorage'
