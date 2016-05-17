@@ -2,6 +2,9 @@
 {% load staticfiles compress %}
 
 
+{% block title %}{{ request.site.name }}{% endblock %}
+
+
 {% block content %}
   {% include "partials/widgets/slider.html" with articles=featured_articles %}
   {% include "partials/widgets/categories-links.html" %}
