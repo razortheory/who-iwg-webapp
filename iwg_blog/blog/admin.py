@@ -1,10 +1,12 @@
 import copy
-from pprint import pprint
 
 from django.contrib import admin, messages
 from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models.functions import Coalesce
 from django.http import HttpResponseRedirect
+from django.utils import timezone
 from django.utils.encoding import force_text
 from watson.search import default_search_engine
 
@@ -34,7 +36,10 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
         status_display = force_text(dict(opts.get_field('status').flatchoices).get(status, status), strings_only=True)
         objects_count = queryset.count()
 
-        queryset.update(status=status)
+        update_fields = {'status': status}
+        if status == model.STATUS_PUBLISHED:
+            update_fields['published_at'] = Coalesce(models.F('published_at'), models.Value(timezone.now()))
+        queryset.update(**update_fields)
         messages.success(request, 'Status set to "%s" in %s %s.' % (
             status_display, objects_count, opts.verbose_name if objects_count == 1 else opts.verbose_name_plural
         ))
