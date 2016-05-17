@@ -10,6 +10,10 @@ class MediaRootS3BotoStorage(S3BotoStorage):
         return self.url('')
 
 
+class ThumbnailS3BotoStorage(MediaRootS3BotoStorage):
+    file_overwrite = True
+
+
 class StaticRootS3BotoStorage(S3BotoStorage):
     location = 'static'
     file_overwrite = True
