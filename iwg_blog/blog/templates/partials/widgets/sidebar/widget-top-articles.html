@@ -5,7 +5,7 @@
     {% for article in articles %}
       <li class="widget-top-articles__item">
         <a href="{{ article.get_absolute_url }}" class="widget-top-articles__link">
-          {% thumbnail article.cover_image "100x100" crop="center" as im %}
+          {% thumbnail article.cover_image "100x100" crop="center" lazy="True" as im %}
             <div style="background-image:url({{ im.url }})" class="widget-top-articles__thumbnail">
           {% endthumbnail %}
           </div>

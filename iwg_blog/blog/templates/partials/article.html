@@ -22,7 +22,7 @@
       {{ article.published_at |date:"j<\s\u\b>S</\s\u\b> F, Y" |safe }}
     </div>
   </div>
-  {% thumbnail article.cover_image "1200" as im %}
+  {% thumbnail article.cover_image "1200" lazy="True" as im %}
     <img src="{{ im.url }}" class="article__main-image" alt="">
   {% endthumbnail %}
   <div class="article__body content-text">

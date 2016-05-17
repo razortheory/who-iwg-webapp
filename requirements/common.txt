@@ -23,5 +23,5 @@ django-embedded-media
 django-watson
 
 django-libsass
-sorl-thumbnail
+sorl-thumbnail==12.4a1
 redis

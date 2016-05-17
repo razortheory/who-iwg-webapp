@@ -48,7 +48,7 @@ INSTALLED_APPS += (
 
 BROKER_URL = env('BROKER_URL', default='amqp://guest@localhost//')
 
-CELERY_ALWAYS_EAGER = True
+# CELERY_ALWAYS_EAGER = True
 
 
 # Django meta configuration
@@ -68,4 +68,3 @@ NEWRELIC_AVAILABILITY_TEST_ACTIVE = False
 # --------------------------------------------------------------------------
 
 THUMBNAIL_DEBUG = True
-THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
