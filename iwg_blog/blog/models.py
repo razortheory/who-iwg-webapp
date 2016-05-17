@@ -79,7 +79,7 @@ class BaseArticle(ModelMeta, models.Model):
         (STATUS_PUBLISHED, 'Published')
     )
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=130)
 
     tags = OrderedManyToManyField(Tag, related_name='%(class)ss', blank=True)
 
@@ -163,7 +163,7 @@ class Article(BaseArticle):
         manager=all_objects,
     )
 
-    short_description = models.TextField(max_length=300)
+    short_description = models.TextField(max_length=450)
 
     is_featured = models.BooleanField(default=False)
     is_sample = models.BooleanField(default=False, editable=False)
