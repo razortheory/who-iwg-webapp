@@ -13,7 +13,7 @@ from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager
 from .utils import markdown_to_text
 
 
-class Category(models.Model):
+class Category(ModelMeta, models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(
         populate_from='name', editable=True, unique=True, blank=True,
@@ -23,14 +23,23 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    _metadata = {
+        'title': 'name',
+        'url': 'absolute_url',
+    }
+
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('blog:category_detail_view', args=(self.slug, ))
 
+    @property
+    def absolute_url(self):
+        return self.get_absolute_url()
 
-class Tag(models.Model):
+
+class Tag(ModelMeta, models.Model):
     name = models.CharField(max_length=255, unique=True)
     slug = AutoSlugField(
         populate_from='name', editable=True, unique=True, blank=True,
@@ -39,11 +48,24 @@ class Tag(models.Model):
 
     objects = ArticleTagManager()
 
+    _metadata = {
+        'title': 'meta_name',
+        'url': 'absolute_url',
+    }
+
+    @property
+    def meta_name(self):
+        return u"#%s" % self.name
+
     def __unicode__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('blog:tag_detail_view', args=(self.slug,))
+
+    @property
+    def absolute_url(self):
+        return self.get_absolute_url()
 
 
 class BaseArticle(ModelMeta, models.Model):

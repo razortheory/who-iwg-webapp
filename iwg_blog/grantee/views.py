@@ -37,8 +37,8 @@ class RoundView(RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
     paginate_by = 6
 
     def get_meta_context(self, **context):
-        return Meta(title='Article list',
-                    description='List of articles.',
+        return Meta(title='Grantees: %s' % self.object.name,
+                    description='List of grantees.',
                     url=reverse('blog:articles_view')
                     )
 

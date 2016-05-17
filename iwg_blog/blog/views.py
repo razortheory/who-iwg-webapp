@@ -159,7 +159,7 @@ class ArticleListView(BaseViewMixin, ListView):
         objects = context['object_list']
         image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
         return Meta(
-            title='IWG Portal',
+            title='List of articles',
             description='List of articles.',
             url=reverse('blog:articles_view'),
             image=image_url,
@@ -193,7 +193,7 @@ class SearchView(JsonResponseMixin, ArticleListView):
         objects = context['object_list']
         image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
         return Meta(
-            title='IWG Portal',
+            title='Search',
             description='Search result.',
             url=url,
             image=image_url,
@@ -234,6 +234,9 @@ class CategoryView(RelatedListMixin, ArticleListView):
     def get_queryset(self):
         return super(CategoryView, self).get_queryset().filter(category=self.object)
 
+    def get_meta_context(self, **context):
+        return self.object.as_meta(self.request)
+
 
 class TagView(RelatedListMixin, ArticleListView):
     template_name = 'pages/tagged-page.html'
@@ -241,6 +244,9 @@ class TagView(RelatedListMixin, ArticleListView):
 
     def get_queryset(self):
         return super(TagView, self).get_queryset().filter(tags=self.object)
+
+    def get_meta_context(self, **context):
+        return self.object.as_meta(self.request)
 
 
 class SubscribeForUpdates(CreateView):
