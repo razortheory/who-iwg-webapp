@@ -32,3 +32,9 @@ img.document-preview {
 .ui-widget {
     font-family: inherit;
 }
+
+.grp-row textarea {
+    font-family: "DejaVu Sans", sans-serif;
+    font-weight: normal;
+    color: black;
+}
