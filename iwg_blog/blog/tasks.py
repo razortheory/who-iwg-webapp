@@ -36,7 +36,5 @@ def send_emails_for_subscribers():
         'scheme': settings.META_SITE_PROTOCOL
     }
 
-    batch_size = 20
-
-    for offset in xrange(0, len(emails), batch_size):
-        render_send_email(emails[offset:offset + batch_size], 'email/newsletter', data)
+    for email in emails:
+        render_send_email([email, ], 'email/newsletter', data)
