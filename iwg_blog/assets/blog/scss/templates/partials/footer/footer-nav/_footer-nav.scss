@@ -24,6 +24,8 @@
 			max-width: 410px;
 			text-align: left;
 			display: flex;
+			display: -webkit-flex;
+			-webkit-justify-content: space-around;
 			justify-content: space-around;
 		}
 	}
