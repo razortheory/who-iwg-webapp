@@ -19,21 +19,14 @@ $(document).ready(function () {
     }
     else {
         $gallery.imagesLoaded(function(){
-            $gallery.carouFredSel({
-                responsive: true,
-                pagination: {
-                    container: $('.images-gallery-paginator', $galleryWrapper)
-                },
-                auto: {
-                    play: false
-                },
-                swipe: {
-                    onTouch: true,
-                    onMouse: true,
-                    options: {
-                        excludedElements:"button, input, select, textarea, .noSwipe"
-                    }
-                }
+            $gallery.bxSlider({
+                pager: false,
+                controls: false,
+                adaptiveHeight: true,
+                infiniteLoop: false,
+                preloadImages: 'all',
+                oneToOneTouch: false,
+                preventDefaultSwipeX: false,
             });
         });
     }
