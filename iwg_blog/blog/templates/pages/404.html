@@ -1,0 +1,18 @@
+{% extends "pages/article.html" %}
+{% load django_markdown compress %}
+
+
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      <article class="article">
+        <div class="article__header">
+          <h1 class="article__title">Page not found</h1>
+        </div>
+        <div class="article__body content-text">
+          <p>Sorry, but the page you are looking for has not been found. Try checking the URL for errors, then hit the refresh button on your browser.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock %}

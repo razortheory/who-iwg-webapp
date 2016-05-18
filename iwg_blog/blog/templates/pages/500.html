@@ -1,0 +1,18 @@
+{% extends "pages/article.html" %}
+{% load django_markdown compress %}
+
+
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      <article class="article">
+        <div class="article__header">
+          <h1 class="article__title">Internal server error</h1>
+        </div>
+        <div class="article__body content-text">
+          <p>Uh oh, something went wrong. Stay calm, our ninjas are currently working on the issue.<br/>You can try again later, or return to the <a class="home-link" href="/">home page</a>.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock %}

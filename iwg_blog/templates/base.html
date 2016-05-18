@@ -6,7 +6,7 @@
   <head {% meta_namespaces %} itemscope itemtype="http://schema.org/WebSite">
     {% block head %}
       <meta charset="UTF-8">
-      <title itemprop='name'>{% block title %}{{ meta.title }} &mdash; {{ request.site.name }}{% endblock %}</title>
+      <title itemprop='name'>{% block title %}{% if meta.title %}{{ meta.title }} &mdash; {% endif %}{{ request.site.name }}{% endblock %}</title>
       {% include "meta/meta.html" %}
 
     {% endblock %}

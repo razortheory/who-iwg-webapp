@@ -308,3 +308,11 @@ class TagsAutocompleteAjax(View):
             .values_list('name', flat=True)[:self.tags_count]
 
         return JsonResponse(list(queryset), safe=False)
+
+
+class PageNotFoundView(TemplateView):
+    template_name = 'pages/404.html'
+
+
+class ServerErrorView(TemplateView):
+    template_name = 'pages/500.html'

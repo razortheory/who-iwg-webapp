@@ -22,6 +22,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 
 from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
+from iwg_blog.blog import views as blog_views
 
 sitemaps = {
     'articles': ArticlesSitemap,
@@ -55,3 +56,6 @@ if settings.NEWRELIC_AVAILABILITY_TEST_ACTIVE:
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = blog_views.PageNotFoundView.as_view()
+handler500 = blog_views.ServerErrorView.as_view()
