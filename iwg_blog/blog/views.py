@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.db import models
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
@@ -310,9 +311,9 @@ class TagsAutocompleteAjax(View):
         return JsonResponse(list(queryset), safe=False)
 
 
-class PageNotFoundView(TemplateView):
-    template_name = 'pages/404.html'
+def page_not_found(request):
+    return render(request, 'pages/404.html', {})
 
 
-class ServerErrorView(TemplateView):
-    template_name = 'pages/500.html'
+def server_error(request):
+    return render(request, 'pages/500.html', {})

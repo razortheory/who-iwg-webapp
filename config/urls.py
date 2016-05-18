@@ -57,5 +57,5 @@ if settings.NEWRELIC_AVAILABILITY_TEST_ACTIVE:
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-handler404 = blog_views.PageNotFoundView.as_view()
-handler500 = blog_views.ServerErrorView.as_view()
+handler404 = blog_views.page_not_found
+handler500 = blog_views.server_error
