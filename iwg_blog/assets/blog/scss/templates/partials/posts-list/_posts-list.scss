@@ -1,9 +1,5 @@
 .posts-list {
     &__title {
-        position: relative;
-        float: right;
-        width: 100%;
-        max-width: round(496px*$x);
     }
     &__list {
         clear: both;
