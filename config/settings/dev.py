@@ -68,4 +68,3 @@ NEWRELIC_AVAILABILITY_TEST_ACTIVE = False
 # --------------------------------------------------------------------------
 
 THUMBNAIL_DEBUG = True
-THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'

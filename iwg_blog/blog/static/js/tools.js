@@ -128,9 +128,16 @@ $(function () {
     }
     $searchResultsWrapper.hide();
   }
-  $searchForm[0].addEventListener('focus', onFormFocus, true);
-  $searchForm[0].addEventListener('blur', onFormBlur, true);
-  $('.search-top-results, .search-top__button', $searchForm).on('mousedown', function(event){
-    event.preventDefault();
-  });
+  if ($searchForm.length > 0){
+    $searchForm[0].addEventListener('focus', onFormFocus, true);
+    $searchForm[0].addEventListener('blur', onFormBlur, true);
+    $('.search-top-results, .search-top__button', $searchForm).on('mousedown', function(event){
+      event.preventDefault();
+    });
+    $searchForm.submit(function(){
+      if ($(this).find('input').val().length == 0) {
+        return false;
+      }
+    });
+  }
 });

@@ -49,6 +49,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    'iwg_blog.thumbnail_lazy',
     'iwg_blog.taskapp',
     'iwg_blog.blog',
     'iwg_blog.grantee',
@@ -219,3 +220,10 @@ MARKDOWN_EXTENSION_CONFIGS = {
         'smart_angled_quotes': True
     }
 }
+
+
+# Thumbnails configuration
+# --------------------------------------------------------------------------
+
+THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
+THUMBNAIL_BACKEND = 'iwg_blog.thumbnail_lazy.backends.LazyThumbnailBackend'

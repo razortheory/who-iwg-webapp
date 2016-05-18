@@ -155,9 +155,8 @@ if NEWRELIC_AVAILABILITY_TEST_ACTIVE:
 # Thumbnails configuration
 # --------------------------------------------------------------------------
 
+THUMBNAIL_STORAGE = 'config.settings.s3utils.ThumbnailS3BotoStorage'
 THUMBNAIL_FORCE_OVERWRITE = True
-THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
-THUMBNAIL_PREFIX = 'media/cache/'
 THUMBNAIL_REDIS_DB = env('REDIS_DB')
 THUMBNAIL_REDIS_PASSWORD = env('REDIS_PASSWORD')
 THUMBNAIL_REDIS_HOST = env('REDIS_HOST')

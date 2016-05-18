@@ -2,10 +2,12 @@
 	&__list {
 		@include list-reset;
 		@include max-screen(930px) {
-			text-align: center;
 			max-width: 400px;
 			margin-left: auto;
 			margin-right: auto;
+			display: flex;
+			justify-content: space-around;
+	    align-items: center;
 		}
 	}
 	&__item {
@@ -14,18 +16,9 @@
 		vertical-align: middle;
 		padding-right: round(28px*$x);
 		@include max-screen(930px) {
-			padding-right: 0;
-			margin-left: 3%;
-			margin-right: 3%;
-			width: 44%;
-		}
-		&:last-child {
-			padding-right: 0;
-		}
-		&:first-child {
-			@include max-screen(930px) {
-				margin-left: 0;
-			}
+			max-width: 50%;
+			padding-left: 5px;
+			padding-right: 5px;
 		}
 	}
 	&__link {

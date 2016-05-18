@@ -7,7 +7,7 @@
     {% for article in articles %}
       <li class="category-list__item">
         <div class="category-post">
-          {% thumbnail article.cover_image "600" as im %}
+          {% thumbnail article.cover_image "600" lazy="True" as im %}
             <div style="background-image:url({{ im.url }})" class="category-post__image"></div>
           {% endthumbnail %}
           <h3 class="category-post__title">{{ article.title }}

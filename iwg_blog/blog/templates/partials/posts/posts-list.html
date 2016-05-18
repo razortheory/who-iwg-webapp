@@ -12,8 +12,8 @@
     {% for article in articles %}
       <li class="post posts-list__item">
         <a href="{{ article.get_absolute_url }}">
-          {% thumbnail article.cover_image "800" as im %}
-            <div style="background-image:url({{ im.url }})" class="post__image"></div>
+          {% thumbnail article.cover_image "800" lazy="True" as im %}
+            <img src="{{ im.url }}" class="post__image">
           {% endthumbnail %}
           <h3 class="post__title">
             {{ article.title }}
@@ -22,7 +22,7 @@
         <div class="post__body">
           <a href="{{ article.get_absolute_url }}" class="button desktop-only post__button">CONTINUE READING</a>
           <div class="post__text">
-            {{ article.short_description |markdown }}
+            {{ article.short_description }}
           </div>
         </div>
         <div class="post__footer">
