@@ -25,6 +25,10 @@
 		z-index: 4;
 	}
 
+	.bx-wrapper, .bx-viewport {
+	    height: 100% !important;
+	}
+
 	&__list {
 		position: relative;
 		height: 100%;
@@ -171,6 +175,9 @@
 		&:focus {
 			padding-top: round(17px*$x);
 			padding-bottom: round(15px*$x);
+            @include max-screen($M_X3S) {
+                padding: 10px 18px 8px;
+            }
 		}
 	}
 	&__pagination {
@@ -184,9 +191,23 @@
 		@include min-screen($M_SM + 1) {
 			bottom: round(30px*$x);
 		}
+		div {
+		    display: inline;
+			margin: 0 0 0 16px;
+			@include min-screen($M_XS + 1) {
+				margin-left: round(20px*$x);
+				width: round(21px*$x);
+				height: round(21px*$x);
+			}
+			&:first-child {
+				margin-left: 0;
+				@include min-screen($M_XS + 1) {
+					margin-left: 0;
+				}
+			}
+		}
 		a {
 			position: relative;
-			margin: 0 0 0 16px;
 			height: 16px;
 			width: 16px;
 			display: inline-block;
@@ -194,11 +215,6 @@
 			border: 2px solid $white;
 			@include border-radius(100%);
 			@include transition();
-			@include min-screen($M_XS + 1) {
-				margin-left: round(20px*$x);
-				width: round(21px*$x);
-				height: round(21px*$x);
-			}
 			&:before {
 				position: absolute;
 				left: 50%;
@@ -220,12 +236,6 @@
 					height: round(12px*$x);
 				}
 			}
-			&:first-child {
-				margin-left: 0;
-				@include min-screen($M_XS + 1) {
-					margin-left: 0;
-				}
-			}
 			&:hover {
 				@include transition();
 				&:before {
@@ -233,7 +243,7 @@
 					@include opacity(1);
 				}
 			}
-			&.selected {
+			&.selected, &.active {
 				&:before {
 					@include opacity(1);
 				}

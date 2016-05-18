@@ -49,8 +49,8 @@
 {% block scripts %}
   {{ block.super }}
   {% compress js %}
+    <script src="{% static 'vendor/jquery.bxslider.min.js' %}"></script>
     <script src="{% static 'vendor/jquery.sticky-kit.min.js' %}"></script>
-    <script src="{% static 'vendor/jquery.carouFredSel.js' %}"></script>
     <script src="{% static 'vendor/jquery.touchSwipe.min.js' %}"></script>
     <script src="{% static 'vendor/fancybox/jquery.fancybox.pack.js' %}"></script>
     <script src="{% static 'blog/js/images-gallery.js' %}"></script>
