@@ -104,9 +104,9 @@ mySettings = {
       className: 'mui-link',
       name: 'Link',
       key: 'L',
-      openWith: '[Your text to link here...](',
-      closeWith: ')',
-      placeHolder: 'http://'
+      openWith: '[',
+      closeWith: '](http://)',
+      placeHolder: 'Your text to link here...'
     },
     {
       className: 'mui-big-link',
