@@ -2,6 +2,8 @@ import environ
 
 
 # Build paths inside the project like this: root(...)
+from django.core.urlresolvers import reverse_lazy
+
 env = environ.Env()
 
 root = environ.Path(__file__) - 3
@@ -227,3 +229,8 @@ MARKDOWN_EXTENSION_CONFIGS = {
 
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 THUMBNAIL_BACKEND = 'iwg_blog.thumbnail_lazy.backends.LazyThumbnailBackend'
+
+
+# Auth configuration
+# --------------------------------------------------------------------------
+LOGIN_URL = reverse_lazy('admin:login')
