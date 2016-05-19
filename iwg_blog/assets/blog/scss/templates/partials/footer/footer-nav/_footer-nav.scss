@@ -42,15 +42,6 @@
 			display: block;
 			padding-right: round(10px*$x);
 		}
-		@include min-screen(1200px) {
-			&:first-of-type {
-				padding-left: round(12px*$x);
-
-				&:before {
-					left: 0;
-				}
-			}
-		}
 		a{
 			padding-left: round(26px*$x);
 
