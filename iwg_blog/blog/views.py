@@ -312,7 +312,7 @@ class TagsAutocompleteAjax(View):
 
 
 def page_not_found(request):
-    return render(request, 'pages/404.html', {})
+    return render(request, 'pages/404.html', {}, status=404)
 
 
 def server_error(request):
