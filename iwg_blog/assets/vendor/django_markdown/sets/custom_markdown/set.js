@@ -246,11 +246,15 @@ $(document).ready(function () {
   }
 
   addEventHandler(window, 'dragenter', function (event) {
-    event.preventDefault();
+    if (event.target.className == "markItUpEditor") {
+      event.preventDefault();
+    }
   });
 
   addEventHandler(window, 'dragover', function (event) {
-    event.preventDefault();
+    if (event.target.className == "markItUpEditor") {
+      event.preventDefault();
+    }
   });
 
   addEventHandler(window, "drop", function (event) {
