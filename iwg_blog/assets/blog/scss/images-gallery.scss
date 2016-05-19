@@ -1,3 +1,6 @@
+@import "./assets/stylesheets/helpers/_mixins.scss";
+@import "./assets/stylesheets/helpers/_vars.scss";
+
 .images-gallery-wrapper {
     position: relative;
 }
@@ -110,4 +113,82 @@ article.article.markdown-cheatsheet div.article__body-content {
 
 article.article.markdown-cheatsheet code {
     white-space: pre-wrap;
+}
+
+.bx-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 25%;
+    z-index: 50;
+    width: 50%;
+    height: 12px;
+    text-align: center;
+    overflow-y: hidden;
+    @include min-screen($M_SM + 1) {
+        bottom: round(30px*$x);
+    }
+
+    .bx-pager {
+        div {
+            display: inline;
+            margin: 0 0 0 10px;
+            @include min-screen($M_XS + 1) {
+                margin-left: round(20px*$x);
+                width: round(21px*$x);
+                height: round(21px*$x);
+            }
+            &:first-child {
+                margin-left: 0;
+                @include min-screen($M_XS + 1) {
+                    margin-left: 0;
+                }
+            }
+        }
+        a {
+            position: relative;
+            height: 12px;
+            width: 12px;
+            display: inline-block;
+            vertical-align: top;
+            border: 2px solid $white;
+            @include border-radius(100%);
+            @include transition();
+            &:before {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-top: -4px;
+                margin-left: -4px;
+                display: block;
+                content: '';
+                width: 8px;
+                height: 8px;
+                background-color: $blue;
+                @include border-radius(100%);
+                @include transition();
+                @include opacity(0);
+                @include min-screen($M_XS + 1) {
+                    margin-top: round(-6px*$x);
+                    margin-left: round(-6px*$x);
+                    width: round(12px*$x);
+                    height: round(12px*$x);
+                }
+            }
+            &:hover {
+                @include transition();
+                &:before {
+                    @include transition();
+                    @include opacity(1);
+                }
+            }
+            &.selected, &.active {
+                &:before {
+                    @include opacity(1);
+                }
+            }
+            span {
+                display: none;
+            }
+        }
+    }
 }

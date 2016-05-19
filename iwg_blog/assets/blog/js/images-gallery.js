@@ -20,13 +20,15 @@ $(document).ready(function () {
     else {
         $gallery.imagesLoaded(function(){
             $gallery.bxSlider({
-                pager: false,
                 controls: false,
                 adaptiveHeight: true,
                 infiniteLoop: false,
                 preloadImages: 'all',
                 oneToOneTouch: false,
                 preventDefaultSwipeX: false,
+                buildPager: function (slideIndex) {
+                    return '<span>' + slideIndex + '</span>'
+                },
             });
         });
     }
