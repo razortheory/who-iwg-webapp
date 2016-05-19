@@ -13,8 +13,9 @@
 
 .markItUp .markItUpHeader [class^="icon-"],
 .markItUp .markItUpHeader [class*=" icon-"]{
-    font-size: 28px;
-    margin: 0 2px;
+    font-size: 26px;
+    margin: 3px;
+    padding: 1px;
 }
 
 .markItUp .markItUpHeader [class^="icon-"] a,
@@ -30,7 +31,8 @@
 }
 
 .markItUpHeader ul .markItUpSeparator {
-    height: 26px;
+    height: 30px;
+    margin: 2px 1em;
 }
 
 .markItUp .preview a {

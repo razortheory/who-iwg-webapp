@@ -124,8 +124,8 @@ mySettings = {
         window.gridModalDialog.dialog("open");
       }
     },
-    {separator: '---------------'},
-    {name: 'Preview', call: 'preview', className: "preview"},
+    // {separator: '---------------'},
+    // {name: 'Preview', call: 'preview', className: "preview"},
     // {
     //   name: 'Fullscreen',
     //   className: 'markItUpFullScreen',

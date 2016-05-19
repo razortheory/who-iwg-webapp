@@ -18,6 +18,29 @@ $markitup_height: 700px;
 
 .markItUp {
   width: 100% !important;
+  max-width: 1200px;
+  margin: 0!important;
+
+  .nav-tabs > li.active > a{
+    &, &:hover, &:focus{
+      background-color: #f9f9f9;
+    }
+  }
+
+  &Container{
+    border: 1px solid#dddddd;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+
+    &:after {
+      content: " ";
+      display: table;
+      width: 100%;
+      clear: both;
+    }
+  }
 
   .markItUpHeader {
     width: 100%;
@@ -49,9 +72,10 @@ $markitup_height: 700px;
   &.tabbed {
     textarea,
     .markItUpPreviewFrame {
-      max-width: 1200px;
-      width: 100%;
-      margin: 0;
+      @include calc("width", "100% + 2px", 100%);
+      margin: 0 -1px -1px -1px;
+      border-radius: 0 0 5px 5px;
+      resize: none;
     }
 
     .nav-tabs {
