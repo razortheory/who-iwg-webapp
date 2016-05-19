@@ -6,76 +6,31 @@
     background-size: contain;
     background-position: 50% 50%;
     padding: 0;
-    margin: 3px;
+    margin: 0 3px;
+    width: 26px;
+    height: 26px;
 }
 
-.markItUp .mui-h1 a {
-    background-image: url(images/svg/h1.svg);
+.markItUp .markItUpHeader [class^="icon-"],
+.markItUp .markItUpHeader [class*=" icon-"]{
+    font-size: 28px;
+    margin: 0 2px;
 }
 
-.markItUp .mui-h2 a {
-    background-image: url(images/svg/h2.svg);
+.markItUp .markItUpHeader [class^="icon-"] a,
+.markItUp .markItUpHeader [class*=" icon-"] a{
+    position: absolute;
+    top: 0;
+    margin: 0;
 }
 
-.markItUp .mui-h3 a {
-    background-image: url(images/svg/h3.svg);
+.markItUp .markItUpHeader [class^="icon-"]:hover,
+.markItUp .markItUpHeader [class*=" icon-"]:hover{
+    color: #41A5C0;
 }
 
-.markItUp .mui-h4 a {
-    background-image: url(images/svg/h4.svg);
-}
-
-.markItUp .mui-h5 a {
-    background-image: url(images/svg/h5.svg);
-}
-
-.markItUp .mui-h6 a {
-    background-image: url(images/svg/h6.svg);
-}
-
-.markItUp .mui-bold a {
-    background-image: url(images/svg/bold.svg);
-}
-
-.markItUp .mui-italic a {
-    background-image: url(images/svg/i.svg);
-}
-
-.markItUp .mui-list-bulleted a {
-    background-image: url(images/svg/list-button.svg);
-}
-
-.markItUp .mui-list-numeric a {
-    background-image: url(images/svg/list.svg);
-}
-
-.markItUp .mui-picture a,
-.markItUp .mui-picture-modal a {
-    background-image: url(images/svg/image.svg);
-}
-
-.markItUp .mui-picture-gallery a {
-    background-image: url(images/svg/gallery.svg);
-}
-
-.markItUp .mui-embed a {
-    background-image: url(images/svg/embed.svg);
-}
-
-.markItUp .mui-link a {
-    background-image: url(images/svg/link.svg);
-}
-
-.markItUp .mui-big-link a {
-    background-image: url(images/svg/big-link.svg);
-}
-
-.markItUp .mui-quotes a {
-    background-image: url(images/svg/quote.svg);
-}
-
-.markItUp .mui-table a {
-    background-image: url(images/svg/table.svg);
+.markItUpHeader ul .markItUpSeparator {
+    height: 26px;
 }
 
 .markItUp .preview a {

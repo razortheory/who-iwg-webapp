@@ -14,6 +14,7 @@
     {% compress css %}
       <link rel="stylesheet" href="{% static 'fonts/dejavu-sans-mono/style.css' %}">
       <link rel="stylesheet" href="{% static 'fonts/dejavu-sans/style.css' %}">
+      <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
       <link rel="stylesheet" href="{% static 'vendor/jquery-ui-custom/jquery-ui.min.css' %}">
       <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-tabs.css' %}">
       <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
@@ -28,7 +29,7 @@
       <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
       <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
       <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
-      <script src="{% static "admin/js/admin-markitup-image-insert-modal.js" %}"></script>
+      <script src="{% static "admin/js/admin-markitup-modals.js" %}"></script>
     {% endcompress %}
     {{ block.super }}
 {% endblock %}
@@ -39,7 +40,7 @@
 {% block footer %}
     {{ block.super }}
     {% include "admin/models-autosave.html" %}
-    {% include "admin/image-insert-modal.html" %}
+    {% include "admin/admin-markitup-modals.html" %}
     <div id="loadingDiv" class="loading-modal">
         <div class="loading-modal-center">
             <div class="cssload-thecube">

@@ -48,7 +48,7 @@ mySettings = {
   onShiftEnter: {keepDefault: false, openWith: '\n\n'},
   markupSet: [
     {
-      className: 'mui-h1',
+      className: 'mui-h1 icon-h1',
       name: 'First Level Heading',
       key: '1',
       placeHolder: 'Your title here...',
@@ -57,7 +57,7 @@ mySettings = {
       }
     },
     {
-      className: 'mui-h2',
+      className: 'mui-h2 icon-h2',
       name: 'Second Level Heading',
       key: '2',
       placeHolder: 'Your title here...',
@@ -65,35 +65,35 @@ mySettings = {
         return miu.markdownTitle(markItUp, '-')
       }
     },
-    {className: 'mui-h3', name: 'Heading 3', key: '3', openWith: '### ', placeHolder: 'Your title here...'},
-    {className: 'mui-h4', name: 'Heading 4', key: '4', openWith: '#### ', placeHolder: 'Your title here...'},
-    {className: 'mui-h5', name: 'Heading 5', key: '5', openWith: '##### ', placeHolder: 'Your title here...'},
-    {className: 'mui-h6', name: 'Heading 6', key: '6', openWith: '###### ', placeHolder: 'Your title here...'},
+    {className: 'mui-h3 icon-h3', name: 'Heading 3', key: '3', openWith: '### ', placeHolder: 'Your title here...'},
+    {className: 'mui-h4 icon-h4', name: 'Heading 4', key: '4', openWith: '#### ', placeHolder: 'Your title here...'},
+    {className: 'mui-h5 icon-h5', name: 'Heading 5', key: '5', openWith: '##### ', placeHolder: 'Your title here...'},
+    {className: 'mui-h6 icon-h6', name: 'Heading 6', key: '6', openWith: '###### ', placeHolder: 'Your title here...'},
     {separator: '---------------'},
-    {className: 'mui-bold', name: 'Bold', key: 'B', openWith: '**', closeWith: '**'},
-    {className: 'mui-italic', name: 'Italic', key: 'I', openWith: '_', closeWith: '_'},
+    {className: 'mui-bold icon-bold', name: 'Bold', key: 'B', openWith: '**', closeWith: '**'},
+    {className: 'mui-italic icon-italic', name: 'Italic', key: 'I', openWith: '_', closeWith: '_'},
     {separator: '---------------'},
-    {className: 'mui-list-bulleted', name: 'Bulleted List', openWith: '- '},
+    {className: 'mui-list-bulleted icon-list_ordered', name: 'Bulleted List', openWith: '- '},
     {
-      className: 'mui-list-numeric', name: 'Numeric List', openWith: function (markItUp) {
+      className: 'mui-list-numeric icon-list_unordered', name: 'Numeric List', openWith: function (markItUp) {
       return markItUp.line + '. ';
     }
     },
     {separator: '---------------'},
     {
-      className: 'mui-picture-modal', name: 'Picture', replaceWith: function (h) {
-      window.imageModalDialog.dialog("open");
-    }
+      className: 'mui-picture-modal icon-add_image', name: 'Picture', replaceWith: function (h) {
+        window.imageModalDialog.dialog("open");
+      }
     },
     {
-      className: 'mui-picture-gallery',
+      className: 'mui-picture-gallery icon-add_image_gallery',
       name: 'Pictures gallery',
       key: 'G',
       openWith: '----images-gallery----\ncolumns: 2\n',
       placeHolder: 'Insert your images here'
     },
     {
-      className: 'mui-embed',
+      className: 'mui-embed icon-add_media',
       name: 'Embed Video',
       key: 'E',
       openWith: '![embed](',
@@ -101,7 +101,7 @@ mySettings = {
       placeHolder: 'http://'
     },
     {
-      className: 'mui-link',
+      className: 'mui-link icon-link',
       name: 'Link',
       key: 'L',
       openWith: '[',
@@ -109,41 +109,19 @@ mySettings = {
       placeHolder: 'Your text to link here...'
     },
     {
-      className: 'mui-big-link',
+      className: 'mui-big-link icon-link_article',
       name: 'Big link',
       openWith: '----big-link----\nimage: ',
       closeWith: '\ntext: \ndescription: \nurl: \n',
       placeHolder: 'Insert image url or tag here...'
     },
     {separator: '---------------'},
-    {className: 'mui-quotes', name: 'Quotes', openWith: '> '},
+    {className: 'mui-quotes icon-quote', name: 'Quotes', openWith: '> '},
     {
-      className: 'mui-table',
+      className: 'mui-table icon-table',
       name: 'Table',
-      header: " header ",
-      seperator: " ------ ",
-      placeholder: " data   ",
       replaceWith: function (h) {
-        cols = prompt("How many cols?");
-        rows = prompt("How many rows?");
-        out = "";
-        // header row
-        for (c = 0; c < cols; c++) {
-          out += "|" + (h.header || "");
-        }
-        out += "|\n";
-        // seperator
-        for (c = 0; c < cols; c++) {
-          out += "|" + (h.seperator || "");
-        }
-        out += "|\n";
-        for (r = 0; r < rows; r++) {
-          for (c = 0; c < cols; c++) {
-            out += "|" + (h.placeholder || "");
-          }
-          out += "|\n";
-        }
-        return out;
+        window.gridModalDialog.dialog("open");
       }
     },
     {separator: '---------------'},
