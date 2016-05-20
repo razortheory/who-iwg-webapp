@@ -15,7 +15,13 @@ $(document).ready(function () {
     var $galleryWrapper = $('.images-gallery-wrapper');
     var $gallery = $('.images-gallery', $galleryWrapper);
     if (window.innerWidth >= 768){
+        $gallery.each(function (i, e) {
+            $(e).find('.images-gallery-item a').attr('rel', 'group' + i);
+        });
         $gallery.find('.images-gallery-item a').fancybox({
+            closeBtn: false,
+            nextClick: true,
+            loop: false,
             helpers: {
                 overlay: {
                     locked: false
