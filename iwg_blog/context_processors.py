@@ -1,4 +1,7 @@
 from django.conf import settings
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
+from iwg_blog.blog.templatetags.blog_tags import absolute_url
 
 
 def google_analytics(request):
@@ -21,3 +24,18 @@ def google_analytics(request):
         "GA_CODE": getattr(settings, 'GOOGLE_ANALYTICS_PROPERTY_ID', ''),
     }
     return context_ext
+
+
+def watermarks(request):
+    return {
+        'watermark_article': {
+            'gravity': 'br',
+            'width': '10%',
+            'x': '2%',
+            'y': '2%',
+            'url': absolute_url(static('images/who-watermark.png')),
+            'brightness_threshold': 200,
+            'color': ['#ffffff', '#9b9b9b'],
+            'opacity': 0.6,
+        }
+    }

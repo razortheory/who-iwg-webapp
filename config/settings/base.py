@@ -94,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'iwg_blog.context_processors.google_analytics',
+                'iwg_blog.context_processors.watermarks',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
@@ -229,6 +230,7 @@ MARKDOWN_EXTENSION_CONFIGS = {
 
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 THUMBNAIL_BACKEND = 'iwg_blog.thumbnail_lazy.backends.LazyThumbnailBackend'
+THUMBNAIL_ENGINE = 'iwg_blog.thumbnail_lazy.engines.ThumbnailEngine'
 
 
 # Auth configuration

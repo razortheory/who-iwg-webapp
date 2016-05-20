@@ -12,7 +12,7 @@
     {% for article in articles %}
       <li class="post posts-list__item">
         <a href="{{ article.get_absolute_url }}">
-          {% thumbnail article.cover_image "800" lazy="True" as im %}
+          {% thumbnail article.cover_image "800" lazy="True" watermark=watermark_article as im %}
             <img src="{{ im.url }}" class="post__image">
           {% endthumbnail %}
           <h3 class="post__title">
