@@ -29,7 +29,9 @@ class ThumbnailerProcessor(Postprocessor):
 
         for uploaded_image in UploadedImage.objects.filter(image_file__in=matched_tags.keys()):
             for tag_obj in matched_tags[uploaded_image.image_file]:
-                tag_obj[self.tags[tag_obj.name]] = get_thumbnail(uploaded_image.image_file, "1200", lazy=True, watermark=watermark_article).url
+                tag_obj[self.tags[tag_obj.name]] = get_thumbnail(
+                    uploaded_image.image_file, "1200", upscale=False, lazy=True, watermark=watermark_article
+                ).url
 
         return soup.decode()
 
