@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from iwg_blog.blog.templatetags.blog_tags import absolute_url
+from .thumbnail_lazy import watermarks_config
 
 
 def google_analytics(request):
@@ -27,15 +26,7 @@ def google_analytics(request):
 
 
 def watermarks(request):
-    return {
-        'watermark_article': {
-            'gravity': 'br',
-            'width': '10%',
-            'x': '2%',
-            'y': '2%',
-            'url': absolute_url(static('images/who-watermark.png')),
-            'brightness_threshold': 200,
-            'color': ['#ffffff', '#9b9b9b'],
-            'opacity': 0.6,
-        }
-    }
+    context = {}
+    for name in watermarks_config.watermarks:
+        context['watermark_%s' % name] = watermarks_config.watermarks[name]
+    return context
