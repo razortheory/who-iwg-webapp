@@ -60,9 +60,6 @@ class ImagesGalleryProcessor(ParagraphProcessor):
                 image_title = ''.join(image_data.split()[1:]).strip(u' "')
                 image.set('title', image_title)
 
-        images_paginator = etree.SubElement(images_gallery_wrap, 'div')
-        images_paginator.set('class', 'images-gallery-paginator')
-
 
 class ImagesGalleryExtension(Extension):
     def extendMarkdown(self, md, md_globals):
