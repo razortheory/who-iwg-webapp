@@ -19,11 +19,7 @@
     position: absolute;
     bottom: -7px;
     left: 50%;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
+    @include css3-prefix(transform, translateX(-50%));
 }
 
 .images-gallery-paginator a {
@@ -34,18 +30,9 @@
     display: inline-block;
     vertical-align: top;
     border: 2px solid #fff;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    -o-border-radius: 100%;
-    border-radius: 100%;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    @include css3-prefix(border-radius, 100%);
+    @include css3-prefix(background-clip, padding-box);
+    @include css3-prefix(transition, all 0.3s ease);
 }
 
 .images-gallery-paginator a:first-child {
@@ -63,22 +50,11 @@
     width: 10px;
     height: 10px;
     background-color: #4a90e2;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    -o-border-radius: 100%;
-    border-radius: 100%;
-    -moz-background-clip: padding;
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    @include css3-prefix(border-radius, 100%);
+    @include css3-prefix(background-clip, padding-box);
+    @include css3-prefix(transition, all 0.3s ease);
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
-    -moz-opacity: 0;
-    -khtml-opacity: 0;
-    opacity: 0;
+    @include css3-prefix(opacity, 0);
 }
 
 .images-gallery-paginator a.selected:before {
@@ -93,11 +69,7 @@
 }
 
 .images-gallery-paginator a:hover {
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    @include css3-prefix(transition, all 0.3s ease);
 }
 
 @media (min-width: 767px) {
@@ -115,17 +87,43 @@ article.article.markdown-cheatsheet code {
     white-space: pre-wrap;
 }
 
+.bx-wrapper {
+    .images-gallery{
+        &-item {
+            pointer-events: none;
+        }
+    }
+}
+
 .bx-controls {
     position: absolute;
     bottom: 20px;
-    left: 25%;
-    z-index: 50;
-    width: 50%;
     height: 12px;
     text-align: center;
-    overflow-y: hidden;
+    @include calc("top", "50% - 18px", 45%);
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+
     @include min-screen($M_SM + 1) {
         bottom: round(30px*$x);
+    }
+
+    .bx-controls-direction{
+        .bx-next, .bx-prev {
+            width: 36px;
+            height: 34px;
+            z-index: 8040;
+            background-image: url('../../vendor/fancybox/fancybox_sprite.png');
+        }
+        .bx-next {
+            background-position: 0 -72px;
+            float: right;
+        }
+        .bx-prev {
+            background-position: 0 -36px;
+            float: left;
+        }
     }
 
     .bx-pager {

@@ -96,6 +96,13 @@
     line-height: $line-height;
 }
 
+@mixin calc($property, $value, $fallback) {
+  #{$property}: #{$fallback};
+  #{$property}: -moz-calc(#{$value});
+  #{$property}: -webkit-calc(#{$value});
+  #{$property}: calc(#{$value});
+}
+
 
 @mixin fsResponsiveM($line-height: false) {
 

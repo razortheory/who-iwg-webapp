@@ -86,15 +86,15 @@ $(document).ready(function () {
     else {
         $gallery.imagesLoaded(function(){
             $gallery.bxSlider({
-                controls: false,
+                pager: false,
+                controls: true,
                 adaptiveHeight: true,
-                infiniteLoop: false,
+                infiniteLoop: true,
                 preloadImages: 'all',
                 oneToOneTouch: false,
                 preventDefaultSwipeX: false,
-                buildPager: function (slideIndex) {
-                    return '<span>' + slideIndex + '</span>'
-                },
+                nextText: "",
+                prevText: ""
             });
         });
     }
