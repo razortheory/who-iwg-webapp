@@ -9,9 +9,11 @@
     </div>
   </div>
   <div class="inner inner_category">
+    {% if related_articles %}
       <h2 class="title-main">
-        <span class="first"><span>S</span></span><span>uggested Articles</span>
+        <span class="first"><span>R</span></span><span>ead More</span>
       </h2>
-    {% include "partials/posts/small-posts-list.html" with articles=related_articles related=True %}
+      {% include "partials/posts/small-posts-list.html" with articles=related_articles related=True %}
+    {% endif %}
   </div>
 {% endblock %}
