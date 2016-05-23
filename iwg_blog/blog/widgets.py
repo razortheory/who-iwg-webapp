@@ -1,3 +1,4 @@
+import embedded_media
 from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms.utils import flatatt
@@ -44,11 +45,26 @@ class CustomMarkdownWidget(TabbedMarkdownWidget):
 
 class AdminImageWidget(AdminFileWidget):
     def render(self, name, value, attrs=None):
-        output = u''
-        if value and getattr(value, "url", None):
-            output += u'<a href="%s" target="_blank"><img height="200" src="%s" alt="%s" /></a>' % (value.url, value.url, value)
+        attrs = attrs or {}
+        attrs['class'] = attrs.get('class', '') + ' imagefile-input'
+
+        final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
+        id_ = final_attrs.get('id')
+
+        url = value.url if value and getattr(value, "url", None) else ''
+        output = u'<a href="%s" target="_blank">' \
+                 u'<img style="max-height: 200px; display: block; margin-bottom: 5px;" id="%s_preview" src="%s"/></a>' \
+                 % (url, self.id_for_label(id_), url)
         output += super(AdminFileWidget, self).render(name, value, attrs)
         return mark_safe(output)
+
+    @property
+    def media(self):
+        media = super(AdminImageWidget, self).media
+        media.add_js([
+            'admin/js/adminImageWidget.js',
+        ])
+        return media
 
 
 class TagitWidget(CheckboxSelectMultiple):
