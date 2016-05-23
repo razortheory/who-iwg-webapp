@@ -223,18 +223,6 @@ $(document).ready(function () {
     }
   }
 
-  addEventHandler(window, 'dragenter', function (event) {
-    if (event.target.className == "markItUpEditor") {
-      event.preventDefault();
-    }
-  });
-
-  addEventHandler(window, 'dragover', function (event) {
-    if (event.target.className == "markItUpEditor") {
-      event.preventDefault();
-    }
-  });
-
   addEventHandler(window, "drop", function (event) {
     if (event.target.className == "markItUpEditor") {
       event = event || window.event;

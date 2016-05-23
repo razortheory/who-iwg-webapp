@@ -19,6 +19,37 @@ from .utils import markdown_ordered_dict_prepend
 class EmbeddingProcessor(ParagraphProcessor):
     RE = re.compile(r'!\[embed(\?(?P<params>.*))?\]\((?P<url>[^\)]+)\)')
 
+    YOUTUBE_LINK_PATTERN = re.compile(r'youtu\.?be')
+    VIMEO_LINK_PATTERN = re.compile(r'(https?://)?(www.)?(player.)?vimeo.com/([a-z]*/)*(?P<id>[0-9]{6,11})[?]?.*')
+
+    YOUTUBE_PATTERNS = [
+        re.compile(r'youtu\.be/(?P<id>\w+)'),  # youtu.be/<id>
+        re.compile(r'(\?|&)v=(?P<id>\w+)'),  # ?v=<id> | &v=<id>
+        re.compile(r'embed/(?P<id>\w+)'),  # embed/<id>
+        re.compile(r'/v/(?P<id>\w+)'),  # /v/<id>
+    ]
+
+    YOUTUBE_EMBED_TEMPLATE = 'https://www.youtube.com/embed/%s'
+    VIMEO_EMBED_TEMPLATE = 'https://player.vimeo.com/video/%s'
+
+    def process_embed_url(self, url):
+        youtube_match = self.YOUTUBE_LINK_PATTERN.search(url)
+        if youtube_match:
+            for pattern in self.YOUTUBE_PATTERNS:
+                match = pattern.search(url)
+                if not match:
+                    continue
+
+                return self.YOUTUBE_EMBED_TEMPLATE % match.group('id')
+
+            return url
+
+        vimeo_match = self.VIMEO_LINK_PATTERN.search(url)
+        if vimeo_match:
+            return self.VIMEO_EMBED_TEMPLATE % vimeo_match.group('id')
+
+        return url
+
     def test(self, parent, block):
         return bool(self.RE.match(block))
 
@@ -33,7 +64,7 @@ class EmbeddingProcessor(ParagraphProcessor):
         el.set('allowfullscreen', '')
         el.set('frameborder', '0')
         el.set('width', '100%')
-        el.set('src', block_match.groupdict()['url'])
+        el.set('src', self.process_embed_url(block_match.groupdict()['url']))
         params = block_match.groupdict()['params'] or ''
         for param in params.split('&'):
             param = param.split('=')
