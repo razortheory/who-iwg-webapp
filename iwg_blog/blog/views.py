@@ -1,37 +1,32 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
+from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
-from django.conf import settings
-from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse, reverse_lazy
 
-from django.views.generic import DetailView, ListView, CreateView, UpdateView
-
-from meta.views import Meta
+from meta.views import MetadataMixin
 from watson import search as watson
 
-from iwg_blog.attachments.views import FeaturedDocumentsMixin
-from iwg_blog.blog.serializers import ArticleSerializer
-from iwg_blog.utils.views import JsonResponseMixin
+from ..attachments.views import FeaturedDocumentsMixin
+from ..blog.serializers import ArticleSerializer
+from ..utils.views import JsonResponseMixin
 from .forms import SubscribeForm, UnsubscribeForm
-from .models import Article, Subscriber, Tag, Category, BaseArticle
+from .helpers import Meta
+from .models import Article, BaseArticle, Category, Subscriber, Tag
 
 
 class BaseViewMixin(object):
-    def get_meta_context(self, **context):
-        raise NotImplementedError
-
     def get_context_data(self, **kwargs):
         context = super(BaseViewMixin, self).get_context_data(**kwargs)
         context['site'] = Site.objects.get_current()
         context['scheme'] = settings.META_SITE_PROTOCOL
-
-        context['meta'] = self.get_meta_context(**context)
 
         return context
 
@@ -112,14 +107,15 @@ class HitsTrackingMixin(object):
         return obj
 
 
-class ArticleView(HitsTrackingMixin, BaseViewMixin, DetailView):
+class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
+    meta_class = Meta
     model = Article
     queryset = Article.objects.all()
     template_name = 'pages/article.html'
 
     related_articles_count = 3
 
-    def get_meta_context(self, **context):
+    def get_meta(self, **kwargs):
         return self.get_object().as_meta(self.request)
 
     def get_context_data(self, **kwargs):
@@ -149,22 +145,23 @@ class ArticlePreviewView(AccessMixin, TemplateView):
         return self.render_to_response(context)
 
 
-class ArticleListView(BaseViewMixin, ListView):
+class ArticleListView(MetadataMixin, BaseViewMixin, ListView):
+    meta_class = Meta
     model = Article
     queryset = Article.published.all()
     paginate_by = 6
 
     template_name = 'pages/article-list.html'
 
-    def get_meta_context(self, **context):
-        objects = context['object_list']
-        image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
-        return Meta(
-            title='List of articles',
-            description='List of articles.',
-            url=reverse('blog:articles_view'),
-            image=image_url,
-        )
+    title = 'List of articles'
+    description = 'List of articles.'
+    url = reverse_lazy('blog:articles_view')
+    image_width = 800
+    image_height = 420
+
+    def get_meta_image(self, context=None):
+        if context['object_list']:
+            return context['object_list'][0].cover_image
 
 
 class SearchView(JsonResponseMixin, ArticleListView):
@@ -174,6 +171,12 @@ class SearchView(JsonResponseMixin, ArticleListView):
 
     serializer_class = ArticleSerializer
     ajax_search_result_count = 3
+
+    title = 'Search'
+    description = 'Search result.'
+
+    def get_meta_url(self, context=None):
+        return reverse('blog:search_view') + '?' + self.request.GET.urlencode()
 
     def get_queryset(self):
         queryset = super(SearchView, self).get_queryset()
@@ -188,17 +191,6 @@ class SearchView(JsonResponseMixin, ArticleListView):
         context['search_string'] = self.search_string
         context.update(kwargs)
         return super(SearchView, self).get_context_data(**context)
-
-    def get_meta_context(self, **context):
-        url = reverse('blog:search_view') + '?' + self.request.GET.urlencode()
-        objects = context['object_list']
-        image_url = objects[0].cover_image.url if objects and objects[0].cover_image else None
-        return Meta(
-            title='Search',
-            description='Search result.',
-            url=url,
-            image=image_url,
-        )
 
     def get_ajax(self, request, *args, **kwargs):
         self.object_list = self.get_queryset()[:self.ajax_search_result_count]
@@ -216,15 +208,14 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
                   FeaturedDocumentsMixin, CategoriesMixin, ArticleListView):
     template_name = 'pages/index.html'
 
-    def get_meta_context(self, **context):
+    title = 'IWG Portal'
+    description = 'IWG Portal'
+    url = reverse_lazy('blog:landing_view')
+
+    def get_meta_image(self, context=None):
         article = context.get('featured_articles').first()
-        image_url = getattr(article, 'cover_image_url', '')
-        return Meta(
-            title='IWG Portal',
-            description='IWG Portal',
-            url=reverse('blog:landing_view'),
-            image=image_url
-        )
+        if article and article.cover_image:
+            return article.cover_image
 
 
 class CategoryView(RelatedListMixin, ArticleListView):
@@ -235,7 +226,7 @@ class CategoryView(RelatedListMixin, ArticleListView):
     def get_queryset(self):
         return super(CategoryView, self).get_queryset().filter(category=self.object)
 
-    def get_meta_context(self, **context):
+    def get_meta(self, **context):
         return self.object.as_meta(self.request)
 
 
@@ -246,7 +237,7 @@ class TagView(RelatedListMixin, ArticleListView):
     def get_queryset(self):
         return super(TagView, self).get_queryset().filter(tags=self.object)
 
-    def get_meta_context(self, **context):
+    def get_meta(self, **context):
         return self.object.as_meta(self.request)
 
 

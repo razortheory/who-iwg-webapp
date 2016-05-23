@@ -117,7 +117,15 @@ class BaseArticle(ModelMeta, models.Model):
 
     @property
     def cover_image_url(self):
-        return self.cover_image.url
+        return self.cover_image.url if self.cover_image else None
+
+    @property
+    def cover_image_width(self):
+        return self.cover_image.width if self.cover_image else None
+
+    @property
+    def cover_image_height(self):
+        return self.cover_image.height if self.cover_image else None
 
     @property
     def absolute_url(self):
@@ -144,6 +152,8 @@ class BaseArticle(ModelMeta, models.Model):
         'title': 'title',
         'description': 'short_description_text',
         'image': 'cover_image_url',
+        'image_width': 'cover_image_width',
+        'image_height': 'cover_image_height',
         'url': 'absolute_url',
         'keywords': 'keywords'
     }

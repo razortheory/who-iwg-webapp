@@ -1,10 +1,12 @@
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.base import RedirectView
 from django.views.generic.detail import DetailView
-from meta.views import Meta
+
+from meta.views import MetadataMixin
 
 from ..blog.views import BaseViewMixin, RelatedListMixin, HitsTrackingMixin
+from ..blog.helpers import Meta
 from .models import Grantee, Round
 
 
@@ -16,18 +18,20 @@ class RoundsMixin(object):
         return super(RoundsMixin, self).get_context_data(**context)
 
 
-class GranteeView(HitsTrackingMixin, BaseViewMixin, DetailView):
+class GranteeView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
+    meta_class = Meta
     model = Grantee
     queryset = Grantee.objects.all()
     template_name = 'grantee/pages/grantee.html'
 
     related_articles_count = 3
 
-    def get_meta_context(self, **context):
+    def get_meta(self, **context):
         return self.get_object().as_meta(self.request)
 
 
-class RoundView(RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
+class RoundView(MetadataMixin, RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
+    meta_class = Meta
     model = Grantee
     queryset = Grantee.published.all()
 
@@ -36,11 +40,11 @@ class RoundView(RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
 
     paginate_by = 6
 
-    def get_meta_context(self, **context):
-        return Meta(title='Grantees: %s' % self.object.name,
-                    description='List of grantees.',
-                    url=reverse('blog:articles_view')
-                    )
+    description = 'List of grantees.'
+    url = reverse_lazy('grantee:grantee_list_view')
+
+    def get_meta_title(self, context=None):
+        return 'Grantees: %s' % self.object.name
 
     def get_queryset(self):
         return super(RoundView, self).get_queryset().filter(round=self.object)
