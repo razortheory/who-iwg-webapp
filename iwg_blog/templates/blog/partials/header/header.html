@@ -5,7 +5,7 @@
   <div class="header__inner">
     <span style="background-image:url({% static 'images/hrp-logo.png' %})" class="header__logo"></span>
     <div class="header__search-mobile">
-      {% include "partials/search/search-mobile.html" %}
+      {% include "blog/partials/search/search-mobile.html" %}
     </div>
     <div class="header-nav-shifted-handle menu-right push-body sb-toggle-right">
       <svg class="icon icon_burger"><use xlink:href="#icon_burger"></use>
@@ -14,14 +14,14 @@
     <div class="header__search-social">
       <div class="header__social">
         {% url 'blog:landing_view' as landing_url %}
-        {% include "partials/social/social.html" with sharer_url=landing_url %}
+        {% include "blog/partials/social/social.html" with sharer_url=landing_url %}
       </div>
       <div class="header__search">
-        {% include "partials/search/search-top.html" %}
+        {% include "blog/partials/search/search-top.html" %}
       </div>
     </div>
     <div class="header__nav">
-      {% include "partials/header/nav.html" %}
+      {% include "blog/partials/header/nav.html" %}
     </div>
   </div>
 </header>

@@ -4,28 +4,28 @@
     <div class="footer__layer footer__layer__column">
       <aside class="footer__subscribe">
         <p class="footer__subscribe__title">Subscribe</p>
-        {% include "partials/footer/subscribe.html" %}
+        {% include "blog/partials/footer/subscribe.html" %}
       </aside>
       <div class="footer__copy">Copyright &copy; {% now "Y" %} IWG. All rights reserved.</div>
     </div>
     <div class="footer__layer footer__layer__column">
       <div class="footer__partners">
         <p class="text-left text-bold">Our partners</p>
-        {% include "partials/footer/partners.html" %}
+        {% include "blog/partials/footer/partners.html" %}
       </div>
       <div class="footer__nav">
         <p class="footer__nav__title">Site navigation</p>
-        {% include "partials/footer/footer-nav.html" %}
+        {% include "blog/partials/footer/footer-nav.html" %}
       </div>
       <div class="footer__partners__mobile">
-        {% include "partials/footer/partners.html" %}
+        {% include "blog/partials/footer/partners.html" %}
       </div>
     </div>
     <div class="footer__layer footer__layer__column footer__layer__column__social">
       <div class="footer__social">
         <p class="footer__social__title">We are social</p>
         {% url 'blog:landing_view' as landing_url %}
-        {% include "partials/social/social.html" with sharer_url=landing_url %}
+        {% include "blog/partials/social/social.html" with sharer_url=landing_url %}
       </div>
     </div>
     <div class="footer__layer footer__layer__column">

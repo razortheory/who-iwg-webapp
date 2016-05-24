@@ -1,4 +1,4 @@
-{% extends "pages/base.html" %}
+{% extends "blog/pages/base.html" %}
 
 
 {% block content %}
@@ -6,7 +6,7 @@
     <div class="tagged-page">
       <h2 class="tagged-page__title title-main"><span class="first"><span>T </span></span><span>AGGED IN</span> <em>“{{ tag.name }}”</em>
       </h2>
-      {% include "partials/posts/blog-posts.html" with articles=article_list %}
+      {% include "blog/partials/posts/blog-posts.html" with articles=article_list %}
     </div>
   </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% extends "pages/base.html" %}
+{% extends "blog/pages/base.html" %}
 {% load staticfiles compress %}
 
 
@@ -6,42 +6,42 @@
 
 
 {% block content %}
-  {% include "partials/widgets/slider.html" with articles=featured_articles %}
-  {% include "partials/widgets/categories-links.html" %}
-  {% include "partials/fixed-info/fixed-info-mobile.html" %}
+  {% include "blog/partials/widgets/slider.html" with articles=featured_articles %}
+  {% include "blog/partials/widgets/categories-links.html" %}
+  {% include "blog/partials/fixed-info/fixed-info-mobile.html" %}
 
   <div class="inner inner_index">
     <div class="blog-full">
       <section class="blog-full__col blog-full__col_posts">
-        {% include "partials/posts/posts-list.html" with articles=article_list title="LATEST ARTICLES" %}
-        {% include "partials/posts/posts-nav.html" %}
+        {% include "blog/partials/posts/posts-list.html" with articles=article_list title="LATEST ARTICLES" %}
+        {% include "blog/partials/posts/posts-nav.html" %}
       </section>
       <section class="blog-full__col blog-full__col_sidebar">
         <div class="sidebar">
           <aside class="widget widget_links">
             <h4 class="widget__title">Links
             </h4>
-            {% include "partials/widgets/sidebar/widget-links.html" %}
+            {% include "blog/partials/widgets/sidebar/widget-links.html" %}
           </aside>
           <aside class="widget widget_top-articles">
             <h4 class="widget__title">Top articles
             </h4>
-            {% include "partials/widgets/sidebar/widget-top-articles.html" with articles=top_articles %}
+            {% include "blog/partials/widgets/sidebar/widget-top-articles.html" with articles=top_articles %}
           </aside>
           <aside class="widget widget_latest-tweets">
             <h4 class="widget__title">Latest tweets
             </h4>
-            {% include "partials/widgets/sidebar/widget-latest-tweets.html" %}
+            {% include "blog/partials/widgets/sidebar/widget-latest-tweets.html" %}
           </aside>
           <aside class="widget widget_tags">
             <h4 class="widget__title">Tags
             </h4>
-            {% include "partials/widgets/sidebar/widget-tags.html" with tags=top_tags %}
+            {% include "blog/partials/widgets/sidebar/widget-tags.html" with tags=top_tags %}
           </aside>
           <aside class="widget widget_docs">
             <h4 class="widget__title">DOCUMENTS
             </h4>
-            {% include "partials/widgets/sidebar/widget-docs.html" with documents=featured_documents %}
+            {% include "blog/partials/widgets/sidebar/widget-docs.html" with documents=featured_documents %}
           </aside>
         </div>
       </section>

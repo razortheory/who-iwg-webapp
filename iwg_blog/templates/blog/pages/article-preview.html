@@ -1,11 +1,11 @@
-{% extends "pages/article.html" %}
+{% extends "blog/pages/article.html" %}
 {% load staticfiles compress %}
 {% load django_markdown %}
 
 
 {% block page %}
   <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
-    {% include "partials/utils/svg-images.html" %}
+    {% include "blog/partials/utils/svg-images.html" %}
   </div>
   <div class="inner inner_article" style="padding-bottom: 60px;">
     <div class="post-page">

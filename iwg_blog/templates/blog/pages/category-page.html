@@ -1,4 +1,4 @@
-{% extends "pages/base.html" %}
+{% extends "blog/pages/base.html" %}
 
 
 {% block content %}
@@ -7,9 +7,9 @@
       <h2 class="category-page__title title-main title-main_n">
         <span class="first"><span>{{ category.name |first }}</span></span><span>{{ category.name.upper |slice:"1:" }}</span>
       </h2>
-      {% include "partials/posts/small-posts-list.html" with articles=article_list %}
+      {% include "blog/partials/posts/small-posts-list.html" with articles=article_list %}
       <div class="category-page__nav">
-        {% include "partials/posts/posts-nav.html" %}
+        {% include "blog/partials/posts/posts-nav.html" %}
       </div>
     </div>
   </div>

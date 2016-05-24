@@ -37,4 +37,4 @@ def send_emails_for_subscribers():
     }
 
     for email in emails:
-        render_send_email([email, ], 'email/newsletter', data)
+        render_send_email([email, ], 'blog/email/newsletter', data)

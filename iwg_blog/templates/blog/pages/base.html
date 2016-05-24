@@ -1,4 +1,4 @@
-{% extends "layouts/default.html" %}
+{% extends "blog/layouts/default.html" %}
 {% load staticfiles compress %}
 
 
@@ -17,15 +17,15 @@
 
 {% block page %}
   <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
-    {% include "partials/utils/svg-images.html" %}
+    {% include "blog/partials/utils/svg-images.html" %}
   </div>
   <div class="page" id="sb-site">
     <div class="header-wrap">
-      {% include "partials/header/header.html" %}
+      {% include "blog/partials/header/header.html" %}
     </div>
 
     <div class="messages-wrap">
-      {% include "partials/widgets/messages.html" %}
+      {% include "blog/partials/widgets/messages.html" %}
     </div>
 
     <div class="main-wrap">
@@ -37,11 +37,11 @@
     </div>
     <!--main END-->
     <div class="footer-wrap">
-      {% include "partials/footer/footer.html" %}
+      {% include "blog/partials/footer/footer.html" %}
     </div>
   </div>
 
-  {% include "partials/menu/menu-aside.html" %}
+  {% include "blog/partials/menu/menu-aside.html" %}
 
 {% endblock %}
 
@@ -118,5 +118,5 @@
       });
     </script>
   {% endcompress %}
-  {% include "include/cookies-policy.html" %}
+  {% include "blog/include/cookies-policy.html" %}
 {% endblock %}

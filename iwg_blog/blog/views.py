@@ -111,7 +111,7 @@ class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
     meta_class = Meta
     model = Article
     queryset = Article.objects.all()
-    template_name = 'pages/article.html'
+    template_name = 'blog/pages/article.html'
 
     related_articles_count = 3
 
@@ -128,7 +128,7 @@ class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
 
 
 class ArticlePreviewView(AccessMixin, TemplateView):
-    template_name = 'pages/article-preview.html'
+    template_name = 'blog/pages/article-preview.html'
     raise_exception = True
 
     def has_permission(self):
@@ -151,7 +151,7 @@ class ArticleListView(MetadataMixin, BaseViewMixin, ListView):
     queryset = Article.published.all()
     paginate_by = 6
 
-    template_name = 'pages/article-list.html'
+    template_name = 'blog/pages/article-list.html'
 
     title = 'List of articles'
     description = 'List of articles.'
@@ -167,7 +167,7 @@ class ArticleListView(MetadataMixin, BaseViewMixin, ListView):
 class SearchView(JsonResponseMixin, ArticleListView):
     search_string = None
 
-    template_name = 'pages/search-page.html'
+    template_name = 'blog/pages/search-page.html'
 
     serializer_class = ArticleSerializer
     ajax_search_result_count = 3
@@ -206,7 +206,7 @@ class SearchView(JsonResponseMixin, ArticleListView):
 
 class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
                   FeaturedDocumentsMixin, CategoriesMixin, ArticleListView):
-    template_name = 'pages/index.html'
+    template_name = 'blog/pages/index.html'
 
     title = 'IWG Portal'
     description = 'IWG Portal'
@@ -219,7 +219,7 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
 
 
 class CategoryView(RelatedListMixin, ArticleListView):
-    template_name = 'pages/category-page.html'
+    template_name = 'blog/pages/category-page.html'
     object_queryset = Category.objects.all()
     paginate_by = 12
 
@@ -231,7 +231,7 @@ class CategoryView(RelatedListMixin, ArticleListView):
 
 
 class TagView(RelatedListMixin, ArticleListView):
-    template_name = 'pages/tagged-page.html'
+    template_name = 'blog/pages/tagged-page.html'
     object_queryset = Tag.objects.all()
 
     def get_queryset(self):
@@ -244,7 +244,7 @@ class TagView(RelatedListMixin, ArticleListView):
 class SubscribeForUpdates(CreateView):
     model = Subscriber
     form_class = SubscribeForm
-    template_name = 'subscribe_form.html'
+    template_name = 'blog/subscribe_form.html'
     success_url = reverse_lazy('blog:landing_view')
 
     success_message = 'You\'re successfully subscribed.'
@@ -267,7 +267,7 @@ class SubscribeForUpdates(CreateView):
 class UnsubscribeFromUpdates(UpdateView):
     model = Subscriber
     form_class = UnsubscribeForm
-    template_name = 'subscribe_form.html'
+    template_name = 'blog/subscribe_form.html'
     success_url = reverse_lazy('blog:landing_view')
 
     def get_object(self, queryset=None):
@@ -303,8 +303,8 @@ class TagsAutocompleteAjax(View):
 
 
 def page_not_found(request):
-    return render(request, 'pages/404.html', {}, status=404)
+    return render(request, 'blog/pages/404.html', {}, status=404)
 
 
 def server_error(request):
-    return render(request, 'pages/500.html', {})
+    return render(request, 'blog/pages/500.html', {})

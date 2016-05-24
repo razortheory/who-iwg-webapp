@@ -1,11 +1,11 @@
-{% extends "pages/base.html" %}
+{% extends "blog/pages/base.html" %}
 {% load staticfiles compress %}
 
 
 {% block content %}
   <div class="inner inner_article">
     <div class="post-page">
-      {% include "partials/article.html" %}
+      {% include "blog/partials/article.html" %}
     </div>
   </div>
   <div class="inner inner_category">
@@ -13,7 +13,7 @@
       <h2 class="title-main">
         <span class="first"><span>R</span></span><span>ead More</span>
       </h2>
-      {% include "partials/posts/small-posts-list.html" with articles=related_articles related=True %}
+      {% include "blog/partials/posts/small-posts-list.html" with articles=related_articles related=True %}
     {% endif %}
   </div>
 {% endblock %}
