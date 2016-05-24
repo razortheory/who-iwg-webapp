@@ -217,6 +217,8 @@ MARKDOWN_EXTENSIONS = [
     'iwg_blog.markdown_extensions.images_caption',
     'iwg_blog.markdown_extensions.incut',
     'iwg_blog.markdown_extensions.thumbnailer',
+    'iwg_blog.markdown_extensions.del_ins',
+    'iwg_blog.markdown_extensions.cite',
 ]
 
 MARKDOWN_EXTENSION_CONFIGS = {
