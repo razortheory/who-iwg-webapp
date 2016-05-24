@@ -19,6 +19,9 @@ class ThumbnailerProcessor(Postprocessor):
 
         matched_tags = {}
         for tag_obj in soup.findAll(self.tags.keys()):
+            if self.tags[tag_obj.name] not in tag_obj.attrs:
+                continue
+
             attr = tag_obj[self.tags[tag_obj.name]]
             if not attr.startswith(default_storage.base_url):
                 continue
