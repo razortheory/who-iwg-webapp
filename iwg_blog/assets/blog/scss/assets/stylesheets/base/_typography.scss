@@ -115,6 +115,8 @@ h4,
         vertical-align: top;
         &.first {
             position: relative;
+            padding-left: round(35px*$x);
+
             span {
                 position: relative;
                 z-index: 2;
@@ -150,16 +152,5 @@ h4,
 		font-weight: $extrabold;
 		text-transform: none;
 		font-style: italic;
-	}
-	&_n {
-		span.first:before {
-			left: round(-18px*$x);
-			@include max-screen($M_XS) {
-				left: -12px;
-			}
-			@include max-screen(519px) {
-				left: -12px;
-			}
-		}
 	}
 }
