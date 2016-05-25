@@ -1,83 +1,92 @@
 .footer-nav {
-	&__title {
-		margin: 0 0 round(20px*$x);
-		font-size: round(15px*$x);
-		line-height: round(20px*$x);
-		font-weight: $bold;
-		color: $dark-grey;
-		@include max-screen(930px) {
-			margin-bottom: round(28px*$x);
-			text-align: center;
-		}
-	}
-	&__list {
-		@include list-reset;
-		position: relative;
-		float: left;
-		@include max-screen(930px) {
-			@include clearfix;
-			float: none;
-			margin-left: auto;
-			margin-right: auto;
-			margin-bottom: round(18px*$x);
-			width: 100%;
-			max-width: 410px;
-			text-align: left;
-			display: flex;
-			display: -webkit-flex;
-			-webkit-justify-content: space-around;
-			justify-content: space-around;
-		}
-	}
-	&__column {
-		display: inline-block;
-	}
-	&__item {
-		position: relative;
-		font-size: round(15px*$x);
-		line-height: round(20px*$x);
-		color: $dark-grey;
-		display: inline-block;
-		@include max-screen(930px) {
-			display: block;
-			padding-right: round(10px*$x);
-		}
-		a{
-			padding-left: round(26px*$x);
+  &__title {
+    margin: 0 0 round(20px*$x);
+    font-size: round(15px*$x);
+    line-height: round(20px*$x);
+    font-weight: $bold;
+    color: $dark-grey;
+    @include max-screen(930px) {
+      margin-bottom: round(28px*$x);
+      text-align: center;
+    }
+  }
+  &__list {
+    @include list-reset;
+    position: relative;
+    float: left;
+    @include max-screen(930px) {
+      @include clearfix;
+      float: none;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: round(18px*$x);
+      width: 100%;
+      max-width: 410px;
+      text-align: left;
+      display: flex;
+      display: -webkit-flex;
+      -webkit-justify-content: space-around;
+      justify-content: space-around;
+    }
+  }
+  &__column {
+    display: inline-block;
+  }
+  &__item {
+    position: relative;
+    font-size: round(15px*$x);
+    line-height: round(20px*$x);
+    color: $dark-grey;
+    display: inline-block;
+    @include max-screen(930px) {
+      display: block;
+      padding-right: round(10px*$x);
 
-			&:before {
-				position: absolute;
-				left: round(13px*$x);
-				top: round(8px*$x);
-				display: block;
-				content: '';
-				width: round(6px*$x);
-				height: round(6px*$x);
-				border-radius: round(3px*$x);
-				background-color: $dark-grey;
-			}
-			&:hover {
-				text-decoration: none;
-			}
-		}
-		&:hover {
-			color: $blue;
+      &.desktop-only {
+        display: none;
+      }
+    }
+    @include min-screen(930px) {
+      &.mobile-only {
+        display: none;
+      }
+    }
+    a {
+      padding-left: round(26px*$x);
 
-			a:before {
-				background-color: $blue;
-			}
-		}
-	}
-	&__link {
-		display: inline-block;
-		vertical-align: top;
-		font-family: $font;
-		font-size: round(15px*$x);
-		line-height: round(20px*$x);
-		color: $dark-grey;
-		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
-	}
+      &:before {
+        position: absolute;
+        left: round(13px*$x);
+        top: round(8px*$x);
+        display: block;
+        content: '';
+        width: round(6px*$x);
+        height: round(6px*$x);
+        border-radius: round(3px*$x);
+        background-color: $dark-grey;
+      }
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    &:hover {
+      color: $blue;
+
+      a:before {
+        background-color: $blue;
+      }
+    }
+  }
+  &__link {
+    display: inline-block;
+    vertical-align: top;
+    font-family: $font;
+    font-size: round(15px*$x);
+    line-height: round(20px*$x);
+    color: $dark-grey;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
