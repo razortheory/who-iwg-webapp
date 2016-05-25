@@ -75,7 +75,7 @@ $(document).ready(function () {
                     column.top += el.size.height * column.k;
                 }
 
-                setTimeout(function () { $gallery.css('height', newHeight + 'px'); }, 0);
+                setTimeout(function () { $(event.target).css('height', newHeight + 'px'); }, 0);
             }
         );
 
