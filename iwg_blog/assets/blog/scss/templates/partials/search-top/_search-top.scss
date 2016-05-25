@@ -1,127 +1,128 @@
 .search-top {
-	@include max-screen($M_XS) {
-		display: none;
-	}
-	&__form {
-		display: block;
-		width: 100%;
-		margin: 0;
-		padding: 0;
-		&-inner {
-			position: relative;
-			z-index: 11;
-		}
-	}
-	&_active {
-		.search-top-results {
-			display: block;
-		}
-	}
-	&__field {
-		position: relative;
-		padding-right: round(70px*$x);
-		width: round(300px*$x);
-	}
-	&__form{
-		&.active {
-			.search-top {
-				&__field {
-					width: round(390px*$x);
-					background-color: #f6f6f6;
-					@include transition;
-				}
-			}
-		}
-	}
-	&__button {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: round(50px*$x);
-		height: round(40px*$x);
-		min-width: 0;
-		display: block;
-		@include border-radius(15px 15px 15px 0);
-		.icon {
-			position: absolute;
-			right: round(15px*$x);
-			top: round(11px*$x);
-			width: round(20px*$x);
-			height: round(20px*$x);
-			display: block;
-			fill: $white;
-		}
-	}
+  @include max-screen($M_XS) {
+    display: none;
+  }
+  &__form {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    &-inner {
+      position: relative;
+      z-index: 11;
+    }
+  }
+  &_active {
+    .search-top-results {
+      display: block;
+    }
+  }
+  &__field {
+    position: relative;
+    padding-right: round(70px*$x);
+    width: round(300px*$x);
+  }
+  &__form {
+    &.active {
+      .search-top {
+        &__field {
+          width: round(390px*$x);
+          background-color: #f6f6f6;
+          @include transition;
+        }
+      }
+    }
+  }
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: round(50px*$x);
+    height: round(40px*$x);
+    min-width: 0;
+    display: block;
+    @include border-radius(15px 15px 15px 0);
+    .icon {
+      position: absolute;
+      right: round(15px*$x);
+      top: round(11px*$x);
+      width: round(20px*$x);
+      height: round(20px*$x);
+      display: block;
+      fill: $white;
+    }
+  }
 
-	&-results {
-		position: absolute;
-		z-index: 10;
-		top: round(20px*$x);
-		left: 0;
-		padding-top: round(20px*$x);
-		width: 100%;
-		display: none;
-		border: 1px solid $blue;
-		background-color: rgba(255, 255, 255, 0.9);
-		@include border-radius(0 0 round(15px*$x) round(15px*$x));
-		&__list {
-	        @include list-reset;
-	    }
-	    &__item {
-			padding: round(16px*$x) round(46px*$x) round(16px*$x) round(33px*$x);
-	        @include clearfix;
-	        position: relative;
-	        font-size: round(14px*$x);
-	        line-height: round(19px*$x);
-	        border-bottom: 1px solid rgba(159, 185, 164, 0.4);
-			border-left: 2px solid transparent;
-			cursor: pointer;
-			@include transition;
-			&:hover {
-				background-color: #f2f2f2;
-				border-left-color: $blue;
-				@include transition;
-			}
-	        &-body {
-				padding-top: round(10px*$x);
-	            padding-left: round(15px*$x);
-	            overflow: hidden;
-	            min-height: round(64px*$x);
-	        }
-	    }
-	    &__thumbnail {
-	        position: relative;
-	        float: left;
-	        width: round(64px*$x);
-	        height: round(64px*$x);
-	        background-repeat: no-repeat;
-	        background-position: 0 0;
-	        background-size: cover;
-	        background-color: rgba(159, 185, 164, 0.4);
-	    }
-	    &__link {
-	        color: #666666;
-	        text-decoration: none;
-	        &:hover {
-	            text-decoration: none;
-	        }
-			strong {
-				color: $blue;
-			}
-	    }
-		&__footer {
-			text-align: center;
-			padding: round(10px*$x);
-		}
-		&__more-link.button {
-			padding: round(9px*$x) round(25px*$x) round(10px*$x);
-			min-width: round(185px*$x);
-			font-size: round(13px*$x);
-			line-height: round(16px*$x);
-			&:hover,
-			&:focus {
-				padding: round(9px*$x) round(25px*$x) round(10px*$x);
-			}
-		}
-	}
+  &-results {
+    position: absolute;
+    z-index: 10;
+    top: round(20px*$x);
+    left: 0;
+    padding-top: round(20px*$x);
+    width: 100%;
+    display: none;
+    border: 1px solid $blue;
+    background-color: rgba(255, 255, 255, 0.9);
+    @include border-radius(0 0 round(15px*$x) round(15px*$x));
+    &__list {
+      @include list-reset;
+    }
+    &__item {
+      padding: round(16px*$x) round(46px*$x) round(16px*$x) round(33px*$x);
+      @include clearfix;
+      position: relative;
+      font-size: round(14px*$x);
+      line-height: round(19px*$x);
+      border-bottom: 1px solid rgba(159, 185, 164, 0.4);
+      border-left: 2px solid transparent;
+      cursor: pointer;
+      @include transition;
+      &:hover {
+        background-color: #f2f2f2;
+        border-left-color: $blue;
+        @include transition;
+      }
+      &-body {
+        position: relative;
+        top: -2px;
+        padding-left: round(15px*$x);
+        overflow: hidden;
+        min-height: round(64px*$x);
+      }
+    }
+    &__thumbnail {
+      position: relative;
+      float: left;
+      width: round(64px*$x);
+      height: round(64px*$x);
+      background-repeat: no-repeat;
+      background-position: 0 0;
+      background-size: cover;
+      background-color: rgba(159, 185, 164, 0.4);
+    }
+    &__link {
+      color: #666666;
+      text-decoration: none;
+      &:hover {
+        text-decoration: none;
+      }
+      strong {
+        color: $blue;
+      }
+    }
+    &__footer {
+      text-align: center;
+      padding: round(10px*$x);
+    }
+    &__more-link.button {
+      padding: round(9px*$x) round(25px*$x) round(10px*$x);
+      min-width: round(185px*$x);
+      font-size: round(13px*$x);
+      line-height: round(16px*$x);
+      &:hover,
+      &:focus {
+        padding: round(9px*$x) round(25px*$x) round(10px*$x);
+      }
+    }
+  }
 }
