@@ -69,34 +69,3 @@ figure figcaption {
     line-height: 1.4;
     letter-spacing: 1px;
 }
-
-div.category-list ul.category-list__list {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-
-    justify-content: center;
-    -webkit-justify-content: center;
-    -moz-justify-content: center;
-
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-div.category-list ul.category-list__list li.category-list__item {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-}
-
-div.category-list ul.category-list__list li.category-list__item .category-post {
-    width: 100%;
-    padding-bottom: 60px;
-}
-
-div.category-list ul.category-list__list li.category-list__item .category-post .category-post__footer {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-}

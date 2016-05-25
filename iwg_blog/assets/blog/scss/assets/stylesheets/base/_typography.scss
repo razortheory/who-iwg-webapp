@@ -2,54 +2,53 @@
 **************************************************************************************************/
 
 body {
-	font-family: $font;
-	color: $text;
-    font-weight: $normal;
+  font-family: $font;
+  color: $text;
+  font-weight: $normal;
 }
 
 //
 // Text tools
 //
 
-
 /* Links */
 
 a {
-    color: inherit;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0 none;
+
+  &:hover {
+    color: $blue;
     text-decoration: none;
     cursor: pointer;
     outline: 0 none;
 
-    &:hover {
-        color: $blue;
-        text-decoration: none;
-        cursor: pointer;
-        outline: 0 none;
+    &.no-link {
+      text-decoration: none;
+      cursor: text;
 
-        &.no-link {
-            text-decoration: none;
-            cursor: text;
-
-            &:hover {
-                cursor: text;
-            }
-        }
+      &:hover {
+        cursor: text;
+      }
     }
+  }
 }
 
 b,
 strong {
-    font-family: $font;
-    font-weight: $normal;
+  font-family: $font;
+  font-weight: $normal;
 }
 
 em {
-    font-weight: inherit;
-    font-style: italic;
+  font-weight: inherit;
+  font-style: italic;
 }
 
 p {
-    margin-bottom: round(10px*$x);
+  margin-bottom: round(10px*$x);
 }
 
 /* Titles */
@@ -60,55 +59,58 @@ h3,
 h4,
 h5,
 h6 {
-    margin-top: 0;
-    margin-bottom: round(10px*$x);
-    font-family: $font;
-    font-weight: $normal;
+  margin-top: 0;
+  margin-bottom: round(10px*$x);
+  font-family: $font;
+  font-weight: $normal;
 }
+
 h1,
 .title-h1 {
-    @include fs(32px, 32px);
-    text-transform: none;
-    @include min-screen($M_XSM+1) {
-        @include fs(round(44px*$x), round(44px*$x));
-    }
+  @include fs(32px, 32px);
+  text-transform: none;
+  @include min-screen($M_XSM+1) {
+    @include fs(round(44px*$x), round(44px*$x));
+  }
 }
+
 h2,
 .title-h2 {
-    @include fs(round(36px*$x), round(49px*$x));
-    text-transform: none;
+  @include fs(round(36px*$x), round(49px*$x));
+  text-transform: none;
 }
+
 h4,
 .title-h4 {
-    @include fs(round(18px*$x), round(22px*$x));
-    text-transform: none;
+  @include fs(round(18px*$x), round(22px*$x));
+  text-transform: none;
 }
 
 .title-main {
-    margin: round(10px*$x) 0 round(66px*$x);
-    padding-top: round(5px*$x);
-    font-size: round(36px*$x);
-	  line-height: 1.36111;
-    color: #666666;
-    font-weight: $extrabold;
-    text-align: center;
-	@include max-screen($M_XS) {
-		margin: 0 0 50px;
-		font-size: 30px;
-	}
-	@include max-screen(519px) {
-		margin-bottom: 40px;
-		font-size: 20px;
-	}
-	&_low {
-		text-transform: none;
-		margin-bottom: round(70px*$x);
-		@include max-screen($M_XS) {
-			margin-bottom: 55px;
-		}
-		@include max-screen(519px) {
-			margin-bottom: 36px;
-		}
+  margin: round(10px*$x) 0 round(66px*$x);
+  padding-top: round(5px*$x);
+  font-size: round(36px*$x);
+  line-height: 1.36111;
+  color: #666666;
+  font-weight: $extrabold;
+  text-align: center;
+  @include max-screen($M_XS) {
+    margin: 0 0 50px;
+    font-size: 30px;
+  }
+  @include max-screen(519px) {
+    margin-bottom: 40px;
+    font-size: 20px;
+  }
+  &_low {
+    text-transform: none;
+    margin-bottom: round(70px*$x);
+    @include max-screen($M_XS) {
+      margin-bottom: 55px;
+    }
+    @include max-screen(519px) {
+      margin-bottom: 36px;
+    }
   }
   span {
     display: inline-block;
@@ -152,9 +154,9 @@ h4,
       }
     }
   }
-	em {
-		font-weight: $extrabold;
-		text-transform: none;
-		font-style: italic;
-	}
+  em {
+    font-weight: $extrabold;
+    text-transform: none;
+    font-style: italic;
+  }
 }

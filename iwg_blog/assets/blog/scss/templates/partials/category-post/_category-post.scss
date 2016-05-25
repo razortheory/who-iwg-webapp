@@ -1,176 +1,180 @@
 .category-post {
-	position: relative;
-	&:hover {
-		.category-post {
-			&__body {
-				visibility: visible;
-				@include opacity(1);
-				@include transition;
-			}
-			&__footer-devider {
-				visibility: hidden;
-				@include opacity(0);
-				@include transition;
-			}
-		}
-	}
-    &__image {
-        margin-bottom: round(22px*$x);
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: cover;
-		@include max-screen(429px) {
-			margin-bottom: 14px;
-		}
-        &:before {
-            width: 100%;
-            padding-bottom: 67.226%;
-            height: 0;
-            display: block;
-            content: '';
-        }
+  position: relative;
+  width: 100%;
+  padding-bottom: 60px;
+  &:hover {
+    .category-post {
+      &__body {
+        visibility: visible;
+        @include opacity(1);
+        @include transition;
+      }
+      &__footer-devider {
+        visibility: hidden;
+        @include opacity(0);
+        @include transition;
+      }
     }
-    &__title {
-        margin: 0 auto round(20px*$x);
-        width: 100%;
-        max-width: round(380px*$x);
-        font-size: round(24px*$x);
-        line-height: round(32px*$x);
-        font-weight: $bold;
-		text-transform: uppercase;
-        color: #1b1d17;
-		@include max-screen(429px) {
-			margin-bottom: 16px;
-			font-size: 18px;
-			line-height: 1.1;
-		}
+  }
+  &__image {
+    margin-bottom: round(22px*$x);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    @include max-screen(429px) {
+      margin-bottom: 14px;
     }
-    &__footer {
+    &:before {
+      width: 100%;
+      padding-bottom: 67.226%;
+      height: 0;
+      display: block;
+      content: '';
+    }
+  }
+  &__title {
+    margin: 0 auto round(20px*$x);
+    width: 100%;
+    max-width: round(380px*$x);
+    font-size: round(24px*$x);
+    line-height: round(32px*$x);
+    font-weight: $bold;
+    text-transform: uppercase;
+    color: #1b1d17;
+    @include max-screen(429px) {
+      margin-bottom: 16px;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+  }
+  &__footer {
+    @include clearfix;
+    padding-bottom: round(28px*$x);
+    font-size: round(14px*$x);
+    line-height: round(19px*$x);
+    letter-spacing: round(2px*$x);
+    color: $grey;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(159, 185, 164, 0.4);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    @include max-screen(1409px) {
+      font-size: round(13px*$x);
+      letter-spacing: 1px;
+    }
+    @include screen($M_XSM + 1, $M_MD) {
+      font-size: round(14px*$x);
+    }
+    @include max-screen(429px) {
+      padding-bottom: 20px;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+    &-devider {
+      margin-left: -25.21%;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      height: round(3px*$x);
+      width: 50.42%;
+      display: block;
+      content: '';
+      background-color: $blue;
+      visibility: visible;
+      @include opacity(1);
+      @include transition;
+    }
+    &-tags {
+      position: relative;
+      float: left;
+      @include list-reset;
+      padding-top: round(10px*$x);
+      @include max-screen(429px) {
+        float: none;
         @include clearfix;
-        position: relative;
-        padding-bottom: round(28px*$x);
-        font-size: round(14px*$x);
-        line-height: round(19px*$x);
-        letter-spacing: round(2px*$x);
-        color: $grey;
-        text-transform: uppercase;
-        border-top: 1px solid rgba(159, 185, 164, 0.4);
-		@include max-screen(1409px) {
-            font-size: round(13px*$x);
-            letter-spacing: 1px;
-        }
-		@include screen($M_XSM + 1, $M_MD) {
-			font-size: round(14px*$x);
-		}
-		@include max-screen(429px) {
-			padding-bottom: 20px;
-			font-size: 10px;
-			line-height: 1.4;
-		}
-        &-devider {
-			margin-left: -25.21%;
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			height: round(3px*$x);
-			width: 50.42%;
-			display: block;
-			content: '';
-			background-color: $blue;
-			visibility: visible;
-			@include opacity(1);
-			@include transition;
-		}
-        &-tags {
-            position: relative;
-            float: left;
-            @include list-reset;
-            padding-top: round(10px*$x);
-			@include max-screen(429px) {
-				float: none;
-				@include clearfix;
-			}
-        }
-        &-tag {
-            position: relative;
-            float: left;
-            margin-right: round(12px*$x);
-			@include max-screen(1409px) {
-				margin-right: round(8px*$x);
-			}
-        }
-        &-link {
-            display: block;
-            color: $grey;
-            text-decoration: none;
-        }
-        &-date {
-            position: relative;
-            float: right;
-            padding-top: round(10px*$x);
-			@include max-screen(429px) {
-				float: none;
-				padding-top: 4px;
-				text-align: left;
-			}
-            sub {
-                position: static;
-                font-size: round(12px*$x);
-				line-height: 1.83;
-				@include max-screen($M_SM) {
-                    font-size: 11px;
-                }
-                @include max-screen($M_X2S) {
-                    font-size: 10px;
-                    line-height: 1.4;
-                }
-            }
-        }
+      }
     }
-	&__body {
-		position: absolute;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		padding: round(38px*$x) round(30px*$x) round(70px*$x);
-		width: 100%;
-		visibility: hidden;
-		@include opacity(0);
-		overflow: hidden;
-		background-color: rgba(74, 144, 226, 0.8);
-		@include transition;
-	}
-	&__text {
-		font-size: round(24px*$x);
-		line-height: 1.41666;
-		color: $white;
-		font-family: $font-serif;
-		text-align: center;
-		@include max-screen(1409px) {
-			font-size: round(20px*$x);
-		}
-		@include max-screen(399px) {
-			font-size: 16px;
-		}
-	}
-	&__button {
-		position: absolute;
-		right: round(30px*$x);
-		bottom: round(30px*$x);
-		width: round(40px*$x);
-		height: round(40px*$x);
-		background-color: $white;
-		display: block;
-		@include border-radius(50%);
-		.icon {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			margin-left: round(-6px*$x);
-			margin-top: round(-12px*$x);
-			width: round(14px*$x);
-			height: round(24px*$x);
-			fill: $blue;
-		}
-	}
+    &-tag {
+      position: relative;
+      float: left;
+      margin-right: round(12px*$x);
+      @include max-screen(1409px) {
+        margin-right: round(8px*$x);
+      }
+    }
+    &-link {
+      display: block;
+      color: $grey;
+      text-decoration: none;
+    }
+    &-date {
+      position: relative;
+      float: right;
+      padding-top: round(10px*$x);
+      @include max-screen(429px) {
+        float: none;
+        padding-top: 4px;
+        text-align: left;
+      }
+      sub {
+        position: static;
+        font-size: round(12px*$x);
+        line-height: 1.83;
+        @include max-screen($M_SM) {
+          font-size: 11px;
+        }
+        @include max-screen($M_X2S) {
+          font-size: 10px;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+  &__body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: round(38px*$x) round(30px*$x) round(70px*$x);
+    width: 100%;
+    visibility: hidden;
+    @include opacity(0);
+    overflow: hidden;
+    background-color: rgba(74, 144, 226, 0.8);
+    @include transition;
+  }
+  &__text {
+    font-size: round(24px*$x);
+    line-height: 1.41666;
+    color: $white;
+    font-family: $font-serif;
+    text-align: center;
+    @include max-screen(1409px) {
+      font-size: round(20px*$x);
+    }
+    @include max-screen(399px) {
+      font-size: 16px;
+    }
+  }
+  &__button {
+    position: absolute;
+    right: round(30px*$x);
+    bottom: round(30px*$x);
+    width: round(40px*$x);
+    height: round(40px*$x);
+    background-color: $white;
+    display: block;
+    @include border-radius(50%);
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: round(-6px*$x);
+      margin-top: round(-12px*$x);
+      width: round(14px*$x);
+      height: round(24px*$x);
+      fill: $blue;
+    }
+  }
 }
