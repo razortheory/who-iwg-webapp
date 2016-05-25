@@ -1,49 +1,49 @@
 .blog-full {
-    width: 100%;
-    display: table;
-    margin-bottom: round(85px*$x);
+  width: 100%;
+  display: table;
+  margin-bottom: round(85px*$x);
+  @include max-screen(719px) {
+    display: block;
+    margin-bottom: 75px;
+  }
+  &__col {
+    display: table-cell;
+    vertical-align: top;
     @include max-screen(719px) {
-        display: block;
-        margin-bottom: 75px;
+      display: block;
     }
-    &__col {
-        display: table-cell;
-        vertical-align: top;
-        @include max-screen(719px) {
-            display: block;
+    &_posts {
+      width: 77.31%;
+      padding-right: round(60px*$x);
+      .posts-list {
+        &__list {
+          padding-top: round(120px*$x);
         }
-        &_posts {
-            width: 77.31%;
-            padding-right: round(60px*$x);
-            .posts-list {
-                &__list{
-                    padding-top: round(120px*$x);
-                }
-                &__title {
-                    width: 100%;
-                    position: absolute;
-                }
-            }
-            @include max-screen($M_SM3X) {
-                width: auto;
-                padding-right: round(40px*$x);
-            }
-            @include max-screen(719px) {
-                padding-right: 0;
-            }
+        &__title {
+          width: 100%;
+          position: absolute;
         }
-        &_sidebar {
-            padding-top: round(13px*$x);
-            @include max-screen($M_SM3X) {
-                width: round(240px*$x);
-            }
-            @include max-screen(719px) {
-                margin-left: auto;
-                margin-right: auto;
-                padding-top: 23px;
-                width: 100%;
-                max-width: 400px;
-            }
-        }
+      }
+      @include max-screen($M_SM3X) {
+        width: auto;
+        padding-right: round(40px*$x);
+      }
+      @include max-screen(719px) {
+        padding-right: 0;
+      }
     }
+    &_sidebar {
+      padding-top: round(13px*$x);
+      @include max-screen($M_SM3X) {
+        width: round(240px*$x);
+      }
+      @include max-screen(719px) {
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 23px;
+        width: 100%;
+        max-width: 400px;
+      }
+    }
+  }
 }

@@ -1,31 +1,51 @@
 .category-list {
-	&_related {
-		padding-bottom: round(75px*$x);
-	}
-	&__list {
-		@include list-reset;
-		text-align: center;
-	}
-	&__item {
-		margin-bottom: round(70px*$x);
-		@include dib;
-		@include dib-fix;
-		padding-left: round(15px*$x);
-		padding-right: round(15px*$x);
-		width: 33.333%;
-		@include max-screen($M_MD) {
-			width: 50%;
-		}
-		@include max-screen(799px) {
-			display: block;
-			margin-left: 0;
-			margin-right: 0;
-			width: 100%;
-		}
-		@include max-screen(479px) {
-			margin-bottom: 40px;
-			padding-left: 0;
-			padding-right: 0;
-		}
-	}
+  &_related {
+    padding-bottom: round(75px*$x);
+  }
+  &__list {
+    @include list-reset;
+    text-align: center;
+
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    @include css3-prefix(justify-content, center);
+    @include css3-prefix(flex-wrap, wrap);
+  }
+  &__item {
+    margin-bottom: round(70px*$x);
+    @include dib;
+    @include dib-fix;
+    padding-left: round(15px*$x);
+    padding-right: round(15px*$x);
+    width: 33.333%;
+
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    @include max-screen($M_MD) {
+      width: 50%;
+    }
+    @include max-screen(799px) {
+      display: block;
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%;
+    }
+    @include max-screen(479px) {
+      margin-bottom: 40px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.category-page {
+  .category-list {
+    &__list {
+      @include css3-prefix(justify-content, flex-start);
+    }
+  }
 }
