@@ -15,6 +15,15 @@
         &_posts {
             width: 77.31%;
             padding-right: round(60px*$x);
+            .posts-list {
+                &__list{
+                    padding-top: round(120px*$x);
+                }
+                &__title {
+                    width: 100%;
+                    position: absolute;
+                }
+            }
             @include max-screen($M_SM3X) {
                 width: auto;
                 padding-right: round(40px*$x);
