@@ -33,12 +33,16 @@ def image_brightness(image):
     return math.sqrt(0.241 * (r ** 2) + 0.691 * (g ** 2) + 0.068 * (b ** 2))
 
 
-def parse_value(value, origin):
+def parse_value(value, origin=None, context=None):
     if not isinstance(value, six.string_types):
         return value
 
-    if value[-1] == '%':
-        return origin * int(value[:-1]) / 100
+    context = context or {}
+    if origin:
+        context['%'] = origin
+
+    if value[-1] in ['%', 'w', 'h']:
+        return context[value[-1]] * int(value[:-1]) / 100
 
     return int(value)
 
@@ -61,8 +65,9 @@ class ThumbnailEngine(WatermarkMixin, Engine):
 
         watermark = Image.open(BytesIO(base64.b64decode(watermark_content_base64)))
 
-        width = parse_value(width, image.width)
-        height = parse_value(height, image.height)
+        value_context = {'w': image.width, 'h': image.height}
+        width = parse_value(width, image.width, value_context)
+        height = parse_value(height, image.height, value_context)
         if width or height:
             if not width:
                 width = watermark.width*height/watermark.height
@@ -75,8 +80,8 @@ class ThumbnailEngine(WatermarkMixin, Engine):
         if y == 'center':
             y = (image.height - watermark.height) / 2
 
-        x = parse_value(x, image.width)
-        y = parse_value(y, image.height)
+        x = parse_value(x, image.width, value_context)
+        y = parse_value(y, image.height, value_context)
 
         if gravity:
             if gravity[0] == 'b':
