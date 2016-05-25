@@ -109,45 +109,41 @@ h4,
 		@include max-screen(519px) {
 			margin-bottom: 36px;
 		}
-	}
-    span {
-        display: inline-block;
-        vertical-align: top;
-        &.first {
-            position: relative;
-            padding-left: round(35px*$x);
+  }
+  span {
+    display: inline-block;
+    vertical-align: top;
+    &.first {
+      position: relative;
+      padding-left: round(35px*$x);
 
-            span {
-                position: relative;
-                z-index: 2;
-                color: $white;
-            }
-            &:before {
-                position: absolute;
-                z-index: 1;
-                top: round(-5px*$x);
-                right: round(-2px*$x);
-                display: block;
-                content: '';
-                width: round(50px*$x);
-                height: round(50px*$x);
-                @include border-radius(100%);
-                background-color: $blue;
-				@include max-screen($M_XS) {
-					top: -3px;
-					left: -16px;
-					width: 38px;
-					height: 38px;
-				}
-				@include max-screen(519px) {
-					top: -5px;
-					left: -15px;
-					width: 30px;
-					height: 30px;
-				}
-            }
+      span {
+        position: relative;
+        z-index: 2;
+        color: $white;
+      }
+      &:before {
+        position: absolute;
+        z-index: 1;
+        top: round(-5px*$x);
+        right: round(-2px*$x);
+        display: block;
+        content: '';
+        width: round(50px*$x);
+        height: round(50px*$x);
+        @include border-radius(100%);
+        background-color: $blue;
+        @include max-screen($M_XS) {
+          width: 38px;
+          height: 38px;
         }
+        @include max-screen(519px) {
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
+  }
 	em {
 		font-weight: $extrabold;
 		text-transform: none;
