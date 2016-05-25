@@ -34,7 +34,7 @@ img.document-preview {
 }
 
 .grp-row textarea {
-    font-family: "DejaVu Sans", sans-serif;
+    font-family: "DejaVu Sans Mono", monospace;
     font-weight: normal;
     color: black;
 }
