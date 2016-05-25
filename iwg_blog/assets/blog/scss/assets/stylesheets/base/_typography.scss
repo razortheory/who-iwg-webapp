@@ -115,7 +115,15 @@ h4,
     vertical-align: top;
     &.first {
       position: relative;
-      padding-left: round(35px*$x);
+      width: round(50px*$x);
+      text-align: right;
+
+      @include max-screen($M_XS) {
+        width: 38px;
+      }
+      @include max-screen(519px) {
+        width: 30px;
+      }
 
       span {
         position: relative;
