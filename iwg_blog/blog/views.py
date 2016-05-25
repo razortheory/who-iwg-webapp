@@ -120,9 +120,13 @@ class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = dict()
-        context['related_articles'] = self.get_queryset() \
-            .filter(status=BaseArticle.STATUS_PUBLISHED).exclude(pk=self.object.pk) \
-            .filter(category=self.object.category)[:self.related_articles_count]
+        related_articles = self.get_queryset() \
+                               .filter(status=BaseArticle.STATUS_PUBLISHED).exclude(pk=self.object.pk) \
+                               .filter(category=self.object.category)[:self.related_articles_count]
+        if not related_articles:
+            related_articles = self.model.published.order_by('-hits')[:self.related_articles_count]
+        context['related_articles'] = related_articles
+
         context.update(kwargs)
         return super(ArticleView, self).get_context_data(**context)
 
