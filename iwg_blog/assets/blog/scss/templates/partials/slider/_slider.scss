@@ -1,258 +1,265 @@
 .slider {
-	position: relative;
-	margin-top: -1px;
-	margin-left: round(-20px*$x);
-	margin-right: round(-20px*$x);
-	height: round(500px*$x);
-	@include min-screen($M_SM + 1) {
-		min-height: round(635px*$x);
-		height: round(746px*$x);
-		max-height: round(800px*$x);
-	}
-	@include max-screen($M_XS) {
-		min-height: 520px;
-	}
-	@include max-screen(519px) {
-		min-height: 400px;
-		height: 400px !important;
-	}
-	@include max-screen(399px) {
-		min-height: 318px;
-		height: 318px !important;
-	}
-	.caroufredsel_wrapper {
-		height: 100% !important;
-		z-index: 4;
-	}
+  position: relative;
+  margin-top: -1px;
+  margin-left: round(-20px*$x);
+  margin-right: round(-20px*$x);
+  height: round(500px*$x);
+  @include min-screen($M_SM + 1) {
+    min-height: round(635px*$x);
+    height: round(746px*$x);
+    max-height: round(800px*$x);
+  }
+  @include max-screen($M_XS) {
+    min-height: 520px;
+  }
+  @include max-screen(519px) {
+    min-height: 400px;
+    height: 400px !important;
+  }
+  @include max-screen(399px) {
+    min-height: 318px;
+    height: 318px !important;
+  }
+  .caroufredsel_wrapper {
+    height: 100% !important;
+    z-index: 4;
+  }
 
-	.bx-wrapper, .bx-viewport {
-	    height: 100% !important;
-	}
+  .bx-wrapper, .bx-viewport {
+    height: 100% !important;
+  }
 
-	&__list {
-		position: relative;
-		height: 100%;
-		margin: 0;
-		padding-left: 0;
-		list-style: none;
-		left: 0;
-		overflow-y: hidden;
-	}
+  &__list {
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    left: 0;
+    overflow-y: hidden;
+  }
 
-	&__item {
-		position: relative;
-		float: left;
-		@include box-sizing();
-		height: 100%;
-		width: 100%;
-		display: table;
-		table-layout: fixed;
-		color: #fff;
-		text-align: center;
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: cover;
-	}
+  &__item {
+    position: relative;
+    float: left;
+    @include box-sizing();
+    height: 100%;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    color: #fff;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
 
-	&__inner {
-		@include box-sizing();
-		position: relative;
-		z-index: 2;
-		width: 100%;
-		max-width: round(1060px*$x);
-		margin: 0 auto;
-		padding-left: round(30px*$x);
-		padding-right: round(30px*$x);
-		font-size: round(16px*$x);
-		line-height: 1.375;
-		font-weight: $semibold;
-		color: $white;
-		@include max-screen($M_XS) {
-			font-size: 14px;
-		}
-		@include max-screen($M_X2S) {
-			font-size: 12px;
-		}
-		@include max-screen($M_X3S) {
-			padding-left: 45px;
-			padding-right: 45px;
-		}
-		&-wrap {
-			padding-top: round(60px*$x);
-			position: relative;
-			width: 100%;
-			height: 100%;
-			display: table-cell;
-			vertical-align: middle;
-			background: rgba(0, 0, 0, 0.35);
-			@include max-screen($M_XS) {
-				padding-top: 0;
-			}
-			&:before {
-				position: absolute;
-				left: 0;
-				top: 0;
-				right: 0;
-				z-index: 1;
-				content: '';
-				display: block;
-				background-color: rgba(0,0,0,0.35);
-			}
-		}
-	}
-	&__date {
-		margin-bottom: round(10px*$x);
-		letter-spacing: round(2px*$x);
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-		text-align: center;
-		@include max-screen($M_X3S) {
-			display: none;
-		}
-	}
-	&__category {
-		margin-bottom: round(30px*$x);
-		letter-spacing: round(2px*$x);
-		text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-		text-align: center;
-		text-transform: uppercase;
-		@include max-screen($M_X3S) {
-			display: none;
-		}
-	}
-	&__title {
-		position: relative;
-		margin: round(10px*$x) 0;
-		padding-bottom: round(10px*$x);
-		font-size: 40px;
-		line-height: 1.2;
-		font-weight: $extrabold;
-		text-transform: uppercase;
-		text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-		@include min-screen($M_SM + 1) {
-			font-size: round(50px*$x);
-		}
-		@include max-screen($M_XS) {
-			font-size: 30px;
-		}
-		@include max-screen($M_X2S) {
-			font-size: 24px;
-		}
-		@include max-screen($M_X3S) {
-			margin-bottom: 17px;
-			padding-bottom: 20px;
-			font-size: 16px;
-			line-height: 1.8
-		}
-		&:after {
-			position: absolute;
-			bottom: 0;
-			left: 50%;
-			margin-left: -18.29%;
-			height: round(3px*$x);
-			width: 36.58%;
-			display: block;
-			content: '';
-			background-color: $white;
-			@include max-screen($M_X3S) {
-				height: 2px;
-			}
-			@include max-screen($M_X3S) {
-				width: 43%;
-				margin-left: -21.5%;
-			}
-		}
-	}
-	&__button.button {
-		min-width: round(225px*$x);
-		padding-top: round(17px*$x);
-		padding-bottom: round(15px*$x);
-		font-weight: $normal;
-		@include max-screen($M_X3S) {
-			padding: 10px 18px 8px;
-			min-width: 0;
-			font-size: 10px;
-			line-height: 1.2
-		}
-		&:hover,
-		&:focus {
-			padding-top: round(17px*$x);
-			padding-bottom: round(15px*$x);
-            @include max-screen($M_X3S) {
-                padding: 10px 18px 8px;
-            }
-		}
-	}
-	&__pagination {
-		position: absolute;
-		bottom: 20px;
-		left: 0;
-		z-index: 50;
-		width: 100%;
-		height: round(10px*$x);
-		text-align: center;
-		@include min-screen($M_SM + 1) {
-			bottom: round(30px*$x);
-		}
-		div {
-		    display: inline;
-			margin: 0 0 0 16px;
-			@include min-screen($M_XS + 1) {
-				margin-left: round(20px*$x);
-				width: round(21px*$x);
-				height: round(21px*$x);
-			}
-			&:first-child {
-				margin-left: 0;
-				@include min-screen($M_XS + 1) {
-					margin-left: 0;
-				}
-			}
-		}
-		a {
-			position: relative;
-			height: 16px;
-			width: 16px;
-			display: inline-block;
-			vertical-align: top;
-			border: 2px solid $white;
-			@include border-radius(100%);
-			@include transition();
-			&:before {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				margin-top: -5px;
-				margin-left: -5px;
-				display: block;
-				content: '';
-				width: 10px;
-				height: 10px;
-				background-color: $blue;
-				@include border-radius(100%);
-				@include transition();
-				@include opacity(0);
-				@include min-screen($M_XS + 1) {
-					margin-top: round(-6px*$x);
-					margin-left: round(-6px*$x);
-					width: round(12px*$x);
-					height: round(12px*$x);
-				}
-			}
-			&:hover {
-				@include transition();
-				&:before {
-					@include transition();
-					@include opacity(1);
-				}
-			}
-			&.selected, &.active {
-				&:before {
-					@include opacity(1);
-				}
-			}
-		}
-		span {
-			display: none;
-		}
-	}
+  &__inner {
+    @include box-sizing();
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: round(1060px*$x);
+    margin: 0 auto;
+    padding-left: round(30px*$x);
+    padding-right: round(30px*$x);
+    font-size: round(16px*$x);
+    line-height: 1.375;
+    font-weight: $semibold;
+    color: $white;
+    @include max-screen($M_XS) {
+      font-size: 14px;
+    }
+    @include max-screen($M_X2S) {
+      font-size: 12px;
+    }
+    @include max-screen($M_X3S) {
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+    &__background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+    }
+    &-wrap {
+      padding-top: round(60px*$x);
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: table-cell;
+      vertical-align: middle;
+      background: rgba(0, 0, 0, 0.35);
+      @include max-screen($M_XS) {
+        padding-top: 0;
+      }
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        content: '';
+        display: block;
+        background-color: rgba(0, 0, 0, 0.35);
+      }
+    }
+  }
+  &__date {
+    margin-bottom: round(10px*$x);
+    letter-spacing: round(2px*$x);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    @include max-screen($M_X3S) {
+      display: none;
+    }
+  }
+  &__category {
+    margin-bottom: round(30px*$x);
+    letter-spacing: round(2px*$x);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    text-transform: uppercase;
+    @include max-screen($M_X3S) {
+      display: none;
+    }
+  }
+  &__title {
+    position: relative;
+    margin: round(10px*$x) 0;
+    padding-bottom: round(10px*$x);
+    font-size: 40px;
+    line-height: 1.2;
+    font-weight: $extrabold;
+    text-transform: uppercase;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
+    @include min-screen($M_SM + 1) {
+      font-size: round(50px*$x);
+    }
+    @include max-screen($M_XS) {
+      font-size: 30px;
+    }
+    @include max-screen($M_X2S) {
+      font-size: 24px;
+    }
+    @include max-screen($M_X3S) {
+      margin-bottom: 17px;
+      padding-bottom: 20px;
+      font-size: 16px;
+      line-height: 1.8
+    }
+    &:after {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -18.29%;
+      height: round(3px*$x);
+      width: 36.58%;
+      display: block;
+      content: '';
+      background-color: $white;
+      @include max-screen($M_X3S) {
+        height: 2px;
+      }
+      @include max-screen($M_X3S) {
+        width: 43%;
+        margin-left: -21.5%;
+      }
+    }
+  }
+  &__button.button {
+    min-width: round(225px*$x);
+    padding-top: round(17px*$x);
+    padding-bottom: round(15px*$x);
+    font-weight: $normal;
+    @include max-screen($M_X3S) {
+      padding: 10px 18px 8px;
+      min-width: 0;
+      font-size: 10px;
+      line-height: 1.2
+    }
+    &:hover,
+    &:focus {
+      padding-top: round(17px*$x);
+      padding-bottom: round(15px*$x);
+      @include max-screen($M_X3S) {
+        padding: 10px 18px 8px;
+      }
+    }
+  }
+  &__pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    height: round(10px*$x);
+    text-align: center;
+    @include min-screen($M_SM + 1) {
+      bottom: round(30px*$x);
+    }
+    div {
+      display: inline;
+      margin: 0 0 0 16px;
+      @include min-screen($M_XS + 1) {
+        margin-left: round(20px*$x);
+        width: round(21px*$x);
+        height: round(21px*$x);
+      }
+      &:first-child {
+        margin-left: 0;
+        @include min-screen($M_XS + 1) {
+          margin-left: 0;
+        }
+      }
+    }
+    a {
+      position: relative;
+      height: 16px;
+      width: 16px;
+      display: inline-block;
+      vertical-align: top;
+      border: 2px solid $white;
+      @include border-radius(100%);
+      @include transition();
+      &:before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -5px;
+        margin-left: -5px;
+        display: block;
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: $blue;
+        @include border-radius(100%);
+        @include transition();
+        @include opacity(0);
+        @include min-screen($M_XS + 1) {
+          margin-top: round(-6px*$x);
+          margin-left: round(-6px*$x);
+          width: round(12px*$x);
+          height: round(12px*$x);
+        }
+      }
+      &:hover {
+        @include transition();
+        &:before {
+          @include transition();
+          @include opacity(1);
+        }
+      }
+      &.selected, &.active {
+        &:before {
+          @include opacity(1);
+        }
+      }
+    }
+    span {
+      display: none;
+    }
+  }
 }
