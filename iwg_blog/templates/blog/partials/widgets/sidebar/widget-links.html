@@ -1,22 +1,12 @@
 <div class="widget-links">
   <ul class="widget-links__list">
-    <li class="widget-links__item">
-      <svg class="icon icon_arrow-link">
-        <use xlink:href="#icon_arrow-link"></use>
-      </svg>
-      <a href="http://who.int/" target="_blank" class="widget-links__link">World Health Organization</a>
-    </li>
-    <li class="widget-links__item">
-      <svg class="icon icon_arrow-link">
-        <use xlink:href="#icon_arrow-link"></use>
-      </svg>
-      <a href="http://www.unfoundation.org/" target="_blank" class="widget-links__link">United Nations Foundations</a>
-    </li>
-    <li class="widget-links__item">
-      <svg class="icon icon_arrow-link">
-        <use xlink:href="#icon_arrow-link"></use>
-      </svg>
-      <a href="http://www.who.int/reproductivehealth/about_us/hrp/" target="_blank" class="widget-links__link">Human Reproduction Programme</a>
-    </li>
+    {% for link in links %}
+      <li class="widget-links__item">
+        <svg class="icon icon_arrow-link">
+          <use xlink:href="#icon_arrow-link"></use>
+        </svg>
+        <a href="{{ link.url }}" target="_blank" class="widget-links__link">{{ link.title }}</a>
+      </li>
+    {% endfor %}
   </ul>
 </div>

@@ -14,6 +14,7 @@ from django.views.generic.list import MultipleObjectMixin
 from meta.views import MetadataMixin
 from watson import search as watson
 
+from iwg_blog.attachments.models import Link
 from ..attachments.views import FeaturedDocumentsMixin
 from ..blog.serializers import ArticleSerializer
 from ..utils.views import JsonResponseMixin
@@ -68,6 +69,14 @@ class TopTagsMixin(object):
             .order_by('-article_count')[:self.top_tags_count]
         context.update(kwargs)
         return super(TopTagsMixin, self).get_context_data(**context)
+
+
+class LinksMixin(object):
+    def get_context_data(self, **kwargs):
+        context = dict()
+        context['links'] = Link.objects.all()
+        context.update(kwargs)
+        return super(LinksMixin, self).get_context_data(**context)
 
 
 class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
@@ -202,7 +211,7 @@ class SearchView(JsonResponseMixin, ArticleListView):
         return super(SearchView, self).get(request, *args, **kwargs)
 
 
-class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
+class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin, LinksMixin,
                   FeaturedDocumentsMixin, CategoriesMixin, ArticleListView):
     template_name = 'blog/pages/index.html'
 

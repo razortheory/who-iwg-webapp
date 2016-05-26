@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Document, UploadedImage
+from .models import Document, UploadedImage, Link
 
 
 @admin.register(Document)
@@ -52,3 +52,8 @@ class UploadedImageAdmin(admin.ModelAdmin):
     def image_url(self, obj):
         return '<a href="{0}">{0}</a>'.format(obj.image_file.url)
     image_url.allow_tags = True
+
+
+@admin.register(Link)
+class LinkAdmin(admin.ModelAdmin):
+    list_display = ('title', 'url')

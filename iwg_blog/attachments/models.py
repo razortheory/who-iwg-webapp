@@ -53,3 +53,11 @@ class UploadedImage(models.Model):
 
     def __unicode__(self):
         return u'UploadedImage: %s' % self.image_file
+
+
+class Link(models.Model):
+    title = models.CharField(max_length=100)
+    url = models.URLField()
+
+    def __unicode__(self):
+        return self.title
