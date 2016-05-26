@@ -40,7 +40,6 @@ class RoundView(MetadataMixin, RoundsMixin, RelatedListMixin, BaseViewMixin, Lis
 
     paginate_by = 6
 
-    description = 'List of grantees.'
     url = reverse_lazy('grantee:grantee_list_view')
 
     def get_meta_title(self, context=None):

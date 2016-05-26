@@ -6,11 +6,11 @@ from django.utils import timezone
 
 from autoslug.utils import generate_unique_slug, slugify
 from django_markdown.models import MarkdownField
-from meta.models import ModelMeta
 
 from .fields import AutoSlugField, OrderedManyToManyField
 from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager, SampleArticleManager
 from .utils import markdown_to_text
+from .helpers import ModelMeta
 
 
 class Category(ModelMeta, models.Model):

@@ -157,15 +157,10 @@ class ArticleListView(MetadataMixin, BaseViewMixin, ListView):
 
     template_name = 'blog/pages/article-list.html'
 
-    title = 'List of articles'
-    description = 'List of articles.'
+    title = 'Latest articles'
     url = reverse_lazy('blog:articles_view')
     image_width = 800
     image_height = 420
-
-    def get_meta_image(self, context=None):
-        if context['object_list']:
-            return context['object_list'][0].cover_image
 
 
 class SearchView(JsonResponseMixin, ArticleListView):
@@ -177,7 +172,6 @@ class SearchView(JsonResponseMixin, ArticleListView):
     ajax_search_result_count = 3
 
     title = 'Search'
-    description = 'Search result.'
 
     def get_meta_url(self, context=None):
         return reverse('blog:search_view') + '?' + self.request.GET.urlencode()
@@ -213,13 +207,7 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin,
     template_name = 'blog/pages/index.html'
 
     title = 'IWG Portal'
-    description = 'IWG Portal'
     url = reverse_lazy('blog:landing_view')
-
-    def get_meta_image(self, context=None):
-        article = context.get('featured_articles').first()
-        if article and article.cover_image:
-            return article.cover_image
 
 
 class CategoryView(RelatedListMixin, ArticleListView):
