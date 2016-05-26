@@ -57,6 +57,7 @@
     <script src="{% static 'blog/js/cookies-policy.js' %}"></script>
     <script src="{% static 'blog/js/utils.js' %}"></script>
     <script src="{% static 'blog/js/share-utils.js' %}"></script>
+    <script src="{% static 'blog/js/jquery.ui.shake.min.js' %}"></script>
     <script>
       $(function () {
         $('.messages-wrap').stick_in_parent();
@@ -90,20 +91,21 @@
         var $subscribeForm = $('#id__subscribe__form'),
             $subscribeAlerts = $subscribeForm.find('.subscribe-alerts'),
             subscribeUrl = $subscribeForm.attr('action'),
-            cleanTimeout = 5000;
+            cleanTimeout = 10000,
+            timeoutId;
+
         $subscribeForm.on('submit', function (e) {
+          $subscribeForm.removeClass('has-error');
+          $subscribeAlerts.empty();
 
           $.post(subscribeUrl, $subscribeForm.serialize())
             .done(function (data) {
-              $subscribeAlerts.empty();
-
               $subscribeAlerts.append('<div class="alert alert-success">' + data.message + '</div>');
 
-              setTimeout(function () { $subscribeAlerts.empty(); }, cleanTimeout);
+              clearTimeout(timeoutId);
+              timeoutId = setTimeout(function () { $subscribeAlerts.children().fadeOut(); }, cleanTimeout);
             }).error(function ($xhr) {
               var data = $xhr.responseJSON;
-
-              $subscribeAlerts.empty();
 
               for (key in data.errors) {
                 for (var i = 0; i < data.errors[key].length; i++) {
@@ -111,7 +113,16 @@
                 }
               }
 
-              setTimeout(function () { $subscribeAlerts.empty(); }, cleanTimeout);
+              $subscribeForm.addClass('has-error');
+              $subscribeForm.shake({
+                distance: 5,
+                times: 3,
+                speed: 70,
+              });
+
+              clearTimeout(timeoutId);
+              timeoutId = setTimeout(function () { $subscribeAlerts.children().fadeOut();
+                                       $subscribeForm.removeClass('has-error'); }, cleanTimeout);
             });
           e.preventDefault();
         });

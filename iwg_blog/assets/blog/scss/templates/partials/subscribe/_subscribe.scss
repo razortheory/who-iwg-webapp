@@ -9,6 +9,10 @@
 			@include clearfix;
 			text-align: center;
 		}
+
+		&.has-error .subscribe__field {
+		    color: #A94442;
+		}
 	}
 	&__label {
 		position: relative;
