@@ -3,21 +3,21 @@
 <div class="social">
   <ul class="social__list">
     <li class="social__item">
-      <a href="{% absolute_url sharer_url %}" class="social__link fb_sharer">
+      <a href="{{ social_links.facebook }}" target="_blank" class="social__link">
         <svg class="icon icon_fb">
           <use xlink:href="#icon_fb"></use>
         </svg>
       </a>
     </li>
     <li class="social__item">
-      <a href="{% absolute_url sharer_url %}" class="social__link twitter_sharer">
+      <a href="{{ social_links.twitter }}" target="_blank" class="social__link">
         <svg class="icon icon_tw">
           <use xlink:href="#icon_tw"></use>
         </svg>
       </a>
     </li>
     <li class="social__item">
-      <a href="{% absolute_url sharer_url %}" class="social__link google_sharer">
+      <a href="{{ social_links.google_plus }}" target="_blank" class="social__link">
         <svg class="icon icon_gp">
           <use xlink:href="#icon_gp"></use>
         </svg>

@@ -30,3 +30,13 @@ def watermarks(request):
     for name in watermarks_config.watermarks:
         context['watermark_%s' % name] = watermarks_config.watermarks[name]
     return context
+
+
+def social_links(request):
+    return {
+        'social_links': {
+            'facebook': 'https://www.facebook.com/WHO',
+            'twitter': 'https://twitter.com/who',
+            'google_plus': 'https://plus.google.com/+who',
+        }
+    }

@@ -95,6 +95,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'iwg_blog.context_processors.google_analytics',
                 'iwg_blog.context_processors.watermarks',
+                'iwg_blog.context_processors.social_links',
             ],
             'loaders': [
                 'django.template.loaders.filesystem.Loader',
