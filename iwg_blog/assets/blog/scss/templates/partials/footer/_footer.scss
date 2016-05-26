@@ -75,12 +75,6 @@
 	}
 }
 
-@media (max-width: 980px) and (min-width: 931px) {
-	.footer__social {
-		display: none;
-	}
-}
-
 @include min-screen(931px) {
 		.footer__copy__mobile {
 			display: none;
@@ -89,12 +83,6 @@
 		.footer__partners__mobile {
 			display: none;
 		}
-}
-
-@include max-screen(1200px) {
-	.footer-nav__list {
-		max-width: round(400px*$x);
-	}
 }
 
 @include max-screen(930px) {
@@ -134,4 +122,19 @@
 			}
 		}
 	}
+}
+
+
+@include min-screen(931px) {
+    .footer__layer-nav {
+        position: absolute;
+        right: 0px;
+    }
+}
+
+
+@media screen and (max-width: 970px) and (min-width: 931px) {
+    .footer__layer-nav {
+        max-width: 580px;
+    }
 }
