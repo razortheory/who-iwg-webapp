@@ -1,24 +1,20 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db import models
 
-from ..grantee.models import Grantee
 from .tasks import generate_document_preview
-from ..blog.models import Article
 from ..utils.file_types import get_file_type
 
 
-class Document(models.Model):
+class BaseDocument(models.Model):
     name = models.CharField(max_length=100)
-
-    article = models.ForeignKey(Article, related_name='documents', blank=True, null=True)
-    grantee = models.ForeignKey(Grantee, related_name='documents', blank=True, null=True)
 
     document_file = models.FileField(upload_to='documents')
     file_preview = models.ImageField(upload_to='documents/thumbnails', blank=True, null=True)
 
-    is_featured = models.BooleanField(default=False)
-
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
 
     def __unicode__(self):
         return self.name
@@ -26,9 +22,9 @@ class Document(models.Model):
     def save(self, **kwargs):
         old_obj = None
         if self.pk:
-            old_obj = Document.objects.get(pk=self.pk)
+            old_obj = self._default_manager.get(pk=self.pk)
 
-        super(Document, self).save(**kwargs)
+        super(BaseDocument, self).save(**kwargs)
 
         if not old_obj or old_obj.document_file != self.document_file:
             generate_document_preview.delay(self)
@@ -44,6 +40,10 @@ class Document(models.Model):
 
     def file_type_icon_url(self):
         return static('attachments/images/%s-icon.png' % self.file_type) if self.file_type else ''
+
+
+class Document(BaseDocument):
+    is_featured = models.BooleanField(default=False)
 
 
 class UploadedImage(models.Model):

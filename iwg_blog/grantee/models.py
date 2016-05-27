@@ -3,6 +3,7 @@ from django.db import models
 from django_markdown.models import MarkdownField
 
 from .managers import PublishedGranteeManager
+from ..attachments.models import BaseDocument
 from ..blog.utils import markdown_to_text
 from ..blog.fields import AutoSlugField
 from ..blog.models import BaseArticle
@@ -55,3 +56,7 @@ class Grantee(BaseArticle):
 
     def get_absolute_url(self):
         return reverse('grantee:grantee_view', args=(self.slug, ))
+
+
+class GranteeDocument(BaseDocument):
+    grantee = models.ForeignKey(Grantee, related_name='documents')

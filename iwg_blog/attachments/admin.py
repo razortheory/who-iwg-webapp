@@ -7,15 +7,13 @@ from .models import Document, UploadedImage, Link
 class DocumentAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_featured', 'document_preview')
     list_filter = ('is_featured', )
-    search_fields = ('name', 'article')
+    search_fields = ('name',)
     readonly_fields = ('document_preview', )
-    exclude = ('article', 'grantee', 'file_preview', )
+    exclude = ('file_preview', )
     list_per_page = 20
 
     def get_queryset(self, request):
-        return super(DocumentAdmin, self).get_queryset(request) \
-            .filter(article__isnull=True) \
-            .filter(grantee__isnull=True)
+        return super(DocumentAdmin, self).get_queryset(request)
 
     def document_preview(self, obj):
         return '<img class="document-preview" src="%s">' % obj.get_preview_url()
@@ -24,7 +22,6 @@ class DocumentAdmin(admin.ModelAdmin):
 
 
 class DocumentAdminInline(admin.TabularInline):
-    model = Document
     exclude = ['is_featured', 'file_preview']
     readonly_fields = ['document_preview_thumb', ]
 
@@ -32,12 +29,6 @@ class DocumentAdminInline(admin.TabularInline):
         return '<img class="document-preview" width="100" src="%s">' % obj.file_preview.url if obj.file_preview else ''
     document_preview_thumb.short_description = 'Preview'
     document_preview_thumb.allow_tags = True
-
-    def get_fields(self, request, obj=None):
-        fields = super(DocumentAdminInline, self).get_fields(request, obj=None)
-        fields.remove('article')
-        fields.remove('grantee')
-        return fields
 
 
 @admin.register(UploadedImage)
