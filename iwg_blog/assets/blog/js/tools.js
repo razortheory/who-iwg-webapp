@@ -106,8 +106,13 @@ $(function () {
       if (results.length) {
         $searchResults.empty();
         for (var i = 0, result; result = results[i]; i++) {
-          var itemHtml = searchItemTemplate.replace(/{\s*([a-zA-Z0-9-_]+)\s*}/g, function (_, key) {
-            return result[key];
+          var itemHtml = searchItemTemplate.replace(/{\s*([a-zA-Z0-9-_.]+)\s*}/g, function (_, key) {
+            var keys = key.split('.');
+            var value = result;
+            for (var i=0; i<keys.length; i++){
+              value = value[keys[i]];
+            }
+            return value;
           });
           $searchResults.append(itemHtml);
         }
