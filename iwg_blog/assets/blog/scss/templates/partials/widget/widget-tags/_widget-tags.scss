@@ -2,6 +2,8 @@
     &__list {
         @include list-reset;
         padding-left: round(7px*$x);
+        max-height: round(150px*$x);
+        overflow: hidden;
     }
     &__item {
         @include dib;

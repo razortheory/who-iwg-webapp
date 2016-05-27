@@ -61,7 +61,7 @@ class TopArticlesMixin(object):
 
 
 class TopTagsMixin(object):
-    top_tags_count = 10
+    top_tags_count = 20
 
     def get_context_data(self, **kwargs):
         context = dict()
