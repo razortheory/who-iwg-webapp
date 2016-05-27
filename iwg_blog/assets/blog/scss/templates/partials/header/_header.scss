@@ -52,6 +52,7 @@
   }
   &__logo {
     position: relative;
+    top: -8px;
     float: left;
     width: round(170px*$x);
     background-position: 0 0;
@@ -61,6 +62,7 @@
       width: 10.8%;
     }
     @include max-screen(1150px) {
+      top: 0;
       margin-bottom: round(20px*$x);
     }
     @include max-screen($M_SM3X) {
