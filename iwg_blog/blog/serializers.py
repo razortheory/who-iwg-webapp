@@ -1,10 +1,10 @@
 from sorl.thumbnail import get_thumbnail
 
 from ..thumbnail_lazy.watermarks_config import watermark_article
-from ..utils.serializers import JsonSerializer
+from ..utils.serializers import DictSerializer
 
 
-class ArticleSerializer(JsonSerializer):
+class ArticleSerializer(DictSerializer):
     serializable_fields = ['title', 'cover_image', 'short_description_text', 'published_at', 'get_absolute_url']
 
     def serialize_cover_image(self, value):

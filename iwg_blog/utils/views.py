@@ -1,10 +1,13 @@
 from django.db.models import QuerySet
 
-from iwg_blog.utils.serializers import JsonSerializer
+from .serializers import DictSerializer
 
 
 class JsonResponseMixin(object):
-    serializer_class = JsonSerializer
+    """
+    Django CBV mixin for using ajax requests without any heavy libraries
+    """
+    serializer_class = DictSerializer
 
     def get_serializer(self):
         return self.serializer_class()

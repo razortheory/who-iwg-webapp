@@ -1,4 +1,7 @@
-class JsonSerializer(object):
+class DictSerializer(object):
+    """
+    Dict serializer for objects. Fetch all fields, notated in serializable_fields from obj and return as data
+    """
     serializable_fields = []
 
     def __init__(self, *args, **kwargs):

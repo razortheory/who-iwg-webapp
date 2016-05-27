@@ -1,8 +1,18 @@
-from django.contrib import admin
 from six import string_types
+
+from django.contrib import admin
 
 
 class ConfigurableModelAdmin(admin.ModelAdmin):
+    """
+        Django ModelAdmin with configurable list_filter and list_display.
+        Remove from needed list if 'list_(filter|display)_`field`' callable exists and return False
+
+        Example:
+        --------
+        def list_display_hits(self, request):
+            return request.user.has_perm('blog.view_article_hits')
+    """
     def _filter_configurable_list(self, request, configurable_list, prefix):
         for filter_attr in configurable_list:
             filter_func_name = prefix + filter_attr

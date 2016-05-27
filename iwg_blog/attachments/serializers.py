@@ -1,7 +1,7 @@
-from iwg_blog.utils.serializers import JsonSerializer
+from ..utils.serializers import DictSerializer
 
 
-class UploadedImageSerializer(JsonSerializer):
+class UploadedImageSerializer(DictSerializer):
     serializable_fields = ['image_file', ]
 
     def serialize_image_file(self, value):
