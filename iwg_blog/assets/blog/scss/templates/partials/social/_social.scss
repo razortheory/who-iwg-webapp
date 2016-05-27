@@ -1,125 +1,136 @@
 .social {
- 	&__list {
-		@include list-reset;
-		@include clearfix;
-		position: relative;
-        @include max-screen($M_X2S) {
-            text-align: center;
-        }
-	}
-	&__item {
-		position: relative;
-		float: left;
-		margin-left: round(25px*$x);
+  &__title {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 26px;
+    color: $grey;
+    vertical-align: top;
+    margin-right: 0.5em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &__list {
+    @include list-reset;
+    @include clearfix;
+    position: relative;
+    @include max-screen($M_X2S) {
+      text-align: center;
+    }
+    display: inline-block;
+  }
+  &__item {
+    position: relative;
+    float: left;
+    margin-left: round(25px*$x);
+    @include max-screen(1459px) {
+      margin-left: round(15px*$x);
+    }
+    @include max-screen($M_X2S) {
+      float: none;
+      @include dib;
+      @include dib-fix;
+      vertical-align: top;
+    }
+    &:first-child {
+      margin-left: 0;
+      @include max-screen(1459px) {
+        margin-left: 0;
+      }
+    }
+    &_footer {
+      margin-left: round(17px*$x);
+      &:first-child {
+        margin-left: 0;
         @include max-screen(1459px) {
-            margin-left: round(15px*$x);
+          margin-left: 0;
         }
-        @include max-screen($M_X2S) {
-            float: none;
-            @include dib;
-            @include dib-fix;
-            vertical-align: top;
+      }
+      @include max-screen(1459px) {
+        margin-left: round(17px*$x);
+      }
+      @include max-screen($M_X2S) {
+        position: relative;
+        float: left;
+      }
+    }
+  }
+  &__link {
+    position: relative;
+    width: round(42px*$x);
+    height: round(42px*$x);
+    display: block;
+    border: 1px solid $blue;
+    @include border-radius(50%);
+    @include transition(background-color 0.3s ease);
+    &:hover {
+      background-color: $blue;
+      border: 0;
+      @include transition(background-color 0.3s ease);
+      .icon {
+        fill: $white;
+        @include transition(fill 0.3s ease);
+      }
+    }
+    .icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      fill: $blue;
+      @include transition(fill 0.3s ease);
+      &_fb {
+        margin-top: round(-9px*$x);
+        margin-left: round(-5px*$x);
+        height: round(18px*$x);
+        width: round(9px*$x);
+      }
+      &_tw {
+        margin-top: round(-9px*$x);
+        margin-left: round(-8px*$x);
+        height: round(18px*$x);
+        width: round(17px*$x);
+      }
+      &_gp {
+        margin-top: round(-7px*$x);
+        margin-left: round(-10px*$x);
+        height: round(14px*$x);
+        width: round(20px*$x);
+      }
+    }
+    &_footer.social__link {
+      width: round(30px*$x);
+      height: round(30px*$x);
+      border: 1px solid $grey;
+      @include transition;
+      .icon {
+        fill: $grey;
+        &_fb {
+          margin-top: round(-5px*$x);
+          margin-left: round(-5px*$x);
+          height: round(12px*$x);
+          width: round(9px*$x);
         }
-        &:first-child {
-            margin-left: 0;
-            @include max-screen(1459px) {
-                margin-left: 0;
-            }
+        &_tw {
+          margin-top: round(-6px*$x);
+          margin-left: round(-6px*$x);
+          height: round(12px*$x);
+          width: round(13px*$x);
         }
-        &_footer {
-            margin-left: round(17px*$x);
-            &:first-child {
-                margin-left: 0;
-                @include max-screen(1459px) {
-                    margin-left: 0;
-                }
-            }
-            @include max-screen(1459px) {
-                margin-left: round(17px*$x);
-            }
-            @include max-screen($M_X2S) {
-                position: relative;
-        		float: left;
-            }
+        &_gp {
+          margin-top: round(-5px*$x);
+          margin-left: round(-7px*$x);
+          height: round(10px*$x);
+          width: round(14px*$x);
         }
-	}
-	&__link {
-		position: relative;
-		width: round(42px*$x);
-		height: round(42px*$x);
-		display: block;
-		border: 1px solid $blue;
-		@include border-radius(50%);
-		@include transition(background-color 0.3s ease);
-		&:hover {
-			background-color: $blue;
-			border: 0;
-			@include transition(background-color 0.3s ease);
-			.icon {
-				fill: $white;
-				@include transition(fill 0.3s ease);
-			}
-		}
-		.icon {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			display: block;
-			fill: $blue;
-			@include transition(fill 0.3s ease);
-			&_fb {
-				margin-top: round(-9px*$x);
-				margin-left: round(-5px*$x);
-				height: round(18px*$x);
-				width: round(9px*$x);
-			}
-			&_tw {
-				margin-top: round(-9px*$x);
-				margin-left: round(-8px*$x);
-				height: round(18px*$x);
-				width: round(17px*$x);
-			}
-			&_gp {
-				margin-top: round(-7px*$x);
-				margin-left: round(-10px*$x);
-				height: round(14px*$x);
-				width: round(20px*$x);
-			}
-		}
-        &_footer.social__link {
-            width: round(30px*$x);
-            height: round(30px*$x);
-            border: 1px solid $grey;
-            @include transition;
-            .icon {
-                fill: $grey;
-                &_fb {
-    				margin-top: round(-5px*$x);
-    				margin-left: round(-5px*$x);
-    				height: round(12px*$x);
-    				width: round(9px*$x);
-    			}
-    			&_tw {
-    				margin-top: round(-6px*$x);
-    				margin-left: round(-6px*$x);
-    				height: round(12px*$x);
-    				width: round(13px*$x);
-    			}
-    			&_gp {
-    				margin-top: round(-5px*$x);
-    				margin-left: round(-7px*$x);
-    				height: round(10px*$x);
-    				width: round(14px*$x);
-    			}
-            }
-            &:hover {
-                border: 1px solid $blue;
-                @include transition;
-                background-color: transparent;
-                .icon {
-    				fill: $blue;
-    			}
-            }
+      }
+      &:hover {
+        border: 1px solid $blue;
+        @include transition;
+        background-color: transparent;
+        .icon {
+          fill: $blue;
         }
-	}
+      }
+    }
+  }
 }

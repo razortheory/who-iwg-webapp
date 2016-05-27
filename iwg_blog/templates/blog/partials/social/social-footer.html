@@ -1,23 +1,24 @@
 {% load blog_tags %}
 
 <div class="social social_footer">
+  <span class="social__title social__title_footer">Share:</span>
   <ul class="social__list">
     <li class="social__item social__item_footer">
-      <a href="{{ social_links.facebook }}" target="_blank" class="social__link social__link_footer">
+      <a href="{% absolute_url sharer_url %}" target="_blank" class="social__link social__link_footer fb_sharer">
         <svg class="icon icon_fb">
           <use xlink:href="#icon_fb"></use>
         </svg>
       </a>
     </li>
     <li class="social__item social__item_footer">
-      <a href="{{ social_links.twitter }}" target="_blank" class="social__link social__link_footer">
+      <a href="{% absolute_url sharer_url %}" target="_blank" class="social__link social__link_footer twitter_sharer">
         <svg class="icon icon_tw">
           <use xlink:href="#icon_tw"></use>
         </svg>
       </a>
     </li>
     <li class="social__item social__item_footer">
-      <a href="{{ social_links.google_plus }}" target="_blank" class="social__link social__link_footer">
+      <a href="{% absolute_url sharer_url %}" target="_blank" class="social__link social__link_footer google_sharer">
         <svg class="icon icon_gp">
           <use xlink:href="#icon_gp"></use>
         </svg>

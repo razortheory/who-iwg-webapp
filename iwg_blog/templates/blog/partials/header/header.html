@@ -14,7 +14,7 @@
     <div class="header__search-social">
       <div class="header__social">
         {% url 'blog:landing_view' as landing_url %}
-        {% include "blog/partials/social/social.html" with sharer_url=landing_url %}
+        {% include "blog/partials/social/social.html" %}
       </div>
       <div class="header__search">
         {% include "blog/partials/search/search-top.html" %}
