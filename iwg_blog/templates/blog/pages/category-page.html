@@ -5,7 +5,7 @@
   <div class="inner inner_category">
     <div class="category-page">
       <h2 class="category-page__title title-main title-main_n">
-        <span class="first"><span>{{ category.name |first }}</span></span><span>{{ category.name.upper |slice:"1:" }}</span>
+        <span class="first"><span>{{ category.name |first }}</span></span><span>{{ category.name |slice:"1:" }}</span>
       </h2>
       {% include "blog/partials/posts/small-posts-list.html" with articles=article_list %}
       <div class="category-page__nav">
