@@ -1,145 +1,145 @@
 .header {
-	width: 100%;
-    border-bottom: solid 1px rgba(51, 51, 51, 0.4);
-	&-nav-shifted-handle {
-		position: relative;
-		float: right;
-		margin-top: 5px;
-		padding-left: 8px;
-		padding-top: 8px;
-		width: 41px;
-		height: 41px;
-		@include border-radius(5px);
-		@include transition;
+  width: 100%;
+  border-bottom: solid 1px rgba(51, 51, 51, 0.4);
+  &-nav-shifted-handle {
+    position: relative;
+    float: right;
+    margin-top: 5px;
+    padding-left: 8px;
+    padding-top: 8px;
+    width: 41px;
+    height: 41px;
+    @include border-radius(5px);
+    @include transition;
 
-		display: none;
+    display: none;
 
-		.icon {
-			width: 25px;
-			height: 25px;
-			display: block;
-			fill: $blue;
-			@include transition;
-		}
-		@include max-screen($M_XS) {
-			display: block;
-		}
-		.sb-active & {
-			background-color: $blue;
-			@include transition;
-			.icon {
-				fill: $white;
-				@include transition;
-			}
-		}
-	}
-	&__inner {
-		position: relative;
-		@include clearfix;
-		margin: 0 auto;
-		padding-left: round(32px*$x);
-		padding-top: round(23px*$x);
-		padding-right: round(10px*$x);
-		width: 100%;
-		max-width: round(1940px*$x);
-		@include max-screen(1459px) {
-			padding-left: round(12px*$x);
-		}
-		@include max-screen($M_XS) {
-			padding-top: 10px;
-			padding-left: 17px;
-		}
-	}
-	&__logo {
-		position: relative;
-		float: left;
-		width: round(147px*$x);
-		background-position: 0 0;
-		background-repeat: no-repeat;
-		background-size: contain;
-		@include max-screen(1459px) {
-			width: 10.8%;
-		}
-		@include max-screen(1150px) {
-			margin-bottom: round(20px*$x);
-		}
-		@include max-screen($M_SM3X) {
-			width: round(140px*$x);
-		}
-		@include max-screen($M_XS) {
-			width: 114px;
-		}
-		&:before {
-			padding-bottom: 44.2%;
-			width: 100%;
-			height: 0;
-			display: block;
-			content: '';
-		}
-	}
-	&__search-social {
-		position: absolute;
-		top: round(30px*$x);
-		right: round(32px*$x);
-		@include max-screen(1459px) {
-			top: round(25px*$x);
-			right: round(12px*$x);
-		}
-		@include max-screen(1150px) {
-			position: relative;
-			float: right;
-			top: auto;
-			right: auto;
-			margin-top: round(10px*$x);
-		}
-		@include max-screen($M_XS) {
-			display: none;
-		}
-	}
-	&__social {
-		position: relative;
-		float: right;
-	}
-	&__search {
-		position: relative;
-		float: right;
-		margin-right: round(34px*$x);
-		@include max-screen(1459px) {
-			margin-right: round(25px*$x);
-		}
-		&-mobile {
-			position: absolute;
-			right: 60px;
-			top: 0;
-			z-index: 1000;
-			height: 100%;
-			width: 40px;
-			background-color: $white;
-			overflow: hidden;
-			display: none;
-			@include max-screen($M_XS) {
-				display: block;
-			}
-		}
-	}
-	&__nav {
-		position: relative;
-		overflow: hidden;
-		margin: round(47px*$x) 32.8% -1px round(10px*$x);
-		@include max-screen(1609px) {
-			margin-right: 36.2%;
-		}
-		@include max-screen(1439px) {
-			margin-right: 37.1%;
-		}
-		@include max-screen(1150px) {
-			clear: both;
-			width: 100%;
-			max-width: round(665px*$x);
-			margin: 0 auto -1px;
-		}
-		@include max-screen($M_XS) {
-			display: none;
-		}
-	}
+    .icon {
+      width: 25px;
+      height: 25px;
+      display: block;
+      fill: $blue;
+      @include transition;
+    }
+    @include max-screen($M_XS) {
+      display: block;
+    }
+    .sb-active & {
+      background-color: $blue;
+      @include transition;
+      .icon {
+        fill: $white;
+        @include transition;
+      }
+    }
+  }
+  &__inner {
+    position: relative;
+    @include clearfix;
+    margin: 0 auto;
+    padding-left: round(32px*$x);
+    padding-top: round(23px*$x);
+    padding-right: round(10px*$x);
+    width: 100%;
+    max-width: round(1940px*$x);
+    @include max-screen(1459px) {
+      padding-left: round(12px*$x);
+    }
+    @include max-screen($M_XS) {
+      padding-top: 10px;
+      padding-left: 17px;
+    }
+  }
+  &__logo {
+    position: relative;
+    float: left;
+    width: round(170px*$x);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    @include max-screen(1459px) {
+      width: 10.8%;
+    }
+    @include max-screen(1150px) {
+      margin-bottom: round(20px*$x);
+    }
+    @include max-screen($M_SM3X) {
+      width: round(140px*$x);
+    }
+    @include max-screen($M_XS) {
+      width: 114px;
+    }
+    &:before {
+      padding-bottom: 44.2%;
+      width: 100%;
+      height: 0;
+      display: block;
+      content: '';
+    }
+  }
+  &__search-social {
+    position: absolute;
+    top: round(30px*$x);
+    right: round(32px*$x);
+    @include max-screen(1459px) {
+      top: round(25px*$x);
+      right: round(12px*$x);
+    }
+    @include max-screen(1150px) {
+      position: relative;
+      float: right;
+      top: auto;
+      right: auto;
+      margin-top: round(10px*$x);
+    }
+    @include max-screen($M_XS) {
+      display: none;
+    }
+  }
+  &__social {
+    position: relative;
+    float: right;
+  }
+  &__search {
+    position: relative;
+    float: right;
+    margin-right: round(34px*$x);
+    @include max-screen(1459px) {
+      margin-right: round(25px*$x);
+    }
+    &-mobile {
+      position: absolute;
+      right: 60px;
+      top: 0;
+      z-index: 1000;
+      height: 100%;
+      width: 40px;
+      background-color: $white;
+      overflow: hidden;
+      display: none;
+      @include max-screen($M_XS) {
+        display: block;
+      }
+    }
+  }
+  &__nav {
+    position: relative;
+    overflow: hidden;
+    margin: round(47px*$x) 32.8% -1px round(10px*$x);
+    @include max-screen(1609px) {
+      margin-right: 36.2%;
+    }
+    @include max-screen(1439px) {
+      margin-right: 37.1%;
+    }
+    @include max-screen(1150px) {
+      clear: both;
+      width: 100%;
+      max-width: round(665px*$x);
+      margin: 0 auto -1px;
+    }
+    @include max-screen($M_XS) {
+      display: none;
+    }
+  }
 }
