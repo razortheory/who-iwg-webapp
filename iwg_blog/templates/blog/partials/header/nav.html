@@ -5,19 +5,19 @@
     {% url 'django.contrib.flatpages.views.flatpage' 'opensrp/' as opensrp_link %}
     {% url 'django.contrib.flatpages.views.flatpage' 'about/' as about_link %}
     {% url 'django.contrib.flatpages.views.flatpage' 'expert-group/' as expert_group %}
-    <li class="nav__item {% if request.path == home_link %} nav__item_active {% endif %}">
+    <li class="nav__item {% if request.path == home_link or home_link_active %} nav__item_active {% endif %}">
       <a href="{{ home_link }}" class="nav__link">HOME</a>
     </li>
-    <li class="nav__item {% if request.path == expert_group %} nav__item_active {% endif %}">
+    <li class="nav__item {% if request.path == expert_group or expert_group_active %} nav__item_active {% endif %}">
       <a href="{{ expert_group }}" class="nav__link">EXPERT ADVISORY GROUP</a>
     </li>
-    <li class="nav__item {% if request.path == about_link %} nav__item_active {% endif %}">
+    <li class="nav__item {% if request.path == about_link or about_link_active %} nav__item_active {% endif %}">
       <a href="{{ about_link }}" class="nav__link">ABOUT US</a>
     </li>
-    <li class="nav__item {% if request.path == grantees_link %} nav__item_active {% endif %}">
+    <li class="nav__item {% if request.path == grantees_link or grantees_link_active %} nav__item_active {% endif %}">
       <a href="{{ grantees_link }}" class="nav__link">IWG GRANTEES</a>
     </li>
-    <li class="nav__item {% if request.path == opensrp_link %} nav__item_active {% endif %}">
+    <li class="nav__item {% if request.path == opensrp_link or opensrp_link_active %} nav__item_active {% endif %}">
       <a href="{{ opensrp_link }}" class="nav__link">OPENSRP</a>
     </li>
   </ul>

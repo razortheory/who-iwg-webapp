@@ -1,5 +1,10 @@
 {% extends "blog/pages/base.html" %}
 
+{% block page %}
+  {% with grantees_link_active=True %}
+    {{ block.super }}
+  {% endwith %}
+{% endblock %}
 
 {% block content %}
   <div class="inner inner_content">
