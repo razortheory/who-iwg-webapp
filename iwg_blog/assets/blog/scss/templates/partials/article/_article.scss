@@ -17,13 +17,19 @@
     }
     &__title {
         margin: 0 0 round(10px*$x);
-        font-size: 40px;
+        font-size: round(50px*$x);
         line-height: 1.2;
         font-family: $font-nice;
         font-weight: $bold;
         color: $dark-grey;
-        @include min-screen($M_SM + 1) {
-            font-size: round(50px*$x);
+
+        &__extra {
+            font-size: round(76px*$x);
+            line-height: 1.5;
+        }
+
+        @include max-screen($M_SM) {
+            font-size: round(40px*$x);
         }
         @include max-screen($M_XS) {
             font-size: 30px;
@@ -73,7 +79,8 @@
             float: left;
             margin-right: round(15px*$x);
             @include max-screen($M_X2S) {
-				margin-right: 8px;
+            margin-right: 8px;
+            margin-bottom: 4px;
 			}
         }
         &-link {

@@ -90,6 +90,9 @@
       float: left;
       @include list-reset;
       padding-top: round(10px*$x);
+      max-width: 290px;
+      max-height: 25px;
+      overflow: hidden;
       @include max-screen(429px) {
         float: none;
         @include clearfix;
