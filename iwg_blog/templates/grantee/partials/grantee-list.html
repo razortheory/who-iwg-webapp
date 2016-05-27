@@ -15,19 +15,24 @@
     </p>
   </div>
   <h3>{{ round.name }} Grantees:</h3>
+  <div class="grantee-list__list">
   {% for grantee in grantee_list %}
-    <a href="{{ grantee.get_absolute_url }}" class="grantee-link">
-      <h4>{{ grantee.title }}</h4>
-    </a>
+    <div class="grantee grantee-list__item">
+      <a href="{{ grantee.get_absolute_url }}" class="grantee-link">
+        <h4 class="grantee-title">{{ grantee.title }}</h4>
+      </a>
 
-    {{ grantee.short_description | markdown }}
+      {{ grantee.short_description | markdown }}
 
-    {% if grantee.documents.all.0 %}
-      <div class="article__body-incut">
-        {% include "attachments/widgets/document-link.html" with document=grantee.documents.all.0 %}
-      </div>
-    {% endif %}
+      {% if grantee.documents.all.0 %}
+        <div class="article__body-incut">
+          {% include "attachments/widgets/document-link.html" with document=grantee.documents.all.0 %}
+        </div>
+      {% endif %}
+      <div class="post__footer-devider"></div>
+    </div>
   {% empty %}
     <p>No Grantees</p>
   {% endfor %}
+  </div>
 </div>

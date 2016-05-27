@@ -1,59 +1,84 @@
 .widget-rounds {
-    &__list {
-        margin: 0px;
-        padding: 0px;
-        list-style: outside none none;
-        display: block;
+  &__list {
+    margin: 0px;
+    padding: 0px;
+    list-style: outside none none;
+    display: block;
+  }
+
+  &__item {
+    position: relative;
+    height: round(40px*$x);
+    margin-bottom: round(36px*$x);
+    @include max-screen($M_XS){
+      margin-bottom: round(20px*$x);
     }
 
-    &__item {
-        position: relative;
-        height: 40px;
-        margin-bottom: 36px;
+    &_active {
+      &:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 7px;
+        background-color: #4a90e2;
+        border-radius: 5px;
+      }
 
-        &_active {
-            &:before {
-                content: "";
-                position: absolute;
-                height: 100%;
-                width: 7px;
-                background-color: #4a90e2;
-                border-radius: 5px;
-            }
-
-            .widget-rounds__link {
-                font-weight: bold;
-            }
-        }
+      .widget-rounds__link {
+        font-weight: bold;
+      }
     }
+  }
 
-    &__link {
-        display: block;
-        padding: 3px 0px 3px 32px;
-        font-size: 25px;
-        font-family: Open Sans;
-        color: #7d7d7d;
+  &__link {
+    display: block;
+    padding: 3px 0px 3px round(32px*$x);
+    font-size: round(25px*$x);
+    line-height: round(32px*$x);
+    color: #7d7d7d;
+    @include max-screen($M_XS){
+      font-size: round(20px*$x);
+      padding-left: round(20px*$x);
     }
+  }
 }
 
 .grantee-page {
-    .blog-full__col_posts {
-        padding-right: 0px;
-        padding-left: 60px;
-        @include max-screen($M_SM3X) {
-            padding-left: 40px;
-        }
-        @include max-screen(719px) {
-            padding-left: 0;
-        }
+  .blog-full__col_posts {
+    padding-right: 0px;
+    padding-left: 60px;
+    @include max-screen($M_SM3X) {
+      padding-left: 40px;
     }
+    @include max-screen(719px) {
+      padding-left: 0;
+    }
+  }
 
-    .article-download {
-        margin: 0px;
+  .article-download {
+    margin: 0px;
+  }
+
+  .grantee {
+    &-title {
+      color: $blue;
+      font-size: 120%;
+      font-family: $font;
     }
+    &-list {
+      &__item {
+        padding-bottom: 10px;
+        position: relative;
+        margin-bottom: 40px;
+        @include max-screen(719px){
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 }
 
 a.grantee-link {
-    font-style: normal;
-    text-decoration: none;
+  font-style: normal;
+  text-decoration: none;
 }

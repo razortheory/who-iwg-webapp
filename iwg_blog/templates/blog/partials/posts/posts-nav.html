@@ -1,20 +1,22 @@
-<div class="posts-nav">
-  {% if page_obj.has_previous %}
-    <a href="?page={{ page_obj.previous_page_number }}" class="posts-nav__link posts-nav__link_prev">
-      <svg class="icon icon_arrow-left">
-        <use xlink:href="#icon_arrow-left"></use>
-      </svg>
-      <span class="posts-nav__link-text">{{ previous_prefix | default:"NEWER" }} <span
-          class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
-    </a>
-  {% endif %}
-  {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}" class="posts-nav__link posts-nav__link_next">
-      <span class="posts-nav__link-text">{{ next_prefix | default:"OLDER" }} <span
-          class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
-      <svg class="icon icon_arrow-right">
-        <use xlink:href="#icon_arrow-right"></use>
-      </svg>
-    </a>
-  {% endif %}
-</div>
+{% if page_obj.has_previous or page_obj.has_next %}
+  <div class="posts-nav">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="posts-nav__link posts-nav__link_prev">
+        <svg class="icon icon_arrow-left">
+          <use xlink:href="#icon_arrow-left"></use>
+        </svg>
+        <span class="posts-nav__link-text">{{ previous_prefix | default:"NEWER" }} <span
+            class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
+      </a>
+    {% endif %}
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="posts-nav__link posts-nav__link_next">
+        <span class="posts-nav__link-text">{{ next_prefix | default:"OLDER" }} <span
+            class="posts-nav__link-text posts-nav__link-text_no-mobile">{{ page_name | default:"POSTS" }}</span></span>
+        <svg class="icon icon_arrow-right">
+          <use xlink:href="#icon_arrow-right"></use>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
