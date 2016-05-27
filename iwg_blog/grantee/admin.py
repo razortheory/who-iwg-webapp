@@ -2,14 +2,19 @@ import copy
 
 from django.contrib import admin
 
-from ..blog.admin import BaseArticleAdmin
 from .forms import GranteeAdminForm
-from .models import Grantee, Round
+from .models import Grantee, Round, GranteeDocument
+from ..attachments.admin import DocumentAdminInline
+from ..blog.admin import BaseArticleAdmin
 
 
 @admin.register(Round)
 class RoundAdmin(admin.ModelAdmin):
     list_display = ('name', )
+
+
+class GranteeDocumentInline(DocumentAdminInline):
+    model = GranteeDocument
 
 
 @admin.register(Grantee)
@@ -22,6 +27,8 @@ class GranteeAdmin(BaseArticleAdmin):
     ]
     list_filter = ['status', 'round', 'published_at']
     readonly_fields = []
+
+    inlines = [GranteeDocumentInline,]
 
     fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
     fieldsets[0][1]['fields'].insert(2, 'round')

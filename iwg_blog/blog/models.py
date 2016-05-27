@@ -11,6 +11,7 @@ from .fields import AutoSlugField, OrderedManyToManyField
 from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager, SampleArticleManager
 from .utils import markdown_to_text
 from .helpers import ModelMeta
+from ..attachments.models import BaseDocument
 
 
 class Category(ModelMeta, models.Model):
@@ -219,3 +220,7 @@ class Subscriber(models.Model):
 
     def __unicode__(self):
         return self.email
+
+
+class ArticleDocument(BaseDocument):
+    article = models.ForeignKey(Article, related_name='documents')

@@ -13,9 +13,13 @@ from watson.search import default_search_engine
 from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
 from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
-from .models import Article, Category, SampleArticle, Tag, Subscriber, BaseArticle
+from .models import Article, Category, SampleArticle, Tag, Subscriber, BaseArticle, ArticleDocument
 from ..utils.base import update_url_params
 from ..attachments.admin import DocumentAdminInline
+
+
+class ArticleDocumentInline(DocumentAdminInline):
+    model = ArticleDocument
 
 
 class BaseArticleAdmin(ConfigurableModelAdmin):
@@ -26,8 +30,6 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
         (None, {'fields': ['title', 'slug', 'tags', 'status', 'published_at']}),
         (None, {'fields': ['cover_image', 'short_description', 'content']}),
     )
-
-    inlines = (DocumentAdminInline,)
 
     def change_status(self, request, queryset, status):
         model = queryset.model
@@ -115,6 +117,8 @@ class ArticleAdmin(BaseArticleAdmin):
     search_adapter_cls = ArticleAdapter
     search_engine = default_search_engine
     search_fields = [None]
+
+    inlines = (ArticleDocumentInline,)
 
     actions = ['mark_featured', 'unmark_featured']
 
