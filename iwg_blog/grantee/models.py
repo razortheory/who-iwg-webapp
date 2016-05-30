@@ -1,12 +1,13 @@
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import models
+
 from django_markdown.models import MarkdownField
 
-from .managers import PublishedGranteeManager
 from ..attachments.models import BaseDocument
-from ..blog.utils import markdown_to_text
 from ..blog.fields import AutoSlugField
 from ..blog.models import BaseArticle
+from ..blog.utils import markdown_to_text
+from .managers import PublishedGranteeManager
 
 
 class Round(models.Model):

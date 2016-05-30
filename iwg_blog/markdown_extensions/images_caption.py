@@ -18,11 +18,12 @@ Outputs:
     </figure>
 """
 
-from markdown import Extension
-from markdown.inlinepatterns import IMAGE_LINK_RE, IMAGE_REFERENCE_RE
-from markdown.blockprocessors import BlockProcessor
-from markdown.util import etree
 import re
+
+from markdown import Extension
+from markdown.blockprocessors import BlockProcessor
+from markdown.inlinepatterns import IMAGE_LINK_RE, IMAGE_REFERENCE_RE
+from markdown.util import etree
 
 
 class FigcaptionProcessor(BlockProcessor):

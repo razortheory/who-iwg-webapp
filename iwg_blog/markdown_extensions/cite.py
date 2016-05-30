@@ -16,7 +16,6 @@ Usage
 import markdown
 from markdown.inlinepatterns import SimpleTagPattern
 
-
 CITE_RE = r'(\"{3})(.+?)\2'
 
 

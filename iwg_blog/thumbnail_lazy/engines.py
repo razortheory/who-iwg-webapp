@@ -1,11 +1,10 @@
 import base64
 import math
+import six
 import urllib
 from io import BytesIO
 
-import six
 from PIL import Image, ImageEnhance, ImageStat
-
 from sorl.thumbnail import default
 from sorl.thumbnail.engines.pil_engine import Engine
 

@@ -1,9 +1,10 @@
 from __future__ import absolute_import
 
 from datetime import timedelta
-from django.utils import timezone
-from django.conf import settings
+
 from celery.task import periodic_task
+from django.conf import settings
+from django.utils import timezone
 
 from .models import AvailabilityTest
 

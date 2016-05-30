@@ -2,10 +2,10 @@ import copy
 
 from django.contrib import admin
 
-from .forms import GranteeAdminForm
-from .models import Grantee, Round, GranteeDocument
 from ..attachments.admin import DocumentAdminInline
 from ..blog.admin import BaseArticleAdmin
+from .forms import GranteeAdminForm
+from .models import Grantee, GranteeDocument, Round
 
 
 @admin.register(Round)

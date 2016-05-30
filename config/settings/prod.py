@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 
-from .base import *
+from kombu import Exchange, Queue
 
+from .base import *
 
 DEBUG = False
 
@@ -112,7 +113,6 @@ GA_ENABLED = bool(GOOGLE_ANALYTICS_PROPERTY_ID)
 # http://docs.celeryproject.org/en/latest/configuration.html
 # --------------------------------------------------------------------------
 
-from kombu import Exchange, Queue
 
 BROKER_URL = env('BROKER_URL')
 

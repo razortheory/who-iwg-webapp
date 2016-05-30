@@ -2,13 +2,12 @@ from __future__ import absolute_import
 
 from datetime import timedelta
 
-from celery.schedules import crontab
-from celery.task import periodic_task
-
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.utils import timezone
 
+from celery.schedules import crontab
+from celery.task import periodic_task
 from mailing.shortcuts import render_send_email
 
 from .models import Article, Subscriber

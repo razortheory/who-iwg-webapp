@@ -7,11 +7,11 @@ from django.utils import timezone
 from autoslug.utils import generate_unique_slug, slugify
 from django_markdown.models import MarkdownField
 
+from ..attachments.models import BaseDocument
 from .fields import AutoSlugField, OrderedManyToManyField
+from .helpers import ModelMeta
 from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager, SampleArticleManager
 from .utils import markdown_to_text
-from .helpers import ModelMeta
-from ..attachments.models import BaseDocument
 
 
 class Category(ModelMeta, models.Model):

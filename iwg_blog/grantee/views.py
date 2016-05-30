@@ -5,8 +5,8 @@ from django.views.generic.detail import DetailView
 
 from meta.views import MetadataMixin
 
-from ..blog.views import BaseViewMixin, RelatedListMixin, HitsTrackingMixin
 from ..blog.helpers import Meta
+from ..blog.views import BaseViewMixin, HitsTrackingMixin, RelatedListMixin
 from .models import Grantee, Round
 
 

@@ -1,4 +1,4 @@
-from django.db.models import Func, Value, QuerySet, F
+from django.db.models import F, Func, QuerySet, Value
 from django.db.models.functions import Concat
 
 

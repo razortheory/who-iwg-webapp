@@ -1,8 +1,8 @@
 import copy
 
 from ..blog.fields import MarkdownFormField
-from ..blog.widgets import CustomMarkdownWidget
 from ..blog.forms import ArticleAdminForm
+from ..blog.widgets import CustomMarkdownWidget
 
 
 class GranteeAdminForm(ArticleAdminForm):

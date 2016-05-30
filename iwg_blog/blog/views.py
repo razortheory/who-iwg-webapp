@@ -14,7 +14,7 @@ from django.views.generic.list import MultipleObjectMixin
 from meta.views import MetadataMixin
 from watson import search as watson
 
-from iwg_blog.attachments.models import Link
+from ..attachments.models import Link
 from ..attachments.views import FeaturedDocumentsMixin
 from ..blog.serializers import ArticleSerializer
 from ..utils.views import JsonResponseMixin

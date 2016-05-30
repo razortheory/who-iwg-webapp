@@ -1,7 +1,7 @@
+from bs4 import BeautifulSoup
+from bs4.element import NavigableString
 from markdown import Extension
 from markdown.postprocessors import Postprocessor
-from bs4 import BeautifulSoup
-from bs4.element import Tag, NavigableString
 
 
 class IncutProcessor(Postprocessor):

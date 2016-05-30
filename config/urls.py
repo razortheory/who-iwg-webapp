@@ -15,14 +15,14 @@ Including another URLconf
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf import settings
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 
-from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
 from iwg_blog.blog import views as blog_views
+from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
 
 sitemaps = {
     'articles': ArticlesSitemap,

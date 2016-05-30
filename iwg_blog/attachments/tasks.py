@@ -3,7 +3,7 @@ import os
 from django.core.files.base import ContentFile
 
 from celery.task import task
-from py_thumbnailer.exceptions import ThumbnailerNotFoundException, MimeTypeNotFoundException
+from py_thumbnailer.exceptions import MimeTypeNotFoundException, ThumbnailerNotFoundException
 from py_thumbnailer.thumbnail import create_thumbnail
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Document, UploadedImage, Link
+from .models import Document, Link, UploadedImage
 
 
 @admin.register(Document)

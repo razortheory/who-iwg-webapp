@@ -1,8 +1,8 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db import models
 
-from .tasks import generate_document_preview
 from ..utils.file_types import get_file_type
+from .tasks import generate_document_preview
 
 
 class BaseDocument(models.Model):

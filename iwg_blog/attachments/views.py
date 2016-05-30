@@ -1,9 +1,9 @@
 from django.http import JsonResponse
 from django.views.generic import CreateView
 
-from iwg_blog.utils.views import JsonResponseMixin
+from ..utils.views import JsonResponseMixin
 from .forms import UploadImageForm
-from .models import UploadedImage, Document
+from .models import Document, UploadedImage
 from .serializers import UploadedImageSerializer
 
 

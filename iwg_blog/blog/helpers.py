@@ -1,8 +1,8 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from meta import settings
-from meta.views import Meta as OldMeta
 from meta.models import ModelMeta as OldModelMeta
+from meta.views import Meta as OldMeta
 
 
 class Meta(OldMeta):

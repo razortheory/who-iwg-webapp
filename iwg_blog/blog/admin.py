@@ -8,14 +8,15 @@ from django.db.models.functions import Coalesce
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.utils.encoding import force_text
+
 from watson.search import default_search_engine
 
+from ..attachments.admin import DocumentAdminInline
 from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
+from ..utils.base import update_url_params
 from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
-from .models import Article, Category, SampleArticle, Tag, Subscriber, BaseArticle, ArticleDocument
-from ..utils.base import update_url_params
-from ..attachments.admin import DocumentAdminInline
+from .models import Article, ArticleDocument, BaseArticle, Category, SampleArticle, Subscriber, Tag
 
 
 class ArticleDocumentInline(DocumentAdminInline):

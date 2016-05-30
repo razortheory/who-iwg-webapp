@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.views import DEFAULT_TEMPLATE
 from django.contrib.sites.shortcuts import get_current_site
-from django.http.response import HttpResponsePermanentRedirect, Http404
+from django.http.response import Http404, HttpResponsePermanentRedirect
 from django.utils.safestring import mark_safe
 from django.views.generic.detail import DetailView
 

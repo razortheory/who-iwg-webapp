@@ -19,14 +19,13 @@ Outputs:
     </div>
 """
 
-from urlparse import urlparse
-
 import re
+from urlparse import urlparse
 
 from markdown.blockprocessors import ParagraphProcessor
 from markdown.extensions import Extension
 from markdown.inlinepatterns import IMAGE_LINK_RE
-from markdown.util import etree, AtomicString
+from markdown.util import AtomicString, etree
 
 
 class BigLinkGalleryProcessor(ParagraphProcessor):
@@ -90,4 +89,3 @@ class BigLinkExtension(Extension):
 
 def makeExtension(*args, **kwargs):
     return BigLinkExtension(*args, **kwargs)
-

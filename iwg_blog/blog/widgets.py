@@ -1,4 +1,3 @@
-import embedded_media
 from django.contrib.admin.widgets import AdminFileWidget
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.forms.utils import flatatt
@@ -6,7 +5,6 @@ from django.forms.widgets import CheckboxSelectMultiple, Textarea
 from django.template import loader
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-
 from django_markdown.utils import editor_js_initialization
 from django_markdown.widgets import MarkdownWidget
 
