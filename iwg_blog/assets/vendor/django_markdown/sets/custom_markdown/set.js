@@ -211,8 +211,6 @@ miu = {
 };
 
 $(document).ready(function () {
-  $.markItUp.fullscreen = false;
-
   function addEventHandler(obj, evt, handler) {
     if (obj.addEventListener) {
       obj.addEventListener(evt, handler, false);
@@ -223,14 +221,27 @@ $(document).ready(function () {
     }
   }
 
-  addEventHandler(window, "drop", function (event) {
-    if (event.target.className == "markItUpEditor") {
-      event = event || window.event;
-      if (event.preventDefault) {
-        event.preventDefault();
-      }
+  $(document).on('init.markItUp', function(event){
+    $.markItUp.fullscreen = false;
 
-      event.target.focus();
+    var textarea = event.target;
+    var $markItUp = $(textarea).closest('.markItUp');
+    $markItUp.append(
+      '<div class="drop-zone">' +
+        '<div class="drop-zone_inner">' +
+          '<i class="drop-zone_image icon-add_image"> </i>' +
+          '<h1 class="drop-zone_text">Drop to upload image</h1>' +
+        '</div>' +
+      '</div>'
+    );
+
+    addEventHandler($markItUp[0], "drop", function (event) {
+      console.log('drop', event);
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      textarea.focus();
 
       var files = event.dataTransfer.files;
 
@@ -239,19 +250,40 @@ $(document).ready(function () {
 
       loading_spinner_enabled = true;
       $.ajax({
-        url: event.target.getAttribute('data-upload-image-url'),
+        url: textarea.getAttribute('data-upload-image-url'),
         type: 'POST',
         data: data,
         cache: false,
         processData: false,
         contentType: false,
         success: function (data, textStatus, jqXHR) {
-          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n'});
+          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n', target: textarea});
+          $markItUp.trigger('dragleave');
         },
         error: function (data, textStatus, errorThrown) {
           console.log('ERRORS: ' + data.statusText);
+          $markItUp.trigger('dragleave');
         }
       });
-    }
+    });
+
+    $('body').on('drop', function(event){
+      console.log('drop', event);
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    var dragOverTimeout;
+    $markItUp.on('dragover dragenter', function (event) {
+      $markItUp.addClass('dragenter');
+      clearTimeout(dragOverTimeout);
+      event.preventDefault();
+      event.stopPropagation();
+    }).on('dragleave', function(){
+      clearTimeout(dragOverTimeout);
+      dragOverTimeout = setTimeout(function () {$markItUp.removeClass('dragenter')}, 200);
+      event.preventDefault();
+      event.stopPropagation();
+    });
   });
 });
