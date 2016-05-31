@@ -21,10 +21,7 @@ class RoundsMixin(object):
 class GranteeView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
     meta_class = Meta
     model = Grantee
-    queryset = Grantee.objects.all()
     template_name = 'grantee/pages/grantee.html'
-
-    related_articles_count = 3
 
     def get_meta(self, **context):
         return self.get_object().as_meta(self.request)
@@ -33,20 +30,17 @@ class GranteeView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
 class RoundView(MetadataMixin, RoundsMixin, RelatedListMixin, BaseViewMixin, ListView):
     meta_class = Meta
     model = Grantee
-    queryset = Grantee.published.all()
-
-    template_name = 'grantee/pages/grantee-list.html'
-    object_queryset = Round.objects.all()
-
+    object_model = Round
     paginate_by = 6
 
+    template_name = 'grantee/pages/grantee-list.html'
     url = reverse_lazy('grantee:grantee_list_view')
 
     def get_meta_title(self, context=None):
         return 'Grantees: %s' % self.object.name
 
     def get_queryset(self):
-        return super(RoundView, self).get_queryset().filter(round=self.object)
+        return Grantee.published.filter(round=self.object)
 
 
 class GranteesView(RedirectView):

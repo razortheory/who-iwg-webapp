@@ -2,10 +2,12 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
 from django.contrib.sites.models import Site
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import SingleObjectMixin
@@ -81,9 +83,25 @@ class LinksMixin(object):
 
 class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
     object_queryset = None
+    object_model = None
+
+    def get_object_queryset(self):
+        if self.object_queryset is not None:
+            return self.object_queryset.all()
+
+        if self.object_model:
+            return self.object_model._default_manager.all()
+
+        raise ImproperlyConfigured(
+            "%(cls)s is missing a object QuerySet. Define "
+            "%(cls)s.object_model, %(cls)s.object_queryset, or override "
+            "%(cls)s.get_object_queryset()." % {
+                'cls': self.__class__.__name__
+            }
+        )
 
     def get(self, request, *args, **kwargs):
-        self.object = self.get_object(self.object_queryset)
+        self.object = self.get_object(self.get_object_queryset())
         return super(RelatedListMixin, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -119,7 +137,6 @@ class HitsTrackingMixin(object):
 class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
     meta_class = Meta
     model = Article
-    queryset = Article.objects.all()
     template_name = 'blog/pages/article.html'
 
     related_articles_count = 3
@@ -130,7 +147,8 @@ class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = dict()
         related_articles = self.get_queryset() \
-                               .filter(status=BaseArticle.STATUS_PUBLISHED).exclude(pk=self.object.pk) \
+                               .filter(status=BaseArticle.STATUS_PUBLISHED, published_at__lte=timezone.now()) \
+                               .exclude(pk=self.object.pk) \
                                .filter(category=self.object.category)[:self.related_articles_count]
         if not related_articles:
             related_articles = self.model.published.order_by('-hits')[:self.related_articles_count]
@@ -161,8 +179,10 @@ class ArticlePreviewView(AccessMixin, TemplateView):
 class ArticleListView(MetadataMixin, BaseViewMixin, ListView):
     meta_class = Meta
     model = Article
-    queryset = Article.published.all()
     paginate_by = 6
+
+    def get_queryset(self):
+        return Article.published.all()
 
     template_name = 'blog/pages/article-list.html'
 
@@ -191,7 +211,7 @@ class SearchView(JsonResponseMixin, ArticleListView):
         if not self.search_string:
             return queryset
 
-        return watson.filter(self.queryset, self.search_string, ranking=True)
+        return watson.filter(queryset, self.search_string, ranking=True)
 
     def get_context_data(self, **kwargs):
         context = dict()
@@ -221,7 +241,7 @@ class LandingView(FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin, LinksMi
 
 class CategoryView(RelatedListMixin, ArticleListView):
     template_name = 'blog/pages/category-page.html'
-    object_queryset = Category.objects.all()
+    object_model = Category
     paginate_by = 12
 
     def get_queryset(self):
@@ -233,7 +253,7 @@ class CategoryView(RelatedListMixin, ArticleListView):
 
 class TagView(RelatedListMixin, ArticleListView):
     template_name = 'blog/pages/tagged-page.html'
-    object_queryset = Tag.objects.all()
+    object_model = Tag
 
     def get_queryset(self):
         return super(TagView, self).get_queryset().filter(tags=self.object)
