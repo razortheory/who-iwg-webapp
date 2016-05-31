@@ -6,64 +6,68 @@
 {% block title %}{{ title }} | {% get_site_title %}{% endblock %}
 
 {% block branding %}
-    {# Use the div#grp-branding for branding elements, e.g. a logo #}
-    {# <div id="grp-branding"></div> #}
+  {# Use the div#grp-branding for branding elements, e.g. a logo #}
+  {# <div id="grp-branding"></div> #}
 {% endblock %}
 
 {% block extrastyle %}
-    {% compress css %}
-      <link rel="stylesheet" href="{% static 'fonts/dejavu-sans-mono/style.css' %}">
-      <link rel="stylesheet" href="{% static 'fonts/dejavu-sans/style.css' %}">
-      <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
-      <link rel="stylesheet" href="{% static 'vendor/jquery-ui-custom/jquery-ui.min.css' %}">
-      <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-tabs.css' %}">
-      <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
-      <link type="text/x-scss" rel="stylesheet" href="{% static 'admin/scss/admin-markitup.scss' %}">
-      <link rel="stylesheet" href="{% static 'admin/css/admin-modal-loading.css' %}">
-    {% endcompress %}
+  {% compress css %}
+    <link rel="stylesheet" href="{% static 'fonts/dejavu-sans-mono/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/dejavu-sans/style.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/jquery-ui-custom/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-tabs.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/admin-extra.css' %}">
+    <link type="text/x-scss" rel="stylesheet" href="{% static 'admin/scss/admin-markitup.scss' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/admin-modal-loading.css' %}">
+  {% endcompress %}
 {% endblock %}
 
 {% block javascripts %}
-    {% compress js %}
-      <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
-      <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
-      <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
-      <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
-      <script src="{% static "admin/js/admin-markitup-modals.js" %}"></script>
-      <script src="{% static "admin/js/tools.js" %}"></script>
-    {% endcompress %}
-    {{ block.super }}
+  {% compress js %}
+    <script src="{% static "vendor/jquery/jquery-2.2.3.min.js" %}"></script>
+    <script src="{% static "vendor/jquery/jqModal.min.js" %}"></script>
+    <script src="{% static "vendor/jquery-ui-custom/jquery-ui.min.js" %}"></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
+    <script src="{% static "admin/js/admin-markitup-modals.js" %}"></script>
+  {% endcompress %}
+  {{ block.super }}
 {% endblock %}
 
 
 {% block nav-global %}{% endblock %}
 
 {% block footer %}
-    {{ block.super }}
-    {% include "admin/models-autosave.html" %}
-    {% include "admin/admin-markitup-modals.html" %}
-    <div id="loadingDiv" class="loading-modal">
-        <div class="loading-modal-center">
-            <div class="cssload-thecube">
-                <div class="cssload-cube cssload-c1"></div>
-                <div class="cssload-cube cssload-c2"></div>
-                <div class="cssload-cube cssload-c4"></div>
-                <div class="cssload-cube cssload-c3"></div>
-            </div>
-        </div>
+  {{ block.super }}
+  {% include "admin/models-autosave.html" %}
+  {% include "admin/admin-markitup-modals.html" %}
+  <div id="loadingDiv" class="loading-modal">
+    <div class="loading-modal-center">
+      <div class="cssload-thecube">
+        <div class="cssload-cube cssload-c1"></div>
+        <div class="cssload-cube cssload-c2"></div>
+        <div class="cssload-cube cssload-c4"></div>
+        <div class="cssload-cube cssload-c3"></div>
+      </div>
     </div>
-    <script>
-        var $loading = $('.loading-modal');
-        var loading_spinner_enabled = false;
-        $(document).ajaxStart(function () {
-            if (loading_spinner_enabled){
-                $loading.fadeIn();
-            }
-        }).ajaxStop(function () {
-            if (loading_spinner_enabled){
-                loading_spinner_enabled = false;
-                $loading.fadeOut();
-            }
-        });
-    </script>
+  </div>
+  <script>
+    var $loading = $('.loading-modal');
+    var loading_spinner_enabled = false;
+    $(document).ajaxStart(function () {
+      if (loading_spinner_enabled) {
+        $loading.fadeIn();
+      }
+    }).ajaxStop(function () {
+      if (loading_spinner_enabled) {
+        loading_spinner_enabled = false;
+        $loading.fadeOut();
+      }
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $('<li><a href="/help-page/" target="_blank">Help page</a></li>').appendTo('#grp-user-tools');
+    });
+  </script>
 {% endblock %}
