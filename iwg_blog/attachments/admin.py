@@ -31,7 +31,7 @@ class DocumentAdminInline(admin.TabularInline):
     document_preview_thumb.allow_tags = True
 
 
-@admin.register(UploadedImage)
+# @admin.register(UploadedImage)
 class UploadedImageAdmin(admin.ModelAdmin):
     list_display = ('image_preview', 'image_url')
 
