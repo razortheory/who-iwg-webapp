@@ -128,6 +128,9 @@ $markitup_height: 700px;
         &.preview{
           display: none;
         }
+        &.markItUpFullScreen-minimize {
+          display: none;
+        }
       }
     }
   }
@@ -154,6 +157,12 @@ $markitup_height: 700px;
   .markItUpHeader {
     width: 98%;
     margin: auto;
+
+    .markItUpButton {
+      &.markItUpFullScreen-expand {
+        display: none;
+      }
+    }
   }
 
   .fullScreenClose {
