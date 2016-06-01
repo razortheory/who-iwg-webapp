@@ -44,64 +44,56 @@ function setCaretPosition(ctrl, pos) {
   }
 }
 
-function fullScreen(){
-  var _this = this;
+function minimize() {
   var $this = $(this);
 
-  function minimize() {
-    var caretPosition = getCaretPosition(_this);
-    $($.markItUp.fullscreenSource).val($this.val());
-    setCaretPosition($.markItUp.fullscreenSource, caretPosition);
-    $this.unbind();
-    setTimeout(function () {
-      $.markItUp({target: $($.markItUp.fullscreenSource)})
-    }, 1);
+  var caretPosition = getCaretPosition(this);
+  $($.markItUp.fullscreenSource).val($this.val());
+  setCaretPosition($.markItUp.fullscreenSource, caretPosition);
+  $this.unbind();
+  setTimeout(function () {
+    $.markItUp({target: $($.markItUp.fullscreenSource)})
+  }, 1);
 
-    var container = $this.parents('.markItUp').jqmHide();
-    container.parent().remove();
+  var container = $this.parents('.markItUp').jqmHide();
+  container.parent().remove();
 
-    $.markItUp.fullscreen = false;
-  }
+  $.markItUp.fullscreen = false;
+  return false;
+}
 
-  function maximize() {
-    $.markItUp.fullscreenSource = _this;
-    var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
-    var origTextarea = $($.markItUp.fullscreenSource);
+function maximize() {
+  $.markItUp.fullscreenSource = this;
+  var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
+  var origTextarea = $($.markItUp.fullscreenSource);
 
-    var fullscreenTextarea = $('<textarea id="fullscreen"></textarea>').appendTo('body');
-    $($.markItUp.fullscreenSource.attributes).each(function () {
-      if (this.nodeName.indexOf('data-') == 0) {
-        fullscreenTextarea.attr(this.nodeName, this.nodeValue);
-      }
-    });
+  var fullscreenTextarea = $('<textarea id="fullscreen"></textarea>').appendTo('body');
+  $($.markItUp.fullscreenSource.attributes).each(function () {
+    if (this.nodeName.indexOf('data-') == 0) {
+      fullscreenTextarea.attr(this.nodeName, this.nodeValue);
+    }
+  });
 
-    fullscreenTextarea.val(origTextarea.val()).show().markItUp(
-      mySettings, {"previewParserPath": origTextarea.data('preview-parser-url')}
-    );
+  fullscreenTextarea.val(origTextarea.val()).show().markItUp(
+    mySettings, {"previewParserPath": origTextarea.data('preview-parser-url')}
+  );
 
-    var container = fullscreenTextarea.parents('.markItUp');
-    setTimeout(function () {
-      container.jqm({toTop: true}).jqmShow();
-      $('#markItUpFullscreen').find('a[title="Preview"]').click();
-    }, 0);
-    setCaretPosition(fullscreenTextarea[0], caretPosition);
+  var container = fullscreenTextarea.parents('.markItUp');
+  setTimeout(function () {
+    container.jqm({toTop: true}).jqmShow();
+    $('#markItUpFullscreen').find('a[title="Preview"]').click();
+  }, 0);
+  setCaretPosition(fullscreenTextarea[0], caretPosition);
 
-    var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
-    $('.markItUpHeader', container).append(closeBtn);
+  var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
+  $('.markItUpHeader', container).append(closeBtn);
 
-    $('.fullScreenClose, .jqmOverlay', container).click(function () {
-      minimize();
-      return false;
-    });
+  $('.fullScreenClose, .jqmOverlay', container).click(function () {
+    minimize.call(fullscreenTextarea[0]);
+    return false;
+  });
 
-    $.markItUp.fullscreen = true;
-  }
-
-  if (!$.markItUp.fullscreen) {
-    maximize();
-  } else {
-    minimize();
-  }
+  $.markItUp.fullscreen = true;
   return false;
 }
 
@@ -190,12 +182,12 @@ mySettings = {
     {
       name: 'Expand',
       className: 'markItUpFullScreen-expand icon-expand',
-      call: fullScreen
+      call: maximize
     },
     {
       name: 'Minimize',
       className: 'markItUpFullScreen-minimize icon-minimize',
-      call: fullScreen
+      call: minimize
     }
   ],
   onTab: {

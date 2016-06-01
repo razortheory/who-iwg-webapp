@@ -176,4 +176,8 @@ $markitup_height: 700px;
     min-height: unset;
     @include calc(height, "100% - 22px", 99%);
   }
+
+  .markItUpPreviewFrame {
+    @include calc(width, "50% - 2px", 49%);
+  }
 }
