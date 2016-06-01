@@ -188,12 +188,12 @@ mySettings = {
     {separator: '---------------'},
     {name: 'Preview', call: 'preview', className: "preview icon-preview"},
     {
-      name: 'Expand Fullscreen',
+      name: 'Expand',
       className: 'markItUpFullScreen-expand icon-expand',
       call: fullScreen
     },
     {
-      name: 'Minimize Fullscreen',
+      name: 'Minimize',
       className: 'markItUpFullScreen-minimize icon-minimize',
       call: fullScreen
     }

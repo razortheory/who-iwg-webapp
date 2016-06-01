@@ -34,3 +34,11 @@
     height: 30px;
     margin: 2px 1em;
 }
+
+
+.markItUp .markItUpButton.markItUpFullScreen-expand,
+.markItUp .markItUpButton.markItUpFullScreen-minimize,
+.markItUp .markItUpButton.preview {
+    font-size: 22px;
+    margin-top: 5px;
+}
