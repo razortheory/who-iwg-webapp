@@ -7,15 +7,15 @@
         margin-bottom: round(20px*$x);
         padding-left: round(66px*$x);
         font-size: round(14px*$x);
-        line-height: round(17px*$x);
+        line-height: 1.5;
+        font-weight: bold;
         .icon {
             position: absolute;
             left: round(29px*$x);
             top: 50%;
-            margin-top: round(-6px*$x);
+            @include css3-prefix(transform, translateY(-50%));
             display: block;
-            width: round(14px*$x);
-            height: round(12px*$x);
+            height: round(24px*$x);
             fill: $blue;
         }
     }
