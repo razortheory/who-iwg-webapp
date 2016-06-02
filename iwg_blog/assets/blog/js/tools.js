@@ -128,9 +128,7 @@ $(function () {
     $(this).find('input').trigger('input');
   }
   function onFormBlur(){
-    if ($(this).find('input').val().length == 0){
-      $(this).removeClass('active');
-    }
+    $(this).removeClass('active');
     $searchResultsWrapper.hide();
   }
   if ($searchForm.length > 0){

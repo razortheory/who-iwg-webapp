@@ -44,6 +44,59 @@ function setCaretPosition(ctrl, pos) {
   }
 }
 
+function minimize() {
+  var $this = $(this);
+
+  var caretPosition = getCaretPosition(this);
+  $($.markItUp.fullscreenSource).val($this.val());
+  setCaretPosition($.markItUp.fullscreenSource, caretPosition);
+  $this.unbind();
+  setTimeout(function () {
+    $.markItUp({target: $($.markItUp.fullscreenSource)})
+  }, 1);
+
+  var container = $this.parents('.markItUp').jqmHide();
+  container.parent().remove();
+
+  $.markItUp.fullscreen = false;
+  return false;
+}
+
+function maximize() {
+  $.markItUp.fullscreenSource = this;
+  var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
+  var origTextarea = $($.markItUp.fullscreenSource);
+
+  var fullscreenTextarea = $('<textarea id="fullscreen"></textarea>').appendTo('body');
+  $($.markItUp.fullscreenSource.attributes).each(function () {
+    if (this.nodeName.indexOf('data-') == 0) {
+      fullscreenTextarea.attr(this.nodeName, this.nodeValue);
+    }
+  });
+
+  fullscreenTextarea.val(origTextarea.val()).show().markItUp(
+    mySettings, {"previewParserPath": origTextarea.data('preview-parser-url')}
+  );
+
+  var container = fullscreenTextarea.parents('.markItUp');
+  setTimeout(function () {
+    container.jqm({toTop: true}).jqmShow();
+    $('#markItUpFullscreen').find('a[title="Preview"]').click();
+  }, 0);
+  setCaretPosition(fullscreenTextarea[0], caretPosition);
+
+  var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
+  $('.markItUpHeader', container).append(closeBtn);
+
+  $('.fullScreenClose, .jqmOverlay', container).click(function () {
+    minimize.call(fullscreenTextarea[0]);
+    return false;
+  });
+
+  $.markItUp.fullscreen = true;
+  return false;
+}
+
 mySettings = {
   onShiftEnter: {keepDefault: false, openWith: '\n\n'},
   markupSet: [
@@ -124,67 +177,18 @@ mySettings = {
         window.gridModalDialog.dialog("open");
       }
     },
-    // {separator: '---------------'},
-    // {name: 'Preview', call: 'preview', className: "preview"},
-    // {
-    //   name: 'Fullscreen',
-    //   className: 'markItUpFullScreen',
-    //   call: function () {
-    //     var minimize = function () {
-    //       var textarea = $('#fullscreen');
-    //       var caretPosition = getCaretPosition(textarea[0]);
-    //       $($.markItUp.fullscreenSource).val(textarea.val());
-    //       setCaretPosition($.markItUp.fullscreenSource, caretPosition);
-    //       textarea.unbind();
-    //       setTimeout(function () {
-    //         $.markItUp({target: $($.markItUp.fullscreenSource)})
-    //       }, 1);
-    //
-    //       var container = textarea.parents('.markItUp').jqmHide();
-    //       container.parent().remove();
-    //
-    //       $.markItUp.fullscreen = false;
-    //     };
-    //
-    //     if (!$.markItUp.fullscreen) {
-    //       $.markItUp.fullscreenSource = $.markItUp.focused;
-    //       var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
-    //       var origTextarea = $($.markItUp.fullscreenSource);
-    //
-    //       $('body').append('<textarea id="fullscreen"></textarea>');
-    //
-    //       var textarea = $('#fullscreen');
-    //       $(origTextarea[0].attributes).each(function () {
-    //         if (this.nodeName.indexOf('data-') == 0) {
-    //           textarea.attr(this.nodeName, this.nodeValue);
-    //         }
-    //       });
-    //
-    //       textarea.val(origTextarea.val()).show().markItUp(
-    //         mySettings, {"previewParserPath": origTextarea.data('preview-parser-url')}
-    //       );
-    //
-    //       var container = textarea.parents('.markItUp');
-    //       setTimeout(function () {
-    //         container.jqm({toTop: true}).jqmShow();
-    //       }, 0);
-    //       setCaretPosition(textarea[0], caretPosition);
-    //
-    //       var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
-    //       $('.markItUpHeader', container).append(closeBtn);
-    //
-    //       $('.fullScreenClose, .jqmOverlay', container).click(function () {
-    //         minimize();
-    //         return false;
-    //       });
-    //
-    //       $.markItUp.fullscreen = true;
-    //     } else {
-    //       minimize();
-    //       return false;
-    //     }
-    //   }
-    // }
+    {separator: '---------------'},
+    {name: 'Preview', call: 'preview', className: "preview icon-preview"},
+    {
+      name: 'Expand',
+      className: 'markItUpFullScreen-expand icon-expand',
+      call: maximize
+    },
+    {
+      name: 'Minimize',
+      className: 'markItUpFullScreen-minimize icon-minimize',
+      call: minimize
+    }
   ],
   onTab: {
     keepDefault: false,
@@ -211,8 +215,6 @@ miu = {
 };
 
 $(document).ready(function () {
-  $.markItUp.fullscreen = false;
-
   function addEventHandler(obj, evt, handler) {
     if (obj.addEventListener) {
       obj.addEventListener(evt, handler, false);
@@ -223,35 +225,58 @@ $(document).ready(function () {
     }
   }
 
-  addEventHandler(window, "drop", function (event) {
-    if (event.target.className == "markItUpEditor") {
-      event = event || window.event;
-      if (event.preventDefault) {
-        event.preventDefault();
-      }
+  $(document).on('init.markItUp', function(event){
+    var textarea = event.target;
+    var $markItUp = $(textarea).closest('.markItUp');
+    $markItUp.append(
+      '<div class="drop-zone">' +
+        '<div class="drop-zone_inner">' +
+          '<i class="drop-zone_image icon-add_image"> </i>' +
+          '<h1 class="drop-zone_text">Drop to upload image</h1>' +
+        '</div>' +
+      '</div>'
+    );
 
-      event.target.focus();
+    addEventHandler($markItUp[0], "drop", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      textarea.focus();
 
       var files = event.dataTransfer.files;
 
       var data = new FormData();
       data.append('image_file', files[0]);
 
+      $markItUp.trigger('dragleave');
       loading_spinner_enabled = true;
       $.ajax({
-        url: event.target.getAttribute('data-upload-image-url'),
+        url: textarea.getAttribute('data-upload-image-url'),
         type: 'POST',
         data: data,
         cache: false,
         processData: false,
         contentType: false,
         success: function (data, textStatus, jqXHR) {
-          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n'});
+          $.markItUp({replaceWith: '![alt_text](' + data.image_file.url + ')\n', target: textarea});
         },
         error: function (data, textStatus, errorThrown) {
           console.log('ERRORS: ' + data.statusText);
         }
       });
-    }
+    });
+
+    var dragOverTimeout;
+    $markItUp.on('dragover dragenter', function (event) {
+      $markItUp.addClass('dragenter');
+      clearTimeout(dragOverTimeout);
+      event.preventDefault();
+      event.stopPropagation();
+    }).on('dragleave', function(){
+      clearTimeout(dragOverTimeout);
+      dragOverTimeout = setTimeout(function () {$markItUp.removeClass('dragenter')}, 200);
+      event.preventDefault();
+      event.stopPropagation();
+    });
   });
 });

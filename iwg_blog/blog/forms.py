@@ -59,7 +59,8 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'content': MarkdownFormField,
         }
         help_texts = {
-            'slug': ' '
+            'slug': ' ',
+            'published_at': 'UTC Time'
         }
 
     def __init__(self, *args, **kwargs):
@@ -68,12 +69,6 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
         self.fields['tags'].to_field_name = 'name'
         if self.instance.pk is not None:
             self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
-
-    def clean_published_at(self):
-        published_at = self.cleaned_data.get('published_at')
-        if published_at and published_at > timezone.now():
-            self.add_error('published_at', ValidationError('You can\'t set future date'))
-        return published_at
 
     @property
     def media(self):

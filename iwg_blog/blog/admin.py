@@ -196,6 +196,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    search_fields = ('name', )
     list_display = ('name', )
 
 

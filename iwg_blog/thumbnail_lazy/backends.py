@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 
 
 class LazyThumbnailBackend(ThumbnailBackend):
+    """
+    Return thumbnails as base64 url if not exists in cache and delay convert process.
+    """
     def get_thumbnail(self, file_, geometry_string, **options):
         if not options.pop('lazy', False):
             return super(LazyThumbnailBackend, self).get_thumbnail(file_, geometry_string, **options)
@@ -49,8 +52,10 @@ class LazyThumbnailBackend(ThumbnailBackend):
         if cached:
             return cached
 
+        # Modified code. Overwriting storage for lazy base64
         thumbnail = ImageFile(name, lazy_storage)
         generate_thumbnail_lazy.delay(file_, geometry_string, **options)
+        # End of modified code
 
         try:
             source_image = default.engine.get_image(source)

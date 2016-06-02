@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.functions import Lower
+from django.utils import timezone
 
 from ..utils.db import OrderableQuerySet
 
@@ -73,7 +74,7 @@ class ArticleManager(models.Manager):
 class PublishedArticleManager(ArticleManager):
     def get_queryset(self, *args, **kwargs):
         return super(PublishedArticleManager, self).get_queryset(*args, **kwargs)\
-            .filter(status=self.model.STATUS_PUBLISHED)
+            .filter(status=self.model.STATUS_PUBLISHED, published_at__lte=timezone.now())
 
 
 class SampleArticleManager(models.Manager):

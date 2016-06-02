@@ -1,10 +1,10 @@
+{% load staticfiles %}
+
 <div class="widget-links">
   <ul class="widget-links__list">
     {% for link in links %}
       <li class="widget-links__item">
-        <svg class="icon icon_arrow-link">
-          <use xlink:href="#icon_arrow-link"></use>
-        </svg>
+        <img class="icon icon_arrow-link" src="{% static "blog/images/ic_link.svg" %}">
         <a href="{{ link.url }}" target="_blank" class="widget-links__link">{{ link.title }}</a>
       </li>
     {% endfor %}

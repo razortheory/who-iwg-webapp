@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from .thumbnail_lazy import watermarks_config
+from .blog import watermarks_config
 
 
 def google_analytics(request):

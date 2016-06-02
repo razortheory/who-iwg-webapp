@@ -35,14 +35,10 @@
     margin: 2px 1em;
 }
 
-.markItUp .preview a {
-    background-image: url(images/preview.png);
-}
 
-.markItUp .markItUpFullScreen a {
-    background-image: url(images/fullscreen.png);
-}
-
-.markItUp .markItUpFullScreen-alt a {
-    background-image: url(images/fullscreen-alt.png);
+.markItUp .markItUpButton.markItUpFullScreen-expand,
+.markItUp .markItUpButton.markItUpFullScreen-minimize,
+.markItUp .markItUpButton.preview {
+    font-size: 22px;
+    margin-top: 5px;
 }

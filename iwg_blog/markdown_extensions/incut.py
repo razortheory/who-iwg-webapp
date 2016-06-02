@@ -1,3 +1,21 @@
+"""
+Python-Markdown extension designed specially for IWG article structure.
+Wrap text blocks with `article__body-content` class and `article__body-incut` any other blocks.
+=============================================
+Input:
+    <p>Hello world</p>
+    <p>some other text</p>
+    <img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title">
+Outputs:
+    <div class="article__body-content">
+        <p>Hello world</p>
+        <p>some other text</p>
+    </div>
+    <div class="article__body-incut">
+        <img alt="alt_text" src="/media/images/andrew_galves_paORKUs.png" title="title">
+    </div>
+"""
+
 from bs4 import BeautifulSoup
 from bs4.element import NavigableString
 from markdown import Extension

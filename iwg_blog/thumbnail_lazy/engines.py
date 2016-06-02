@@ -10,6 +10,22 @@ from sorl.thumbnail.engines.pil_engine import Engine
 
 
 class WatermarkMixin(object):
+    """
+    Engine mixin for drawing watermarks.
+
+    Watermarks config:
+    {
+        'gravity': 'tl|tr|bl|br', (top left, top right, bottom left, bottom right)
+        'width': '10%', optional; watermark width; number or percent value (10 - 10px, 10% - 10%)
+        'height': '10%', optional; watermark height. aspect ratio will be maintained if width and height set.
+        'x': '2h', 10/10%/10w/10h - offset from gravity corner by x
+        'y': '2h', 10/10%/10w/10h - offset from gravity corner by y
+        'url': absolute_url(static('blog/images/who-watermark.png')), link for watermark
+        'brightness_threshold': 200, optional; used only if two values provided for color
+        'color': ['#ffffff', '#9b9b9b'], hex color or two-values array (base value and fallback for higher brightness value)
+        'opacity': 0.6, watermark opacity (0-1)
+    }
+    """
     def create(self, image, geometry, options):
         image = super(WatermarkMixin, self).create(image, geometry, options)
         image = self.watermark(image, geometry, options)
@@ -47,6 +63,9 @@ def parse_value(value, origin=None, context=None):
 
 
 class ThumbnailEngine(WatermarkMixin, Engine):
+    """
+    PIL engine with watermark mixin
+    """
     def _watermark(
         self, image, url=None,
         width=None, height=None, gravity=None, x=0, y=0,

@@ -1,11 +1,17 @@
+"""
+Thumbnailing Extension for Python-Markdown
+=============================================
+Automatically thumbnails uploaded images from article content.
+"""
+
 from bs4 import BeautifulSoup
 from django.core.files.storage import default_storage
 from markdown import Extension
 from markdown.postprocessors import Postprocessor
 from sorl.thumbnail import get_thumbnail
 
+from iwg_blog.blog.watermarks_config import watermark_article
 from ..attachments.models import UploadedImage
-from ..thumbnail_lazy.watermarks_config import watermark_article
 
 
 class ThumbnailerProcessor(Postprocessor):
