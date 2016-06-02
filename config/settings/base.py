@@ -56,6 +56,7 @@ LOCAL_APPS = [
     'iwg_blog.blog',
     'iwg_blog.grantee',
     'iwg_blog.attachments',
+    'iwg_blog.utils',
 ]
 
 INSTALLED_APPS = CUSTOMIZE_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
