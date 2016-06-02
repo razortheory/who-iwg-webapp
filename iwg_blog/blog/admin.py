@@ -14,9 +14,9 @@ from watson.search import default_search_engine
 from ..attachments.admin import DocumentAdminInline
 from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
 from ..utils.base import update_url_params
-from .adapters import ArticleAdapter
 from .forms import ArticleAdminForm, FlatPagesAdminForm
 from .models import Article, ArticleDocument, BaseArticle, Category, SampleArticle, Subscriber, Tag
+from .watson_adapters import ArticleAdapter
 
 
 class ArticleDocumentInline(DocumentAdminInline):
@@ -85,6 +85,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
         return fieldsets
 
     def changelist_view(self, request, extra_context=None):
+        # Dirty hack for tags
         self.request = request
         return super(BaseArticleAdmin, self).changelist_view(request, extra_context=extra_context)
 
@@ -117,6 +118,7 @@ class ArticleAdmin(BaseArticleAdmin):
 
     search_adapter_cls = ArticleAdapter
     search_engine = default_search_engine
+    # Dirty hack for displaying search input
     search_fields = [None]
 
     inlines = (ArticleDocumentInline,)
@@ -159,18 +161,20 @@ class ArticleAdmin(BaseArticleAdmin):
 
 @admin.register(SampleArticle)
 class SampleArticleAdmin(ArticleAdmin):
+    new_article_action_name = '_create_article'
+
     def render_change_form(self, request, context, **kwargs):
         if kwargs.get('obj'):
             context = context or {}
             context.update({
                 'additional_actions': [
-                    {'text': 'Create new article from sample', 'name': '_create_article'}
+                    {'text': 'Create new article from sample', 'name': self.new_article_action_name}
                 ]
             })
         return super(SampleArticleAdmin, self).render_change_form(request, context, **kwargs)
 
     def response_change(self, request, obj):
-        if "_create_article" in request.POST:
+        if self.new_article_action_name in request.POST:
             article = Article(sample=obj)
             article.save()
             article.tags.add(*obj.tags.all())

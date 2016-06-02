@@ -2,7 +2,7 @@ from django.apps import AppConfig
 
 from watson import search as watson
 
-from .adapters import ArticleAdapter
+from .watson_adapters import ArticleAdapter
 
 
 class BlogConfig(AppConfig):

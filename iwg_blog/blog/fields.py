@@ -6,7 +6,7 @@ from django.db import models
 from autoslug import AutoSlugField as RealAutoSlugField
 from django_markdown.widgets import MarkdownWidget
 
-from iwg_blog.blog.widgets import TagitWidget
+from .widgets import TagitWidget
 
 
 class MarkdownFormField(forms.CharField):

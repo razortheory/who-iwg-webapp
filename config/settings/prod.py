@@ -39,6 +39,8 @@ USE_COMPRESSOR = env.bool('USE_COMPRESSOR')
 USE_CLOUDFRONT = env.bool('USE_CLOUDFRONT')
 USE_HTTPS = env.bool('USE_HTTPS')
 
+SITE_PROTOCOL = 'https' if USE_HTTPS else 'http'
+
 
 # Storage configurations
 # --------------------------------------------------------------------------
@@ -129,7 +131,7 @@ CELERY_QUEUES = (
 # Django meta settings
 # --------------------------------------------------------------------------
 
-META_SITE_PROTOCOL = 'https'
+META_SITE_PROTOCOL = SITE_PROTOCOL
 
 
 # New Relic configurations

@@ -8,7 +8,7 @@ class DictSerializer(object):
         if 'serializable_fields' in kwargs:
             self.serializable_fields = kwargs.pop('serializable_fields')
 
-    def serialize_obj(self, obj):
+    def _serialize_obj(self, obj):
         data = {}
         for field in self.serializable_fields:
             if hasattr(self, 'serialize_%s' % field):
@@ -23,9 +23,9 @@ class DictSerializer(object):
     def serialize(self, obj, many=False):
         if many:
             data = {
-                'data': [self.serialize_obj(single_obj) for single_obj in obj],
+                'data': [self._serialize_obj(single_obj) for single_obj in obj],
             }
         else:
-            data = self.serialize_obj(obj)
+            data = self._serialize_obj(obj)
 
         return data

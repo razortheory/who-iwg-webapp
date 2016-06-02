@@ -9,11 +9,15 @@ register = template.Library()
 
 @register.simple_tag
 def absolute_url(url):
-    site = Site.objects.get_current()
-    scheme = settings.META_SITE_PROTOCOL
+    """
+    Generate absolute url from provided.
+    """
 
     if re.match(r'^(?:[a-z]+:)?//', url):
         return url
+
+    site = Site.objects.get_current()
+    scheme = settings.SITE_PROTOCOL
 
     if url.startswith('/'):
         url = url[1:]

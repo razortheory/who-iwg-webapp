@@ -12,9 +12,6 @@ class DocumentAdmin(admin.ModelAdmin):
     exclude = ('file_preview', )
     list_per_page = 20
 
-    def get_queryset(self, request):
-        return super(DocumentAdmin, self).get_queryset(request)
-
     def document_preview(self, obj):
         return '<img class="document-preview" src="%s">' % obj.get_preview_url()
     document_preview.allow_tags = True
