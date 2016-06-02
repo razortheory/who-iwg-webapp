@@ -22,7 +22,7 @@ class GranteeAdmin(BaseArticleAdmin):
     form = GranteeAdminForm
 
     list_display = [
-        'title', 'round', 'tags_list', 'short_description_preview',
+        'title', 'round', 'short_description_preview',
         'published_at', 'status', 'hits', 'words_count'
     ]
     list_filter = ['status', 'round', 'published_at']

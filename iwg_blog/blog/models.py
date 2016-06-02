@@ -1,3 +1,4 @@
+import copy
 import re
 
 from django.core.urlresolvers import reverse
@@ -82,8 +83,6 @@ class BaseArticle(ModelMeta, models.Model):
 
     title = models.CharField(max_length=130)
 
-    tags = OrderedManyToManyField(Tag, related_name='%(class)ss', blank=True)
-
     cover_image = models.ImageField(upload_to='images')
 
     content = MarkdownField()
@@ -132,10 +131,6 @@ class BaseArticle(ModelMeta, models.Model):
     def absolute_url(self):
         return self.get_absolute_url()
 
-    @property
-    def keywords(self):
-        return self.tags.values_list('slug', flat=True)
-
     def get_absolute_url(self):
         raise NotImplementedError()
 
@@ -156,7 +151,6 @@ class BaseArticle(ModelMeta, models.Model):
         'image_width': 'cover_image_width',
         'image_height': 'cover_image_height',
         'url': 'absolute_url',
-        'keywords': 'keywords'
     }
 
 
@@ -174,10 +168,15 @@ class Article(BaseArticle):
         manager=all_objects,
     )
 
+    tags = OrderedManyToManyField(Tag, related_name='articles', blank=True)
+
     short_description = models.TextField(max_length=450)
 
     is_featured = models.BooleanField(default=False)
     is_sample = models.BooleanField(default=False, editable=False)
+
+    _metadata = copy.copy(BaseArticle._metadata)
+    _metadata['keywords'] = 'keywords'
 
     class Meta(BaseArticle.Meta):
         abstract = False
@@ -194,6 +193,10 @@ class Article(BaseArticle):
                 kwargs[field] = getattr(sample, field)
 
         super(Article, self).__init__(*args, **kwargs)
+
+    @property
+    def keywords(self):
+        return self.tags.values_list('slug', flat=True)
 
     def short_description_text(self):
         return self.short_description

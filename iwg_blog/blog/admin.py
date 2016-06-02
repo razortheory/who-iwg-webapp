@@ -28,7 +28,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
     change_form_template = 'admin/custom_change_form.html'
 
     fieldsets = (
-        (None, {'fields': ['title', 'slug', 'tags', 'status', 'published_at']}),
+        (None, {'fields': ['title', 'slug', 'status', 'published_at']}),
         (None, {'fields': ['cover_image', 'short_description', 'content']}),
     )
 
@@ -84,25 +84,6 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
             remove_from_fieldsets(fieldsets, 'published_at')
         return fieldsets
 
-    def changelist_view(self, request, extra_context=None):
-        # Dirty hack for tags
-        self.request = request
-        return super(BaseArticleAdmin, self).changelist_view(request, extra_context=extra_context)
-
-    def get_form(self, request, obj=None, **kwargs):
-        form = super(BaseArticleAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['tags'].widget.can_add_related = False
-        return form
-
-    def tags_list(self, obj):
-        return ', '.join([
-             u'<a href="%s">%s</a>' % (
-                 update_url_params(self.request.get_full_path(), {'tags__id__exact': tag.id}), tag
-             ) for tag in obj.tags.all()
-        ])
-    tags_list.short_description = 'Tags'
-    tags_list.allow_tags = True
-
 
 @admin.register(Article)
 class ArticleAdmin(BaseArticleAdmin):
@@ -113,6 +94,7 @@ class ArticleAdmin(BaseArticleAdmin):
     list_filter = ['is_featured', 'status', 'category', 'published_at']
 
     fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
+    fieldsets[0][1]['fields'].insert(2, 'tags')
     fieldsets[0][1]['fields'].insert(2, 'category')
     fieldsets[0][1]['fields'] += ['is_featured']
 
@@ -157,6 +139,25 @@ class ArticleAdmin(BaseArticleAdmin):
             return queryset, False
 
         return self.search_engine.filter(queryset, search_term, ranking=False), False
+
+    def changelist_view(self, request, extra_context=None):
+        # Dirty hack for tags
+        self.request = request
+        return super(ArticleAdmin, self).changelist_view(request, extra_context=extra_context)
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['tags'].widget.can_add_related = False
+        return form
+
+    def tags_list(self, obj):
+        return ', '.join([
+            u'<a href="%s">%s</a>' % (
+                update_url_params(self.request.get_full_path(), {'tags__id__exact': tag.id}), tag
+            ) for tag in obj.tags.all()
+        ])
+    tags_list.short_description = 'Tags'
+    tags_list.allow_tags = True
 
 
 @admin.register(SampleArticle)

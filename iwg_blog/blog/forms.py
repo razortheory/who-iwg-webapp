@@ -1,3 +1,5 @@
+import copy
+
 from django import forms
 from django.core.urlresolvers import reverse
 
@@ -9,19 +11,17 @@ from .models import Subscriber
 from .widgets import AdminImageWidget, CustomMarkdownWidget, LimitedTextarea
 
 
-class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
+class BaseArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
     autosave_prefix = 'blog_article'
     autosave_fields = ['content', 'short_description']
 
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
-            'short_description': LimitedTextarea,
             'content': CustomMarkdownWidget,
             'cover_image': AdminImageWidget,
         }
         field_classes = {
-            'tags': TagitField,
             'content': MarkdownFormField,
         }
         help_texts = {
@@ -29,16 +29,9 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'published_at': 'UTC Time'
         }
 
-    def __init__(self, *args, **kwargs):
-        super(ArticleAdminForm, self).__init__(*args, **kwargs)
-
-        self.fields['tags'].to_field_name = 'name'
-        if self.instance.pk is not None:
-            self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
-
     @property
     def media(self):
-        media = super(ArticleAdminForm, self).media
+        media = super(BaseArticleAdminForm, self).media
         media.add_js([
             embedded_media.JS('var populate_slug_opts={template_url: "%s", ajax_url: "%s", instance_pk: %s};' % (
                 reverse('blog:article_detail_view', args=['dummy_slug']),
@@ -48,6 +41,22 @@ class ArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
             'admin/js/admin-article-slug-control.js'
         ])
         return media
+
+
+class ArticleAdminForm(BaseArticleAdminForm):
+    class Meta(BaseArticleAdminForm.Meta):
+        field_classes = copy.copy(BaseArticleAdminForm.Meta.field_classes)
+        field_classes['tags'] = TagitField
+
+        widgets = copy.copy(BaseArticleAdminForm.Meta.widgets)
+        widgets['short_description'] = LimitedTextarea
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleAdminForm, self).__init__(*args, **kwargs)
+
+        self.fields['tags'].to_field_name = 'name'
+        if self.instance.pk is not None:
+            self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
 
 
 class FlatPagesAdminForm(forms.ModelForm):
