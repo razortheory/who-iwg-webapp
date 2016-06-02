@@ -89,7 +89,7 @@
 			font-weight: $bold;
 			@include border-radius;
 		}
-		&:hover {
+		&:hover, &:focus {
 			padding-top: round(14px*$x);
 			padding-bottom: round(12px*$x);
 			@include max-screen(930px) {
