@@ -27,6 +27,7 @@ img.document-preview {
 
 .ui-dialog {
     position: fixed;
+    z-index: 9001!important;
 }
 
 .ui-widget {
