@@ -6,6 +6,9 @@ from storages.compat import Storage
 
 
 class LazyStorage(Storage):
+    """
+    Base64 storage
+    """
     def exists(self, name):
         return False
 

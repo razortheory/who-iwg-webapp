@@ -1,6 +1,6 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from ..blog.templatetags.blog_tags import absolute_url
+from .templatetags.blog_tags import absolute_url
 
 watermark_article = {
     'gravity': 'br',

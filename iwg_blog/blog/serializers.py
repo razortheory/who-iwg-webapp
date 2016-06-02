@@ -1,6 +1,6 @@
 from sorl.thumbnail import get_thumbnail
 
-from ..thumbnail_lazy.watermarks_config import watermark_article
+from .watermarks_config import watermark_article
 from ..utils.serializers import DictSerializer
 
 
