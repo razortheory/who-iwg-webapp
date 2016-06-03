@@ -40,7 +40,8 @@ img.document-preview {
     color: black;
 }
 
-.field-short_description_preview {
+.field-short_description_preview,
+.field-short_description {
     max-width: 400px;
 }
 
