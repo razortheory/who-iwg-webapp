@@ -1,7 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.db import models
 
-from ..utils.file_types import get_file_type
+from ..utils.file_types import get_file_type, get_file_type_name
 from .tasks import generate_document_preview
 
 
@@ -38,8 +38,12 @@ class BaseDocument(models.Model):
     def file_type(self):
         return get_file_type(self.document_file.name)
 
+    @property
+    def file_type_verbose(self):
+        return get_file_type_name(self.file_type)
+
     def file_type_icon_url(self):
-        return static('attachments/images/%s-icon.png' % self.file_type) if self.file_type else ''
+        return static('attachments/images/svg/%s-icon.svg' % self.file_type) if self.file_type else ''
 
 
 class Document(BaseDocument):

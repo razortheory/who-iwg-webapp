@@ -1,14 +1,16 @@
 <a href="{{ document.document_file.url }}" class="article-download__wrapper" target="_blank">
   <div class="article-download">
     <div style="background-image:url({{ document.get_preview_url }})" class="article-download__thumbnail">
-      <img src="{{ document.file_type_icon_url }}" class="article-download__file-image" alt="">
+      {% if document.file_type_icon_url %}
+        <img src="{{ document.file_type_icon_url }}" class="article-download__file-image" alt="">
+      {% endif %}
     </div>
     <div class="article-download__body">
       <h4 class="article-download__title">
         “{{ document.name }}”
       </h4>
       <div class="article-download__file-name">
-        Download this {{ document.file_type | upper }}
+        Download this {{ document.file_type_verbose }}
       </div>
       <span class="article-download__link">
         <svg class="icon icon_download"><use xlink:href="#icon_download"></use>

@@ -32,15 +32,14 @@
         height: round(90px*$x);
         background-repeat: no-repeat;
         background-position: 0 0;
-        background-size: cover;
-        background-color: rgba(159, 185, 164, 0.4);
+        background-size: contain;
+        background-color: transparent;
     }
     &__file-image {
         position: absolute;
-        top: round(58px*$x);
+        top: round(51px*$x);
         left: round(31px*$x);
-        width: round(38px*$x);
-        height: round(38px*$x);
+        height: round(47px*$x);
         display: block;
     }
     &__link {

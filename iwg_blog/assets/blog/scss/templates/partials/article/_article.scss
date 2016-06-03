@@ -296,9 +296,10 @@
                         width: round(99px*$x);
                         height: round(145px*$x);
                         display: block;
-                        background-color: $light-grey;
                         background-position: center center;
-                        background-size: cover;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-color: transparent;
                         @include max-screen($M_X3S) {
                             width: 70px;
                             height: 102px;
