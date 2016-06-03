@@ -37,7 +37,7 @@ class BaseViewMixin(object):
 class CategoriesMixin(object):
     def get_context_data(self, **kwargs):
         context = dict()
-        context['categories'] = Category.objects.all()
+        context['categories'] = Category.objects.all()[:8]
         context.update(kwargs)
         return super(CategoriesMixin, self).get_context_data(**context)
 
@@ -76,7 +76,7 @@ class TopTagsMixin(object):
 class LinksMixin(object):
     def get_context_data(self, **kwargs):
         context = dict()
-        context['links'] = Link.objects.all()
+        context['links'] = Link.objects.all()[:10]
         context.update(kwargs)
         return super(LinksMixin, self).get_context_data(**context)
 

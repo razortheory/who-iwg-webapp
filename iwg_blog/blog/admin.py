@@ -2,6 +2,8 @@ import copy
 
 from django.contrib import admin, messages
 from django.contrib.flatpages.models import FlatPage
+from django.contrib.sites.admin import SiteAdmin
+from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.functions import Coalesce
@@ -211,3 +213,18 @@ admin.site.unregister(FlatPage)
 class FlatPageAdmin(admin.ModelAdmin):
     form = FlatPagesAdminForm
     change_form_template = 'admin/custom_change_form.html'
+
+
+admin.site.unregister(Site)
+@admin.register(Site)
+class SiteAdmin(SiteAdmin):
+    def get_actions(self, request):
+        actions = super(SiteAdmin, self).get_actions(request)
+        del actions['delete_selected']
+        return actions
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
