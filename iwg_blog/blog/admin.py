@@ -205,6 +205,11 @@ class SampleArticleAdmin(ArticleAdmin):
         else:
             return super(SampleArticleAdmin, self).response_change(request, obj)
 
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(SampleArticleAdmin, self).get_fieldsets(request, obj)
+        remove_from_fieldsets(fieldsets, ['status', 'published_at', 'is_featured'])
+        return fieldsets
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
