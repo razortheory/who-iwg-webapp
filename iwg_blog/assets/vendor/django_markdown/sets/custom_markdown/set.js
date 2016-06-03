@@ -59,10 +59,12 @@ function minimize() {
   container.parent().remove();
 
   $.markItUp.fullscreen = false;
+  $('body').removeClass('frozen');
   return false;
 }
 
 function maximize() {
+  $('body').addClass('frozen');
   $.markItUp.fullscreenSource = this;
   var caretPosition = getCaretPosition($.markItUp.fullscreenSource);
   var origTextarea = $($.markItUp.fullscreenSource);
@@ -85,7 +87,7 @@ function maximize() {
   }, 0);
   setCaretPosition(fullscreenTextarea[0], caretPosition);
 
-  var closeBtn = '<a href="#" class="fullScreenClose">x</a>';
+  var closeBtn = '<a href="#" class="fullScreenClose">&times;</a>';
   $('.markItUpHeader', container).append(closeBtn);
 
   $('.fullScreenClose, .jqmOverlay', container).click(function () {

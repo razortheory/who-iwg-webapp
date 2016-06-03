@@ -43,3 +43,7 @@ img.document-preview {
 .field-short_description_preview {
     max-width: 400px;
 }
+
+body.frozen {
+  overflow: hidden;
+}
