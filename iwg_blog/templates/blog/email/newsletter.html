@@ -66,7 +66,7 @@
         <td align="left" style="padding-top: 0;">
           {% url 'blog:article_detail_view' article.slug as article_url %}
           <a href="{% absolute_url article_url %}" style="text-decoration: none;">
-            {% thumbnail article.cover_image "800" lazy="True" watermark=watermark_article as im %}
+            {% thumbnail article.cover_image "800" watermark=watermark_article as im %}
               <img src="{{ im.url }}" style="width: 100%; height: auto;">
             {% endthumbnail %}
             <p style="font-size: 21px; color: #262626; font-weight: bold;">{{ article.title }}</p>
@@ -124,12 +124,18 @@
         <a href="http://www.unfoundation.org/" target="_blank"><img src="{% absolute_url unf_logo %}" style="width: 110px; height: auto; vertical-align: middle; margin-right: 0.5em; margin-bottom: 0.5em"></a>
       </td>
       <td align="right" style="vertical-align: top; width: 50%;">
-        {% static 'blog/images/facebook-sharer.png' as fb_sharer %}
-        <a href="https://www.facebook.com/WHO" target="_blank"><img src="{% absolute_url fb_sharer %}" height="30" style="margin-right: 0.5em;"></a>
-        {% static 'blog/images/twitter-sharer.png' as twitter_sharer %}
-        <a href="https://twitter.com/who" target="_blank"><img src="{% absolute_url twitter_sharer %}" height="30" style="margin-right: 0.5em;"></a>
-        {% static 'blog/images/google-sharer.png' as google_sharer %}
-        <a href="https://plus.google.com/+who" target="_blank"><img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+        {% spaceless %}
+          {% static 'blog/images/facebook-sharer.png' as fb_sharer %}
+          <a href="https://www.facebook.com/WHO" target="_blank"><img src="{% absolute_url fb_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+          {% static 'blog/images/twitter-sharer.png' as twitter_sharer %}
+          <a href="https://twitter.com/who" target="_blank"><img src="{% absolute_url twitter_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+          {% static 'blog/images/google-sharer.png' as google_sharer %}
+          <a href="https://plus.google.com/+who" target="_blank"><img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;"></a>
+          <div style="display: block; vertical-align: top; padding-top: 8px;">
+            {% url 'blog:unsubscribe_view' email=email as unsubscribe_url%}
+            <a href="{% absolute_url unsubscribe_url %}" target="_blank" style="padding: 5px 10px; margin: 5px 13px; border-radius: 3px; border: 1.2px solid #a3a3a3; font-size: 11.5px; color: #a3a3a3; text-decoration: none;">Unsubscribe</a>
+          </div>
+        {% endspaceless %}
       </td>
     </tr>
   </table>

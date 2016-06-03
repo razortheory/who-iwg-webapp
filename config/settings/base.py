@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = [
     'meta',
     'watson',
     'sorl.thumbnail',
+    'crispy_forms',
 ]
 
 LOCAL_APPS = [
@@ -241,3 +242,5 @@ THUMBNAIL_ENGINE = 'iwg_blog.thumbnail_lazy.engines.ThumbnailEngine'
 # Auth configuration
 # --------------------------------------------------------------------------
 LOGIN_URL = reverse_lazy('admin:login')
+
+CRISPY_TEMPLATE_PACK = 'uni_form'

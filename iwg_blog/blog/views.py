@@ -288,14 +288,19 @@ class SubscribeForUpdates(CreateView):
 class UnsubscribeFromUpdates(UpdateView):
     model = Subscriber
     form_class = UnsubscribeForm
-    template_name = 'blog/subscribe_form.html'
+    template_name = 'blog/pages/unsubscribe_form.html'
     success_url = reverse_lazy('blog:landing_view')
 
+    def get_email(self):
+        return self.kwargs['email']
+
+    def get_initial(self):
+        initial = super(UnsubscribeFromUpdates, self).get_initial()
+        initial['email'] = self.get_email()
+        return initial
+
     def get_object(self, queryset=None):
-        if self.request.method in ('POST', 'PUT'):
-            email = self.request.POST.get('email')
-            return Subscriber.objects.filter(email=email).first()
-        return None
+        return Subscriber.objects.filter(email=self.get_email(), email__isnull=False).first()
 
 
 class GetArticleSlugAjax(View):
@@ -327,7 +332,7 @@ def page_not_found(request):
     return render(
         request, 'blog/pages/404.html',
         {
-            'related_articles': Article.published.all()[:6]
+            'related_articles': Article.published.all()[:3]
         }, status=404
     )
 

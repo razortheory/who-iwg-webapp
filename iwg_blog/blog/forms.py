@@ -4,6 +4,8 @@ from django import forms
 from django.core.urlresolvers import reverse
 
 import embedded_media
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import ButtonHolder, Submit, Layout, Field
 
 from ..utils.forms import AutoSaveModelFormMixin
 from .fields import MarkdownFormField, TagitField
@@ -93,21 +95,20 @@ class SubscribeForm(forms.ModelForm):
 
 
 class UnsubscribeForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UnsubscribeForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'article__form'
+        self.helper.layout = Layout(
+            Field('send_email', type="hidden"),
+            ButtonHolder(
+                Submit('submit', 'Unsubscribe', css_class='article__form__button button')
+            )
+        )
+
+    def clean_send_email(self):
+        return False
+
     class Meta:
         model = Subscriber
-        fields = ['email', ]
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        subscriber = Subscriber.objects.filter(email=email).first()
-        if not subscriber:
-            raise forms.ValidationError("Sorry, but we can't find this email address.")
-
-        if not subscriber.send_email:
-            raise forms.ValidationError("You have already unsubscribed from updates.")
-
-        return email
-
-    def save(self, commit=True):
-        self.instance.send_email = False
-        return super(UnsubscribeForm, self).save(commit)
+        fields = ['send_email', ]

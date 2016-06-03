@@ -12,6 +12,7 @@ a.button {
     text-transform: uppercase;
     text-align: center;
     border: solid 2px $blue;
+    background-color: transparent;
     @include transition(#{background-color 0.3s ease, color 0.3s ease});
     @include appearance;
     @include box-shadow(none);
