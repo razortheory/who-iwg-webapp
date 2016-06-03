@@ -1,0 +1,18 @@
+{% extends "blog/pages/base.html" %}
+{% load staticfiles %}
+{% load compress %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="inner inner_article">
+    <div class="post-page">
+      <article class="article">
+        <h1 class="article__title"><span class="text-small">If you don't want to receive the emails from us, please click here.</span></h1>
+        <div class="article__body content-text">
+          {% crispy form %}
+        </div>
+      </article>
+    </div>
+  </div>
+{% endblock %}

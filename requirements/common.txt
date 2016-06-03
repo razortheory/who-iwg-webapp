@@ -25,3 +25,4 @@ django-watson
 django-libsass
 sorl-thumbnail==12.4a1
 redis
+django-crispy-forms

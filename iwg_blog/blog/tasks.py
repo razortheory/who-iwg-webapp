@@ -29,11 +29,13 @@ def send_emails_for_subscribers():
     if not articles:
         return
 
-    data = {
+    common_data = {
         'articles': articles,
         'domain': Site.objects.get_current(),
         'scheme': settings.META_SITE_PROTOCOL
     }
 
     for email in emails:
+        data = {'email': email}
+        data.update(common_data)
         render_send_email([email, ], 'blog/email/newsletter', data)
