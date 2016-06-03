@@ -17,6 +17,16 @@ file_type_by_mime = {
     re.compile('^video/'): 'video',
 }
 
+file_type_names = {
+    'default': 'File',
+    'ms_word': 'Document',
+    'ms_excel': 'Document',
+    'ms_powerpoint': 'Presentation',
+    'pdf': 'PDF',
+    'image': 'Image',
+    'video': 'Video',
+}
+
 
 def get_file_type(filename):
     mime_type, encoding = mimetypes.guess_type(filename, strict=False)
@@ -32,3 +42,7 @@ def get_file_type(filename):
                 break
 
     return file_type
+
+
+def get_file_type_name(file_type):
+    return file_type_names.get(file_type, file_type_names['default'])

@@ -1,6 +1,7 @@
 import copy
 
 from django import forms
+from django.contrib.flatpages.forms import FlatpageForm
 from django.core.urlresolvers import reverse
 
 import embedded_media
@@ -61,7 +62,10 @@ class ArticleAdminForm(BaseArticleAdminForm):
             self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
 
 
-class FlatPagesAdminForm(forms.ModelForm):
+class FlatPagesAdminForm(AutoSaveModelFormMixin, FlatpageForm):
+    autosave_prefix = 'flatpages_flatpage'
+    autosave_fields = ['content', ]
+
     class Meta:
         fields = forms.ALL_FIELDS
         widgets = {
