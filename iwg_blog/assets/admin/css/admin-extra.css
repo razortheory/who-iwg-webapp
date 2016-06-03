@@ -39,3 +39,7 @@ img.document-preview {
     font-weight: normal;
     color: black;
 }
+
+.field-short_description_preview {
+    max-width: 400px;
+}
