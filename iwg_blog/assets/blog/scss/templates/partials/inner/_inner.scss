@@ -38,4 +38,17 @@
 			padding-top: 40px;
 		}
 	}
+	&_unsubscribe {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		@include css3-prefix(transform, translate(-50%, -50%));
+		text-align: center;
+		padding-bottom: 2em;
+
+		@include max-screen($M_XS) {
+			position: initial;
+			@include css3-prefix(transform, initial);
+		}
+	}
 }
