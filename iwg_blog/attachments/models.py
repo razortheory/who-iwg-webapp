@@ -47,7 +47,7 @@ class BaseDocument(models.Model):
 
 
 class Document(BaseDocument):
-    is_featured = models.BooleanField(default=False)
+    is_featured = models.BooleanField('Visible', default=False)
 
 
 class UploadedImage(models.Model):

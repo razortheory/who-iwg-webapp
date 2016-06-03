@@ -6,7 +6,6 @@ from django.contrib.sites.admin import SiteAdmin
 from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.db.models.functions import Coalesce
 from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.utils.encoding import force_text
@@ -34,6 +33,12 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
         (None, {'fields': ['cover_image', 'short_description', 'content']}),
     )
 
+    _status_colors = {
+        BaseArticle.STATUS_PUBLISHED: '#008000',
+        BaseArticle.STATUS_READY_FOR_PUBLISH: '#0079FF',
+        BaseArticle.STATUS_DRAFT: '#717171',
+    }
+
     def change_status(self, request, queryset, status):
         model = queryset.model
         opts = model._meta
@@ -43,12 +48,21 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
 
         update_fields = {'status': status}
         if status == model.STATUS_PUBLISHED:
-            update_fields['published_at'] = Coalesce(models.F('published_at'), models.Value(timezone.now()))
+            update_fields['published_at'] = models.Case(models.When(~models.Q(status=model.STATUS_PUBLISHED),
+                                                                    then=timezone.now()),
+                                                        default=models.F('published_at'))
         queryset.update(**update_fields)
         messages.success(request, 'Status set to "%s" in %s %s.' % (
             status_display, objects_count, opts.verbose_name if objects_count == 1 else opts.verbose_name_plural
         ))
     change_status.short_description = 'Mark as "%(status_name)s"'
+
+    def colorized_status(self, obj):
+        color = self._status_colors[obj.status]
+        return '<strong style="color: %s">%s</strong>' % (color, obj.get_status_display())
+    colorized_status.short_description = 'Status'
+    colorized_status.admin_order_field = 'status'
+    colorized_status.allow_tags = True
 
     def make_action(self, action, kwargs, context):
         if callable(action):
@@ -91,7 +105,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
 class ArticleAdmin(BaseArticleAdmin):
     list_display = [
         'title', 'category', 'tags_list', 'short_description',
-        'published_at', 'is_featured', 'status', 'hits', 'words_count'
+        'published_at', 'is_featured', 'colorized_status', 'hits', 'words_count'
     ]
     list_filter = ['is_featured', 'status', 'category', 'published_at']
 
