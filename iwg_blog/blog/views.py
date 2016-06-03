@@ -332,7 +332,7 @@ def page_not_found(request):
     return render(
         request, 'blog/pages/404.html',
         {
-            'related_articles': Article.published.all()[:6]
+            'related_articles': Article.published.all()[:3]
         }, status=404
     )
 

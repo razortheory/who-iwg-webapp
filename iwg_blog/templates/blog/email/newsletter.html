@@ -133,7 +133,7 @@
           <a href="https://plus.google.com/+who" target="_blank"><img src="{% absolute_url google_sharer %}" height="30" style="margin-right: 0.5em;"></a>
           <div style="display: block; vertical-align: top; padding-top: 8px;">
             {% url 'blog:unsubscribe_view' email=email as unsubscribe_url%}
-            <a href="{% absolute_url unsubscribe_url %}" target="_blank" style="padding: 5px 10px; margin: 5px 10px; border-radius: 3px; border: 1.2px solid #a3a3a3; text-transform: uppercase; font-size: 11.5px; color: #a3a3a3; text-decoration: none;">Unsubscribe</a>
+            <a href="{% absolute_url unsubscribe_url %}" target="_blank" style="padding: 5px 10px; margin: 5px 13px; border-radius: 3px; border: 1.2px solid #a3a3a3; font-size: 11.5px; color: #a3a3a3; text-decoration: none;">Unsubscribe</a>
           </div>
         {% endspaceless %}
       </td>
