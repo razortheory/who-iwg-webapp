@@ -66,7 +66,7 @@
         <td align="left" style="padding-top: 0;">
           {% url 'blog:article_detail_view' article.slug as article_url %}
           <a href="{% absolute_url article_url %}" style="text-decoration: none;">
-            {% thumbnail article.cover_image "800" lazy="True" watermark=watermark_article as im %}
+            {% thumbnail article.cover_image "800" watermark=watermark_article as im %}
               <img src="{{ im.url }}" style="width: 100%; height: auto;">
             {% endthumbnail %}
             <p style="font-size: 21px; color: #262626; font-weight: bold;">{{ article.title }}</p>
