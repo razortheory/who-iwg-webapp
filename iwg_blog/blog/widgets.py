@@ -50,8 +50,8 @@ class AdminImageWidget(AdminFileWidget):
         id_ = final_attrs.get('id')
 
         url = value.url if value and getattr(value, "url", None) else ''
-        output = u'<a href="%s" target="_blank">' \
-                 u'<img style="max-height: 200px; display: block; margin-bottom: 5px;" id="%s_preview" src="%s"/></a>' \
+        output = u'<p><a href="%s" target="_blank">' \
+                 u'<img style="max-height: 200px; margin-bottom: 5px;" id="%s_preview" src="%s"/></a></p>' \
                  % (url, self.id_for_label(id_), url)
         output += super(AdminFileWidget, self).render(name, value, attrs)
         return mark_safe(output)
