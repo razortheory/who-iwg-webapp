@@ -23,7 +23,7 @@ class GranteeAdmin(BaseArticleAdmin):
 
     list_display = [
         'title', 'round', 'short_description_preview',
-        'published_at', 'status', 'hits', 'words_count'
+        'published_at', 'colorized_status', 'hits', 'words_count'
     ]
     list_filter = ['status', 'round', 'published_at']
     readonly_fields = []
