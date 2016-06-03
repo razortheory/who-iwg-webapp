@@ -214,7 +214,21 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     search_fields = ('name', )
-    list_display = ('name', )
+    list_display = ('name', 'article_count')
+
+    def get_queryset(self, request):
+        return super(TagAdmin, self).get_queryset(request) \
+            .extra(select={'article_count': """
+                SELECT COUNT(1) FROM blog_article_tags as ET1
+                                    INNER JOIN blog_article as ET2 ON ET1.article_id = ET2.id
+                                                                       AND ET2.is_sample = false
+                                    WHERE ET1.tag_id = blog_tag.id
+            """})
+
+    def article_count(self, obj):
+        return obj.article_count
+    article_count.short_description = 'Articles'
+    article_count.admin_order_field = 'article_count'
 
 
 @admin.register(Subscriber)
