@@ -48,3 +48,10 @@ img.document-preview {
 body.frozen {
   overflow: hidden;
 }
+
+
+.status-label {
+    color: #FFFFFF;
+    padding: 3px 7px;
+    border-radius: 5px;
+}

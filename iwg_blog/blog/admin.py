@@ -59,7 +59,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
 
     def colorized_status(self, obj):
         color = self._status_colors[obj.status]
-        return '<strong style="color: %s">%s</strong>' % (color, obj.get_status_display())
+        return '<strong class="status-label" style="background: %s">%s</strong>' % (color, obj.get_status_display())
     colorized_status.short_description = 'Status'
     colorized_status.admin_order_field = 'status'
     colorized_status.allow_tags = True
