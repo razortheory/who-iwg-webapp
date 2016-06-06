@@ -40,10 +40,18 @@ img.document-preview {
     color: black;
 }
 
-.field-short_description_preview {
+.field-short_description_preview,
+.field-short_description {
     max-width: 400px;
 }
 
 body.frozen {
   overflow: hidden;
+}
+
+
+.status-label {
+    color: #FFFFFF;
+    padding: 3px 7px;
+    border-radius: 5px;
 }

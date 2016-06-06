@@ -1,6 +1,7 @@
 import copy
 
 from django import forms
+from django.conf import settings
 from django.contrib.flatpages.forms import FlatpageForm
 from django.core.urlresolvers import reverse
 
@@ -29,7 +30,7 @@ class BaseArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
         }
         help_texts = {
             'slug': ' ',
-            'published_at': 'UTC Time'
+            'published_at': '%s Time' % settings.TIME_ZONE
         }
 
     @property

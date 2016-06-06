@@ -59,7 +59,7 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
 
     def colorized_status(self, obj):
         color = self._status_colors[obj.status]
-        return '<strong style="color: %s">%s</strong>' % (color, obj.get_status_display())
+        return '<strong class="status-label" style="background: %s">%s</strong>' % (color, obj.get_status_display())
     colorized_status.short_description = 'Status'
     colorized_status.admin_order_field = 'status'
     colorized_status.allow_tags = True
@@ -204,6 +204,11 @@ class SampleArticleAdmin(ArticleAdmin):
 
         else:
             return super(SampleArticleAdmin, self).response_change(request, obj)
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(SampleArticleAdmin, self).get_fieldsets(request, obj)
+        remove_from_fieldsets(fieldsets, ['status', 'published_at', 'is_featured'])
+        return fieldsets
 
 
 @admin.register(Category)
