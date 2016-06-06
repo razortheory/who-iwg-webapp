@@ -180,6 +180,12 @@ class ArticleAdmin(BaseArticleAdmin):
 class SampleArticleAdmin(ArticleAdmin):
     new_article_action_name = '_create_article'
 
+    list_display = [
+        'title', 'category', 'tags_list', 'short_description', 'words_count'
+    ]
+    list_filter = ['category']
+    actions = []
+
     def render_change_form(self, request, context, **kwargs):
         if kwargs.get('obj'):
             context = context or {}
