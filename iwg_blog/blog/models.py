@@ -106,9 +106,12 @@ class BaseArticle(ModelMeta, models.Model):
 
     def save(self, **kwargs):
         if self.status == self.STATUS_PUBLISHED:
-            self.published_at = models.Case(models.When(~models.Q(status=self.STATUS_PUBLISHED),
-                                                        then=timezone.now()),
-                                            default=models.F('published_at'))
+            if not self.pk:
+                self.published_at = timezone.now()
+            else:
+                self.published_at = models.Case(models.When(~models.Q(status=self.STATUS_PUBLISHED),
+                                                            then=timezone.now()),
+                                                default=self.published_at)
 
         self.words_count = len(re.findall(r"\S+", self.content_text))
         super(BaseArticle, self).save(**kwargs)
