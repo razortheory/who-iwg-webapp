@@ -180,7 +180,7 @@ mySettings = {
       }
     },
     {separator: '---------------'},
-    {name: 'Preview', call: 'preview', className: "preview icon-preview"},
+    {name: 'Preview', call: 'preview', className: "preview icon-refresh-arrow"},
     {
       name: 'Expand',
       className: 'markItUpFullScreen-expand icon-expand',
