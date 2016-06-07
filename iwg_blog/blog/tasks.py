@@ -41,3 +41,9 @@ def send_emails_for_subscribers():
         data = {'email': email}
         data.update(common_data)
         render_send_email([email, ], 'blog/email/newsletter', data)
+
+
+@periodic_task(run_every=crontab())
+def publish_articles():
+    Article.objects.filter(status=Article.STATUS_READY_FOR_PUBLISH, published_at__lte=timezone.now()) \
+        .update(status=Article.STATUS_PUBLISHED)
