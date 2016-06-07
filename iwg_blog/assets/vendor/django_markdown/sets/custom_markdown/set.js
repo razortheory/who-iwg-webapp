@@ -261,12 +261,16 @@ $(document).ready(function () {
 
       textarea.focus();
 
+      $markItUp.trigger('dragleave');
+
       var files = event.dataTransfer.files;
+      if (files.length == 0){
+        return;
+      }
 
       var data = new FormData();
       data.append('image_file', files[0]);
 
-      $markItUp.trigger('dragleave');
       loading_spinner_enabled = true;
       $.ajax({
         url: textarea.getAttribute('data-upload-image-url'),
