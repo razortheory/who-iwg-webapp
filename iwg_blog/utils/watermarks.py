@@ -1,6 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-from iwg_blog.utils.templatetags.tag_utils import absolute_url
+from .templatetags.tag_utils import absolute_url
+
 
 watermark_article = {
     'gravity': 'br',
@@ -12,6 +13,7 @@ watermark_article = {
     'color': ['#ffffff', '#9b9b9b'],
     'opacity': 0.6,
 }
+
 
 watermarks = {
     'article': watermark_article,

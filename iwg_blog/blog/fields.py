@@ -1,49 +1,8 @@
-from django import forms
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
-from django.db import models
 
-from autoslug import AutoSlugField as RealAutoSlugField
-from django_markdown.widgets import MarkdownWidget
-
-from .widgets import TagitWidget
-
-
-class MarkdownFormField(forms.CharField):
-    widget = MarkdownWidget
-
-    def __init__(self, *args, **kwargs):
-        # Using default form initialization to prevent dirty widget overriding
-        super(MarkdownFormField, self).__init__(*args, **kwargs)
-
-
-class AutoSlugField(RealAutoSlugField):
-    # XXX: Work around https://bitbucket.org/neithere/django-autoslug/issues/34/django-migrations-fail-if-autoslugfield
-    def deconstruct(self):
-        name, path, args, kwargs = super(AutoSlugField, self).deconstruct()
-        if 'manager' in kwargs:
-            del kwargs['manager']
-        return name, path, args, kwargs
-
-
-class OrderedModelMultipleChoiceField(forms.ModelMultipleChoiceField):
-    def clean(self, value):
-        qs = super(OrderedModelMultipleChoiceField, self).clean(value)
-        qs = qs.order_by_array(value, field_name=self.to_field_name)
-        return qs
-
-
-class OrderedManyToManyField(models.ManyToManyField):
-    def save_form_data(self, instance, data):
-        m2m_model = getattr(instance, self.attname).through
-        m2m_model.objects.filter(**{self.m2m_field_name(): instance}).delete()
-        objects_to_create = [
-            m2m_model(**{
-                self.m2m_field_name(): instance,
-                self.m2m_reverse_field_name(): related_instance
-            }) for related_instance in data
-        ]
-        m2m_model.objects.bulk_create(objects_to_create)
+from ..utils.forms.fields import OrderedModelMultipleChoiceField
+from ..utils.forms.widgets import TagitWidget
 
 
 class TagitField(OrderedModelMultipleChoiceField):
@@ -56,6 +15,9 @@ class TagitField(OrderedModelMultipleChoiceField):
         Given a list of possible PK values, returns a QuerySet of the
         corresponding objects. Raises a ValidationError if a given value is
         invalid.
+
+        Equal to the default _check_values method except disabled invalid_choice validation
+        and creating missing objects.
         """
         key = self.to_field_name or 'pk'
         # deduplicate given values to avoid creating many querysets or

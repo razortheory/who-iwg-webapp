@@ -58,6 +58,8 @@ LOCAL_APPS = [
     'iwg_blog.grantee',
     'iwg_blog.attachments',
     'iwg_blog.utils',
+    'iwg_blog.flatpages',
+    'iwg_blog.sites',
 ]
 
 INSTALLED_APPS = CUSTOMIZE_APPS + DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -201,6 +203,12 @@ META_USE_GOOGLEPLUS_PROPERTIES = True
 
 META_USE_SITES = True
 META_SITE_NAME = 'IWG Portal'
+
+META_DEFAULTS = {
+    'title': 'IWG Portal',
+    'description': 'WHO\'s primary role is to direct international health within the United Nations\' system.',
+    'image': 'blog/images/who-logo.jpg',
+}
 
 
 # Markdown configuration

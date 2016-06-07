@@ -10,8 +10,8 @@ from markdown import Extension
 from markdown.postprocessors import Postprocessor
 from sorl.thumbnail import get_thumbnail
 
-from iwg_blog.blog.watermarks_config import watermark_article
 from ..attachments.models import UploadedImage
+from ..utils.watermarks import watermark_article
 
 
 class ThumbnailerProcessor(Postprocessor):

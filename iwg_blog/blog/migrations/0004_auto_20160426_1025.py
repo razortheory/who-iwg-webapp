@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import iwg_blog.blog.fields
+import iwg_blog.utils.models.fields
 
 
 class Migration(migrations.Migration):
@@ -16,16 +16,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='article',
             name='slug',
-            field=iwg_blog.blog.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `title` field', populate_from=b'title', unique=True),
+            field=iwg_blog.utils.models.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `title` field', populate_from=b'title', unique=True),
         ),
         migrations.AlterField(
             model_name='category',
             name='slug',
-            field=iwg_blog.blog.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True),
+            field=iwg_blog.utils.models.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True),
         ),
         migrations.AlterField(
             model_name='tag',
             name='slug',
-            field=iwg_blog.blog.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True),
+            field=iwg_blog.utils.models.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True),
         ),
     ]

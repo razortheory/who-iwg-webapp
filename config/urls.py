@@ -22,7 +22,8 @@ from django.contrib.sitemaps.views import sitemap
 from django.views.generic import TemplateView
 
 from iwg_blog.blog import views as blog_views
-from iwg_blog.blog.sitemaps import ArticlesSitemap, PriorityFlatPageSitemap
+from iwg_blog.blog.sitemaps import ArticlesSitemap
+from iwg_blog.flatpages.sitemaps import PriorityFlatPageSitemap
 
 sitemaps = {
     'articles': ArticlesSitemap,

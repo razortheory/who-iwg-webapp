@@ -1,7 +1,7 @@
 from sorl.thumbnail import get_thumbnail
 
 from ..utils.serializers import DictSerializer
-from .watermarks_config import watermark_article
+from ..utils.watermarks import watermark_article
 
 
 class ArticleSerializer(DictSerializer):

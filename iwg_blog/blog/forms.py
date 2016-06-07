@@ -1,77 +1,9 @@
-import copy
-
 from django import forms
-from django.conf import settings
-from django.contrib.flatpages.forms import FlatpageForm
-from django.core.urlresolvers import reverse
 
-import embedded_media
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Submit, Layout, Field
 
-from ..utils.forms import AutoSaveModelFormMixin
-from .fields import MarkdownFormField, TagitField
 from .models import Subscriber
-from .widgets import AdminImageWidget, CustomMarkdownWidget, LimitedTextarea
-
-
-class BaseArticleAdminForm(AutoSaveModelFormMixin, forms.ModelForm):
-    autosave_prefix = 'blog_article'
-    autosave_fields = ['content', 'short_description']
-
-    class Meta:
-        fields = forms.ALL_FIELDS
-        widgets = {
-            'content': CustomMarkdownWidget,
-            'cover_image': AdminImageWidget,
-        }
-        field_classes = {
-            'content': MarkdownFormField,
-        }
-        help_texts = {
-            'slug': ' ',
-            'published_at': '%s Time' % settings.TIME_ZONE
-        }
-
-    @property
-    def media(self):
-        media = super(BaseArticleAdminForm, self).media
-        media.add_js([
-            embedded_media.JS('var populate_slug_opts={template_url: "%s", ajax_url: "%s", instance_pk: %s};' % (
-                reverse('blog:article_detail_view', args=['dummy_slug']),
-                reverse('blog:article_generate_slug_ajax'),
-                self.instance.pk or 'undefined'
-            )),
-            'admin/js/admin-article-slug-control.js'
-        ])
-        return media
-
-
-class ArticleAdminForm(BaseArticleAdminForm):
-    class Meta(BaseArticleAdminForm.Meta):
-        field_classes = copy.copy(BaseArticleAdminForm.Meta.field_classes)
-        field_classes['tags'] = TagitField
-
-        widgets = copy.copy(BaseArticleAdminForm.Meta.widgets)
-        widgets['short_description'] = LimitedTextarea
-
-    def __init__(self, *args, **kwargs):
-        super(ArticleAdminForm, self).__init__(*args, **kwargs)
-
-        self.fields['tags'].to_field_name = 'name'
-        if self.instance.pk is not None:
-            self.initial['tags'] = self.fields['tags'].prepare_value(self.instance.tags.all())
-
-
-class FlatPagesAdminForm(AutoSaveModelFormMixin, FlatpageForm):
-    autosave_prefix = 'flatpages_flatpage'
-    autosave_fields = ['content', ]
-
-    class Meta:
-        fields = forms.ALL_FIELDS
-        widgets = {
-            'content': CustomMarkdownWidget
-        }
 
 
 class SubscribeForm(forms.ModelForm):

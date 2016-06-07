@@ -5,6 +5,9 @@ from .queryset import ArticleTagQuerySet
 
 
 class ArticleTagManager(models.Manager.from_queryset(ArticleTagQuerySet)):
+    """
+    Ordering tags by through model instead of objects pks
+    """
     use_for_related_fields = True
 
     def get_queryset(self):

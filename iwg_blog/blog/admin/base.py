@@ -1,9 +1,6 @@
 import copy
 
 from django.contrib import admin, messages
-from django.contrib.flatpages.models import FlatPage
-from django.contrib.sites.admin import SiteAdmin
-from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.http import HttpResponseRedirect
@@ -12,12 +9,12 @@ from django.utils.encoding import force_text
 
 from watson.search import default_search_engine
 
-from ..attachments.admin import DocumentAdminInline
-from ..utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
-from ..utils.base import update_url_params
-from .forms import ArticleAdminForm, FlatPagesAdminForm
-from .models import Article, ArticleDocument, BaseArticle, Category, SampleArticle, Subscriber, Tag
-from .watson_adapters import ArticleAdapter
+from ...attachments.admin import DocumentAdminInline
+from ...utils.admin import ConfigurableModelAdmin, remove_from_fieldsets
+from ...utils.base import update_url_params
+from ..models import Article, ArticleDocument, BaseArticle, Category, SampleArticle, Subscriber, Tag
+from ..watson_adapters import ArticleAdapter
+from .forms import ArticleAdminForm
 
 
 class ArticleDocumentInline(DocumentAdminInline):
@@ -230,10 +227,11 @@ class TagAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         return super(TagAdmin, self).get_queryset(request) \
             .extra(select={'article_count': """
-                SELECT COUNT(1) FROM blog_article_tags as ET1
-                                    INNER JOIN blog_article as ET2 ON ET1.article_id = ET2.id
-                                                                       AND ET2.is_sample = false
-                                    WHERE ET1.tag_id = blog_tag.id
+                SELECT COUNT(1)
+                    FROM blog_article_tags as ET1
+                        INNER JOIN blog_article as ET2
+                            ON ET1.article_id = ET2.id AND ET2.is_sample = false
+                    WHERE ET1.tag_id = blog_tag.id
             """})
 
     def article_count(self, obj):
@@ -247,30 +245,5 @@ class SubscriberAdmin(admin.ModelAdmin):
     list_display = ('email', 'send_email')
 
 
-admin.site.unregister(FlatPage)
-@admin.register(FlatPage)
-class FlatPageAdmin(admin.ModelAdmin):
-    form = FlatPagesAdminForm
-    fields = ['url', 'title', 'content', 'registration_required', ]
-    list_display = ('url', 'title')
-    list_filter = ('sites', 'registration_required')
-    search_fields = ('url', 'title')
-
-    def save_related(self, request, form, formsets, change):
-        super(FlatPageAdmin, self).save_related(request, form, formsets, change)
-        form.instance.sites.add(Site.objects.get_current(request))
 
 
-admin.site.unregister(Site)
-@admin.register(Site)
-class SiteAdmin(SiteAdmin):
-    def get_actions(self, request):
-        actions = super(SiteAdmin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
-
-    def has_add_permission(self, request):
-        return False
-
-    def has_delete_permission(self, request, obj=None):
-        return False

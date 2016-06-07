@@ -3,7 +3,7 @@ from django.views.generic import CreateView
 
 from ..utils.views import JsonResponseMixin
 from .forms import UploadImageForm
-from .models import Document, UploadedImage
+from .models import Document, UploadedImage, Link
 from .serializers import UploadedImageSerializer
 
 
@@ -28,3 +28,13 @@ class UploadImageAjaxView(JsonResponseMixin, CreateView):
     def form_valid(self, form):
         obj = form.save()
         return JsonResponse(self.serialize(obj))
+
+
+class LinksMixin(object):
+    def get_context_data(self, **kwargs):
+        context = dict()
+        context['links'] = Link.objects.all()[:10]
+        context.update(kwargs)
+        return super(LinksMixin, self).get_context_data(**context)
+
+

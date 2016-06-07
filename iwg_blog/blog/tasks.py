@@ -10,7 +10,7 @@ from celery.schedules import crontab
 from celery.task import periodic_task
 from mailing.shortcuts import render_send_email
 
-from . import watermarks_config
+from ..utils.watermarks import watermark_article
 from .models import Article, Subscriber
 
 
@@ -34,7 +34,7 @@ def send_emails_for_subscribers():
         'articles': articles,
         'domain': Site.objects.get_current(),
         'scheme': settings.META_SITE_PROTOCOL,
-        'watermark_article': watermarks_config.watermark_article,
+        'watermark_article': watermark_article,
     }
 
     for email in emails:

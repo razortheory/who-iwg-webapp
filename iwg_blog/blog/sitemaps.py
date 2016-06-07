@@ -1,4 +1,3 @@
-from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps import Sitemap
 
 from .models import Article
@@ -15,5 +14,3 @@ class ArticlesSitemap(Sitemap):
         return obj.updated_at
 
 
-class PriorityFlatPageSitemap(FlatPageSitemap):
-    priority = 0.5

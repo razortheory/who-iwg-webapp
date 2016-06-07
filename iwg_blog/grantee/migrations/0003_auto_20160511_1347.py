@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import django_markdown.models
-import iwg_blog.blog.fields
+import iwg_blog.utils.models.fields
 import meta.models
 
 
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('updated_at', models.DateTimeField(auto_now=True)),
                 ('published_at', models.DateTimeField(editable=False, null=True)),
-                ('slug', iwg_blog.blog.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `title` field', populate_from=b'title', unique=True)),
+                ('slug', iwg_blog.utils.models.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `title` field', populate_from=b'title', unique=True)),
                 ('short_description', django_markdown.models.MarkdownField()),
             ],
             options={
@@ -47,7 +47,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, unique=True)),
-                ('slug', iwg_blog.blog.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True)),
+                ('slug', iwg_blog.utils.models.fields.AutoSlugField(blank=True, editable=True, help_text=b'optional; will be automatically populated from `name` field', populate_from=b'name', unique=True)),
             ],
         ),
         migrations.AddField(
@@ -58,6 +58,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='grantee',
             name='tags',
-            field=iwg_blog.blog.fields.OrderedManyToManyField(blank=True, related_name='grantees', to='blog.Tag'),
+            field=iwg_blog.utils.models.fields.OrderedManyToManyField(blank=True, related_name='grantees', to='blog.Tag'),
         ),
     ]

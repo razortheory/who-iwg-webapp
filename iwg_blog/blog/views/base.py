@@ -1,137 +1,20 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import AccessMixin
-from django.contrib.sites.models import Site
-from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.db import models
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.utils import timezone
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
-from django.views.generic.base import TemplateView, View
-from django.views.generic.detail import SingleObjectMixin
-from django.views.generic.list import MultipleObjectMixin
+from django.views.generic import DetailView, TemplateView, ListView, CreateView, UpdateView
 
 from meta.views import MetadataMixin
 from watson import search as watson
 
-from ..attachments.models import Link
-from ..attachments.views import FeaturedDocumentsMixin
-from ..blog.serializers import ArticleSerializer
-from ..utils.views import JsonResponseMixin
-from .forms import SubscribeForm, UnsubscribeForm
-from .helpers import Meta
-from .models import Article, BaseArticle, Category, Subscriber, Tag
-
-
-class BaseViewMixin(object):
-    def get_context_data(self, **kwargs):
-        context = super(BaseViewMixin, self).get_context_data(**kwargs)
-        context['site'] = Site.objects.get_current()
-        context['scheme'] = settings.META_SITE_PROTOCOL
-
-        return context
-
-
-class CategoriesMixin(object):
-    def get_context_data(self, **kwargs):
-        context = dict()
-        context['categories'] = Category.objects.all()[:8]
-        context.update(kwargs)
-        return super(CategoriesMixin, self).get_context_data(**context)
-
-
-class FeaturedArticlesMixin(object):
-    featured_articles_count = 5
-
-    def get_context_data(self, **kwargs):
-        context = dict()
-        context['featured_articles'] = Article.published.filter(is_featured=True)[:self.featured_articles_count]
-        context.update(kwargs)
-        return super(FeaturedArticlesMixin, self).get_context_data(**context)
-
-
-class TopArticlesMixin(object):
-    top_articles_count = 3
-
-    def get_context_data(self, **kwargs):
-        context = dict()
-        context['top_articles'] = Article.published.order_by('-hits')[:self.top_articles_count]
-        context.update(kwargs)
-        return super(TopArticlesMixin, self).get_context_data(**context)
-
-
-class TopTagsMixin(object):
-    top_tags_count = 20
-
-    def get_context_data(self, **kwargs):
-        context = dict()
-        context['top_tags'] = Tag.objects.annotate(article_count=models.Count('articles')) \
-            .order_by('-article_count')[:self.top_tags_count]
-        context.update(kwargs)
-        return super(TopTagsMixin, self).get_context_data(**context)
-
-
-class LinksMixin(object):
-    def get_context_data(self, **kwargs):
-        context = dict()
-        context['links'] = Link.objects.all()[:10]
-        context.update(kwargs)
-        return super(LinksMixin, self).get_context_data(**context)
-
-
-class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
-    object_queryset = None
-    object_model = None
-
-    def get_object_queryset(self):
-        if self.object_queryset is not None:
-            return self.object_queryset.all()
-
-        if self.object_model:
-            return self.object_model._default_manager.all()
-
-        raise ImproperlyConfigured(
-            "%(cls)s is missing a object QuerySet. Define "
-            "%(cls)s.object_model, %(cls)s.object_queryset, or override "
-            "%(cls)s.get_object_queryset()." % {
-                'cls': self.__class__.__name__
-            }
-        )
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(self.get_object_queryset())
-        return super(RelatedListMixin, self).get(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super(RelatedListMixin, self).get_context_data(**kwargs)
-        context_object_name = SingleObjectMixin.get_context_object_name(self, self.object)
-        context[context_object_name] = self.object
-        return context
-
-
-class HitsTrackingMixin(object):
-    def get_hit_flag_name(self, obj):
-        opts = obj._meta
-        return 'hit_%s_%s_%s' % (opts.app_label, opts.model_name, obj.slug)
-
-    def set_hit(self, obj):
-        obj.hits = models.F('hits') + 1
-        obj.save()
-
-        self.request.session[self.get_hit_flag_name(obj)] = True
-
-    def has_hit(self, obj):
-        return self.request.session.get(self.get_hit_flag_name(obj))
-
-    def get_object(self, queryset=None):
-        obj = super(HitsTrackingMixin, self).get_object(queryset)
-
-        if obj.status == obj.STATUS_PUBLISHED and not self.has_hit(obj):
-            self.set_hit(obj)
-
-        return obj
+from ...attachments.views import LinksMixin, FeaturedDocumentsMixin
+from ...utils.views import HitsTrackingMixin, BaseViewMixin, JsonResponseMixin, RelatedListMixin
+from ..forms import SubscribeForm, UnsubscribeForm
+from ..helpers import Meta
+from ..models import Article, BaseArticle, Category, Tag, Subscriber
+from ..serializers import ArticleSerializer
+from .mixins import FeaturedArticlesMixin, TopArticlesMixin, TopTagsMixin, CategoriesMixin
 
 
 class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
@@ -301,41 +184,3 @@ class UnsubscribeFromUpdates(UpdateView):
 
     def get_object(self, queryset=None):
         return Subscriber.objects.filter(email=self.get_email(), email__isnull=False).first()
-
-
-class GetArticleSlugAjax(View):
-    def post(self, *args, **kwargs):
-        return JsonResponse({
-            'status': 'ok',
-            'slug': Article.generate_slug(
-                self.request.POST.get('title', ''),
-                instance_pk=self.request.POST.get('instance_pk')
-            )
-        })
-
-
-class TagsAutocompleteAjax(View):
-    tags_count = 10
-
-    def get(self, request, *args, **kwargs):
-        tag = request.GET.get('term', '')
-        exclude = request.GET.getlist('exclude')
-
-        queryset = Tag.objects.filter(name__startswith=tag).exclude(name__in=exclude) \
-            .annotate(article_count=models.Count('articles')).order_by('-article_count') \
-            .values_list('name', flat=True)[:self.tags_count]
-
-        return JsonResponse(list(queryset), safe=False)
-
-
-def page_not_found(request):
-    return render(
-        request, 'blog/pages/404.html',
-        {
-            'related_articles': Article.published.all()[:3]
-        }, status=404
-    )
-
-
-def server_error(request):
-    return render(request, 'blog/pages/500.html', {})

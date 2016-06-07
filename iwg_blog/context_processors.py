@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from .blog import watermarks_config
+from .utils.watermarks import watermarks as watermarks_config
 
 
 def google_analytics(request):
@@ -27,8 +27,8 @@ def google_analytics(request):
 
 def watermarks(request):
     context = {}
-    for name in watermarks_config.watermarks:
-        context['watermark_%s' % name] = watermarks_config.watermarks[name]
+    for name, value in watermarks_config.items():
+        context['watermark_%s' % name] = value
     return context
 
 

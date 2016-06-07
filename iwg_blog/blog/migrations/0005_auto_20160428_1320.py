@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import iwg_blog.blog.fields
+import iwg_blog.utils.models.fields
 
 
 class Migration(migrations.Migration):
@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='article',
             name='tags',
-            field=iwg_blog.blog.fields.OrderedManyToManyField(blank=True, related_name='articles', to='blog.Tag'),
+            field=iwg_blog.utils.models.fields.OrderedManyToManyField(blank=True, related_name='articles', to='blog.Tag'),
         ),
     ]

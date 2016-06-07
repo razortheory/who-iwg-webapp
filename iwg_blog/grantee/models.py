@@ -4,9 +4,9 @@ from django.db import models
 from django_markdown.models import MarkdownField
 
 from ..attachments.models import BaseDocument
-from ..blog.fields import AutoSlugField
 from ..blog.models import BaseArticle
-from ..blog.utils import markdown_to_text
+from ..utils.base import markdown_to_text
+from ..utils.models.fields import AutoSlugField
 from .managers import PublishedGranteeManager
 
 

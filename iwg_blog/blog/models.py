@@ -9,10 +9,10 @@ from autoslug.utils import generate_unique_slug, slugify
 from django_markdown.models import MarkdownField
 
 from ..attachments.models import BaseDocument
-from .fields import AutoSlugField, OrderedManyToManyField
+from ..utils.base import markdown_to_text
+from ..utils.models.fields import OrderedManyToManyField, AutoSlugField
 from .helpers import ModelMeta
 from .managers import ArticleManager, ArticleTagManager, PublishedArticleManager, SampleArticleManager
-from .utils import markdown_to_text
 
 
 class Category(ModelMeta, models.Model):
@@ -22,13 +22,13 @@ class Category(ModelMeta, models.Model):
         help_text='optional; will be automatically populated from `name` field'
     )
 
-    class Meta:
-        verbose_name_plural = 'Categories'
-
     _metadata = {
         'title': 'name',
         'url': 'absolute_url',
     }
+
+    class Meta:
+        verbose_name_plural = 'Categories'
 
     def __unicode__(self):
         return self.name
@@ -96,6 +96,15 @@ class BaseArticle(ModelMeta, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(null=True, blank=True)
 
+    _metadata = {
+        'title': 'title',
+        'description': 'short_description_text',
+        'image': 'cover_image_url',
+        'image_width': 'cover_image_width',
+        'image_height': 'cover_image_height',
+        'url': 'absolute_url',
+    }
+
     class Meta:
         abstract = True
 
@@ -149,15 +158,6 @@ class BaseArticle(ModelMeta, models.Model):
             cls.all_objects
         )
 
-    _metadata = {
-        'title': 'title',
-        'description': 'short_description_text',
-        'image': 'cover_image_url',
-        'image_width': 'cover_image_width',
-        'image_height': 'cover_image_height',
-        'url': 'absolute_url',
-    }
-
 
 class Article(BaseArticle):
     objects = ArticleManager()
@@ -192,6 +192,9 @@ class Article(BaseArticle):
         )
 
     def __init__(self, *args, **kwargs):
+        """
+        if `sample` provided, generate new Article from SampleArticle object
+        """
         sample = kwargs.pop('sample', None)
         if sample:
             for field in ['title', 'category', 'cover_image', 'short_description', 'content']:

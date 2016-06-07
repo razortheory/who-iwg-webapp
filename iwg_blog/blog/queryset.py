@@ -8,6 +8,9 @@ class ArticleTagQuerySet(CaseInsensitiveUniqueQuerysetMixin, OrderableQuerySetMi
     insensitive_unique_fields = ['name', ]
 
     def order_by_array(self, ordering_array, field_name=None, separator='\a'):
+        """
+        Ordering by lowercase value if field in insensitive_unique_fields
+        """
         qs = self
 
         if field_name in self.insensitive_unique_fields:

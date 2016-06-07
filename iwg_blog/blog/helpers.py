@@ -1,4 +1,4 @@
-from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.conf import settings as django_settings
 
 from meta import settings
 from meta.models import ModelMeta as OldModelMeta
@@ -6,13 +6,17 @@ from meta.views import Meta as OldMeta
 
 
 class Meta(OldMeta):
+    """
+    Class to be used instead of Meta from `meta` module.
+    Added default values support.
+    Added image size attributes.
+    """
     image_width = None
     image_height = None
 
     def __init__(self, **kwargs):
-        kwargs['title'] = kwargs.get('title') or 'IWG Portal'
-        kwargs['description'] = kwargs.get('description') or 'WHO\'s primary role is to direct international health within the United Nations\' system.'
-        kwargs['image'] = kwargs.get('image') or static('blog/images/who-logo.jpg')
+        for field_name, field_value in django_settings.META_DEFAULTS.items():
+            kwargs[field_name] = kwargs.get(field_name) or field_value
         super(Meta, self).__init__(**kwargs)
 
     @property
