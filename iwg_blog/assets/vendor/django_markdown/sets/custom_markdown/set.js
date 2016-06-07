@@ -87,6 +87,22 @@ function maximize() {
   }, 0);
   setCaretPosition(fullscreenTextarea[0], caretPosition);
 
+  var promptedChars = 0;
+  var inputTimeout;
+  fullscreenTextarea.on('input', function(){
+    if (promptedChars == 10){
+      $.markItUp('refresh');
+      promptedChars = 0;
+    }
+    promptedChars++;
+
+    clearTimeout(inputTimeout);
+    inputTimeout = setTimeout(function(){
+      $.markItUp('refresh');
+      promptedChars = 0;
+    }, 5000)
+  });
+
   var closeBtn = '<a href="#" class="fullScreenClose">&times;</a>';
   $('.markItUpHeader', container).append(closeBtn);
 
