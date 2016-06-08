@@ -29,6 +29,9 @@ file_type_names = {
 
 
 def get_file_type(filename):
+    """
+    Guess file type by mime.
+    """
     mime_type, encoding = mimetypes.guess_type(filename, strict=False)
     file_type = None
     for mime_type_test in file_type_by_mime:
@@ -45,4 +48,7 @@ def get_file_type(filename):
 
 
 def get_file_type_name(file_type):
+    """
+    Get file type verbose.
+    """
     return file_type_names.get(file_type, file_type_names['default'])

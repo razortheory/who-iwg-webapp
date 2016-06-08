@@ -1,3 +1,6 @@
+/*
+ * Form autosaving to localstorage.
+ */
 var one_day_ms = 24 * 60 * 60 * 1000;
 
 

@@ -15,6 +15,7 @@ watermark_article = {
 }
 
 
+# Watermarks to be passed to template context.
 watermarks = {
     'article': watermark_article,
 }

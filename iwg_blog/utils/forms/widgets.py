@@ -10,6 +10,9 @@ from django_markdown.widgets import MarkdownWidget
 
 
 class TabbedMarkdownWidget(MarkdownWidget):
+    """
+    Wrap markdown editor to bootstrap tabs.
+    """
     # Override to render content with some object context
     preview_path = None
     template_path = 'admin/tabbed_markitup.html'
@@ -57,6 +60,9 @@ class AdminImageWidget(AdminFileWidget):
 
 
 class TagitWidget(CheckboxSelectMultiple):
+    """
+    Tag input based on tag-it.js library.
+    """
     class Media:
         css = {
             'all': ['admin/css/jquery-ui.min.css', 'admin/css/jquery.tagit.css', 'admin/css/tag-it.custom.css']
@@ -87,6 +93,9 @@ class TagitWidget(CheckboxSelectMultiple):
 
 
 class LimitedTextarea(Textarea):
+    """
+    Textarea with remained symbols indicator.
+    """
     wrapper_template = u'<div class="limited-textarea">{} <div class="counter"></div></div>'
 
     class Media:

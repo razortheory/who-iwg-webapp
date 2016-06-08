@@ -51,7 +51,7 @@ INSTALLED_APPS += (
 BROKER_URL = env('BROKER_URL', default='amqp://guest@localhost//')
 
 CELERY_ALWAYS_EAGER = True
-
+CELERY_IGNORE_RESULT = True
 
 # Django meta configuration
 # --------------------------------------------------------------------------

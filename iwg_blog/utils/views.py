@@ -25,6 +25,9 @@ class JsonResponseMixin(object):
 
 
 class BaseViewMixin(object):
+    """
+    Add domain info to context.
+    """
     def get_context_data(self, **kwargs):
         context = super(BaseViewMixin, self).get_context_data(**kwargs)
         context['site'] = Site.objects.get_current()
@@ -34,6 +37,9 @@ class BaseViewMixin(object):
 
 
 class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
+    """
+    A base view mixin for displaying a list of related objects.
+    """
     object_queryset = None
     object_model = None
 
@@ -64,6 +70,9 @@ class RelatedListMixin(MultipleObjectMixin, SingleObjectMixin):
 
 
 class HitsTrackingMixin(object):
+    """
+    View mixin for tracking hits.
+    """
     def get_hit_flag_name(self, obj):
         opts = obj._meta
         return 'hit_%s_%s_%s' % (opts.app_label, opts.model_name, obj.slug)

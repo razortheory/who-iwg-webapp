@@ -35,6 +35,7 @@ $(document).ready(function () {
 
     $gallery.on('layoutComplete',
       function (event, laidOutItems) {
+        // Alignment bottom border based on changing columns size
         var columns = {};
 
         for (var i = 0; i < laidOutItems.length; i++) {

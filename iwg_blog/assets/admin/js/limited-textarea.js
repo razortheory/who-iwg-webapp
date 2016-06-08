@@ -1,3 +1,6 @@
+/*
+ * Remained symbols indicator behavior for textarea.
+ */
 $(function () {
     $('.limited-textarea').each(function (i, e) {
         var $wrapper = $(e),

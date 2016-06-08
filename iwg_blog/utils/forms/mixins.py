@@ -1,4 +1,8 @@
 class AutoSaveModelFormMixin(object):
+    """
+    Auto save content from selected fields with prefix to local storage.
+    If changed data available, ask user to restore.
+    """
     autosave_prefix = ''
     autosave_fields = []
 

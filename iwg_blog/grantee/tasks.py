@@ -9,6 +9,6 @@ from .models import Grantee
 
 
 @periodic_task(run_every=crontab())
-def publish_articles():
+def publish_grantees():
     Grantee.objects.filter(status=Grantee.STATUS_READY_FOR_PUBLISH, published_at__lte=timezone.now()) \
         .update(status=Grantee.STATUS_PUBLISHED)

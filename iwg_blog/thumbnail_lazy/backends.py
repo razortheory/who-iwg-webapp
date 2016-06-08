@@ -17,11 +17,17 @@ logger = logging.getLogger(__name__)
 
 class LazyThumbnailBackend(ThumbnailBackend):
     """
-    Return thumbnails as base64 url if not exists in cache and delay convert process.
+    Backend for delaying convert process with celery.
     """
     def get_thumbnail(self, file_, geometry_string, **options):
+        """
+        Return thumbnails as base64 url if not exists in cache and delay convert process.
+        Modified version of original get_thumbnail method.
+        """
         if not options.pop('lazy', False):
             return super(LazyThumbnailBackend, self).get_thumbnail(file_, geometry_string, **options)
+
+        logger.debug(text_type('Getting thumbnail for file [%s] at [%s]'), file_, geometry_string)
 
         if file_:
             source = ImageFile(file_)
@@ -52,10 +58,10 @@ class LazyThumbnailBackend(ThumbnailBackend):
         if cached:
             return cached
 
-        # Modified code. Overwriting storage for lazy base64
+        # MODIFIED CODE. Overwriting storage for lazy base64
         thumbnail = ImageFile(name, lazy_storage)
         generate_thumbnail_lazy.delay(file_, geometry_string, **options)
-        # End of modified code
+        # End of MODIFIED CODE
 
         try:
             source_image = default.engine.get_image(source)

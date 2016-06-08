@@ -19,7 +19,7 @@ class FlatPageView(MetadataMixin, DetailView):
         if queryset is None:
             queryset = self.get_queryset()
 
-        url = self.args[0]
+        url = self.kwargs['url']
 
         if not url.startswith('/'):
             url = '/' + url
@@ -50,7 +50,7 @@ class FlatPageView(MetadataMixin, DetailView):
         self.object.title = mark_safe(self.object.title)
         self.object.content = mark_safe(self.object.content)
 
-        if not self.args[0] and settings.APPEND_SLASH:
+        if not self.kwargs['url'] and settings.APPEND_SLASH:
             return HttpResponsePermanentRedirect('%s/' % self.request.path)
 
         if self.object.registration_required and not request.user.is_authenticated():

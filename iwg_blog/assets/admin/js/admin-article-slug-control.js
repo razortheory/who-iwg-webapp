@@ -1,3 +1,6 @@
+/*
+ * Automatically refresh slug from title using AJAX.
+ */
 $(document).ready(function(){
     var $slug = $('input[name="slug"]');
     var $title = $('input[name="title"]');
@@ -22,7 +25,7 @@ $(document).ready(function(){
     function updateHelpText(){
         $help_text.html(help_text_template + populate_slug_opts.template_url.replace('dummy_slug', $slug.val()));
     }
-    
+
     updateHelpText();
     $title.on('keyup', updateSlug);
     $slug.on('keyup change', updateHelpText);

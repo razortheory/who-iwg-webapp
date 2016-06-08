@@ -26,6 +26,9 @@ def google_analytics(request):
 
 
 def watermarks(request):
+    """
+    Watermark configs context processor.
+    """
     context = {}
     for name, value in watermarks_config.items():
         context['watermark_%s' % name] = value

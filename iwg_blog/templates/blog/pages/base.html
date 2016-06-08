@@ -60,6 +60,7 @@
     <script src="{% static 'blog/js/jquery.ui.shake.min.js' %}"></script>
     <script>
       $(function () {
+        /* Alerts behavior. */
         $('.messages-wrap').stick_in_parent();
         $('.alert .close').click(function () {
           $(this).parents('.alert').animate({
@@ -88,6 +89,7 @@
     </script>
     <script>
       $(function () {
+        /* Subscribe form behavior. Saving subscribers though AJAX. */
         var $subscribeForm = $('#id__subscribe__form'),
             $subscribeAlerts = $subscribeForm.find('.subscribe-alerts'),
             subscribeUrl = $subscribeForm.attr('action'),

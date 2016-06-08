@@ -30,6 +30,10 @@ class ConfigurableModelAdmin(admin.ModelAdmin):
 
 
 def remove_from_fieldsets(fieldsets, fields):
+    """
+    Remove named field from fieldsets.
+    https://djangosnippets.org/snippets/1803/
+    """
     if isinstance(fields, string_types):
         fields = [fields, ]
 

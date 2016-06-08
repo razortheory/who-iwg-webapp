@@ -1,17 +1,17 @@
-'''
+"""
 Cite Extension for Python-Markdown
 =============================================
 Wraps the inline content surrounded by three double quotes into <cite> tags.
 Usage
 -----
     > Any long line that will still be quoted properly when it wraps.
-    > """Quote author"""
+    > \"""Quote author\"""
 
     <blockquote>
     <p>Any long line that will still be quoted properly when it wraps.<br>
     <cite>Quote author</cite></p>
     </blockquote>
-'''
+"""
 
 import markdown
 from markdown.inlinepatterns import SimpleTagPattern

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // Initialize featured articles slider.
     $(window).resize(sizeContent);
     function sizeContent() {
         var sliderHeight = $(window).height()*0.76 + "px";
@@ -23,6 +24,7 @@ $(document).ready(function() {
     }
     initSlider();
 
+    // Fixed info initializing
     $("#js-fixed-toggle").on('click', function(e) {
         var $button = $(this),
             $dropdown = $('#js-fixed-toggled-content');
@@ -43,6 +45,7 @@ $(document).ready(function() {
     });
 });
 $('.search-mobile__button').click(function(){
+    // Mobile search input behavior
     var $form = $('.search-mobile__form'),
         $wrapper = $('.header__search-mobile'),
         $wrapperInner = $('.search-mobile'),

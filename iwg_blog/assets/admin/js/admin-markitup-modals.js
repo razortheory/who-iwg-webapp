@@ -1,3 +1,6 @@
+/*
+ * Markdown editor modals.
+ */
 $(function () {
   // Image modal
   function uploadImage() {
