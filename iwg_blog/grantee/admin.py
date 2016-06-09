@@ -37,9 +37,11 @@ class GranteeAdmin(BaseArticleAdmin):
         return super(GranteeAdmin, self).get_queryset(request).prefetch_related('round')
 
     def short_description_preview(self, obj):
+        MAX_LENGTH = 140
+
         short_description_text = obj.short_description_text
-        if len(short_description_text) <= 100:
+        if len(short_description_text) <= MAX_LENGTH:
             return obj.short_description_text
         else:
-            return obj.short_description_text[:100] + u'\u2026'
+            return obj.short_description_text[:MAX_LENGTH] + u'\u2026'
     short_description_preview.short_description = 'Short description (text)'
