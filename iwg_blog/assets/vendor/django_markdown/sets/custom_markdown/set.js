@@ -144,9 +144,9 @@ mySettings = {
     {className: 'mui-bold icon-bold', name: 'Bold', key: 'B', openWith: '**', closeWith: '**'},
     {className: 'mui-italic icon-italic', name: 'Italic', key: 'I', openWith: '_', closeWith: '_'},
     {separator: '---------------'},
-    {className: 'mui-list-bulleted icon-list_ordered', name: 'Bulleted List', openWith: '- '},
+    {className: 'mui-list-bulleted icon-list_unordered', name: 'Bulleted List', openWith: '- '},
     {
-      className: 'mui-list-numeric icon-list_unordered', name: 'Numeric List', openWith: function (markItUp) {
+      className: 'mui-list-numeric icon-list_ordered', name: 'Numeric List', openWith: function (markItUp) {
       return markItUp.line + '. ';
     }
     },
