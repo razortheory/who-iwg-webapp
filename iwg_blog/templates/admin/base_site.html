@@ -31,9 +31,9 @@
     <script src="{% static "vendor/bootstrap/js/bootstrap-tabs.js" %}"></script>
     <script src="{% static "admin/js/admin-markitup-modals.js" %}"></script>
     <script>
+      var loading_spinner_enabled = false;
       $(document).ready(function () {
         var $loading = $('.loading-modal');
-        var loading_spinner_enabled = false;
         $(document).ajaxStart(function () {
           if (loading_spinner_enabled) {
             $loading.fadeIn();
