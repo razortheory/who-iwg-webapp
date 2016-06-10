@@ -55,3 +55,8 @@ body.frozen {
     padding: 3px 7px;
     border-radius: 5px;
 }
+
+#grid-insert-form table,
+#grid-insert-form table tbody tr td {
+  border: none;
+}

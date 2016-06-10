@@ -18,19 +18,27 @@
 </div>
 
 <div id="grid-insert-form" style="display: none" title="Add new grid">
-    <form>
-        <fieldset>
-            <p>
-                <label for="grid-insert-columns">Columns:</label>
-                <input type="number" name="columns" id="grid-insert-columns" value="2" class="text ui-widget-content ui-corner-all">
-            </p>
-            <p>
-                <label for="grid-insert-rows">Rows:</label>
-                <input type="number" name="rows" id="grid-insert-rows" value="2" class="text ui-widget-content ui-corner-all">
-            </p>
-
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
-            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-        </fieldset>
-    </form>
+  <form>
+    <fieldset>
+      <table>
+        <tr>
+          <td>
+            <label for="grid-insert-columns">Columns:</label></td>
+          <td>
+            <input type="number" name="columns" id="grid-insert-columns" value="2" class="text ui-widget-content ui-corner-all">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="grid-insert-rows">Rows:</label>
+          </td>
+          <td>
+            <input type="number" name="rows" id="grid-insert-rows" value="2" class="text ui-widget-content ui-corner-all">
+          </td>
+        </tr>
+        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      </table>
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
 </div>
