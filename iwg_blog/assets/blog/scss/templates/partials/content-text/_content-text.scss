@@ -95,7 +95,7 @@
 		& + .intro {
 			margin-top: 0;
 		}
-		li {
+		& > li {
 			position: relative;
 			margin: 0 0 round(30px*$x);
 			padding: 0 0 0 round(24px*$x);
@@ -125,36 +125,11 @@
 					top: 8px;
 				}
 			}
-			ul,
-			ol {
-				padding-left: round(29px*$x);
-				padding-right: 0;
-				@include max-screen($M_XSM) {
-					padding-left: 12px;
-				}
-				@include max-screen($M_X2S) {
-					padding-left: 6px;
-				}
-				@include max-screen(419px) {
-					padding-left: 0;
-				}
-				li {
-					&:before {
-						top: round(15px*$x);
-						width: round(8px*$x);
-						height: round(2px*$x);
-						@include border-radius(0);
-						@include max-screen($M_XSM) {
-							top: 11px;
-						}
-					}
-				}
-			}
 		}
 	}
 	ol {
-		counter-reset: list1;
-		li {
+		counter-reset: item;
+    & > li {
 			&:before {
 				top: 0;
 				left: 0;
@@ -163,8 +138,8 @@
 				background: 0;
 				color: $blue;
 				@include border-radius(0);
-				counter-increment: list1;
-				content: counter(list1) ". ";
+        counter-increment: item;
+        content: counters(item, ".") ". ";
 				font-size: round(20px*$x);
 				line-height: 1.5;
 				@include max-screen($M_XSM) {
@@ -175,25 +150,15 @@
 				}
 			}
 			ol {
-				counter-reset: list2;
-				li {
+				& > li {
+          padding-left: 30px;
 					&:before {
-						top: 0;
-						left: 0;
-						width: auto;
-						height: auto;
-						background: 0;
-						@include border-radius(0);
-						counter-increment: list2;
-						content: counter(list2) ") ";
 					}
 					ol {
-						counter-reset: list3;
-						li {
+						& > li {
+              padding-left: 40px;
 							&:before {
 								text-decoration: underline;
-								counter-increment: list3;
-								content: counter(list3);
 							}
 						}
 					}
