@@ -85,6 +85,17 @@ $(document).ready(function () {
     $gallery.imagesLoaded(function () {
       $gallery.masonry('layout');
     });
+
+    $('.article__body-incut > figure > img, .article__body-incut > img').wrap(function(){
+      return '<a href="' + this.getAttribute('src') + '"></a>'
+    }).parent('a').fancybox({
+      closeBtn: false,
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
   }
   else {
     $gallery.imagesLoaded(function () {
