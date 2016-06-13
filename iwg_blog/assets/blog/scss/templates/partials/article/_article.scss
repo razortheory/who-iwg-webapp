@@ -149,7 +149,8 @@
                 margin-bottom: 30px;
             }
 
-            & > img {
+            & > img,
+            & > a > img {
                 display: block;
                 margin-right: auto;
                 margin-left: auto;
