@@ -86,7 +86,11 @@ $(document).ready(function () {
       $gallery.masonry('layout');
     });
 
-    $('.article__body-incut > figure > img, .article__body-incut > img').wrap(function(){
+    $(
+      '.article .article__body-incut > figure > img, ' +
+      '.article .article__body-incut > img, ' +
+      '.article img.article__main-image'
+    ).wrap(function () {
       return '<a href="' + this.getAttribute('src') + '"></a>'
     }).parent('a').fancybox({
       closeBtn: false,
