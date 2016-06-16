@@ -19,7 +19,7 @@ Standard installation.
 ## 1. Create virtual environment
 
 
-1. Clone repository: ``git clone https://bitbucket.org/razortheory/iwg_blog.git``
+1. Clone repository: ``git clone https://bitbucket.org/razortheory/who-iwg-webapp.git``
 2. Create virtual environment: ``mkvirtualenv iwg_blog``
 3. Install requirements ``pip install -r requirements/dev.txt``
 4. Edit ``$VIRTUAL_ENV/bin/postactivate`` to contain the following lines:
@@ -47,7 +47,7 @@ Standard installation.
 
 # Alternative project initialization
 
-1. Clone repository: ``git clone https://bitbucket.org/razortheory/iwg_blog.git``
+1. Clone repository: ``git clone https://bitbucket.org/razortheory/who-iwg-webapp.git``
 2. Execute the following command to setup database credentials:
 
         echo DATABASE_URL=your_psql_url >> env.config
