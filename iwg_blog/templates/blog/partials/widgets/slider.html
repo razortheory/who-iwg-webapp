@@ -11,7 +11,7 @@
               {{ article.title }}
             </h2>
             <div class="slider__category">
-              -{{ article.category.name }}-
+              -{% for category in article.categories.all %}{{ category.name }}{% if not forloop.last %},{% endif %}{% endfor %}-
             </div>
             <a href="{{ article.get_absolute_url }}" class="button button_full slider__button">CONTINUE READING</a>
           </div>

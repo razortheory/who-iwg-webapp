@@ -164,7 +164,7 @@ class Article(BaseArticle):
     published = PublishedArticleManager()
     all_objects = models.Manager()
 
-    category = models.ForeignKey(Category, related_name='articles')
+    categories = models.ManyToManyField(Category, related_name='articles')
     slug = AutoSlugField(
         populate_from='title',
         unique=True, db_index=True,

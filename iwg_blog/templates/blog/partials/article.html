@@ -7,7 +7,9 @@
     <h1 class="article__title">{{ article.title }}
     </h1>
     <div class="article__category">
-      <a href="{{ article.category.get_absolute_url }}" class="article__meta-link">{{ article.category.name }}</a>
+      {% for category in article.categories.all %}
+        <a href="{{ category.get_absolute_url }}" class="article__meta-link">{{ category.name }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %}
     </div>
   </div>
   <div class="article__meta">
