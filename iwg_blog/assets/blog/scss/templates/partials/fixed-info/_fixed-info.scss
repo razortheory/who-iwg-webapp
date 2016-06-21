@@ -2,7 +2,7 @@
 	position: absolute;
 	top: round(38px*$x);
 	left: 0;
-	z-index: 1000;
+	z-index: 9;
 	width: round(360px*$x);
 	background-color: $white;
 	@include border-radius(0 round(8px*$x) round(8px*$x) 0);
