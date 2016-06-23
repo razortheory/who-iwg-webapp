@@ -102,14 +102,14 @@ class BaseArticleAdmin(ConfigurableModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(BaseArticleAdmin):
     list_display = [
-        'title', 'category', 'tags_list', 'short_description',
+        'title', 'categories_list', 'tags_list', 'short_description',
         'published_at', 'is_featured', 'colorized_status', 'hits', 'words_count'
     ]
-    list_filter = ['is_featured', 'status', 'category', 'published_at']
+    list_filter = ['is_featured', 'status', 'categories', 'published_at']
 
     fieldsets = copy.deepcopy(BaseArticleAdmin.fieldsets)
     fieldsets[0][1]['fields'].insert(2, 'tags')
-    fieldsets[0][1]['fields'].insert(2, 'category')
+    fieldsets[0][1]['fields'].insert(2, 'categories')
     fieldsets[0][1]['fields'] += ['is_featured']
 
     search_adapter_cls = ArticleAdapter
@@ -146,7 +146,7 @@ class ArticleAdmin(BaseArticleAdmin):
     unmark_featured.short_description = 'Remove featured flag'
 
     def get_queryset(self, request):
-        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('category')
+        return super(ArticleAdmin, self).get_queryset(request).prefetch_related('tags', 'categories')
 
     def get_search_results(self, request, queryset, search_term):
         if not search_term:
@@ -173,15 +173,19 @@ class ArticleAdmin(BaseArticleAdmin):
     tags_list.short_description = 'Tags'
     tags_list.allow_tags = True
 
+    def categories_list(self, obj):
+        return ', '.join(obj.categories.values_list('name', flat=True))
+    categories_list.short_description = 'Categories'
+
 
 @admin.register(SampleArticle)
 class SampleArticleAdmin(ArticleAdmin):
     new_article_action_name = '_create_article'
 
     list_display = [
-        'title', 'category', 'tags_list', 'short_description', 'words_count'
+        'title', 'tags_list', 'short_description', 'words_count'
     ]
-    list_filter = ['category']
+    list_filter = ['categories']
     actions = []
 
     def render_change_form(self, request, context, **kwargs):

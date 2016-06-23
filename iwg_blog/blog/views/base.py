@@ -32,7 +32,7 @@ class ArticleView(MetadataMixin, HitsTrackingMixin, BaseViewMixin, DetailView):
         related_articles = self.get_queryset() \
                                .filter(status=BaseArticle.STATUS_PUBLISHED, published_at__lte=timezone.now()) \
                                .exclude(pk=self.object.pk) \
-                               .filter(category=self.object.category)[:self.related_articles_count]
+                               .filter(categories__in=self.object.categories.all())[:self.related_articles_count]
         if not related_articles:
             related_articles = self.model.published.order_by('-hits')[:self.related_articles_count]
         context['related_articles'] = related_articles
@@ -128,7 +128,7 @@ class CategoryView(RelatedListMixin, ArticleListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return super(CategoryView, self).get_queryset().filter(category=self.object)
+        return super(CategoryView, self).get_queryset().filter(categories=self.object)
 
     def get_meta(self, **context):
         return self.object.as_meta(self.request)

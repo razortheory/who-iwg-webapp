@@ -13,7 +13,6 @@ class ArticleTagManager(models.Manager.from_queryset(ArticleTagQuerySet)):
     def get_queryset(self):
         queryset = super(ArticleTagManager, self).get_queryset()
         if hasattr(self, 'instance'):
-            queryset = queryset.filter(**self.core_filters)
             queryset = queryset.order_by('%s.%s' % (self.through._meta.db_table, self.through._meta.pk.name))
         return queryset
 

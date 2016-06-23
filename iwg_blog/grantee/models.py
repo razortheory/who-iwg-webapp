@@ -38,9 +38,11 @@ class Grantee(BaseArticle):
 
     short_description = MarkdownField()
 
-    category = {
-        'name': 'Iwg Grantee',
-        'get_absolute_url': reverse_lazy('grantee:grantee_list_view'),
+    categories = {
+        'all': [{
+            'name': 'Iwg Grantee',
+            'get_absolute_url': reverse_lazy('grantee:grantee_list_view'),
+        }],
     }
 
     class Meta(BaseArticle.Meta):
