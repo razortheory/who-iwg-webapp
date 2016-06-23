@@ -80,44 +80,55 @@ strong {
 }
 
 .page {
-  $header-height: round(109px*$x);
-
-	display: table;
-	table-layout: fixed;
 	height: 100%;
 	width: 100%;
-  &-inner{
-    margin-top: $header-height!important;
+  &-header[canvas]{
+    height: 93px;
+    width: 100%;
+    position: fixed;
+    z-index: 2!important;
+    top: 0;
   }
 	.header-wrap {
 		z-index: 60;
-		display: table-row;
-    position: fixed;
-    top: 0;
-    width: 100%;
     background-color: white;
-    height: $header-height;
 	}
 
-  @include max-screen($M_SM3X) {
-    $header-height: round(144px*$x);
+  [canvas="container"]{
+    margin-top: 93px;
+    @include calc(height, "100% - 93px", 100%);
 
-    &-inner {
-      margin-top: $header-height!important;
+    .page-inner{
+      display: table;
+      table-layout: fixed;
+      width: 100%;
+      @include calc(min-height, "100vh - 93px", 100%);
     }
-    .header-wrap {
-      height: $header-height;
+  }
+
+  @include max-screen($M_SM3X) {
+    &-header[canvas]{
+      height: 122px;
+    }
+    [canvas="container"]{
+      margin-top: 122px;
+      @include calc(height, "100% - 122px", 100%);
+      .page-inner {
+        @include calc(min-height, "100vh - 122px", 100%);
+      }
     }
   }
 
   @include max-screen($M_XS) {
-    $header-height: round(92px*$x);
-
-    &-inner {
-      margin-top: $header-height!important;
+    &-header[canvas]{
+      height: 78px;
     }
-    .header-wrap {
-      height: $header-height;
+    [canvas="container"]{
+      margin-top: 78px;
+      @include calc(height, "100% - 78px", 100%);
+      .page-inner {
+        @include calc(min-height, "100vh - 78px", 100%);
+      }
     }
   }
 

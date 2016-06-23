@@ -26,18 +26,18 @@
     {% include "blog/partials/utils/svg-images.html" %}
   </div>
 
-  <div class="page">
-    <div canvas="">
-      <div class="header-wrap">
-        {% include "blog/partials/header/header.html" %}
-      </div>
-
-      <div class="messages-wrap">
-        {% include "blog/partials/widgets/messages.html" %}
-      </div>
+  <div canvas="" class="page-header">
+    <div class="header-wrap">
+      {% include "blog/partials/header/header.html" %}
     </div>
 
-    <div class="page-inner" canvas="container">
+    <div class="messages-wrap">
+      {% include "blog/partials/widgets/messages.html" %}
+    </div>
+  </div>
+
+  <div canvas="container">
+    <div class="page-inner">
       <div class="main-wrap">
         <!--main-->
         <main role="main" class="main">
