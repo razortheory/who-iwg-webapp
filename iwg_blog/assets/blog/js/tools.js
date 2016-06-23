@@ -43,9 +43,29 @@ $(document).ready(function () {
     }
   });
 
-  $.slidebars({
-    siteClose: true,
-    scrollLock: false
+  var controller = new slidebars();
+  controller.init();
+  function toggleSBClass(){
+    if (controller.getActiveSlidebar()){
+      $('html').addClass('sb-active');
+    }
+    else{
+      $('html').removeClass('sb-active');
+    }
+  }
+  $('.header-nav-shifted-handle').click(function(event){
+    event.stopPropagation();
+    event.preventDefault();
+    controller.toggle('id-menu-aside');
+    toggleSBClass();
+  });
+  $('[canvas]').click(function(event){
+    if (controller.getActiveSlidebar()){
+      event.stopPropagation();
+      event.preventDefault();
+      controller.close('id-menu-aside');
+      toggleSBClass();
+    }
   });
 });
 $('.search-mobile__button').click(function () {
@@ -53,8 +73,8 @@ $('.search-mobile__button').click(function () {
   var $form = $('.search-mobile__form'),
     $wrapper = $('.header__search-mobile'),
     $wrapperInner = $('.search-mobile'),
-    $input = $wrapper.find('.search-mobile__field')
-  isOpen = $wrapperInner.hasClass('search-mobile-opened');
+    $input = $wrapper.find('.search-mobile__field'),
+    isOpen = $wrapperInner.hasClass('search-mobile-opened');
 
   if (!isOpen || !$input.val()) {
     if (isOpen) {

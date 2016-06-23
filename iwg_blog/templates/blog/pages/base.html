@@ -8,10 +8,16 @@
   {% compress css %}
     <link href="{% static 'blog/css/alerts.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'blog/css/bootstrap-grid.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'vendor/slidebars/slidebars.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'blog/scss/images-gallery.scss' %}" type="text/x-scss" rel="stylesheet">
     <link href="{% static 'blog/css/custom.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'blog/scss/cookies-policy.scss' %}" type="text/x-scss" rel="stylesheet">
   {% endcompress %}
+  <style>
+    #djDebug {
+      display: none!important;
+    }
+  </style>
 {% endblock %}
 
 
@@ -19,25 +25,30 @@
   <div style="height: 0; width: 0; position: absolute; visibility: hidden" class="hidden">
     {% include "blog/partials/utils/svg-images.html" %}
   </div>
-  <div class="page" id="sb-site">
-    <div class="header-wrap">
-      {% include "blog/partials/header/header.html" %}
+
+  <div class="page">
+    <div canvas="">
+      <div class="header-wrap">
+        {% include "blog/partials/header/header.html" %}
+      </div>
+
+      <div class="messages-wrap">
+        {% include "blog/partials/widgets/messages.html" %}
+      </div>
     </div>
 
-    <div class="messages-wrap">
-      {% include "blog/partials/widgets/messages.html" %}
-    </div>
-
-    <div class="main-wrap">
-      <!--main-->
-      <main role="main" class="main">
-        {% block content %}
-        {% endblock %}
-      </main>
-    </div>
-    <!--main END-->
-    <div class="footer-wrap">
-      {% include "blog/partials/footer/footer.html" %}
+    <div class="page-inner" canvas="container">
+      <div class="main-wrap">
+        <!--main-->
+        <main role="main" class="main">
+          {% block content %}
+          {% endblock %}
+        </main>
+      </div>
+      <!--main END-->
+      <div class="footer-wrap">
+        {% include "blog/partials/footer/footer.html" %}
+      </div>
     </div>
   </div>
 

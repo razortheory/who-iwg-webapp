@@ -86,8 +86,9 @@ strong {
 	table-layout: fixed;
 	height: 100%;
 	width: 100%;
-  margin-top: $header-height;
-
+  &-inner{
+    margin-top: $header-height!important;
+  }
 	.header-wrap {
 		z-index: 60;
 		display: table-row;
@@ -101,7 +102,9 @@ strong {
   @include max-screen($M_SM3X) {
     $header-height: round(144px*$x);
 
-    margin-top: $header-height;
+    &-inner {
+      margin-top: $header-height!important;
+    }
     .header-wrap {
       height: $header-height;
     }
@@ -110,11 +113,14 @@ strong {
   @include max-screen($M_XS) {
     $header-height: round(92px*$x);
 
-    margin-top: $header-height;
+    &-inner {
+      margin-top: $header-height!important;
+    }
     .header-wrap {
       height: $header-height;
     }
   }
+
 	.main-wrap {
 		position: relative;
 		z-index: 9;
