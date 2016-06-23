@@ -89,7 +89,7 @@ strong {
   margin-top: $header-height;
 
 	.header-wrap {
-		z-index: 10;
+		z-index: 60;
 		display: table-row;
     position: fixed;
     top: 0;
@@ -97,6 +97,24 @@ strong {
     background-color: white;
     height: $header-height;
 	}
+
+  @include max-screen($M_SM3X) {
+    $header-height: round(144px*$x);
+
+    margin-top: $header-height;
+    .header-wrap {
+      height: $header-height;
+    }
+  }
+
+  @include max-screen($M_XS) {
+    $header-height: round(92px*$x);
+
+    margin-top: $header-height;
+    .header-wrap {
+      height: $header-height;
+    }
+  }
 	.main-wrap {
 		position: relative;
 		z-index: 9;
