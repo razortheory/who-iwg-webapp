@@ -9,6 +9,10 @@
     height: round(746px*$x);
     max-height: round(800px*$x);
   }
+	@include max-screen($M_X2S) {
+		margin-left: round(-15px*$x);
+		margin-right: round(-15px*$x);
+	}
   @include max-screen($M_XS) {
     min-height: 520px;
   }

@@ -74,8 +74,8 @@ strong {
 .main {
 	padding: 0 round(20px*$x);
 	@include max-screen($M_X2S) {
-		padding-left: 15px;
-		padding-right: 15px;
+		padding-left: round(15px*$x);
+		padding-right: round(15px*$x);
 	}
 }
 

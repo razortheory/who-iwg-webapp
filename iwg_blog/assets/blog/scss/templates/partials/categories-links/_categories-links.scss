@@ -5,6 +5,8 @@
 	border-bottom: 1px solid #cccccc;
 	@include max-screen($M_X2S) {
 		padding-bottom: 11px;
+    margin-left: round(-15px*$x);
+		margin-right: round(-15px*$x);
 	}
 	&__list {
 		@include list-reset;
