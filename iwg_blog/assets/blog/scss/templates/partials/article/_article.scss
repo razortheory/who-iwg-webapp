@@ -6,6 +6,10 @@
     @include max-screen($M_X3S) {
         padding-bottom: 10px;
     }
+    &_preview {
+      overflow: auto;
+      height: auto;
+    }
     &__header {
         margin-bottom: round(40px*$x);
         @include max-screen($M_XS) {
