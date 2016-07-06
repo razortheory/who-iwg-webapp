@@ -3,6 +3,10 @@
         @include list-reset;
         padding-right: round(10px*$x);
         padding-left: round(10px*$x);
+
+        iframe {
+            width: 100% !important;
+        }
     }
     &__item {
         position: relative;
