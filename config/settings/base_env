@@ -29,6 +29,7 @@ AWS_SECRET_ACCESS_KEY=
 # Example: EMAIL_URL=smtp://username:password@host:port/
 EMAIL_URL=
 SERVER_EMAIL=
+SERVER_EMAIL_SIGNATURE=
 
 GA_PROPERTY_ID=
 
