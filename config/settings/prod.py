@@ -101,9 +101,7 @@ if USE_COMPRESSOR:
 EMAIL_CONFIG = env.email()
 vars().update(EMAIL_CONFIG)
 
-DEFAULT_FROM_EMAIL = SERVER_EMAIL = 'iwg_blog '.capitalize() + '<%s>' % env('SERVER_EMAIL')
-
-SERVER_EMAIL_SIGNATURE = env('SERVER_EMAIL_SIGNATURE', default='{{ project_name }}'.capitalize())
+SERVER_EMAIL_SIGNATURE = env('SERVER_EMAIL_SIGNATURE', default='IWG Portal')
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = SERVER_EMAIL_SIGNATURE + ' <%s>' % env('SERVER_EMAIL')
 
 # Google analytics settings
